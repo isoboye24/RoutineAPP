@@ -10,19 +10,18 @@ using System.Windows.Forms;
 
 namespace RoutineAPP.AllForms
 {
-    public partial class FormDeletedData : Form
+    public partial class FormTotalReportsList : Form
     {
-        public FormDeletedData()
+        public FormTotalReportsList()
         {
             InitializeComponent();
         }
 
-        private void FormDeletedData_Load(object sender, EventArgs e)
+        private void FormTotalReportsList_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
-            cmbDeletedData.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnRetrieve.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            btnView.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);

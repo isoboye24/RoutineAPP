@@ -33,13 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FontAwesome.Sharp, Version=6.3.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.6.3.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,35 +68,71 @@
     <Compile Include="AllForms\FormCategory.Designer.cs">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormDeletedData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormDeletedData.Designer.cs">
-      <DependentUpon>FormDeletedData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormMonthlyReports.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormMonthlyReports.Designer.cs">
-      <DependentUpon>FormMonthlyReports.cs</DependentUpon>
-    </Compile>
     <Compile Include="AllForms\FormTask.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AllForms\FormTask.Designer.cs">
       <DependentUpon>FormTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormTotalReports.cs">
+    <Compile Include="AllForms\FormCategoryList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormTotalReports.Designer.cs">
-      <DependentUpon>FormTotalReports.cs</DependentUpon>
+    <Compile Include="AllForms\FormCategoryList.Designer.cs">
+      <DependentUpon>FormCategoryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormYearlyReports.cs">
+    <Compile Include="AllForms\FormDeletedData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormYearlyReports.Designer.cs">
-      <DependentUpon>FormYearlyReports.cs</DependentUpon>
+    <Compile Include="AllForms\FormDeletedData.Designer.cs">
+      <DependentUpon>FormDeletedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormMonthlyReportsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormMonthlyReportsList.Designer.cs">
+      <DependentUpon>FormMonthlyReportsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormTaskList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormTaskList.Designer.cs">
+      <DependentUpon>FormTaskList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormTotalReportsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormTotalReportsList.Designer.cs">
+      <DependentUpon>FormTotalReportsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormYearlyReportsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormYearlyReportsList.Designer.cs">
+      <DependentUpon>FormYearlyReportsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CATEGORY.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MONTH.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TASK.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -95,25 +140,32 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="General.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AllForms\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormDeletedData.resx">
-      <DependentUpon>FormDeletedData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormMonthlyReports.resx">
-      <DependentUpon>FormMonthlyReports.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormTask.resx">
       <DependentUpon>FormTask.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormTotalReports.resx">
-      <DependentUpon>FormTotalReports.cs</DependentUpon>
+    <EmbeddedResource Include="AllForms\FormCategoryList.resx">
+      <DependentUpon>FormCategoryList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormYearlyReports.resx">
-      <DependentUpon>FormYearlyReports.cs</DependentUpon>
+    <EmbeddedResource Include="AllForms\FormDeletedData.resx">
+      <DependentUpon>FormDeletedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormMonthlyReportsList.resx">
+      <DependentUpon>FormMonthlyReportsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormTaskList.resx">
+      <DependentUpon>FormTaskList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormTotalReportsList.resx">
+      <DependentUpon>FormTotalReportsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormYearlyReportsList.resx">
+      <DependentUpon>FormYearlyReportsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -127,6 +179,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="DAL\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -140,6 +199,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL\DataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAL\DataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BLL\" />
+    <Folder Include="DAL\DAO\" />
+    <Folder Include="DAL\DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -120,35 +120,35 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormTask());
+            OpenChildForm(new FormTaskList());
         }
 
         private void btnCategory_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormCategory());
+            OpenChildForm(new FormCategoryList());
         }
 
         private void btnMonthlyReports_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormMonthlyReports());
+            OpenChildForm(new FormMonthlyReportsList());
         }
 
         private void btnYearlyReports_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormYearlyReports());
+            OpenChildForm(new FormYearlyReportsList());
         }
 
         private void btnTotalReports_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormTotalReports());
+            OpenChildForm(new FormTotalReportsList());
         }
 
         private void btnDeletedData_Click(object sender, EventArgs e)
