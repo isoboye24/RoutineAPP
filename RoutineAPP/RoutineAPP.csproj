@@ -110,9 +110,18 @@
     <Compile Include="AllForms\FormYearlyReportsList.Designer.cs">
       <DependentUpon>FormYearlyReportsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="BLL\CategoryBLL.cs" />
+    <Compile Include="BLL\IBLL.cs" />
+    <Compile Include="BLL\MonthBLL.cs" />
+    <Compile Include="BLL\TaskBLL.cs" />
     <Compile Include="DAL\CATEGORY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DAO\APPContext.cs" />
+    <Compile Include="DAL\DAO\CategoryDAO.cs" />
+    <Compile Include="DAL\DAO\IDAO.cs" />
+    <Compile Include="DAL\DAO\MonthDAO.cs" />
+    <Compile Include="DAL\DAO\TaskDAO.cs" />
     <Compile Include="DAL\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,6 +137,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DTO\CategoryDetailDTO.cs" />
+    <Compile Include="DAL\DTO\CategoryDTO.cs" />
+    <Compile Include="DAL\DTO\MonthDetailDTO.cs" />
+    <Compile Include="DAL\DTO\MonthDTO.cs" />
+    <Compile Include="DAL\DTO\TaskDetailDTO.cs" />
+    <Compile Include="DAL\DTO\TaskDTO.cs" />
     <Compile Include="DAL\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -215,10 +230,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-    <Folder Include="DAL\DAO\" />
-    <Folder Include="DAL\DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -206,6 +206,7 @@
             this.iconMinimize.Size = new System.Drawing.Size(32, 32);
             this.iconMinimize.TabIndex = 13;
             this.iconMinimize.TabStop = false;
+            this.iconMinimize.Click += new System.EventHandler(this.iconMinimize_Click);
             // 
             // iconMaximize
             // 
@@ -220,6 +221,7 @@
             this.iconMaximize.Size = new System.Drawing.Size(32, 32);
             this.iconMaximize.TabIndex = 14;
             this.iconMaximize.TabStop = false;
+            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
             // 
             // iconClose
             // 

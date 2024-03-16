@@ -166,5 +166,29 @@ namespace RoutineAPP
                 Reset();
             }
         }
+
+        private void iconMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void iconMinimize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
     }
 }
