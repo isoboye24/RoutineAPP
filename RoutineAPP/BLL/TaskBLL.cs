@@ -1,4 +1,5 @@
-﻿using RoutineAPP.DAL.DAO;
+﻿using RoutineAPP.DAL;
+using RoutineAPP.DAL.DAO;
 using RoutineAPP.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,13 @@ namespace RoutineAPP.BLL
     public class TaskBLL : IBLL<TaskDTO, TaskDetailDTO>
     {
         MonthDAO monthDAO = new MonthDAO();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        TaskDAO dao = new TaskDAO();
         public bool Delete(TaskDetailDTO entity)
         {
-            throw new NotImplementedException();
+            TASK task = new TASK();
+            task.taskID = entity.TaskID;
+            return dao.Delete(task);
         }
 
         public bool GetBack(TaskDetailDTO entity)
@@ -23,19 +28,34 @@ namespace RoutineAPP.BLL
 
         public bool Insert(TaskDetailDTO entity)
         {
-            throw new NotImplementedException();
+            TASK task = new TASK();
+            task.categoryID = entity.CategoryID;
+            task.timeSpent = entity.TimeSpent;
+            task.day = entity.Day;
+            task.monthID = entity.MonthID;
+            task.year = entity.Year;
+            return dao.Insert(task);
         }
 
         public TaskDTO Select()
         {
             TaskDTO dto = new TaskDTO();
             dto.Months = monthDAO.Select();
+            dto.Categories = categoryDAO.Select();
+            dto.Tasks = dao.Select();
             return dto;
         }
 
         public bool Update(TaskDetailDTO entity)
         {
-            throw new NotImplementedException();
+            TASK task = new TASK();
+            task.taskID = entity.TaskID;
+            task.categoryID = entity.CategoryID;
+            task.timeSpent = entity.TimeSpent;
+            task.day = entity.Day;
+            task.monthID = entity.MonthID;
+            task.year = entity.Year;
+            return dao.Update(task);
         }
     }
 }

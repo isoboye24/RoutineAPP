@@ -1,4 +1,6 @@
-﻿using RoutineAPP.DAL.DTO;
+﻿using RoutineAPP.DAL;
+using RoutineAPP.DAL.DAO;
+using RoutineAPP.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,12 @@ namespace RoutineAPP.BLL
 {
     public class CategoryBLL : IBLL<CategoryDTO, CategoryDetailDTO>
     {
+        CategoryDAO dao = new CategoryDAO();
         public bool Delete(CategoryDetailDTO entity)
         {
-            throw new NotImplementedException();
+            CATEGORY category = new CATEGORY();
+            category.categoryID = entity.CategoryID;
+            return dao.Delete(category);
         }
 
         public bool GetBack(CategoryDetailDTO entity)
@@ -21,17 +26,24 @@ namespace RoutineAPP.BLL
 
         public bool Insert(CategoryDetailDTO entity)
         {
-            throw new NotImplementedException();
+            CATEGORY category = new CATEGORY();
+            category.categoryName = entity.CategoryName;
+            return dao.Insert(category);
         }
 
         public CategoryDTO Select()
         {
-            throw new NotImplementedException();
+            CategoryDTO dto = new CategoryDTO();
+            dto.Categories = dao.Select();
+            return dto;
         }
 
         public bool Update(CategoryDetailDTO entity)
         {
-            throw new NotImplementedException();
+            CATEGORY category = new CATEGORY();
+            category.categoryID = entity.CategoryID;
+            category.categoryName = entity.CategoryName;
+            return dao.Update(category);
         }
     }
 }
