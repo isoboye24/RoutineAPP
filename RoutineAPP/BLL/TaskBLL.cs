@@ -26,6 +26,15 @@ namespace RoutineAPP.BLL
             throw new NotImplementedException();
         }
 
+        public int TotalTasks(int ID)
+        {
+            return dao.TotalTasks(ID);
+        }
+        public decimal TotalUsedHours(int ID)
+        {
+            return dao.TotalUsedHours(ID);
+        }
+
         public bool Insert(TaskDetailDTO entity)
         {
             TASK task = new TASK();
@@ -34,15 +43,21 @@ namespace RoutineAPP.BLL
             task.day = entity.Day;
             task.monthID = entity.MonthID;
             task.year = entity.Year;
+            task.dailiyRoutineID = entity.DailyRoutineID;
             return dao.Insert(task);
         }
 
         public TaskDTO Select()
         {
+            throw new NotImplementedException();
+        }
+        
+        public TaskDTO Select(int ID)
+        {
             TaskDTO dto = new TaskDTO();
             dto.Months = monthDAO.Select();
             dto.Categories = categoryDAO.Select();
-            dto.Tasks = dao.Select();
+            dto.Tasks = dao.Select( ID);
             return dto;
         }
 
@@ -55,6 +70,7 @@ namespace RoutineAPP.BLL
             task.day = entity.Day;
             task.monthID = entity.MonthID;
             task.year = entity.Year;
+            task.dailiyRoutineID = entity.DailyRoutineID;
             return dao.Update(task);
         }
     }

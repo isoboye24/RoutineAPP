@@ -31,6 +31,7 @@ namespace RoutineAPP.AllForms
         TaskBLL bll = new TaskBLL();
         TaskDTO dto = new TaskDTO();
         public TaskDetailDTO detail = new TaskDetailDTO();
+        public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
         private void FormTask_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -41,7 +42,7 @@ namespace RoutineAPP.AllForms
             btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
-            dto = bll.Select();
+            dto = bll.Select(detailDailyRoutine.DailyTaskID);
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
             if (isUpdate)
@@ -69,9 +70,10 @@ namespace RoutineAPP.AllForms
                     TaskDetailDTO task = new TaskDetailDTO();
                     task.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
                     task.TimeSpent = Convert.ToDecimal(txtTimeSpent.Text.Trim());
-                    task.Day = DateTime.Today.Day;
-                    task.MonthID = DateTime.Today.Month;
-                    task.Year = DateTime.Today.Year;
+                    task.Day = detailDailyRoutine.Day;
+                    task.MonthID = detailDailyRoutine.MonthID;
+                    task.Year = detailDailyRoutine.Year;
+                    task.DailyRoutineID = detailDailyRoutine.DailyTaskID;
                     if (bll.Insert(task))
                     {
                         MessageBox.Show("Task was added successfully");
@@ -92,6 +94,7 @@ namespace RoutineAPP.AllForms
                         detail.Year = detail.Year;
                         detail.TimeSpent = Convert.ToDecimal(txtTimeSpent.Text.Trim());
                         detail.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
+                        detail.DailyRoutineID = detail.DailyRoutineID;
                         if (bll.Update(detail))
                         {
                             MessageBox.Show("Task was updated successfully");

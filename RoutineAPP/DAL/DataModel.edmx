@@ -14,6 +14,19 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
         </EntityType>
+        <EntityType Name="DAILY_ROUTINE">
+          <Key>
+            <PropertyRef Name="dailyRoutineID" />
+          </Key>
+          <Property Name="dailyRoutineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="routineDate" Type="date" Nullable="false" />
+          <Property Name="summary" Type="text" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="monthID" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="deletedDate" Type="date" />
+        </EntityType>
         <EntityType Name="MONTH">
           <Key>
             <PropertyRef Name="monthID" />
@@ -33,9 +46,11 @@
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
+          <Property Name="dailiyRoutineID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DailyTaskModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DAILY_ROUTINE" EntityType="Self.DAILY_ROUTINE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MONTH" EntityType="Self.MONTH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -50,6 +65,19 @@
           </Key>
           <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="deletedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DAILY_ROUTINE">
+          <Key>
+            <PropertyRef Name="dailyRoutineID" />
+          </Key>
+          <Property Name="dailyRoutineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="routineDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Int32" Nullable="false" />
+          <Property Name="monthID" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
         </EntityType>
@@ -72,9 +100,11 @@
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
+          <Property Name="dailiyRoutineID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DailyTaskEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+          <EntitySet Name="DAILY_ROUTINE" EntityType="Self.DAILY_ROUTINE" />
           <EntitySet Name="MONTHs" EntityType="Self.MONTH" />
           <EntitySet Name="TASKs" EntityType="Self.TASK" />
         </EntityContainer>
@@ -89,6 +119,20 @@
               <MappingFragment StoreEntitySet="CATEGORY">
                 <ScalarProperty Name="categoryID" ColumnName="categoryID" />
                 <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DAILY_ROUTINE">
+            <EntityTypeMapping TypeName="DailyTaskModel.DAILY_ROUTINE">
+              <MappingFragment StoreEntitySet="DAILY_ROUTINE">
+                <ScalarProperty Name="dailyRoutineID" ColumnName="dailyRoutineID" />
+                <ScalarProperty Name="routineDate" ColumnName="routineDate" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
               </MappingFragment>
@@ -113,6 +157,7 @@
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+                <ScalarProperty Name="dailiyRoutineID" ColumnName="dailiyRoutineID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

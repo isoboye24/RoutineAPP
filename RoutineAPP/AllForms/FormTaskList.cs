@@ -25,36 +25,47 @@ namespace RoutineAPP.AllForms
             cmbCategory.SelectedIndex = -1;
             cmbMonth.SelectedIndex = -1;
             bll = new TaskBLL();
-            dto = bll.Select();
+            dto = bll.Select(detailDailyRoutine.DailyTaskID);
             dataGridView1.DataSource = dto.Tasks;
+            RefreshDataCounts();
         }
-        private void btnAdd_Click(object sender, EventArgs e)
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            FormTask open = new FormTask();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
+            if (detailDailyRoutine.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please create a routine first");
+            }
+            else
+            {
+                FormTask open = new FormTask();
+                open.detailDailyRoutine = detailDailyRoutine;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
         }
+        
         TaskBLL bll = new TaskBLL();
         TaskDTO dto = new TaskDTO();
+        public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
         private void FormTaskList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtDay.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            cmbCategory.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnUpdate.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            
-            dto = bll.Select();
+
+            dto = bll.Select(detailDailyRoutine.DailyTaskID);
             cmbMonth.DataSource = dto.Months;
             General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
             cmbCategory.DataSource = dto.Categories;
@@ -64,75 +75,20 @@ namespace RoutineAPP.AllForms
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].HeaderText = "Category";
-            dataGridView1.Columns[3].HeaderText = "Time Spent";
-            dataGridView1.Columns[4].HeaderText = "Day";
-            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns[3].HeaderText = "Time Spent in mins";
+            dataGridView1.Columns[4].Visible = false;
             dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].HeaderText = "Month";
-            dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns[7].HeaderText = "Year";
-            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
+            labelTitle.Text = detailDailyRoutine.Day + "." + detailDailyRoutine.MonthID + "." + detailDailyRoutine.Year;
+            RefreshDataCounts();
         }
         TaskDetailDTO detail = new TaskDetailDTO();
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = new TaskDetailDTO();
-            detail.TaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.CategoryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            detail.CategoryName = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            detail.TimeSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (detail.TaskID == 0)
-            {
-                MessageBox.Show("Please choose a task from the table");
-            }
-            else
-            {
-                FormTask open = new FormTask();
-                open.detail = detail;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }            
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (detail.TaskID == 0)
-            {
-                MessageBox.Show("Please choose a task from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Waring!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Task was deleted successfully");
-                        ClearFilters();
-                    }
-                }                
-            }
-        }
 
         private void txtDay_TextChanged(object sender, EventArgs e)
         {
@@ -148,9 +104,111 @@ namespace RoutineAPP.AllForms
             dataGridView1.DataSource = list;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void iconMaximize_Click(object sender, EventArgs e)
         {
-            List<TaskDetailDTO> list = dto.Tasks;           
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void iconMinimize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void iconClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+            if (detail.TaskID == 0)
+            {
+                MessageBox.Show("Please choose a task from the table");
+            }
+            else
+            {
+                FormTask open = new FormTask();
+                open.detail = detail;
+                open.detailDailyRoutine = detailDailyRoutine;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+            if (detail.TaskID == 0)
+            {
+                MessageBox.Show("Please choose a task from the table");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Waring!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (bll.Delete(detail))
+                    {
+                        MessageBox.Show("Task was deleted successfully");
+                        ClearFilters();
+                    }
+                }
+            }
+        }
+        private void RefreshDataCounts()
+        {
+            labelTotalTasks.Text = bll.TotalTasks(detailDailyRoutine.DailyTaskID).ToString();
+            decimal totalMinutes = bll.TotalUsedHours(detailDailyRoutine.DailyTaskID);
+            int hours = Convert.ToInt32(totalMinutes/60);
+            int minutes = Convert.ToInt32(totalMinutes % 60);
+            if (hours < 1)
+            {
+                labelTotalTimeUsed.Text = minutes + " min" + (minutes > 1 ? "s" : "");
+            }
+            else
+            {
+                labelTotalTimeUsed.Text = hours + " hr" + (hours > 1? "s ":" ") + minutes + " min" + (minutes > 1 ? "s" : "");
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dataGridView1_RowEnter_1(object sender, DataGridViewCellEventArgs e)
+        {
+            detail = new TaskDetailDTO();
+            detail.TaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            detail.CategoryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+            detail.CategoryName = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            detail.TimeSpent = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
+            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
+            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
+            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+            detail.DailyRoutineID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+            List<TaskDetailDTO> list = dto.Tasks;
             if (cmbCategory.SelectedIndex != -1)
             {
                 list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
@@ -160,6 +218,11 @@ namespace RoutineAPP.AllForms
                 list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
             }
             dataGridView1.DataSource = list;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
         }
     }
 }

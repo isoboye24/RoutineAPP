@@ -39,7 +39,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelMaleChildren = new System.Windows.Forms.Label();
+            this.labelTotalCategory = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -201,7 +201,7 @@
             this.tableLayoutPanel9.ColumnCount = 2;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.labelMaleChildren, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.labelTotalCategory, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(519, 51);
@@ -211,15 +211,15 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(203, 21);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
-            // labelMaleChildren
+            // labelTotalCategory
             // 
-            this.labelMaleChildren.AutoSize = true;
-            this.labelMaleChildren.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMaleChildren.Location = new System.Drawing.Point(104, 0);
-            this.labelMaleChildren.Name = "labelMaleChildren";
-            this.labelMaleChildren.Size = new System.Drawing.Size(15, 17);
-            this.labelMaleChildren.TabIndex = 0;
-            this.labelMaleChildren.Text = "0";
+            this.labelTotalCategory.AutoSize = true;
+            this.labelTotalCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalCategory.Location = new System.Drawing.Point(104, 0);
+            this.labelTotalCategory.Name = "labelTotalCategory";
+            this.labelTotalCategory.Size = new System.Drawing.Size(15, 17);
+            this.labelTotalCategory.TabIndex = 0;
+            this.labelTotalCategory.Text = "0";
             // 
             // label2
             // 
@@ -265,6 +265,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.Label labelMaleChildren;
+        private System.Windows.Forms.Label labelTotalCategory;
     }
 }

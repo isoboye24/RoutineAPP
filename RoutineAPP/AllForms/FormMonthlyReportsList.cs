@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RoutineAPP.BLL;
+using RoutineAPP.DAL.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +18,7 @@ namespace RoutineAPP.AllForms
         {
             InitializeComponent();
         }
-
+        ReportsBLL bll = new ReportsBLL();
         private void FormMonthlyReportsList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -30,6 +32,9 @@ namespace RoutineAPP.AllForms
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnView.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+
+
+
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);

@@ -68,6 +68,18 @@
     <Compile Include="AllForms\FormCategory.Designer.cs">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormDailyRoutine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormDailyRoutine.Designer.cs">
+      <DependentUpon>FormDailyRoutine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormDailyRoutineList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormDailyRoutineList.Designer.cs">
+      <DependentUpon>FormDailyRoutineList.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormTask.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,16 +123,23 @@
       <DependentUpon>FormYearlyReportsList.cs</DependentUpon>
     </Compile>
     <Compile Include="BLL\CategoryBLL.cs" />
+    <Compile Include="BLL\DailyTaskBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
     <Compile Include="BLL\MonthBLL.cs" />
+    <Compile Include="BLL\ReportsBLL.cs" />
     <Compile Include="BLL\TaskBLL.cs" />
     <Compile Include="DAL\CATEGORY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DAILY_ROUTINE.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DAO\APPContext.cs" />
     <Compile Include="DAL\DAO\CategoryDAO.cs" />
+    <Compile Include="DAL\DAO\DailyTaskDAO.cs" />
     <Compile Include="DAL\DAO\IDAO.cs" />
     <Compile Include="DAL\DAO\MonthDAO.cs" />
+    <Compile Include="DAL\DAO\ReportsDAO.cs" />
     <Compile Include="DAL\DAO\TaskDAO.cs" />
     <Compile Include="DAL\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -139,6 +158,8 @@
     </Compile>
     <Compile Include="DAL\DTO\CategoryDetailDTO.cs" />
     <Compile Include="DAL\DTO\CategoryDTO.cs" />
+    <Compile Include="DAL\DTO\DailyTaskDetailDTO.cs" />
+    <Compile Include="DAL\DTO\DailyTaskDTO.cs" />
     <Compile Include="DAL\DTO\MonthDetailDTO.cs" />
     <Compile Include="DAL\DTO\MonthDTO.cs" />
     <Compile Include="DAL\DTO\TaskDetailDTO.cs" />
@@ -160,6 +181,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AllForms\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormDailyRoutine.resx">
+      <DependentUpon>FormDailyRoutine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormDailyRoutineList.resx">
+      <DependentUpon>FormDailyRoutineList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormTask.resx">
       <DependentUpon>FormTask.cs</DependentUpon>
@@ -216,10 +243,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DAL\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
       <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DAL\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -227,9 +257,5 @@
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

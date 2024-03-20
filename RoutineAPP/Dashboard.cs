@@ -116,12 +116,6 @@ namespace RoutineAPP
             Application.Exit();
         }
         private bool buttonWasClicked = false;
-        private void btnTask_Click(object sender, EventArgs e)
-        {
-            buttonWasClicked = true;
-            ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormTaskList());
-        }
 
         private void btnCategory_Click(object sender, EventArgs e)
         {
@@ -189,6 +183,13 @@ namespace RoutineAPP
             {
                 WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void btnRoutine_Click(object sender, EventArgs e)
+        {
+            buttonWasClicked = true;
+            ActivateButton(sender, RBGColors.color2);
+            OpenChildForm(new FormDailyRoutineList());
         }
     }
 }

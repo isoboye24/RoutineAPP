@@ -26,6 +26,19 @@ namespace RoutineAPP.DAL.DAO
             }
         }
 
+        public int TotalCategory()
+        {
+            try
+            {
+                int total = db.CATEGORies.Count(x=>x.isDeleted==false);
+                return total;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool GetBack(int ID)
         {
             throw new NotImplementedException();

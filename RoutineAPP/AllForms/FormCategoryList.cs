@@ -24,7 +24,7 @@ namespace RoutineAPP.AllForms
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            labelMaleChildren.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            labelTotalCategory.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             txtCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
             btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
@@ -38,6 +38,7 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
+            RefreshDataCounts();
         }
         private void ClearFilters()
         {
@@ -45,6 +46,11 @@ namespace RoutineAPP.AllForms
             bll = new CategoryBLL();
             dto = bll.Select();
             dataGridView1.DataSource = dto.Categories;
+            RefreshDataCounts();
+        }
+        private void RefreshDataCounts()
+        {
+            labelTotalCategory.Text = bll.TotalCategory().ToString();
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {

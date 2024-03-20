@@ -31,6 +31,46 @@ namespace RoutineAPP.DAL.DAO
             throw new NotImplementedException();
         }
 
+        public int TotalTasks(int ID)
+        {
+            try
+            {
+                int total = db.TASKs.Count(x => x.isDeleted == false && x.dailiyRoutineID == ID);
+                return total;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        public decimal TotalUsedHours(int ID)
+        {
+            try
+            {
+                List<decimal> totalUsedHours = new List<decimal>();
+                int taskCount = db.TASKs.Count(x => x.isDeleted == false && x.dailiyRoutineID == ID);
+                if (taskCount > 0)
+                {
+                    var usedHours = db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID == ID);
+                    foreach (var time in usedHours)
+                    {
+                        totalUsedHours.Add(time.timeSpent);
+                    }
+                    decimal total = totalUsedHours.Sum();                    
+                    return total;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool Insert(TASK entity)
         {
             try
@@ -45,12 +85,12 @@ namespace RoutineAPP.DAL.DAO
             }
         }
         
-        public List<TaskDetailDTO> Select()
+        public List<TaskDetailDTO> Select(int ID)
         {
             try
             {
                 List<TaskDetailDTO> tasks = new List<TaskDetailDTO>();
-                var list = (from t in db.TASKs.Where(x => x.isDeleted == false)
+                var list = (from t in db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID== ID)
                             join m in db.MONTHs on t.monthID equals m.monthID
                             join c in db.CATEGORies.Where(x => x.isDeleted == false) on t.categoryID equals c.categoryID
                             select new
@@ -63,6 +103,7 @@ namespace RoutineAPP.DAL.DAO
                                 monthID = t.monthID,
                                 monthName = m.monthName,
                                 year = t.year,
+                                dailyRoutineID = t.dailiyRoutineID,
                             }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ThenBy(x => x.categoryName).ToList();
                 foreach (var item in list)
                 {
@@ -75,6 +116,7 @@ namespace RoutineAPP.DAL.DAO
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;
                     dto.Year = item.year;
+                    dto.DailyRoutineID = item.dailyRoutineID;
                     tasks.Add(dto);
                 }
                 return tasks;
@@ -83,6 +125,10 @@ namespace RoutineAPP.DAL.DAO
             {
                 throw ex;
             }
+        }
+        public List<TaskDetailDTO> Select()
+        {
+            throw new NotImplementedException();
         }
 
         public bool Update(TASK entity)
@@ -95,6 +141,7 @@ namespace RoutineAPP.DAL.DAO
                 task.day = entity.day;
                 task.monthID = entity.monthID;
                 task.year = entity.year;
+                task.dailiyRoutineID = entity.dailiyRoutineID;
                 db.SaveChanges();
                 return true;
             }

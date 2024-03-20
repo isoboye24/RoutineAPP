@@ -26,6 +26,7 @@ namespace RoutineAPP.DAL
         }
     
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
+        public virtual DbSet<DAILY_ROUTINE> DAILY_ROUTINE { get; set; }
         public virtual DbSet<MONTH> MONTHs { get; set; }
         public virtual DbSet<TASK> TASKs { get; set; }
     }

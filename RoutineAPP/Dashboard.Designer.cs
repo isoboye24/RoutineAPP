@@ -51,7 +51,7 @@
             this.btnYearlyReports = new FontAwesome.Sharp.IconButton();
             this.btnMonthlyReports = new FontAwesome.Sharp.IconButton();
             this.btnCategory = new FontAwesome.Sharp.IconButton();
-            this.btnTask = new FontAwesome.Sharp.IconButton();
+            this.btnRoutine = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -288,7 +288,7 @@
             this.panelSidebar.Controls.Add(this.btnYearlyReports);
             this.panelSidebar.Controls.Add(this.btnMonthlyReports);
             this.panelSidebar.Controls.Add(this.btnCategory);
-            this.panelSidebar.Controls.Add(this.btnTask);
+            this.panelSidebar.Controls.Add(this.btnRoutine);
             this.panelSidebar.Controls.Add(this.panelLogo);
             this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSidebar.Location = new System.Drawing.Point(0, 0);
@@ -407,25 +407,25 @@
             this.btnCategory.UseVisualStyleBackColor = true;
             this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
             // 
-            // btnTask
+            // btnRoutine
             // 
-            this.btnTask.FlatAppearance.BorderSize = 0;
-            this.btnTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTask.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTask.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnTask.IconChar = FontAwesome.Sharp.IconChar.ListCheck;
-            this.btnTask.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnTask.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTask.IconSize = 24;
-            this.btnTask.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTask.Location = new System.Drawing.Point(0, 109);
-            this.btnTask.Name = "btnTask";
-            this.btnTask.Size = new System.Drawing.Size(210, 44);
-            this.btnTask.TabIndex = 14;
-            this.btnTask.Text = "        Daily Task";
-            this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTask.UseVisualStyleBackColor = true;
-            this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
+            this.btnRoutine.FlatAppearance.BorderSize = 0;
+            this.btnRoutine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRoutine.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRoutine.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnRoutine.IconChar = FontAwesome.Sharp.IconChar.ListCheck;
+            this.btnRoutine.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnRoutine.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRoutine.IconSize = 24;
+            this.btnRoutine.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRoutine.Location = new System.Drawing.Point(0, 109);
+            this.btnRoutine.Name = "btnRoutine";
+            this.btnRoutine.Size = new System.Drawing.Size(210, 44);
+            this.btnRoutine.TabIndex = 14;
+            this.btnRoutine.Text = "        Daily Routine";
+            this.btnRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRoutine.UseVisualStyleBackColor = true;
+            this.btnRoutine.Click += new System.EventHandler(this.btnRoutine_Click);
             // 
             // FormDashboard
             // 
@@ -476,7 +476,7 @@
         private System.Windows.Forms.TableLayoutPanel panelRegMembers;
         private System.Windows.Forms.Label labelNoOfRegMem;
         private System.Windows.Forms.Label label2;
-        private FontAwesome.Sharp.IconButton btnTask;
+        private FontAwesome.Sharp.IconButton btnRoutine;
         private FontAwesome.Sharp.IconButton btnDeletedData;
         private FontAwesome.Sharp.IconButton btnTotalReports;
         private FontAwesome.Sharp.IconButton btnYearlyReports;

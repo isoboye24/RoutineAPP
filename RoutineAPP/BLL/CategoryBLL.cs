@@ -31,6 +31,11 @@ namespace RoutineAPP.BLL
             return dao.Insert(category);
         }
 
+        public int TotalCategory()
+        {
+            return dao.TotalCategory();
+        }
+
         public CategoryDTO Select()
         {
             CategoryDTO dto = new CategoryDTO();
