@@ -17,10 +17,16 @@ namespace RoutineAPP.AllForms
             InitializeComponent();
         }
 
-        private void FormTotalReportsList_Load(object sender, EventArgs e)
+        private void FormYearlyReportsList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            txtDay.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnView.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {

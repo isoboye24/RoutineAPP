@@ -128,7 +128,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormMonthlyReportsList());
+            OpenChildForm(new FormMonthlyRoutineReportsList());
         }
 
         private void btnYearlyReports_Click(object sender, EventArgs e)
