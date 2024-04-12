@@ -40,13 +40,14 @@
           </Key>
           <Property Name="taskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="categoryID" Type="int" Nullable="false" />
-          <Property Name="timeSpent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="timeSpent" Type="int" Nullable="false" />
           <Property Name="day" Type="int" Nullable="false" />
           <Property Name="monthID" Type="int" Nullable="false" />
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="deletedDate" Type="date" />
           <Property Name="dailiyRoutineID" Type="int" Nullable="false" />
+          <Property Name="summary" Type="text" />
         </EntityType>
         <EntityContainer Name="DailyTaskModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
@@ -94,13 +95,14 @@
           </Key>
           <Property Name="taskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="categoryID" Type="Int32" Nullable="false" />
-          <Property Name="timeSpent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="timeSpent" Type="Int32" Nullable="false" />
           <Property Name="day" Type="Int32" Nullable="false" />
           <Property Name="monthID" Type="Int32" Nullable="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="deletedDate" Type="DateTime" Precision="0" />
           <Property Name="dailiyRoutineID" Type="Int32" Nullable="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="DailyTaskEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
@@ -158,6 +160,7 @@
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
                 <ScalarProperty Name="dailiyRoutineID" ColumnName="dailiyRoutineID" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

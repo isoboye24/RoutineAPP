@@ -46,13 +46,18 @@ namespace RoutineAPP.AllForms
         public CategoryDetailDTO detail = new CategoryDetailDTO();
         private void btnSave_Click(object sender, EventArgs e)
         {
+            int checkCategory = bll.CheckCategory(txtCategory.Text.Trim());
             if (txtCategory.Text.Trim()=="")
             {
                 MessageBox.Show("Category is empty");
-            }
+            }            
             else
             {
-                if (!isUpdate)
+                if (checkCategory > 0)
+                {
+                    MessageBox.Show("This category already exists");
+                }
+                else if(!isUpdate)
                 {
                     CategoryDetailDTO category = new CategoryDetailDTO();
                     category.CategoryName = txtCategory.Text.Trim();

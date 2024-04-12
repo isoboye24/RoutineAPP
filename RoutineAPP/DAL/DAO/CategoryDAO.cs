@@ -26,6 +26,18 @@ namespace RoutineAPP.DAL.DAO
             }
         }
 
+        public int CheckCategory(string category)
+        {
+            try
+            {
+                int check = db.CATEGORies.Count(x=>x.isDeleted==false && x.categoryName==category);                
+                return check;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public int TotalCategory()
         {
             try

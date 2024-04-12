@@ -35,6 +35,10 @@ namespace RoutineAPP.BLL
         {
             return dao.TotalCategory();
         }
+        public int CheckCategory(string category)
+        {
+            return dao.CheckCategory(category);
+        }
 
         public CategoryDTO Select()
         {

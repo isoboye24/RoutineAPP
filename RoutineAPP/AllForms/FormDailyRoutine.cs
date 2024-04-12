@@ -53,6 +53,7 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
         public bool isUpdate = false;
+        public bool isSummaryList = false;
         private void FormDailyRoutine_Load(object sender, EventArgs e)
         {
             dateTimePickerRoutine.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -63,26 +64,45 @@ namespace RoutineAPP.AllForms
             {
                 txtSummary.Text = detail.Summary;
                 dateTimePickerRoutine.Value = detail.RoutineDate;
+                labelTitle.Text = "Edit Routine";
+            }
+            if (isSummaryList)
+            {
+                txtSummary.Text = detail.Summary;
+                dateTimePickerRoutine.Value = detail.RoutineDate;
+                txtSummary.ReadOnly = true;
+                dateTimePickerRoutine.Hide();
+                label3.Hide();
+                labelTitle.Text = "Routine on "+ detail.Day + "." + detail.MonthID + "." + detail.Year; 
             }
         }
         DailyTaskBLL bll = new DailyTaskBLL();
         public DailyTaskDetailDTO detail = new DailyTaskDetailDTO();
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!isUpdate)
+            int checkDailyRoutine = bll.CheckDailyRoutine(dateTimePickerRoutine.Value.Day, dateTimePickerRoutine.Value.Month, dateTimePickerRoutine.Value.Year);
+            
+            if(!isUpdate)
             {
-                DailyTaskDetailDTO dailyTask = new DailyTaskDetailDTO();
-                dailyTask.Summary = txtSummary.Text.Trim();
-                dailyTask.RoutineDate = dateTimePickerRoutine.Value;
-                dailyTask.Day = dateTimePickerRoutine.Value.Day;
-                dailyTask.MonthID = dateTimePickerRoutine.Value.Month;
-                dailyTask.Year = dateTimePickerRoutine.Value.Year;
-                if (bll.Insert(dailyTask))
+                if (checkDailyRoutine > 0)
                 {
-                    MessageBox.Show("Daily routine was added successfully");
-                    txtSummary.Clear();
-                    dateTimePickerRoutine.Value = DateTime.Today;
+                    MessageBox.Show("This Daily Routine already exists");
                 }
+                else
+                {
+                    DailyTaskDetailDTO dailyTask = new DailyTaskDetailDTO();
+                    dailyTask.Summary = txtSummary.Text.Trim();
+                    dailyTask.RoutineDate = dateTimePickerRoutine.Value;
+                    dailyTask.Day = dateTimePickerRoutine.Value.Day;
+                    dailyTask.MonthID = dateTimePickerRoutine.Value.Month;
+                    dailyTask.Year = dateTimePickerRoutine.Value.Year;
+                    if (bll.Insert(dailyTask))
+                    {
+                        MessageBox.Show("Daily routine was added successfully");
+                        txtSummary.Clear();
+                        dateTimePickerRoutine.Value = DateTime.Today;
+                    }
+                }                
             }
             else if (isUpdate)
             {

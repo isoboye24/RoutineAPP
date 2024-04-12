@@ -11,11 +11,13 @@ namespace RoutineAPP.DAL.DTO
         public int TaskID { get; set; }
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
-        public decimal TimeSpent { get; set; }
+        public int TimeSpent { get; set; }
         public int Day { get; set; }
         public int MonthID { get; set; }
         public string MonthName { get; set; }
         public int Year { get; set; }
         public int DailyRoutineID { get; set; }
+        public string TimeInHoursAndMinutes { get; set; }
+        public string Summary { get; set; }
     }
 }

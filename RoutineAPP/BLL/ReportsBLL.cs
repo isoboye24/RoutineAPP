@@ -11,17 +11,21 @@ namespace RoutineAPP.BLL
     public class ReportsBLL
     {
         ReportsDAO dao = new ReportsDAO();
+        MonthDAO monthdao = new MonthDAO();
+        CategoryDAO categoryDAO = new CategoryDAO();
         public ReportDTO Select()
         {
             ReportDTO dto = new ReportDTO();
             dto.MonthlyRoutineReports = dao.SelectMonthlyRoutineReports();
             dto.YearlyRoutineReports = dao.SelectYearlyRoutineReports();
+            dto.Months = monthdao.Select();
             return dto;
         }
         public ReportDTO SelectMonthlyReports(int month, int year)
         {
             ReportDTO dto = new ReportDTO();
             dto.MonthlyReports = dao.SelectMonthlyReports(month, year);
+            dto.Categories = categoryDAO.Select();
             return dto;
         }
         public string SelectTotalHoursUsedInMonth(int month, int year)
@@ -46,6 +50,10 @@ namespace RoutineAPP.BLL
         public decimal SelectTotalHoursInYear(int year)
         {
             return dao.SelectTotalHoursInYear(year);
+        }
+        public int SelectTotalMonths()
+        {
+            return dao.SelectTotalMonths();
         }
     }
 }

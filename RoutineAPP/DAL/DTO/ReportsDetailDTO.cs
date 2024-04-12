@@ -13,5 +13,6 @@ namespace RoutineAPP.DAL.DTO
         public string Category { get; set; }
         public string TotalTimeUsed { get; set; }
         public string PercentageOfUsedTime { get; set; }
+        public double TotalTimeForFormatting { get; set; }
     }
 }

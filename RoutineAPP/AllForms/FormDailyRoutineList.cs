@@ -100,17 +100,7 @@ namespace RoutineAPP.AllForms
             RefreshDataCounts();
         }
         DailyTaskDetailDTO detail = new DailyTaskDetailDTO();
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = new DailyTaskDetailDTO();
-            detail.DailyTaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.RoutineDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-        }
+        
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -159,6 +149,39 @@ namespace RoutineAPP.AllForms
                 list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
             }            
             dataGridView1.DataSource = list;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (detail.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please choose a routine from the table");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?","Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (bll.Delete(detail))
+                    {
+                        MessageBox.Show("Daily Routine was deleted successfully");
+                        ClearFilters();
+                    }
+                }                
+            }
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            detail = new DailyTaskDetailDTO();
+            detail.DailyTaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            detail.RoutineDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+            detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
+            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
+            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
+            txtSummary.Text = detail.Summary;
         }
     }
 }

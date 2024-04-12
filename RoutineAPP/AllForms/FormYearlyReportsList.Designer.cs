@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCategory = new System.Windows.Forms.ComboBox();
@@ -100,11 +100,12 @@
             this.dataGridViewCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCategories.Location = new System.Drawing.Point(147, 3);
             this.dataGridViewCategories.Name = "dataGridViewCategories";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCategories.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCategories.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewCategories.RowTemplate.Height = 30;
             this.dataGridViewCategories.Size = new System.Drawing.Size(575, 379);
             this.dataGridViewCategories.TabIndex = 6;
+            this.dataGridViewCategories.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewCategories_CellFormatting);
             // 
             // tableLayoutPanel1
             // 
@@ -236,8 +237,8 @@
             this.dataGridViewYears.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewYears.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewYears.Name = "dataGridViewYears";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewYears.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewYears.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewYears.RowTemplate.Height = 30;
             this.dataGridViewYears.Size = new System.Drawing.Size(124, 379);
             this.dataGridViewYears.TabIndex = 6;

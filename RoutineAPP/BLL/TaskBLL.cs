@@ -30,6 +30,10 @@ namespace RoutineAPP.BLL
         {
             return dao.TotalTasks(ID);
         }
+        public int CheckTask(int categoryID, int routineID)
+        {
+            return dao.CheckTask(categoryID, routineID);
+        }
         public decimal TotalUsedHours(int ID)
         {
             return dao.TotalUsedHours(ID);
@@ -44,6 +48,7 @@ namespace RoutineAPP.BLL
             task.monthID = entity.MonthID;
             task.year = entity.Year;
             task.dailiyRoutineID = entity.DailyRoutineID;
+            task.summary = entity.Summary;
             return dao.Insert(task);
         }
 
@@ -71,6 +76,7 @@ namespace RoutineAPP.BLL
             task.monthID = entity.MonthID;
             task.year = entity.Year;
             task.dailiyRoutineID = entity.DailyRoutineID;
+            task.summary = entity.Summary;
             return dao.Update(task);
         }
     }

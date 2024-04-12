@@ -56,14 +56,7 @@ namespace RoutineAPP.AllForms
         ReportDTO dto = new ReportDTO();
         public MonthlyRoutinesDetailDTO routineDetail = new MonthlyRoutinesDetailDTO();
         private void FormMonthlyReports_Load(object sender, EventArgs e)
-        {
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtDay.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+        {            
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -75,18 +68,112 @@ namespace RoutineAPP.AllForms
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].HeaderText = "Category";
             dataGridView1.Columns[3].HeaderText = "Total Time Used";
-            dataGridView1.Columns[4].HeaderText = "Percentage of used time";
+            dataGridView1.Columns[4].HeaderText = "Percentage in 2 dp";
+            dataGridView1.Columns[5].HeaderText = "Complete value in %";
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
             labelTotalHours.Text = bll.SelectTotalHoursInMonth(routineDetail.MonthID, routineDetail.Year).ToString();
             labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInMonth(routineDetail.MonthID, routineDetail.Year);
+            label7.Text = "Total hours in " + General.ConventIntToMonth(DateTime.Today.Month);
+            labelTitle.Text = routineDetail.MonthName + " Report";
+            cmbCategory.DataSource = dto.Categories;
+            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
             dataGridView1.Sort(dataGridView1.Columns[4], System.ComponentModel.ListSortDirection.Descending);
+        }
+        
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {            
+            if (e.ColumnIndex == 5 && e.Value != null)
+            {
+                double cellValue;
+                if (double.TryParse(e.Value.ToString(), out cellValue))
+                {
+                    if (cellValue*100 <= 5)
+                    {
+                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.Red;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+                    else if (cellValue * 100 > 5 && cellValue * 100 <= 10)
+                    {
+                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.Yellow;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+                    else if (cellValue * 100 > 10 && cellValue * 100 <= 25)
+                    {
+                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.DarkGreen;
+                            cell.Style.ForeColor = Color.White;
+                        }
+                    }
+                    else if (cellValue * 100 > 25)
+                    {
+                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.DarkGoldenrod;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+                    else
+                    {
+                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+                            cell.Style.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<ReportsDetailDTO> list = dto.MonthlyReports;
+            if (cmbCategory.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
+            }
+            dataGridView1.DataSource = list;
+        }
+        ReportsDetailDTO detail = new ReportsDetailDTO();
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            detail = new ReportsDetailDTO();
+            detail.ReportID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            detail.CategoryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
+            detail.Category = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            detail.TotalTimeUsed = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            detail.PercentageOfUsedTime = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            detail.TotalTimeForFormatting = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
+        }
+        private void ClearFilters()
+        {
+            cmbCategory.SelectedIndex = -1;
+            bll = new ReportsBLL();
+            dto = bll.SelectMonthlyReports(routineDetail.MonthID, routineDetail.Year);
+            dataGridView1.DataSource = dto.MonthlyReports;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
         }
     }
 }

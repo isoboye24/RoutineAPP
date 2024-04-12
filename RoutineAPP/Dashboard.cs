@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using RoutineAPP.AllForms;
+using RoutineAPP.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,9 +101,26 @@ namespace RoutineAPP
             childForm.Show();
             labelTitleChildForm.Text = childForm.Text;
         }
+        DashboardBLL bll = new DashboardBLL();
         private void FormDashboard_Load(object sender, EventArgs e)
         {
+            RefreshCards();
+        }
+        private void RefreshCards()
+        {
+            labelTimeOnExercise.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Exercise").ToString();
+            labelTimeOnFamilyInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Time with family").ToString();
+            labelTimeOnGermanInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "German studies").ToString();
+            labelTimeOnGodInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Time with God").ToString();
+            labelTimeOnProgrammingInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Programming").ToString();
+            labelTimeOnBooksInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Books").ToString();
 
+            labelTimeOnRussianInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Russian studies").ToString();
+            labelTimeOnGermanInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "German studies").ToString();
+            labelTimeOnProgrammingInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Programming").ToString();
+
+            label4.Text = "In " + DateTime.Today.Year + " (annualy)";
+            label8.Text = "In " + General.ConventIntToMonth(DateTime.Today.Month) + " (monthly)";
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -158,6 +176,7 @@ namespace RoutineAPP
             {
                 currentChildForm.Close();
                 Reset();
+                RefreshCards();
             }
         }
 
@@ -190,6 +209,13 @@ namespace RoutineAPP
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
             OpenChildForm(new FormDailyRoutineList());
+        }        
+
+        private void btnSummary_Click(object sender, EventArgs e)
+        {
+            buttonWasClicked = true;
+            ActivateButton(sender, RBGColors.color2);
+            OpenChildForm(new FormSummaryList());
         }
     }
 }

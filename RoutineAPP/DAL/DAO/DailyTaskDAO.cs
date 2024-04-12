@@ -12,7 +12,18 @@ namespace RoutineAPP.DAL.DAO
     {
         public bool Delete(DAILY_ROUTINE entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DAILY_ROUTINE routine = db.DAILY_ROUTINE.First(x=>x.dailyRoutineID == entity.dailyRoutineID);
+                routine.isDeleted = true;
+                routine.deletedDate = DateTime.Today;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool GetBack(int ID)
@@ -46,7 +57,56 @@ namespace RoutineAPP.DAL.DAO
                 throw ex;
             }
         }
+        public int CheckDailyRoutine(int day, int month, int year)
+        {
+            try
+            {
+                int checkDate = db.DAILY_ROUTINE.Count(x=>x.isDeleted==false && x.day == day && x.monthID == month && x.year == year);
+                return checkDate;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        public List<DailyTaskDetailDTO> SelectSummaries()
+        {
+            try
+            {
+                List<DailyTaskDetailDTO> dailyTasks = new List<DailyTaskDetailDTO>();
+                var list = (from d in db.DAILY_ROUTINE.Where(x => x.isDeleted == false)
+                            join m in db.MONTHs on d.monthID equals m.monthID
+                            select new
+                            {
+                                dailyRoutineID = d.dailyRoutineID,
+                                summary = d.summary,
+                                routineDate = d.routineDate,
+                                day = d.day,
+                                monthID = d.monthID,
+                                monthName = m.monthName,
+                                year = d.year,
+                            }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ToList();
+                foreach (var item in list)
+                {
+                    DailyTaskDetailDTO dto = new DailyTaskDetailDTO();
+                    dto.DailyTaskID = item.dailyRoutineID;
+                    dto.Summary = item.summary;
+                    dto.RoutineDate = item.routineDate;
+                    dto.Day = item.day;
+                    dto.MonthID = item.monthID;
+                    dto.MonthName = item.monthName;
+                    dto.Year = item.year;
+                    dailyTasks.Add(dto);  
+                }
+                return dailyTasks;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         public List<DailyTaskDetailDTO> Select()
         {
             try

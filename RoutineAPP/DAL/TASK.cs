@@ -16,12 +16,13 @@ namespace RoutineAPP.DAL
     {
         public int taskID { get; set; }
         public int categoryID { get; set; }
-        public decimal timeSpent { get; set; }
+        public int timeSpent { get; set; }
         public int day { get; set; }
         public int monthID { get; set; }
         public int year { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
         public int dailiyRoutineID { get; set; }
+        public string summary { get; set; }
     }
 }

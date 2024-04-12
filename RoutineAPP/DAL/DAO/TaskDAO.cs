@@ -30,7 +30,104 @@ namespace RoutineAPP.DAL.DAO
         {
             throw new NotImplementedException();
         }
+        
+        public string SelectTimeInMonth(int month, string category)
+        {
+            try
+            {
+                string result;                
+                var time = (from t in db.TASKs.Where(x => x.monthID == month && x.isDeleted==false)
+                            join c in db.CATEGORies.Where(x=>x.categoryName == category && x.isDeleted == false) on t.categoryID equals c.categoryID
+                            select new
+                            {
+                                monthID = t.monthID,
+                                category = c.categoryName,
+                                timeSpent = t.timeSpent,
+                            }).ToList();
+                if (time.Count > 0)
+                {
+                    int totalMin = 0;
+                    foreach (var item in time)
+                    {
+                        totalMin += item.timeSpent;
+                    }
+                    if (totalMin < 60)
+                    {
+                        result = totalMin + "m";                        
+                    }
+                    else
+                    {
+                        int hours = totalMin / 60;
+                        int minutes = totalMin % 60;
+                        result = hours + "h : " + minutes + "m";                        
+                    }
+                }
+                else
+                {
+                    result = "0m";
+                }                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public string SelectTimeInYear(int year, string category)
+        {
+            try
+            {
+                string result;
+                var time = (from t in db.TASKs.Where(x => x.year == year && x.isDeleted == false)
+                            join c in db.CATEGORies.Where(x => x.categoryName == category && x.isDeleted == false) on t.categoryID equals c.categoryID
+                            select new
+                            {
+                                monthID = t.monthID,
+                                category = c.categoryName,
+                                timeSpent = t.timeSpent,
+                            }).ToList();
+                if (time.Count > 0)
+                {
+                    int totalMin = 0;
+                    foreach (var item in time)
+                    {
+                        totalMin += item.timeSpent;
+                    }                   
+                    if (totalMin < 60)
+                    {                        
+                        result = totalMin + "m";                        
+                    }
+                    else
+                    {
+                        int hours = (totalMin / 60);
+                        int minutes = totalMin % 60;
+                        result = hours + "h : "+ minutes + "m";                        
+                    }
+                }
+                else
+                {
+                    result = "0m";
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        public int CheckTask(int categoryID, int routineID)
+        {
+            try
+            {
+                int total = db.TASKs.Count(x => x.isDeleted == false && x.dailiyRoutineID == routineID && x.categoryID == categoryID);
+                return total;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public int TotalTasks(int ID)
         {
             try
@@ -103,6 +200,7 @@ namespace RoutineAPP.DAL.DAO
                                 monthID = t.monthID,
                                 monthName = m.monthName,
                                 year = t.year,
+                                summary = t.summary,
                                 dailyRoutineID = t.dailiyRoutineID,
                             }).OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day).ThenBy(x => x.categoryName).ToList();
                 foreach (var item in list)
@@ -115,8 +213,26 @@ namespace RoutineAPP.DAL.DAO
                     dto.Day = item.day;
                     dto.MonthID = item.monthID;
                     dto.MonthName = item.monthName;
+                    if (item.summary != "" && item.summary != null)
+                    {
+                        dto.Summary = item.summary;
+                    }
+                    else
+                    {
+                        dto.Summary = "";
+                    }
                     dto.Year = item.year;
-                    dto.DailyRoutineID = item.dailyRoutineID;
+                    dto.DailyRoutineID = item.dailyRoutineID;                                        
+                    if (item.timeSpent < 60)
+                    {
+                        dto.TimeInHoursAndMinutes = item.timeSpent + " min" + (item.timeSpent > 1 ? "s" : "");
+                    }
+                    else
+                    {
+                        int minutes = item.timeSpent % 60;
+                        int totalMinutes = item.timeSpent / 60;
+                        dto.TimeInHoursAndMinutes = totalMinutes + " hr" + (totalMinutes > 1 ? "s " : " ") + minutes + " min" + (minutes > 1 ? "s" : "");
+                    }                    
                     tasks.Add(dto);
                 }
                 return tasks;
@@ -142,6 +258,7 @@ namespace RoutineAPP.DAL.DAO
                 task.monthID = entity.monthID;
                 task.year = entity.year;
                 task.dailiyRoutineID = entity.dailiyRoutineID;
+                task.summary = entity.summary;
                 db.SaveChanges();
                 return true;
             }

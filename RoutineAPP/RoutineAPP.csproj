@@ -68,6 +68,12 @@
     <Compile Include="AllForms\FormCategory.Designer.cs">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormSummaryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormSummaryList.Designer.cs">
+      <DependentUpon>FormSummaryList.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormDailyRoutine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,12 +91,6 @@
     </Compile>
     <Compile Include="AllForms\FormMonthlyReports.Designer.cs">
       <DependentUpon>FormMonthlyReports.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AllForms\FormTask.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AllForms\FormTask.Designer.cs">
-      <DependentUpon>FormTask.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormCategoryList.cs">
       <SubType>Form</SubType>
@@ -116,6 +116,12 @@
     <Compile Include="AllForms\FormTaskList.Designer.cs">
       <DependentUpon>FormTaskList.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\FormTaskWithSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormTaskWithSummary.Designer.cs">
+      <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\FormYearlyReportsList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,7 @@
     </Compile>
     <Compile Include="BLL\CategoryBLL.cs" />
     <Compile Include="BLL\DailyTaskBLL.cs" />
+    <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
     <Compile Include="BLL\MonthBLL.cs" />
     <Compile Include="BLL\ReportsBLL.cs" />
@@ -193,6 +200,9 @@
     <EmbeddedResource Include="AllForms\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormSummaryList.resx">
+      <DependentUpon>FormSummaryList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormDailyRoutine.resx">
       <DependentUpon>FormDailyRoutine.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,9 +211,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormMonthlyReports.resx">
       <DependentUpon>FormMonthlyReports.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormTask.resx">
-      <DependentUpon>FormTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormCategoryList.resx">
       <DependentUpon>FormCategoryList.cs</DependentUpon>
@@ -216,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormTaskList.resx">
       <DependentUpon>FormTaskList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormTaskWithSummary.resx">
+      <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormYearlyReportsList.resx">
       <DependentUpon>FormYearlyReportsList.cs</DependentUpon>

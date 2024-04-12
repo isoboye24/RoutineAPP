@@ -15,7 +15,9 @@ namespace RoutineAPP.BLL
         MonthDAO monthDAO = new MonthDAO();
         public bool Delete(DailyTaskDetailDTO entity)
         {
-            throw new NotImplementedException();
+            DAILY_ROUTINE routine = new DAILY_ROUTINE();
+            routine.dailyRoutineID = entity.DailyTaskID;
+            return dao.Delete(routine);
         }
 
         public bool GetBack(DailyTaskDetailDTO entity)
@@ -38,11 +40,23 @@ namespace RoutineAPP.BLL
         {
             return dao.TotalRoutine();
         }
+        public int CheckDailyRoutine(int day, int month, int year)
+        {
+            return dao.CheckDailyRoutine(day, month, year);
+        }
         public DailyTaskDTO Select()
         {
             DailyTaskDTO dto = new DailyTaskDTO();
             dto.Months = monthDAO.Select();
             dto.DailyRoutines = dao.Select();
+            return dto;
+        }
+
+        public DailyTaskDTO SelectSummaries()
+        {
+            DailyTaskDTO dto = new DailyTaskDTO();
+            dto.Months = monthDAO.Select();
+            dto.DailyRoutines = dao.SelectSummaries();
             return dto;
         }
 
