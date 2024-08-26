@@ -41,6 +41,7 @@ namespace RoutineAPP.BLL
         {
             ReportDTO dto = new ReportDTO();
             dto.YearlyReports = dao.SelectYearlyReports(year);
+            dto.Categories = categoryDAO.Select();
             return dto;
         }
         public string SelectTotalHoursUsedInAYear(int year)

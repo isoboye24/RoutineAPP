@@ -109,18 +109,20 @@ namespace RoutineAPP
         private void RefreshCards()
         {
             labelTimeOnExercise.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Exercise").ToString();
-            labelTimeOnFamilyInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Time with family").ToString();
-            labelTimeOnGermanInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "German studies").ToString();
-            labelTimeOnGodInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Time with God").ToString();
+            labelTimeOnFamilyInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Family").ToString();
+            labelTimeOnGermanInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "German").ToString();
+            labelTimeOnGodInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "God T").ToString();
             labelTimeOnProgrammingInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Programming").ToString();
             labelTimeOnBooksInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Books").ToString();
 
-            labelTimeOnRussianInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Russian studies").ToString();
-            labelTimeOnGermanInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "German studies").ToString();
+            labelTimeOnRussianInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Russian").ToString();
+            labelTimeOnGermanInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "German").ToString();
             labelTimeOnProgrammingInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Programming").ToString();
 
             label4.Text = "In " + DateTime.Today.Year + " (annualy)";
             label8.Text = "In " + General.ConventIntToMonth(DateTime.Today.Month) + " (monthly)";
+
+            
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -216,6 +218,13 @@ namespace RoutineAPP
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
             OpenChildForm(new FormSummaryList());
+        }
+
+        private void btnGraphs_Click(object sender, EventArgs e)
+        {
+            buttonWasClicked = true;
+            ActivateButton(sender, RBGColors.color2);
+            OpenChildForm(new FormGraphs());
         }
     }
 }

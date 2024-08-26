@@ -20,10 +20,13 @@ namespace RoutineAPP.AllForms
         }
         ReportsBLL bll = new ReportsBLL();
         ReportDTO dto = new ReportDTO();
+        public MonthlyRoutinesDetailDTO routineDetail = new MonthlyRoutinesDetailDTO();
         private void FormTotalReportsList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            cmbCategory.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            txtYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
             dto = bll.Select();
             dataGridViewYears.DataSource = dto.YearlyRoutineReports;
@@ -33,6 +36,7 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
+
             dto = bll.SelectYearlyReports(detail.Year);
             dataGridViewCategories.DataSource = dto.YearlyReports;
             dataGridViewCategories.Columns[0].Visible = false;
@@ -41,10 +45,18 @@ namespace RoutineAPP.AllForms
             dataGridViewCategories.Columns[3].HeaderText = "Total Time Used";
             dataGridViewCategories.Columns[4].HeaderText = "Percentage in 2 dp";
             dataGridViewCategories.Columns[5].HeaderText = "Complete value in %";
+            dataGridViewCategories.Columns[6].Visible = false;
             foreach (DataGridViewColumn column in dataGridViewCategories.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
+
+            labelTotalYealyHours.Text = "Total hours in " + detail.Year + " :";
+            label2.Text = bll.SelectTotalHoursInYear(detail.Year).ToString();
+            labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInAYear(detail.Year).ToString();
+            this.Text = detail.Year + " Report";
+            cmbCategory.DataSource = dto.Categories;
+            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
         YearlyDetailDTO detail = new YearlyDetailDTO();
         private void dataGridViewYears_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -108,6 +120,41 @@ namespace RoutineAPP.AllForms
                     }
                 }
             }
+        }
+
+        private void ClearFilters()
+        {
+            txtYear.Clear();
+            cmbCategory.SelectedIndex = -1;
+            bll = new ReportsBLL();
+            dto = bll.SelectYearlyReports(detail.Year);
+            dataGridViewCategories.DataSource = dto.YearlyReports;
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<ReportsDetailDTO> list = dto.YearlyReports;
+            if (cmbCategory.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.Year == detail.Year && x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
+            }
+            dataGridViewCategories.DataSource = list;
+        }
+
+        private void txtYear_TextChanged(object sender, EventArgs e)
+        {
+            List<ReportsDetailDTO> list = dto.YearlyReports;
+            list = list.Where(x => x.Year.ToString().Contains(txtYear.Text)).ToList();
+            dataGridViewCategories.DataSource = list;
+        }
+
+        private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = General.isNumber(e);
         }
     }
 }

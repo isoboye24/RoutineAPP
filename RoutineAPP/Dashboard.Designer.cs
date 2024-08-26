@@ -80,6 +80,7 @@
             this.btnSummary = new FontAwesome.Sharp.IconButton();
             this.btnCategory = new FontAwesome.Sharp.IconButton();
             this.btnRoutine = new FontAwesome.Sharp.IconButton();
+            this.btnGraphs = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -706,6 +707,7 @@
             this.panelSidebar.Controls.Add(this.btnTotalReports);
             this.panelSidebar.Controls.Add(this.btnYearlyReports);
             this.panelSidebar.Controls.Add(this.btnMonthlyReports);
+            this.panelSidebar.Controls.Add(this.btnGraphs);
             this.panelSidebar.Controls.Add(this.btnSummary);
             this.panelSidebar.Controls.Add(this.btnCategory);
             this.panelSidebar.Controls.Add(this.btnRoutine);
@@ -721,7 +723,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DarkGray;
-            this.label3.Location = new System.Drawing.Point(3, 278);
+            this.label3.Location = new System.Drawing.Point(3, 326);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(115, 17);
             this.label3.TabIndex = 15;
@@ -758,7 +760,7 @@
             this.btnTotalReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnTotalReports.IconSize = 24;
             this.btnTotalReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTotalReports.Location = new System.Drawing.Point(0, 410);
+            this.btnTotalReports.Location = new System.Drawing.Point(0, 458);
             this.btnTotalReports.Name = "btnTotalReports";
             this.btnTotalReports.Size = new System.Drawing.Size(210, 44);
             this.btnTotalReports.TabIndex = 14;
@@ -778,7 +780,7 @@
             this.btnYearlyReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnYearlyReports.IconSize = 24;
             this.btnYearlyReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnYearlyReports.Location = new System.Drawing.Point(0, 358);
+            this.btnYearlyReports.Location = new System.Drawing.Point(0, 406);
             this.btnYearlyReports.Name = "btnYearlyReports";
             this.btnYearlyReports.Size = new System.Drawing.Size(210, 44);
             this.btnYearlyReports.TabIndex = 14;
@@ -798,7 +800,7 @@
             this.btnMonthlyReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnMonthlyReports.IconSize = 24;
             this.btnMonthlyReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMonthlyReports.Location = new System.Drawing.Point(0, 306);
+            this.btnMonthlyReports.Location = new System.Drawing.Point(0, 354);
             this.btnMonthlyReports.Name = "btnMonthlyReports";
             this.btnMonthlyReports.Size = new System.Drawing.Size(210, 44);
             this.btnMonthlyReports.TabIndex = 14;
@@ -866,6 +868,26 @@
             this.btnRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRoutine.UseVisualStyleBackColor = true;
             this.btnRoutine.Click += new System.EventHandler(this.btnRoutine_Click);
+            // 
+            // btnGraphs
+            // 
+            this.btnGraphs.FlatAppearance.BorderSize = 0;
+            this.btnGraphs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraphs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraphs.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
+            this.btnGraphs.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnGraphs.IconSize = 24;
+            this.btnGraphs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.Location = new System.Drawing.Point(0, 271);
+            this.btnGraphs.Name = "btnGraphs";
+            this.btnGraphs.Size = new System.Drawing.Size(210, 44);
+            this.btnGraphs.TabIndex = 14;
+            this.btnGraphs.Text = "        Graphs";
+            this.btnGraphs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.UseVisualStyleBackColor = true;
+            this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
             // 
             // FormDashboard
             // 
@@ -972,6 +994,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
         private FontAwesome.Sharp.IconButton btnSummary;
+        private FontAwesome.Sharp.IconButton btnGraphs;
     }
 }
 

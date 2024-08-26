@@ -76,7 +76,7 @@ namespace RoutineAPP.AllForms
             }
             labelTotalHours.Text = bll.SelectTotalHoursInMonth(routineDetail.MonthID, routineDetail.Year).ToString();
             labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInMonth(routineDetail.MonthID, routineDetail.Year);
-            label7.Text = "Total hours in " + General.ConventIntToMonth(DateTime.Today.Month);
+            label7.Text = "Total hours in " + General.ConventIntToMonth(routineDetail.MonthID);
             labelTitle.Text = routineDetail.MonthName + " Report";
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
@@ -84,7 +84,7 @@ namespace RoutineAPP.AllForms
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            dataGridView1.Sort(dataGridView1.Columns[4], System.ComponentModel.ListSortDirection.Descending);
+            dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Descending);
         }
         
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>dailyRoutine.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -49,6 +52,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,6 +71,12 @@
     </Compile>
     <Compile Include="AllForms\FormCategory.Designer.cs">
       <DependentUpon>FormCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\FormGraphs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\FormGraphs.Designer.cs">
+      <DependentUpon>FormGraphs.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\FormSummaryList.cs">
       <SubType>Form</SubType>
@@ -137,6 +147,7 @@
     <Compile Include="BLL\CategoryBLL.cs" />
     <Compile Include="BLL\DailyTaskBLL.cs" />
     <Compile Include="BLL\DashboardBLL.cs" />
+    <Compile Include="BLL\GraphBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
     <Compile Include="BLL\MonthBLL.cs" />
     <Compile Include="BLL\ReportsBLL.cs" />
@@ -150,6 +161,7 @@
     <Compile Include="DAL\DAO\APPContext.cs" />
     <Compile Include="DAL\DAO\CategoryDAO.cs" />
     <Compile Include="DAL\DAO\DailyTaskDAO.cs" />
+    <Compile Include="DAL\DAO\GraphDAO.cs" />
     <Compile Include="DAL\DAO\IDAO.cs" />
     <Compile Include="DAL\DAO\MonthDAO.cs" />
     <Compile Include="DAL\DAO\ReportsDAO.cs" />
@@ -173,6 +185,8 @@
     <Compile Include="DAL\DTO\CategoryDTO.cs" />
     <Compile Include="DAL\DTO\DailyTaskDetailDTO.cs" />
     <Compile Include="DAL\DTO\DailyTaskDTO.cs" />
+    <Compile Include="DAL\DTO\GraphDetailDTO.cs" />
+    <Compile Include="DAL\DTO\GraphDTO.cs" />
     <Compile Include="DAL\DTO\MonthDetailDTO.cs" />
     <Compile Include="DAL\DTO\MonthDTO.cs" />
     <Compile Include="DAL\DTO\MonthlyRoutinesDetailDTO.cs" />
@@ -199,6 +213,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AllForms\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\FormGraphs.resx">
+      <DependentUpon>FormGraphs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FormSummaryList.resx">
       <DependentUpon>FormSummaryList.cs</DependentUpon>
@@ -270,6 +287,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dailyRoutine.ico" />
     <Content Include="DAL\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>

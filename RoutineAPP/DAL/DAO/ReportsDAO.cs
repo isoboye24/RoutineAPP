@@ -169,6 +169,7 @@ namespace RoutineAPP.DAL.DAO
                 dto.ReportID += 1;
                 dto.CategoryID = item.categoryID;
                 dto.Category = item.categoryName;
+                dto.Year = year;
                 if (tasksCount > 0)
                 {
                     var allTasks = db.TASKs.Where(x => x.isDeleted == false && x.year == year).ToList();
