@@ -51,8 +51,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
+            this.iconBtnSave = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
@@ -351,8 +351,8 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tableLayoutPanel5.Controls.Add(this.btnClose, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnSave, 3, 0);
+            this.tableLayoutPanel5.Controls.Add(this.iconBtnClose, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.iconBtnSave, 3, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 310);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -361,33 +361,40 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(605, 36);
             this.tableLayoutPanel5.TabIndex = 45;
             // 
-            // btnClose
+            // iconBtnClose
             // 
-            this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(208, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(84, 30);
-            this.btnClose.TabIndex = 34;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnClose.FlatAppearance.BorderSize = 0;
+            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClose.IconSize = 32;
+            this.iconBtnClose.Location = new System.Drawing.Point(208, 3);
+            this.iconBtnClose.Name = "iconBtnClose";
+            this.iconBtnClose.Size = new System.Drawing.Size(84, 30);
+            this.iconBtnClose.TabIndex = 51;
+            this.iconBtnClose.UseVisualStyleBackColor = false;
+            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
             // 
-            // btnSave
+            // iconBtnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(310, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(84, 30);
-            this.btnSave.TabIndex = 35;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.iconBtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSave.FlatAppearance.BorderSize = 0;
+            this.iconBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSave.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconBtnSave.IconColor = System.Drawing.Color.DarkGreen;
+            this.iconBtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSave.IconSize = 32;
+            this.iconBtnSave.Location = new System.Drawing.Point(310, 3);
+            this.iconBtnSave.Name = "iconBtnSave";
+            this.iconBtnSave.Size = new System.Drawing.Size(84, 30);
+            this.iconBtnSave.TabIndex = 52;
+            this.iconBtnSave.UseVisualStyleBackColor = true;
+            this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
             // 
             // FormTaskWithSummary
             // 
@@ -434,8 +441,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtAdditionalTime;
@@ -448,5 +453,7 @@
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private FontAwesome.Sharp.IconButton iconBtnSave;
+        private FontAwesome.Sharp.IconButton iconBtnClose;
     }
 }

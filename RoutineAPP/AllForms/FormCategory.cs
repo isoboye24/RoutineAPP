@@ -24,18 +24,13 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void FormCategory_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             txtCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             if (isUpdate)
             {
                 txtCategory.Text = detail.CategoryName;
@@ -43,21 +38,22 @@ namespace RoutineAPP.AllForms
         }
         CategoryBLL bll = new CategoryBLL();
         public bool isUpdate = false;
-        public CategoryDetailDTO detail = new CategoryDetailDTO();
-        private void btnSave_Click(object sender, EventArgs e)
+        public CategoryDetailDTO detail = new CategoryDetailDTO();        
+
+        private void iconBtnSave_Click(object sender, EventArgs e)
         {
             int checkCategory = bll.CheckCategory(txtCategory.Text.Trim());
-            if (txtCategory.Text.Trim()=="")
+            if (txtCategory.Text.Trim() == "")
             {
                 MessageBox.Show("Category is empty");
-            }            
+            }
             else
             {
                 if (checkCategory > 0)
                 {
                     MessageBox.Show("This category already exists");
                 }
-                else if(!isUpdate)
+                else if (!isUpdate)
                 {
                     CategoryDetailDTO category = new CategoryDetailDTO();
                     category.CategoryName = txtCategory.Text.Trim();
@@ -84,6 +80,11 @@ namespace RoutineAPP.AllForms
                     }
                 }
             }
+        }
+
+        private void iconBtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -32,13 +32,13 @@
             this.iconMinimize = new FontAwesome.Sharp.IconPictureBox();
             this.iconClose = new FontAwesome.Sharp.IconPictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.txtCategory = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.iconBtnSave = new FontAwesome.Sharp.IconButton();
+            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconClose)).BeginInit();
@@ -97,32 +97,6 @@
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "ADD CATEGORY";
             // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(258, 198);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(128, 40);
-            this.btnSave.TabIndex = 41;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(121, 198);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(128, 40);
-            this.btnClose.TabIndex = 42;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // txtCategory
             // 
             this.txtCategory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,14 +142,47 @@
             this.panel2.Size = new System.Drawing.Size(5, 263);
             this.panel2.TabIndex = 47;
             // 
+            // iconBtnSave
+            // 
+            this.iconBtnSave.FlatAppearance.BorderSize = 0;
+            this.iconBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSave.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconBtnSave.IconColor = System.Drawing.Color.DarkGreen;
+            this.iconBtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSave.IconSize = 32;
+            this.iconBtnSave.Location = new System.Drawing.Point(262, 198);
+            this.iconBtnSave.Name = "iconBtnSave";
+            this.iconBtnSave.Size = new System.Drawing.Size(100, 40);
+            this.iconBtnSave.TabIndex = 50;
+            this.iconBtnSave.UseVisualStyleBackColor = true;
+            this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
+            // 
+            // iconBtnClose
+            // 
+            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClose.FlatAppearance.BorderSize = 0;
+            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClose.IconSize = 32;
+            this.iconBtnClose.Location = new System.Drawing.Point(156, 198);
+            this.iconBtnClose.Name = "iconBtnClose";
+            this.iconBtnClose.Size = new System.Drawing.Size(100, 40);
+            this.iconBtnClose.TabIndex = 50;
+            this.iconBtnClose.UseVisualStyleBackColor = false;
+            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
+            // 
             // FormCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 263);
+            this.Controls.Add(this.iconBtnClose);
+            this.Controls.Add(this.iconBtnSave);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel3);
@@ -201,12 +208,12 @@
         private FontAwesome.Sharp.IconPictureBox iconMinimize;
         private FontAwesome.Sharp.IconPictureBox iconClose;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel2;
+        private FontAwesome.Sharp.IconButton iconBtnSave;
+        private FontAwesome.Sharp.IconButton iconBtnClose;
     }
 }

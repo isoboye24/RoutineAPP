@@ -23,12 +23,12 @@ namespace RoutineAPP.AllForms
         private void FormCategoryList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            labelTotalCategory.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            label2.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            labelTotalCategory.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             txtCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
-            btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
-            btnUpdate.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnEdit.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.Select();
             dataGridView1.DataSource = dto.Categories;
@@ -50,7 +50,7 @@ namespace RoutineAPP.AllForms
         }
         private void RefreshDataCounts()
         {
-            labelTotalCategory.Text = bll.TotalCategory().ToString();
+            labelTotalCategory.Text = dataGridView1.RowCount.ToString();
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -113,6 +113,54 @@ namespace RoutineAPP.AllForms
             list = list.Where(x => x.CategoryName.Contains(txtCategory.Text.Trim())).ToList();
             dataGridView1.DataSource = list;
 
+        }
+
+        private void iconBtnAdd_Click(object sender, EventArgs e)
+        {
+            FormCategory open = new FormCategory();
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
+            ClearFilters();
+        }
+
+        private void iconBtnEdit_Click(object sender, EventArgs e)
+        {
+            if (detail.CategoryID == 0)
+            {
+                MessageBox.Show("Please choose a task from the table");
+            }
+            else
+            {
+                FormCategory open = new FormCategory();
+                open.isUpdate = true;
+                open.detail = detail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+
+        }
+
+        private void iconBtnDelete_Click(object sender, EventArgs e)
+        {
+            if (detail.CategoryID == 0)
+            {
+                MessageBox.Show("Please select a category");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (bll.Delete(detail))
+                    {
+                        MessageBox.Show("Category was deleted successfully");
+                        ClearFilters();
+                    }
+                }
+            }
         }
     }
 }

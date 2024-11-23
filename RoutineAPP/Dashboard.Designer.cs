@@ -77,10 +77,10 @@
             this.btnTotalReports = new FontAwesome.Sharp.IconButton();
             this.btnYearlyReports = new FontAwesome.Sharp.IconButton();
             this.btnMonthlyReports = new FontAwesome.Sharp.IconButton();
+            this.btnGraphs = new FontAwesome.Sharp.IconButton();
             this.btnSummary = new FontAwesome.Sharp.IconButton();
             this.btnCategory = new FontAwesome.Sharp.IconButton();
             this.btnRoutine = new FontAwesome.Sharp.IconButton();
-            this.btnGraphs = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -744,8 +744,9 @@
             this.btnDeletedData.Name = "btnDeletedData";
             this.btnDeletedData.Size = new System.Drawing.Size(210, 44);
             this.btnDeletedData.TabIndex = 14;
-            this.btnDeletedData.Text = "        Deleted Data";
+            this.btnDeletedData.Text = "Deleted Data";
             this.btnDeletedData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletedData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDeletedData.UseVisualStyleBackColor = true;
             this.btnDeletedData.Click += new System.EventHandler(this.btnDeletedData_Click);
             // 
@@ -764,8 +765,9 @@
             this.btnTotalReports.Name = "btnTotalReports";
             this.btnTotalReports.Size = new System.Drawing.Size(210, 44);
             this.btnTotalReports.TabIndex = 14;
-            this.btnTotalReports.Text = "        Total Reports";
+            this.btnTotalReports.Text = "Total Reports";
             this.btnTotalReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTotalReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTotalReports.UseVisualStyleBackColor = true;
             this.btnTotalReports.Click += new System.EventHandler(this.btnTotalReports_Click);
             // 
@@ -784,8 +786,9 @@
             this.btnYearlyReports.Name = "btnYearlyReports";
             this.btnYearlyReports.Size = new System.Drawing.Size(210, 44);
             this.btnYearlyReports.TabIndex = 14;
-            this.btnYearlyReports.Text = "        Yearly Reports";
+            this.btnYearlyReports.Text = "Yearly Reports";
             this.btnYearlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnYearlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnYearlyReports.UseVisualStyleBackColor = true;
             this.btnYearlyReports.Click += new System.EventHandler(this.btnYearlyReports_Click);
             // 
@@ -804,10 +807,32 @@
             this.btnMonthlyReports.Name = "btnMonthlyReports";
             this.btnMonthlyReports.Size = new System.Drawing.Size(210, 44);
             this.btnMonthlyReports.TabIndex = 14;
-            this.btnMonthlyReports.Text = "        Monthly Reports";
+            this.btnMonthlyReports.Text = "Monthly Reports";
             this.btnMonthlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMonthlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMonthlyReports.UseVisualStyleBackColor = true;
             this.btnMonthlyReports.Click += new System.EventHandler(this.btnMonthlyReports_Click);
+            // 
+            // btnGraphs
+            // 
+            this.btnGraphs.FlatAppearance.BorderSize = 0;
+            this.btnGraphs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraphs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraphs.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
+            this.btnGraphs.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnGraphs.IconSize = 24;
+            this.btnGraphs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.Location = new System.Drawing.Point(0, 271);
+            this.btnGraphs.Name = "btnGraphs";
+            this.btnGraphs.Size = new System.Drawing.Size(210, 44);
+            this.btnGraphs.TabIndex = 14;
+            this.btnGraphs.Text = "Graphs";
+            this.btnGraphs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGraphs.UseVisualStyleBackColor = true;
+            this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
             // 
             // btnSummary
             // 
@@ -824,8 +849,9 @@
             this.btnSummary.Name = "btnSummary";
             this.btnSummary.Size = new System.Drawing.Size(210, 44);
             this.btnSummary.TabIndex = 14;
-            this.btnSummary.Text = "        Summary";
+            this.btnSummary.Text = "Summary";
             this.btnSummary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSummary.UseVisualStyleBackColor = true;
             this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
             // 
@@ -844,8 +870,9 @@
             this.btnCategory.Name = "btnCategory";
             this.btnCategory.Size = new System.Drawing.Size(210, 44);
             this.btnCategory.TabIndex = 14;
-            this.btnCategory.Text = "        Category";
+            this.btnCategory.Text = "Category";
             this.btnCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCategory.UseVisualStyleBackColor = true;
             this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
             // 
@@ -864,30 +891,11 @@
             this.btnRoutine.Name = "btnRoutine";
             this.btnRoutine.Size = new System.Drawing.Size(210, 44);
             this.btnRoutine.TabIndex = 14;
-            this.btnRoutine.Text = "        Daily Routine";
+            this.btnRoutine.Text = "Daily Routine";
             this.btnRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRoutine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRoutine.UseVisualStyleBackColor = true;
             this.btnRoutine.Click += new System.EventHandler(this.btnRoutine_Click);
-            // 
-            // btnGraphs
-            // 
-            this.btnGraphs.FlatAppearance.BorderSize = 0;
-            this.btnGraphs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGraphs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGraphs.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnGraphs.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
-            this.btnGraphs.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnGraphs.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnGraphs.IconSize = 24;
-            this.btnGraphs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGraphs.Location = new System.Drawing.Point(0, 271);
-            this.btnGraphs.Name = "btnGraphs";
-            this.btnGraphs.Size = new System.Drawing.Size(210, 44);
-            this.btnGraphs.TabIndex = 14;
-            this.btnGraphs.Text = "        Graphs";
-            this.btnGraphs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGraphs.UseVisualStyleBackColor = true;
-            this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
             // 
             // FormDashboard
             // 

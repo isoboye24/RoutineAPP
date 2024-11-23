@@ -48,18 +48,14 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
         public bool isUpdate = false;
         public bool isSummaryList = false;
         private void FormDailyRoutine_Load(object sender, EventArgs e)
         {
             dateTimePickerRoutine.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             txtSummary.Font = new Font("Segoe UI", 18, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             if (isUpdate)
             {
                 txtSummary.Text = detail.Summary;
@@ -78,11 +74,17 @@ namespace RoutineAPP.AllForms
         }
         DailyTaskBLL bll = new DailyTaskBLL();
         public DailyTaskDetailDTO detail = new DailyTaskDetailDTO();
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void iconBtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void iconBtnSave_Click(object sender, EventArgs e)
         {
             int checkDailyRoutine = bll.CheckDailyRoutine(dateTimePickerRoutine.Value.Day, dateTimePickerRoutine.Value.Month, dateTimePickerRoutine.Value.Year);
-            
-            if(!isUpdate)
+
+            if (!isUpdate)
             {
                 if (checkDailyRoutine > 0)
                 {
@@ -102,7 +104,7 @@ namespace RoutineAPP.AllForms
                         txtSummary.Clear();
                         dateTimePickerRoutine.Value = DateTime.Today;
                     }
-                }                
+                }
             }
             else if (isUpdate)
             {

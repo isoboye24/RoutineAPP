@@ -19,53 +19,11 @@ namespace RoutineAPP.AllForms
             InitializeComponent();
         }
 
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            if (detail.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please choose a routine from the table");
-            }
-            else
-            {
-                FormTaskList open = new FormTaskList();
-                open.detailDailyRoutine = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }            
-        }
         private void RefreshDataCounts()
         {
             labelTotalRoutine.Text = bll.TotalRoutine().ToString();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            FormDailyRoutine open = new FormDailyRoutine();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
-            ClearFilters();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (detail.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please choose a routine from the table");
-            }
-            else
-            {
-                FormDailyRoutine open = new FormDailyRoutine();
-                open.isUpdate = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }            
-        }
         DailyTaskBLL bll = new DailyTaskBLL();
         DailyTaskDTO dto = new DailyTaskDTO();
         private void FormDailyRoutineList_Load(object sender, EventArgs e)
@@ -75,11 +33,11 @@ namespace RoutineAPP.AllForms
             txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnUpdate.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnEdit.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.Select();
             cmbMonth.DataSource = dto.Months;
@@ -136,40 +94,6 @@ namespace RoutineAPP.AllForms
             dataGridView1.DataSource = dto.DailyRoutines;
             RefreshDataCounts();
         }
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
-            if (cmbMonth.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-            }            
-            dataGridView1.DataSource = list;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (detail.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please choose a routine from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?","Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Daily Routine was deleted successfully");
-                        ClearFilters();
-                    }
-                }                
-            }
-        }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -182,6 +106,85 @@ namespace RoutineAPP.AllForms
             detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
             detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
             txtSummary.Text = detail.Summary;
+        }
+
+        private void iconBtnAdd_Click(object sender, EventArgs e)
+        {
+            FormDailyRoutine open = new FormDailyRoutine();
+            this.Hide();
+            open.ShowDialog();
+            this.Visible = true;
+            ClearFilters();
+        }
+
+        private void iconBtnEdit_Click(object sender, EventArgs e)
+        {
+            if (detail.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please choose a routine from the table");
+            }
+            else
+            {
+                FormDailyRoutine open = new FormDailyRoutine();
+                open.isUpdate = true;
+                open.detail = detail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void iconBtnView_Click(object sender, EventArgs e)
+        {
+            if (detail.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please choose a routine from the table");
+            }
+            else
+            {
+                FormTaskList open = new FormTaskList();
+                open.detailDailyRoutine = detail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void iconBtnDelete_Click(object sender, EventArgs e)
+        {
+            if (detail.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please choose a routine from the table");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (bll.Delete(detail))
+                    {
+                        MessageBox.Show("Daily Routine was deleted successfully");
+                        ClearFilters();
+                    }
+                }
+            }
+        }
+
+        private void iconBtnSearch_Click(object sender, EventArgs e)
+        {
+            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
+            if (cmbMonth.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
+            }
+            dataGridView1.DataSource = list;
+        }
+
+        private void iconBtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
         }
     }
 }

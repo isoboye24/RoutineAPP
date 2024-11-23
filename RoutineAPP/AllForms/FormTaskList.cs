@@ -20,10 +20,7 @@ namespace RoutineAPP.AllForms
         }
         private void ClearFilters()
         {
-            txtDay.Clear();
-            txtYear.Clear();
             cmbCategory.SelectedIndex = -1;
-            cmbMonth.SelectedIndex = -1;
             bll = new TaskBLL();
             dto = bll.Select(detailDailyRoutine.DailyTaskID);
             dataGridView1.DataSource = dto.Tasks;
@@ -52,15 +49,9 @@ namespace RoutineAPP.AllForms
         public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
         TaskDetailDTO detail = new TaskDetailDTO();
         private void FormTaskList_Load(object sender, EventArgs e)
-        {
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
+        {          
             label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             cmbCategory.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -69,8 +60,6 @@ namespace RoutineAPP.AllForms
             btnUpdate.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.Select(detailDailyRoutine.DailyTaskID);
-            cmbMonth.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
 
@@ -93,20 +82,6 @@ namespace RoutineAPP.AllForms
             labelTitle.Text = detailDailyRoutine.Day + "." + detailDailyRoutine.MonthID + "." + detailDailyRoutine.Year;
             RefreshDataCounts();
         }        
-
-        private void txtDay_TextChanged(object sender, EventArgs e)
-        {
-            List<TaskDetailDTO> list = dto.Tasks;
-            list = list.Where(x => x.Day.ToString().Contains(txtDay.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
-
-        private void txtYear_TextChanged(object sender, EventArgs e)
-        {
-            List<TaskDetailDTO> list = dto.Tasks;
-            list = list.Where(x => x.Year.ToString().Contains(txtYear.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
 
         private void iconMaximize_Click(object sender, EventArgs e)
         {
@@ -202,11 +177,7 @@ namespace RoutineAPP.AllForms
             if (cmbCategory.SelectedIndex != -1)
             {
                 list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
-            }
-            if (cmbMonth.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-            }
+            }            
             dataGridView1.DataSource = list;
         }
 

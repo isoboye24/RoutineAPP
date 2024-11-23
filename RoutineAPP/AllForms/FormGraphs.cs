@@ -26,23 +26,24 @@ namespace RoutineAPP.AllForms
 
         private void btnClearAllCategories_Click(object sender, EventArgs e)
         {
-            labelGraphTitleAllCategories.Text = "Programming " + DateTime.Today.Year;
-            cmbCategoryAllCat.SelectedIndex = -1;
+            label7.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " report";
+            labelGraphTitleAllCategories.Text = "All Categories " + DateTime.Today.Year;
+            cmbMonthMonthly.SelectedIndex = -1;
             cmbMonthAllCategories.SelectedIndex = -1;
             cmbYearAllCategories.SelectedIndex = -1;
         }
 
         private void FontSizes()
         {
-            cmbCategoryAllCat.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbMonthMonthly.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbCategorySingleCat.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbMonthAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbYearAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbYearSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
-            btnClearAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnClearSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnShowAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnShowSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -52,6 +53,7 @@ namespace RoutineAPP.AllForms
             label6.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelTitleSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelGraphTitleAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label7.Font = new Font("Segoe UI", 12, FontStyle.Bold);
         }
 
         string year = DateTime.Today.Year.ToString();
@@ -87,7 +89,7 @@ namespace RoutineAPP.AllForms
             {
                 new SqlParameter("@year", SqlDbType.VarChar) { Value = year }
             };
-            General.CreateChart(chartAllCategories, allCategoryQuery, allCatparameters, SeriesChartType.Column, "Category", "");
+            General.CreateChart(chartAllCategories, allCategoryQuery, allCatparameters, SeriesChartType.Column, "Hours", "");
 
             string singleCategoryQuery = getSingleCategoryQuery();
             SqlParameter[] singleCatparameters = new SqlParameter[]
@@ -95,7 +97,7 @@ namespace RoutineAPP.AllForms
                 new SqlParameter("@year", SqlDbType.VarChar) { Value = year },
                 new SqlParameter("@category", SqlDbType.VarChar) { Value = category }
             };
-            General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Month", "");
+            General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Hours", "");
             labelTitleSingleCategory.Text = "Programming " + DateTime.Today.Year;
             labelGraphTitleAllCategories.Text = DateTime.Today.Year + " Records";
         }
@@ -103,8 +105,8 @@ namespace RoutineAPP.AllForms
         private void FormGraphs_Load(object sender, EventArgs e)
         {
             dto = bll.Select();
-            cmbCategoryAllCat.DataSource = dto.Categories;
-            General.ComboBoxProps(cmbCategoryAllCat, "CategoryName", "CategoryID");
+            cmbMonthMonthly.DataSource = dto.Categories;
+            General.ComboBoxProps(cmbMonthMonthly, "CategoryName", "CategoryID");
             cmbCategorySingleCat.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategorySingleCat, "CategoryName", "CategoryID");
             cmbMonthAllCategories.DataSource = dto.Months;

@@ -61,8 +61,8 @@ namespace RoutineAPP.AllForms
             txtAdditionalTime.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             txtSummary.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.Select(detailDailyRoutine.DailyTaskID);
             cmbCategory.DataSource = dto.Categories;
@@ -81,8 +81,23 @@ namespace RoutineAPP.AllForms
                 cmbCategory.SelectedValue = detail.CategoryID;
             }
         }
-        
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void FormTaskWithSummary_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void iconBtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void iconBtnSave_Click(object sender, EventArgs e)
         {
             if (txtTimeSpent.Text.Trim() == "")
             {
@@ -116,7 +131,7 @@ namespace RoutineAPP.AllForms
                         txtSummary.Clear();
                         cmbCategory.SelectedIndex = -1;
                     }
-                } 
+                }
             }
             else if (isUpdate)
             {
@@ -147,21 +162,6 @@ namespace RoutineAPP.AllForms
                     }
                 }
             }
-        }
-
-        private void FormTaskWithSummary_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

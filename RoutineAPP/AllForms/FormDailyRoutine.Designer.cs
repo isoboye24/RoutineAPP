@@ -38,12 +38,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePickerRoutine = new System.Windows.Forms.DateTimePicker();
             this.txtSummary = new System.Windows.Forms.TextBox();
+            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
+            this.iconBtnSave = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
@@ -182,8 +182,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.btnClose, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btnSave, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.iconBtnClose, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.iconBtnSave, 3, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(18, 336);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -193,38 +193,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(752, 55);
             this.tableLayoutPanel3.TabIndex = 5;
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(273, 11);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(91, 32);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(385, 11);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(91, 32);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -275,6 +243,41 @@
             this.txtSummary.Size = new System.Drawing.Size(752, 281);
             this.txtSummary.TabIndex = 7;
             // 
+            // iconBtnClose
+            // 
+            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnClose.FlatAppearance.BorderSize = 0;
+            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClose.IconSize = 32;
+            this.iconBtnClose.Location = new System.Drawing.Point(273, 11);
+            this.iconBtnClose.Name = "iconBtnClose";
+            this.iconBtnClose.Size = new System.Drawing.Size(91, 32);
+            this.iconBtnClose.TabIndex = 51;
+            this.iconBtnClose.UseVisualStyleBackColor = false;
+            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
+            // 
+            // iconBtnSave
+            // 
+            this.iconBtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSave.FlatAppearance.BorderSize = 0;
+            this.iconBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSave.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconBtnSave.IconColor = System.Drawing.Color.DarkGreen;
+            this.iconBtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSave.IconSize = 32;
+            this.iconBtnSave.Location = new System.Drawing.Point(385, 11);
+            this.iconBtnSave.Name = "iconBtnSave";
+            this.iconBtnSave.Size = new System.Drawing.Size(91, 32);
+            this.iconBtnSave.TabIndex = 52;
+            this.iconBtnSave.UseVisualStyleBackColor = true;
+            this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
+            // 
             // FormDailyRoutine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,11 +319,11 @@
         private FontAwesome.Sharp.IconPictureBox iconMaximize;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePickerRoutine;
         private System.Windows.Forms.TextBox txtSummary;
+        private FontAwesome.Sharp.IconButton iconBtnSave;
+        private FontAwesome.Sharp.IconButton iconBtnClose;
     }
 }

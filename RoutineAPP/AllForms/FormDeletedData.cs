@@ -21,12 +21,13 @@ namespace RoutineAPP.AllForms
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);            
             cmbDeletedData.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnRetrieve.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnRetrieve.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
         }
+
     }
 }

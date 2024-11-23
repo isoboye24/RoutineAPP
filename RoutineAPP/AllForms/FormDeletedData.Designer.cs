@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbDeletedData = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
+            this.iconBtnRetrieve = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -89,8 +89,8 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 50);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(725, 338);
             this.dataGridView1.TabIndex = 6;
@@ -124,8 +124,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.btnDelete, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btnRetrieve, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.iconBtnDelete, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.iconBtnRetrieve, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 394);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -136,35 +136,39 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(725, 75);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // btnDelete
+            // iconBtnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(372, 21);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(88, 31);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
+            this.iconBtnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnDelete.FlatAppearance.BorderSize = 0;
+            this.iconBtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnDelete.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            this.iconBtnDelete.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnDelete.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnDelete.IconSize = 32;
+            this.iconBtnDelete.Location = new System.Drawing.Point(372, 21);
+            this.iconBtnDelete.Name = "iconBtnDelete";
+            this.iconBtnDelete.Size = new System.Drawing.Size(88, 31);
+            this.iconBtnDelete.TabIndex = 56;
+            this.iconBtnDelete.UseVisualStyleBackColor = false;
             // 
-            // btnRetrieve
+            // iconBtnRetrieve
             // 
-            this.btnRetrieve.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnRetrieve.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRetrieve.FlatAppearance.BorderSize = 0;
-            this.btnRetrieve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRetrieve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetrieve.ForeColor = System.Drawing.Color.White;
-            this.btnRetrieve.Location = new System.Drawing.Point(264, 21);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(88, 31);
-            this.btnRetrieve.TabIndex = 3;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = false;
+            this.iconBtnRetrieve.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnRetrieve.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnRetrieve.FlatAppearance.BorderSize = 0;
+            this.iconBtnRetrieve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnRetrieve.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnRetrieve.IconChar = FontAwesome.Sharp.IconChar.RotateBackward;
+            this.iconBtnRetrieve.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnRetrieve.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnRetrieve.IconSize = 32;
+            this.iconBtnRetrieve.Location = new System.Drawing.Point(264, 21);
+            this.iconBtnRetrieve.Name = "iconBtnRetrieve";
+            this.iconBtnRetrieve.Size = new System.Drawing.Size(88, 31);
+            this.iconBtnRetrieve.TabIndex = 56;
+            this.iconBtnRetrieve.UseVisualStyleBackColor = false;
             // 
             // FormDeletedData
             // 
@@ -191,8 +195,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ComboBox cmbDeletedData;
+        private FontAwesome.Sharp.IconButton iconBtnDelete;
+        private FontAwesome.Sharp.IconButton iconBtnRetrieve;
     }
 }

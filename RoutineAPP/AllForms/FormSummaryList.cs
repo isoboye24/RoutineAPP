@@ -25,6 +25,7 @@ namespace RoutineAPP.AllForms
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            labelTotalComments.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
@@ -58,7 +59,7 @@ namespace RoutineAPP.AllForms
         }
         private void RefreshDataCounts()
         {
-
+            labelTotalComments.Text = dataGridView1.RowCount.ToString();
         }
         private void ClearFilters()
         {
