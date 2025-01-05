@@ -26,37 +26,47 @@ namespace RoutineAPP.AllForms
 
         private void btnClearAllCategories_Click(object sender, EventArgs e)
         {
-            label7.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " report";
-            labelGraphTitleAllCategories.Text = "All Categories " + DateTime.Today.Year;
+            ClearFilters();
+        }
+
+        private void ClearFilters()
+        {
+            labelGraphTitleAnnualReport.Text = "All Categories " + DateTime.Today.Year;
+            cmbAnnualYear.SelectedIndex = -1;
+
+            labelTitleSingleCategory.Text = "Programming " + DateTime.Today.Year;
+            cmbCategorySingleCat.SelectedIndex = -1;
+            cmbYearSingleCategory.SelectedIndex = -1;
+
+            allCatMonthlyReport.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " Reports";
             cmbMonthMonthly.SelectedIndex = -1;
-            cmbMonthAllCategories.SelectedIndex = -1;
-            cmbYearAllCategories.SelectedIndex = -1;
+            cmbYearMonthly.SelectedIndex = -1;
+
+            getUpdate();
         }
 
         private void FontSizes()
         {
             cmbMonthMonthly.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbCategorySingleCat.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbMonthAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbYearAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbAnnualYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbYearSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbYearMonthly.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
             iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnClearSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             iconBtnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnShowSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label5.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label6.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelTitleSingleCategory.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            labelGraphTitleAllCategories.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label7.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            labelGraphTitleAnnualReport.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            allCatMonthlyReport.Font = new Font("Segoe UI", 12, FontStyle.Bold);
         }
 
         string year = DateTime.Today.Year.ToString();
+        string month = DateTime.Today.Month.ToString();
         string category = "Programming";
 
         private string getAllCategoryQuery()
@@ -82,6 +92,17 @@ namespace RoutineAPP.AllForms
             return singleCategoriesQuery;
         }
 
+        private string getAllMonthlyCategoryQuery()
+        {
+            string allCategoriesQuery = "SELECT CATEGORY.CategoryName, SUM(TASK.timeSpent)/60 \r\n" +
+            "FROM TASK \r\n" +
+            "JOIN CATEGORY ON TASK.categoryID = CATEGORY.categoryID \r\n" +
+            "WHERE TASK.year = @year AND TASK.monthID = @month AND TASK.isDeleted = 0 AND CATEGORY.isDeleted = 0 \r\n" +
+            "GROUP BY CATEGORY.categoryName\r\n" +
+            "ORDER BY CATEGORY.categoryName ASC";
+            return allCategoriesQuery;
+        }
+
         private void getUpdate()
         {
             string allCategoryQuery = getAllCategoryQuery();            
@@ -89,7 +110,8 @@ namespace RoutineAPP.AllForms
             {
                 new SqlParameter("@year", SqlDbType.VarChar) { Value = year }
             };
-            General.CreateChart(chartAllCategories, allCategoryQuery, allCatparameters, SeriesChartType.Column, "Hours", "");
+            General.CreateChart(chartAnnualReport, allCategoryQuery, allCatparameters, SeriesChartType.Column, "Hours", "");
+            labelGraphTitleAnnualReport.Text = DateTime.Today.Year + " Records";
 
             string singleCategoryQuery = getSingleCategoryQuery();
             SqlParameter[] singleCatparameters = new SqlParameter[]
@@ -97,54 +119,147 @@ namespace RoutineAPP.AllForms
                 new SqlParameter("@year", SqlDbType.VarChar) { Value = year },
                 new SqlParameter("@category", SqlDbType.VarChar) { Value = category }
             };
-            General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Hours", "");
+            General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Hours", "");            
             labelTitleSingleCategory.Text = "Programming " + DateTime.Today.Year;
-            labelGraphTitleAllCategories.Text = DateTime.Today.Year + " Records";
+
+            string AllMonthlyCategoryQuery = getAllMonthlyCategoryQuery();
+            SqlParameter[] allMonthlyCatparameters = new SqlParameter[]
+            {
+                new SqlParameter("@year", SqlDbType.VarChar) { Value = year },
+                new SqlParameter("@month", SqlDbType.VarChar) { Value = month },
+                new SqlParameter("@category", SqlDbType.VarChar) { Value = category }
+            };
+            General.CreateChart(chartAllCategoryMonthly, AllMonthlyCategoryQuery, allMonthlyCatparameters, SeriesChartType.Column, "Hours", "");
+            allCatMonthlyReport.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " Reports";
         }
 
         private void FormGraphs_Load(object sender, EventArgs e)
         {
             dto = bll.Select();
-            cmbMonthMonthly.DataSource = dto.Categories;
-            General.ComboBoxProps(cmbMonthMonthly, "CategoryName", "CategoryID");
+            cmbMonthMonthly.DataSource = dto.Months;
+            General.ComboBoxProps(cmbMonthMonthly, "MonthName", "MonthID");
             cmbCategorySingleCat.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategorySingleCat, "CategoryName", "CategoryID");
-            cmbMonthAllCategories.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonthAllCategories, "MonthName", "MonthID");
+
+            cmbAnnualYear.DataSource = dto.Years;
+            General.ComboBoxProps(cmbAnnualYear, "Year", "YearID");
+            cmbYearSingleCategory.DataSource = dto.Years;
+            General.ComboBoxProps(cmbYearSingleCategory, "Year", "YearID");
+            cmbYearMonthly.DataSource = dto.Years;
+            General.ComboBoxProps(cmbYearMonthly, "Year", "YearID");
 
             FontSizes();
             getUpdate();            
         }
 
-        private void btnClearSingleCategory_Click(object sender, EventArgs e)
+        private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            labelTitleSingleCategory.Text = "Programming " + DateTime.Today.Year;
-            cmbCategorySingleCat.SelectedIndex = -1;
-            cmbYearSingleCategory.SelectedIndex = -1;
-            getUpdate();
-        }
+            string annualQuery = getAllCategoryQuery();
+            string selectedYear = cmbAnnualYear.Text;
 
-        private void btnShowSingleCategory_Click(object sender, EventArgs e)
-        {
-            string singleCategoryQuery = getSingleCategoryQuery();
-            string newCategory;
-
-            if (cmbCategorySingleCat.SelectedIndex != -1)
+            if (cmbAnnualYear.SelectedIndex != -1)
             {
-                int CategoryID = Convert.ToInt32(cmbCategorySingleCat.SelectedValue);
-                newCategory = General.ConventIntToCategory(CategoryID);
-
                 SqlParameter[] singleCatparameters = new SqlParameter[]
                 {
-                    new SqlParameter("@year", SqlDbType.VarChar) { Value = year },
-                    new SqlParameter("@category", SqlDbType.VarChar) { Value = newCategory }
+                    new SqlParameter("@year", SqlDbType.VarChar) { Value = selectedYear }
                 };
-                General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Month", "");
-                labelTitleSingleCategory.Text = newCategory + " " + DateTime.Today.Year;
+                General.CreateChart(chartAnnualReport, annualQuery, singleCatparameters, SeriesChartType.Column, "Month", "");
+                labelGraphTitleAnnualReport.Text = selectedYear + " Report";
             }
             else
             {
-                MessageBox.Show("Please select a category from the dropdown.");
+                MessageBox.Show("Please select a year from the dropdown.");
+            }
+        }
+
+        private void iconBtnClearMonthly_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnSingleCatClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconSearchSingleCat_Click(object sender, EventArgs e)
+        {
+            string singleCategoryQuery = getSingleCategoryQuery();
+            string selectedYear = cmbYearSingleCategory.Text;
+            string newCategory;
+
+            if (cmbCategorySingleCat.SelectedIndex != -1 && cmbYearSingleCategory.SelectedIndex != -1)
+            {
+                newCategory = cmbCategorySingleCat.Text;
+
+                SqlParameter[] singleCatparameters = new SqlParameter[]
+                {
+                    new SqlParameter("@year", SqlDbType.VarChar) { Value = selectedYear },
+                    new SqlParameter("@category", SqlDbType.VarChar) { Value = newCategory }
+                };
+                General.CreateChart(chartSingleCategories, singleCategoryQuery, singleCatparameters, SeriesChartType.Column, "Month", "");
+                labelTitleSingleCategory.Text = newCategory + " " + selectedYear;
+            }
+            else
+            {
+                if (cmbCategorySingleCat.SelectedIndex == -1 && cmbYearSingleCategory.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a year and a category from the dropdowns.");
+                }
+                else if (cmbYearSingleCategory.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a year from the dropdown.");
+                }
+                else if (cmbCategorySingleCat.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a category from the dropdown.");
+                }
+                else
+                {
+                    MessageBox.Show("Unknown error.");
+                }
+            }
+        }
+
+        private void iconBtnSearchMonthly_Click(object sender, EventArgs e)
+        {
+            string singleMonthQuery = getAllMonthlyCategoryQuery();
+            string selectedYear = cmbYearMonthly.Text;
+            int selectedMonth = Convert.ToInt32(cmbMonthMonthly.SelectedValue);
+
+            if (cmbYearMonthly.SelectedIndex != -1 && cmbMonthMonthly.SelectedIndex != -1)
+            {
+                SqlParameter[] singleCatparameters = new SqlParameter[]
+                {
+                    new SqlParameter("@year", SqlDbType.VarChar) { Value = selectedYear },
+                    new SqlParameter("@month", SqlDbType.VarChar) { Value = selectedMonth }
+                };
+                General.CreateChart(chartAllCategoryMonthly, singleMonthQuery, singleCatparameters, SeriesChartType.Column, "Month", "");
+                allCatMonthlyReport.Text = General.ConventIntToMonth(selectedMonth) + " " + selectedYear + " Report";
+            }
+            else
+            {
+                if (cmbYearMonthly.SelectedIndex == -1 && cmbMonthMonthly.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a month and a year from the dropdowns.");
+                }
+                else if(cmbYearMonthly.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a year from the dropdown.");
+                }
+                else if (cmbMonthMonthly.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a month from the dropdown.");
+                }
+                else
+                {
+                    MessageBox.Show("Unknown error.");
+                }
             }
         }
     }

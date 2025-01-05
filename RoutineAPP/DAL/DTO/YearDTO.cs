@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace RoutineAPP.DAL.DTO
 {
-    public class GraphDTO
+    public class YearDTO
     {
-        public List<GraphDetailDTO> Graphs { get; set; }
-        public List<MonthDetailDTO> Months { get; set; }
-        public List<CategoryDetailDTO> Categories { get; set; }
         public List<AllYearsDetailDTO> Years { get; set; }
     }
 }

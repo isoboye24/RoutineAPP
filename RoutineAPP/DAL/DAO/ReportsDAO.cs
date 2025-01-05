@@ -126,9 +126,9 @@ namespace RoutineAPP.DAL.DAO
             return days * 24;
         }
 
-        public List<YearlyDetailDTO> SelectYearlyRoutineReports()
+        public List<YearDetailDTO> SelectYearlyRoutineReports()
         {
-            List<YearlyDetailDTO> yearlyRoutineReports = new List<YearlyDetailDTO>();
+            List<YearDetailDTO> yearlyRoutineReports = new List<YearDetailDTO>();
             List<int> yearsCollection = new List<int>();
             List<int> years = new List<int>();
 
@@ -140,8 +140,8 @@ namespace RoutineAPP.DAL.DAO
             years = yearsCollection.Distinct().OrderByDescending(year => year).ToList();
             foreach (var yearItem in years)
             {
-                YearlyDetailDTO dto = new YearlyDetailDTO();
-                dto.YearlyReportID += 1;
+                YearDetailDTO dto = new YearDetailDTO();
+                dto.YearID += 1;
                 dto.Year = yearItem;
                 yearlyRoutineReports.Add(dto);                
             }

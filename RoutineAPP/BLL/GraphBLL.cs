@@ -11,11 +11,13 @@ namespace RoutineAPP.BLL
     public class GraphBLL
     {
         MonthDAO monthDAO = new MonthDAO();
+        YearDAO yearDAO = new YearDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         public GraphDTO Select()
         {
             GraphDTO dto = new GraphDTO();
             dto.Months = monthDAO.Select();
+            dto.Years = yearDAO.Select();
             dto.Categories = categoryDAO.Select();
             return dto;
         }

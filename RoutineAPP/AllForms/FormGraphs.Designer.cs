@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pageAllCategoryMonthly = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -54,19 +54,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.allCatMonthlyReport = new System.Windows.Forms.Label();
             this.chartAllCategoryMonthly = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.singleCategoryPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnShowSingleCategory = new System.Windows.Forms.Button();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCategorySingleCat = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClearSingleCategory = new System.Windows.Forms.Button();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbYearSingleCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -80,17 +78,16 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.iconBtnSearch = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbMonthAllCategories = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbAnnualYear = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.iconBtnClear = new FontAwesome.Sharp.IconButton();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbYearAllCategories = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelGraphTitleAllCategories = new System.Windows.Forms.Label();
-            this.chartAllCategories = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.labelGraphTitleAnnualReport = new System.Windows.Forms.Label();
+            this.chartAnnualReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.iconBtnSingleCatClear = new FontAwesome.Sharp.IconButton();
+            this.iconSearchSingleCat = new FontAwesome.Sharp.IconButton();
             this.tabControl1.SuspendLayout();
             this.pageAllCategoryMonthly.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -120,10 +117,9 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAllCategories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartAnnualReport)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -217,6 +213,7 @@
             this.iconBtnSearchMonthly.Size = new System.Drawing.Size(95, 45);
             this.iconBtnSearchMonthly.TabIndex = 59;
             this.iconBtnSearchMonthly.UseVisualStyleBackColor = false;
+            this.iconBtnSearchMonthly.Click += new System.EventHandler(this.iconBtnSearchMonthly_Click);
             // 
             // tableLayoutPanel21
             // 
@@ -300,6 +297,7 @@
             this.iconBtnClearMonthly.Size = new System.Drawing.Size(98, 45);
             this.iconBtnClearMonthly.TabIndex = 60;
             this.iconBtnClearMonthly.UseVisualStyleBackColor = false;
+            this.iconBtnClearMonthly.Click += new System.EventHandler(this.iconBtnClearMonthly_Click);
             // 
             // tableLayoutPanel24
             // 
@@ -358,7 +356,7 @@
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel26.Controls.Add(this.label7, 1, 0);
+            this.tableLayoutPanel26.Controls.Add(this.allCatMonthlyReport, 1, 0);
             this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel26.Name = "tableLayoutPanel26";
@@ -367,32 +365,32 @@
             this.tableLayoutPanel26.Size = new System.Drawing.Size(711, 30);
             this.tableLayoutPanel26.TabIndex = 0;
             // 
-            // label7
+            // allCatMonthlyReport
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(240, 6);
-            this.label7.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(231, 21);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Graph Title";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.allCatMonthlyReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.allCatMonthlyReport.AutoSize = true;
+            this.allCatMonthlyReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allCatMonthlyReport.Location = new System.Drawing.Point(240, 6);
+            this.allCatMonthlyReport.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.allCatMonthlyReport.Name = "allCatMonthlyReport";
+            this.allCatMonthlyReport.Size = new System.Drawing.Size(231, 21);
+            this.allCatMonthlyReport.TabIndex = 0;
+            this.allCatMonthlyReport.Text = "Graph Title";
+            this.allCatMonthlyReport.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // chartAllCategoryMonthly
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartAllCategoryMonthly.ChartAreas.Add(chartArea1);
+            chartArea7.Name = "ChartArea1";
+            this.chartAllCategoryMonthly.ChartAreas.Add(chartArea7);
             this.chartAllCategoryMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartAllCategoryMonthly.Legends.Add(legend1);
+            legend7.Name = "Legend1";
+            this.chartAllCategoryMonthly.Legends.Add(legend7);
             this.chartAllCategoryMonthly.Location = new System.Drawing.Point(3, 39);
             this.chartAllCategoryMonthly.Name = "chartAllCategoryMonthly";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartAllCategoryMonthly.Series.Add(series1);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chartAllCategoryMonthly.Series.Add(series7);
             this.chartAllCategoryMonthly.Size = new System.Drawing.Size(711, 323);
             this.chartAllCategoryMonthly.TabIndex = 1;
             this.chartAllCategoryMonthly.Text = "chart2";
@@ -451,7 +449,7 @@
             // 
             this.tableLayoutPanel13.ColumnCount = 1;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Controls.Add(this.btnShowSingleCategory, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.iconSearchSingleCat, 0, 1);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(492, 3);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
@@ -460,22 +458,6 @@
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel13.Size = new System.Drawing.Size(100, 62);
             this.tableLayoutPanel13.TabIndex = 7;
-            // 
-            // btnShowSingleCategory
-            // 
-            this.btnShowSingleCategory.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnShowSingleCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnShowSingleCategory.FlatAppearance.BorderSize = 0;
-            this.btnShowSingleCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowSingleCategory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowSingleCategory.ForeColor = System.Drawing.Color.White;
-            this.btnShowSingleCategory.Location = new System.Drawing.Point(3, 15);
-            this.btnShowSingleCategory.Name = "btnShowSingleCategory";
-            this.btnShowSingleCategory.Size = new System.Drawing.Size(94, 44);
-            this.btnShowSingleCategory.TabIndex = 0;
-            this.btnShowSingleCategory.Text = "Show";
-            this.btnShowSingleCategory.UseVisualStyleBackColor = false;
-            this.btnShowSingleCategory.Click += new System.EventHandler(this.btnShowSingleCategory_Click);
             // 
             // tableLayoutPanel15
             // 
@@ -531,7 +513,7 @@
             // 
             this.tableLayoutPanel17.ColumnCount = 1;
             this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Controls.Add(this.btnClearSingleCategory, 0, 1);
+            this.tableLayoutPanel17.Controls.Add(this.iconBtnSingleCatClear, 0, 1);
             this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel17.Location = new System.Drawing.Point(605, 3);
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
@@ -540,22 +522,6 @@
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel17.Size = new System.Drawing.Size(103, 62);
             this.tableLayoutPanel17.TabIndex = 7;
-            // 
-            // btnClearSingleCategory
-            // 
-            this.btnClearSingleCategory.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnClearSingleCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearSingleCategory.FlatAppearance.BorderSize = 0;
-            this.btnClearSingleCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearSingleCategory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearSingleCategory.ForeColor = System.Drawing.Color.White;
-            this.btnClearSingleCategory.Location = new System.Drawing.Point(3, 15);
-            this.btnClearSingleCategory.Name = "btnClearSingleCategory";
-            this.btnClearSingleCategory.Size = new System.Drawing.Size(97, 44);
-            this.btnClearSingleCategory.TabIndex = 0;
-            this.btnClearSingleCategory.Text = "Clear";
-            this.btnClearSingleCategory.UseVisualStyleBackColor = false;
-            this.btnClearSingleCategory.Click += new System.EventHandler(this.btnClearSingleCategory_Click);
             // 
             // tableLayoutPanel18
             // 
@@ -638,17 +604,17 @@
             // 
             // chartSingleCategories
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartSingleCategories.ChartAreas.Add(chartArea2);
+            chartArea8.Name = "ChartArea1";
+            this.chartSingleCategories.ChartAreas.Add(chartArea8);
             this.chartSingleCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartSingleCategories.Legends.Add(legend2);
+            legend8.Name = "Legend1";
+            this.chartSingleCategories.Legends.Add(legend8);
             this.chartSingleCategories.Location = new System.Drawing.Point(3, 39);
             this.chartSingleCategories.Name = "chartSingleCategories";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartSingleCategories.Series.Add(series2);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chartSingleCategories.Series.Add(series8);
             this.chartSingleCategories.Size = new System.Drawing.Size(705, 318);
             this.chartSingleCategories.TabIndex = 1;
             this.chartSingleCategories.Text = "chart2";
@@ -681,20 +647,17 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 7;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel8, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel8, 4, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -733,42 +696,43 @@
             this.iconBtnSearch.Size = new System.Drawing.Size(94, 44);
             this.iconBtnSearch.TabIndex = 57;
             this.iconBtnSearch.UseVisualStyleBackColor = false;
+            this.iconBtnSearch.Click += new System.EventHandler(this.iconBtnSearch_Click);
             // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.cmbMonthAllCategories, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.cmbAnnualYear, 0, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(221, 62);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(100, 62);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
-            // cmbMonthAllCategories
+            // label4
             // 
-            this.cmbMonthAllCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbMonthAllCategories.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMonthAllCategories.FormattingEnabled = true;
-            this.cmbMonthAllCategories.Location = new System.Drawing.Point(3, 30);
-            this.cmbMonthAllCategories.Name = "cmbMonthAllCategories";
-            this.cmbMonthAllCategories.Size = new System.Drawing.Size(215, 28);
-            this.cmbMonthAllCategories.TabIndex = 6;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 3);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 21);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Year";
             // 
-            // label3
+            // cmbAnnualYear
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 21);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Month";
+            this.cmbAnnualYear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbAnnualYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAnnualYear.FormattingEnabled = true;
+            this.cmbAnnualYear.Location = new System.Drawing.Point(3, 30);
+            this.cmbAnnualYear.Name = "cmbAnnualYear";
+            this.cmbAnnualYear.Size = new System.Drawing.Size(94, 28);
+            this.cmbAnnualYear.TabIndex = 6;
             // 
             // tableLayoutPanel8
             // 
@@ -800,49 +764,14 @@
             this.iconBtnClear.Size = new System.Drawing.Size(97, 44);
             this.iconBtnClear.TabIndex = 58;
             this.iconBtnClear.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.cmbYearAllCategories, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(237, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(136, 62);
-            this.tableLayoutPanel6.TabIndex = 0;
-            // 
-            // cmbYearAllCategories
-            // 
-            this.cmbYearAllCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYearAllCategories.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYearAllCategories.FormattingEnabled = true;
-            this.cmbYearAllCategories.Location = new System.Drawing.Point(3, 30);
-            this.cmbYearAllCategories.Name = "cmbYearAllCategories";
-            this.cmbYearAllCategories.Size = new System.Drawing.Size(130, 28);
-            this.cmbYearAllCategories.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 3);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 21);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Year";
+            this.iconBtnClear.Click += new System.EventHandler(this.iconBtnClear_Click);
             // 
             // tableLayoutPanel9
             // 
             this.tableLayoutPanel9.ColumnCount = 1;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.chartAllCategories, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.chartAnnualReport, 0, 1);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 77);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -858,7 +787,7 @@
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel10.Controls.Add(this.labelGraphTitleAllCategories, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.labelGraphTitleAnnualReport, 1, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -867,35 +796,71 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(705, 30);
             this.tableLayoutPanel10.TabIndex = 0;
             // 
-            // labelGraphTitleAllCategories
+            // labelGraphTitleAnnualReport
             // 
-            this.labelGraphTitleAllCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelGraphTitleAllCategories.AutoSize = true;
-            this.labelGraphTitleAllCategories.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGraphTitleAllCategories.Location = new System.Drawing.Point(238, 6);
-            this.labelGraphTitleAllCategories.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.labelGraphTitleAllCategories.Name = "labelGraphTitleAllCategories";
-            this.labelGraphTitleAllCategories.Size = new System.Drawing.Size(229, 21);
-            this.labelGraphTitleAllCategories.TabIndex = 0;
-            this.labelGraphTitleAllCategories.Text = "Graph Title";
-            this.labelGraphTitleAllCategories.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelGraphTitleAnnualReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelGraphTitleAnnualReport.AutoSize = true;
+            this.labelGraphTitleAnnualReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGraphTitleAnnualReport.Location = new System.Drawing.Point(238, 6);
+            this.labelGraphTitleAnnualReport.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.labelGraphTitleAnnualReport.Name = "labelGraphTitleAnnualReport";
+            this.labelGraphTitleAnnualReport.Size = new System.Drawing.Size(229, 21);
+            this.labelGraphTitleAnnualReport.TabIndex = 0;
+            this.labelGraphTitleAnnualReport.Text = "Graph Title";
+            this.labelGraphTitleAnnualReport.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // chartAllCategories
+            // chartAnnualReport
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartAllCategories.ChartAreas.Add(chartArea3);
-            this.chartAllCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartAllCategories.Legends.Add(legend3);
-            this.chartAllCategories.Location = new System.Drawing.Point(3, 39);
-            this.chartAllCategories.Name = "chartAllCategories";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartAllCategories.Series.Add(series3);
-            this.chartAllCategories.Size = new System.Drawing.Size(705, 318);
-            this.chartAllCategories.TabIndex = 1;
-            this.chartAllCategories.Text = "chart1";
+            chartArea9.Name = "ChartArea1";
+            this.chartAnnualReport.ChartAreas.Add(chartArea9);
+            this.chartAnnualReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend9.Name = "Legend1";
+            this.chartAnnualReport.Legends.Add(legend9);
+            this.chartAnnualReport.Location = new System.Drawing.Point(3, 39);
+            this.chartAnnualReport.Name = "chartAnnualReport";
+            series9.ChartArea = "ChartArea1";
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.chartAnnualReport.Series.Add(series9);
+            this.chartAnnualReport.Size = new System.Drawing.Size(705, 318);
+            this.chartAnnualReport.TabIndex = 1;
+            this.chartAnnualReport.Text = "chart1";
+            // 
+            // iconBtnSingleCatClear
+            // 
+            this.iconBtnSingleCatClear.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnSingleCatClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSingleCatClear.FlatAppearance.BorderSize = 0;
+            this.iconBtnSingleCatClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSingleCatClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSingleCatClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
+            this.iconBtnSingleCatClear.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnSingleCatClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSingleCatClear.IconSize = 32;
+            this.iconBtnSingleCatClear.Location = new System.Drawing.Point(3, 15);
+            this.iconBtnSingleCatClear.Name = "iconBtnSingleCatClear";
+            this.iconBtnSingleCatClear.Size = new System.Drawing.Size(97, 44);
+            this.iconBtnSingleCatClear.TabIndex = 59;
+            this.iconBtnSingleCatClear.UseVisualStyleBackColor = false;
+            this.iconBtnSingleCatClear.Click += new System.EventHandler(this.iconBtnSingleCatClear_Click);
+            // 
+            // iconSearchSingleCat
+            // 
+            this.iconSearchSingleCat.BackColor = System.Drawing.Color.Transparent;
+            this.iconSearchSingleCat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconSearchSingleCat.FlatAppearance.BorderSize = 0;
+            this.iconSearchSingleCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconSearchSingleCat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconSearchSingleCat.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.iconSearchSingleCat.IconColor = System.Drawing.Color.DodgerBlue;
+            this.iconSearchSingleCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconSearchSingleCat.IconSize = 32;
+            this.iconSearchSingleCat.Location = new System.Drawing.Point(3, 15);
+            this.iconSearchSingleCat.Name = "iconSearchSingleCat";
+            this.iconSearchSingleCat.Size = new System.Drawing.Size(94, 44);
+            this.iconSearchSingleCat.TabIndex = 60;
+            this.iconSearchSingleCat.UseVisualStyleBackColor = false;
+            this.iconSearchSingleCat.Click += new System.EventHandler(this.iconSearchSingleCat_Click);
             // 
             // FormGraphs
             // 
@@ -942,12 +907,10 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartAllCategories)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartAnnualReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -960,18 +923,16 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.Label labelGraphTitleAllCategories;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartAllCategories;
+        private System.Windows.Forms.Label labelGraphTitleAnnualReport;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartAnnualReport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
-        private System.Windows.Forms.Button btnShowSingleCategory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
         private System.Windows.Forms.ComboBox cmbCategorySingleCat;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
-        private System.Windows.Forms.Button btnClearSingleCategory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
@@ -981,11 +942,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.ComboBox cmbMonthAllCategories;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.ComboBox cmbYearAllCategories;
+        private System.Windows.Forms.ComboBox cmbAnnualYear;
         private System.Windows.Forms.Label label4;
         private FontAwesome.Sharp.IconButton iconBtnSearch;
         private FontAwesome.Sharp.IconButton iconBtnClear;
@@ -1004,9 +962,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label allCatMonthlyReport;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAllCategoryMonthly;
         private System.Windows.Forms.ComboBox cmbYearMonthly;
         private System.Windows.Forms.ComboBox cmbYearSingleCategory;
+        private FontAwesome.Sharp.IconButton iconBtnSingleCatClear;
+        private FontAwesome.Sharp.IconButton iconSearchSingleCat;
     }
 }

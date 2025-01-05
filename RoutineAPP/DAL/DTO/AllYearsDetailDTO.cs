@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RoutineAPP.DAL.DTO
 {
-    public class YearlyDetailDTO
+    public class AllYearsDetailDTO
     {
-        public int YearlyReportID { get; set; }
-        public int Year { get; set; }
+        public int YearID { get; set; }
+        public string Year { get; set; }
     }
 }

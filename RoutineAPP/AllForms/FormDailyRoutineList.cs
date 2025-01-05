@@ -21,7 +21,7 @@ namespace RoutineAPP.AllForms
 
         private void RefreshDataCounts()
         {
-            labelTotalRoutine.Text = bll.TotalRoutine().ToString();
+            labelTotalRoutine.Text = dataGridView1.RowCount.ToString();
         }
 
         DailyTaskBLL bll = new DailyTaskBLL();
@@ -31,7 +31,7 @@ namespace RoutineAPP.AllForms
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            cmbYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
             iconBtnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -42,6 +42,8 @@ namespace RoutineAPP.AllForms
             dto = bll.Select();
             cmbMonth.DataSource = dto.Months;
             General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            cmbYear.DataSource = dto.Years;
+            General.ComboBoxProps(cmbYear, "Year", "YearID");
 
             dataGridView1.DataSource = dto.DailyRoutines;
             dataGridView1.Columns[0].Visible = false;
@@ -65,13 +67,6 @@ namespace RoutineAPP.AllForms
             e.Handled = General.isNumber(e);
         }
 
-        private void txtYear_TextChanged(object sender, EventArgs e)
-        {
-            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
-            list = list.Where(x => x.Year.ToString().Contains(txtYear.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-        }
-
         private void txtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = General.isNumber(e);
@@ -82,13 +77,14 @@ namespace RoutineAPP.AllForms
             List<DailyTaskDetailDTO> list = dto.DailyRoutines;
             list = list.Where(x => x.Day.ToString().Contains(txtDay.Text.Trim())).ToList();
             dataGridView1.DataSource = list;
+            RefreshDataCounts();
         }
 
         private void ClearFilters()
         {
-            txtYear.Clear();
             txtDay.Clear();
             cmbMonth.SelectedIndex = -1;
+            cmbYear.SelectedIndex = -1;
             bll = new DailyTaskBLL();
             dto = bll.Select();
             dataGridView1.DataSource = dto.DailyRoutines;
@@ -175,11 +171,20 @@ namespace RoutineAPP.AllForms
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
             List<DailyTaskDetailDTO> list = dto.DailyRoutines;
-            if (cmbMonth.SelectedIndex != -1)
+            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {
                 list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
             }
+            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue) && x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+            }
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+            }
             dataGridView1.DataSource = list;
+            RefreshDataCounts();
         }
 
         private void iconBtnClear_Click(object sender, EventArgs e)

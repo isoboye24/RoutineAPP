@@ -45,18 +45,7 @@ namespace RoutineAPP.DAL.DAO
             }
         }
 
-        public int TotalRoutine()
-        {
-            try
-            {
-                int total = db.DAILY_ROUTINE.Count(x=>x.isDeleted==false);
-                return total;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         public int CheckDailyRoutine(int day, int month, int year)
         {
             try
@@ -90,14 +79,17 @@ namespace RoutineAPP.DAL.DAO
                 foreach (var item in list)
                 {
                     DailyTaskDetailDTO dto = new DailyTaskDetailDTO();
-                    dto.DailyTaskID = item.dailyRoutineID;
-                    dto.Summary = item.summary;
-                    dto.RoutineDate = item.routineDate;
-                    dto.Day = item.day;
-                    dto.MonthID = item.monthID;
-                    dto.MonthName = item.monthName;
-                    dto.Year = item.year;
-                    dailyTasks.Add(dto);  
+                    if (item.summary != null && item.summary != "")
+                    {
+                        dto.DailyTaskID = item.dailyRoutineID;
+                        dto.Summary = item.summary;
+                        dto.RoutineDate = item.routineDate;
+                        dto.Day = item.day;
+                        dto.MonthID = item.monthID;
+                        dto.MonthName = item.monthName;
+                        dto.Year = item.year;
+                        dailyTasks.Add(dto);
+                    }                   
                 }
                 return dailyTasks;
             }

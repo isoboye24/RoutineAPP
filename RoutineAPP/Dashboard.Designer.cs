@@ -849,7 +849,7 @@
             this.btnSummary.Name = "btnSummary";
             this.btnSummary.Size = new System.Drawing.Size(210, 44);
             this.btnSummary.TabIndex = 14;
-            this.btnSummary.Text = "Summary";
+            this.btnSummary.Text = "Comments";
             this.btnSummary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSummary.UseVisualStyleBackColor = true;

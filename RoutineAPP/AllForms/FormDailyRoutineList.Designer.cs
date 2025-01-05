@@ -40,8 +40,8 @@
             this.iconBtnView = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbYear = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtYear = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbMonth = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -247,8 +247,8 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.cmbYear, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.txtYear, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -259,6 +259,16 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(186, 82);
             this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // cmbYear
+            // 
+            this.cmbYear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYear.FormattingEnabled = true;
+            this.cmbYear.Location = new System.Drawing.Point(3, 44);
+            this.cmbYear.Name = "cmbYear";
+            this.cmbYear.Size = new System.Drawing.Size(180, 28);
+            this.cmbYear.TabIndex = 7;
             // 
             // label4
             // 
@@ -271,17 +281,6 @@
             this.label4.Size = new System.Drawing.Size(43, 21);
             this.label4.TabIndex = 0;
             this.label4.Text = "Year";
-            // 
-            // txtYear
-            // 
-            this.txtYear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYear.Location = new System.Drawing.Point(3, 44);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(180, 27);
-            this.txtYear.TabIndex = 2;
-            this.txtYear.TextChanged += new System.EventHandler(this.txtYear_TextChanged);
-            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
             // 
             // tableLayoutPanel5
             // 
@@ -523,7 +522,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label labelTotalRoutine;
@@ -539,5 +537,6 @@
         private FontAwesome.Sharp.IconButton iconBtnView;
         private FontAwesome.Sharp.IconButton iconBtnSearch;
         private FontAwesome.Sharp.IconButton iconBtnClear;
+        private System.Windows.Forms.ComboBox cmbYear;
     }
 }

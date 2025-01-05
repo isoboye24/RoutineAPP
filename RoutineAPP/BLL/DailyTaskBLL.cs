@@ -13,6 +13,7 @@ namespace RoutineAPP.BLL
     {
         DailyTaskDAO dao = new DailyTaskDAO();
         MonthDAO monthDAO = new MonthDAO();
+        YearDAO yearDAO = new YearDAO();
         public bool Delete(DailyTaskDetailDTO entity)
         {
             DAILY_ROUTINE routine = new DAILY_ROUTINE();
@@ -35,11 +36,7 @@ namespace RoutineAPP.BLL
             dailyTask.summary = entity.Summary;
             return dao.Insert(dailyTask);
         }
-
-        public int TotalRoutine()
-        {
-            return dao.TotalRoutine();
-        }
+        
         public int CheckDailyRoutine(int day, int month, int year)
         {
             return dao.CheckDailyRoutine(day, month, year);
@@ -48,6 +45,7 @@ namespace RoutineAPP.BLL
         {
             DailyTaskDTO dto = new DailyTaskDTO();
             dto.Months = monthDAO.Select();
+            dto.Years = yearDAO.Select();
             dto.DailyRoutines = dao.Select();
             return dto;
         }
@@ -56,7 +54,8 @@ namespace RoutineAPP.BLL
         {
             DailyTaskDTO dto = new DailyTaskDTO();
             dto.Months = monthDAO.Select();
-            dto.DailyRoutines = dao.SelectSummaries();
+            dto.Years = yearDAO.Select();
+            dto.Summaries = dao.SelectSummaries();
             return dto;
         }
 

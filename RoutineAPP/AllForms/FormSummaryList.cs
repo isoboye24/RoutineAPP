@@ -26,20 +26,22 @@ namespace RoutineAPP.AllForms
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelTotalComments.Font = new Font("Segoe UI", 10, FontStyle.Regular);
-            txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            txtYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
+            txtDay.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.SelectSummaries();
             cmbMonth.DataSource = dto.Months;
             General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            cmbYear.DataSource = dto.Years;
+            General.ComboBoxProps(cmbYear, "Year", "YearID");
 
-            dataGridView1.DataSource = dto.DailyRoutines;
+            dataGridView1.DataSource = dto.Summaries;
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].HeaderText = "Summary";
+            dataGridView1.Columns[2].HeaderText = "Comment";
             dataGridView1.Columns[3].HeaderText = "Day";
             dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView1.Columns[4].Visible = false;
@@ -51,7 +53,7 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
-            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
+            List<DailyTaskDetailDTO> list = dto.Summaries;
             list = list.Where(item => item.Summary != "" && item.Summary != null).ToList();
             dataGridView1.DataSource = list;
 
@@ -63,6 +65,13 @@ namespace RoutineAPP.AllForms
         }
         private void ClearFilters()
         {
+            txtComment.Clear();
+            txtDay.Clear();
+            cmbMonth.SelectedIndex = -1;
+            cmbYear.SelectedIndex = -1;
+            
+            dto = bll.SelectSummaries();
+            dataGridView1.DataSource = dto.Summaries;
             RefreshDataCounts();
         }
 
@@ -80,6 +89,7 @@ namespace RoutineAPP.AllForms
                 this.Hide();
                 open.ShowDialog();
                 this.Visible = true;
+                ClearFilters();
             }
         }
 
@@ -98,6 +108,46 @@ namespace RoutineAPP.AllForms
             detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
             detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
             detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void txtComment_TextChanged(object sender, EventArgs e)
+        {
+            List<DailyTaskDetailDTO> list = dto.Summaries;
+            list = list.Where(x => x.Summary.Contains(txtComment.Text.Trim())).ToList();
+            dataGridView1.DataSource = list;
+            RefreshDataCounts();
+        }
+
+        private void txtDay_TextChanged(object sender, EventArgs e)
+        {
+            List<DailyTaskDetailDTO> list = dto.Summaries;
+            list = list.Where(x => x.Day.ToString().Contains(txtDay.Text.Trim())).ToList();
+            dataGridView1.DataSource = list;
+            RefreshDataCounts();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            List<DailyTaskDetailDTO> list = dto.Summaries;
+            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
+            }
+            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue) && x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+            }
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+            }
+            dataGridView1.DataSource = list;
+            RefreshDataCounts();
         }
     }
 }

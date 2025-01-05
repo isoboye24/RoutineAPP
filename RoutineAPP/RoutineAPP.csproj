@@ -152,6 +152,7 @@
     <Compile Include="BLL\MonthBLL.cs" />
     <Compile Include="BLL\ReportsBLL.cs" />
     <Compile Include="BLL\TaskBLL.cs" />
+    <Compile Include="BLL\YearBLL.cs" />
     <Compile Include="DAL\CATEGORY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -166,6 +167,7 @@
     <Compile Include="DAL\DAO\MonthDAO.cs" />
     <Compile Include="DAL\DAO\ReportsDAO.cs" />
     <Compile Include="DAL\DAO\TaskDAO.cs" />
+    <Compile Include="DAL\DAO\YearDAO.cs" />
     <Compile Include="DAL\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -181,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DTO\AllYearsDetailDTO.cs" />
     <Compile Include="DAL\DTO\CategoryDetailDTO.cs" />
     <Compile Include="DAL\DTO\CategoryDTO.cs" />
     <Compile Include="DAL\DTO\DailyTaskDetailDTO.cs" />
@@ -195,7 +198,8 @@
     <Compile Include="DAL\DTO\ReportsDetailDTO.cs" />
     <Compile Include="DAL\DTO\TaskDetailDTO.cs" />
     <Compile Include="DAL\DTO\TaskDTO.cs" />
-    <Compile Include="DAL\DTO\YearlyDetailDTO.cs" />
+    <Compile Include="DAL\DTO\YearDTO.cs" />
+    <Compile Include="DAL\DTO\YearDetailDTO.cs" />
     <Compile Include="DAL\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

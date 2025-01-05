@@ -58,11 +58,11 @@ namespace RoutineAPP.AllForms
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
-        YearlyDetailDTO detail = new YearlyDetailDTO();
+        YearDetailDTO detail = new YearDetailDTO();
         private void dataGridViewYears_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            detail = new YearlyDetailDTO();
-            detail.YearlyReportID = Convert.ToInt32(dataGridViewYears.Rows[e.RowIndex].Cells[0].Value);
+            detail = new YearDetailDTO();
+            detail.YearID = Convert.ToInt32(dataGridViewYears.Rows[e.RowIndex].Cells[0].Value);
             detail.Year = Convert.ToInt32(dataGridViewYears.Rows[e.RowIndex].Cells[1].Value);
         }
 
