@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -36,22 +36,22 @@
             this.txtComment = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.txtDay = new System.Windows.Forms.TextBox();
+            this.iconBtnSearch = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbMonth = new System.Windows.Forms.ComboBox();
-            this.btnClear = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.iconBtnClear = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbYear = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnView = new System.Windows.Forms.Button();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalComments = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconBtnView = new FontAwesome.Sharp.IconButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cmbYear = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -147,8 +147,8 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnSearch, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.txtDay, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.iconBtnSearch, 0, 3);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(204, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -172,22 +172,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Day";
             // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(3, 68);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(174, 29);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // txtDay
             // 
             this.txtDay.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -198,13 +182,31 @@
             this.txtDay.TabIndex = 2;
             this.txtDay.TextChanged += new System.EventHandler(this.txtDay_TextChanged);
             // 
+            // iconBtnSearch
+            // 
+            this.iconBtnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSearch.FlatAppearance.BorderSize = 0;
+            this.iconBtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSearch.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.iconBtnSearch.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSearch.IconSize = 32;
+            this.iconBtnSearch.Location = new System.Drawing.Point(3, 68);
+            this.iconBtnSearch.Name = "iconBtnSearch";
+            this.iconBtnSearch.Size = new System.Drawing.Size(174, 29);
+            this.iconBtnSearch.TabIndex = 57;
+            this.iconBtnSearch.UseVisualStyleBackColor = false;
+            this.iconBtnSearch.Click += new System.EventHandler(this.iconBtnSearch_Click);
+            // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Controls.Add(this.cmbMonth, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.btnClear, 0, 3);
             this.tableLayoutPanel7.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.iconBtnClear, 0, 3);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(405, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -226,22 +228,6 @@
             this.cmbMonth.Size = new System.Drawing.Size(174, 28);
             this.cmbMonth.TabIndex = 6;
             // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(3, 68);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(174, 29);
-            this.btnClear.TabIndex = 0;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -253,6 +239,24 @@
             this.label3.Size = new System.Drawing.Size(61, 21);
             this.label3.TabIndex = 0;
             this.label3.Text = "Month";
+            // 
+            // iconBtnClear
+            // 
+            this.iconBtnClear.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnClear.FlatAppearance.BorderSize = 0;
+            this.iconBtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClear.IconChar = FontAwesome.Sharp.IconChar.PaintBrush;
+            this.iconBtnClear.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClear.IconSize = 32;
+            this.iconBtnClear.Location = new System.Drawing.Point(3, 68);
+            this.iconBtnClear.Name = "iconBtnClear";
+            this.iconBtnClear.Size = new System.Drawing.Size(174, 29);
+            this.iconBtnClear.TabIndex = 57;
+            this.iconBtnClear.UseVisualStyleBackColor = false;
+            this.iconBtnClear.Click += new System.EventHandler(this.iconBtnClear_Click);
             // 
             // tableLayoutPanel6
             // 
@@ -270,6 +274,16 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(185, 100);
             this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // cmbYear
+            // 
+            this.cmbYear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbYear.FormattingEnabled = true;
+            this.cmbYear.Location = new System.Drawing.Point(3, 33);
+            this.cmbYear.Name = "cmbYear";
+            this.cmbYear.Size = new System.Drawing.Size(179, 28);
+            this.cmbYear.TabIndex = 7;
             // 
             // label4
             // 
@@ -289,9 +303,9 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
-            this.tableLayoutPanel3.Controls.Add(this.btnView, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel9, 2, 2);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel8, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.iconBtnView, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 376);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -301,22 +315,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 71);
             this.tableLayoutPanel3.TabIndex = 3;
-            // 
-            // btnView
-            // 
-            this.btnView.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnView.FlatAppearance.BorderSize = 0;
-            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnView.ForeColor = System.Drawing.Color.White;
-            this.btnView.Location = new System.Drawing.Point(348, 13);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(97, 29);
-            this.btnView.TabIndex = 3;
-            this.btnView.Text = "View";
-            this.btnView.UseVisualStyleBackColor = false;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // tableLayoutPanel9
             // 
@@ -367,6 +365,24 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(339, 20);
             this.tableLayoutPanel8.TabIndex = 6;
             // 
+            // iconBtnView
+            // 
+            this.iconBtnView.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnView.FlatAppearance.BorderSize = 0;
+            this.iconBtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnView.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.iconBtnView.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnView.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnView.IconSize = 32;
+            this.iconBtnView.Location = new System.Drawing.Point(348, 13);
+            this.iconBtnView.Name = "iconBtnView";
+            this.iconBtnView.Size = new System.Drawing.Size(97, 29);
+            this.iconBtnView.TabIndex = 56;
+            this.iconBtnView.UseVisualStyleBackColor = false;
+            this.iconBtnView.Click += new System.EventHandler(this.iconBtnView_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -374,23 +390,13 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 115);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(794, 255);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
-            // 
-            // cmbYear
-            // 
-            this.cmbYear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbYear.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(3, 33);
-            this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(179, 28);
-            this.cmbYear.TabIndex = 7;
             // 
             // FormSummaryList
             // 
@@ -427,16 +433,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtDay;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.ComboBox cmbMonth;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label labelTotalComments;
         private System.Windows.Forms.Label label6;
@@ -444,5 +447,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.ComboBox cmbYear;
+        private FontAwesome.Sharp.IconButton iconBtnView;
+        private FontAwesome.Sharp.IconButton iconBtnSearch;
+        private FontAwesome.Sharp.IconButton iconBtnClear;
     }
 }

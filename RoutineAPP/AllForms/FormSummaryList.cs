@@ -21,7 +21,8 @@ namespace RoutineAPP.AllForms
         DailyTaskBLL bll = new DailyTaskBLL();
         DailyTaskDTO dto = new DailyTaskDTO();
         DailyTaskDetailDTO detail = new DailyTaskDetailDTO();
-        private void FormCommentList_Load(object sender, EventArgs e)
+
+        private void FontSizes()
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -29,8 +30,10 @@ namespace RoutineAPP.AllForms
             txtDay.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+        }
+        private void FormCommentList_Load(object sender, EventArgs e)
+        {
+            FontSizes();
 
             dto = bll.SelectSummaries();
             cmbMonth.DataSource = dto.Months;
@@ -75,24 +78,6 @@ namespace RoutineAPP.AllForms
             RefreshDataCounts();
         }
 
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            if (detail.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please select a comment from the table");
-            }
-            else
-            {
-                FormDailyRoutine open = new FormDailyRoutine();
-                open.isSummaryList = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             
@@ -108,11 +93,6 @@ namespace RoutineAPP.AllForms
             detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
             detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
             detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
         }
 
         private void txtComment_TextChanged(object sender, EventArgs e)
@@ -131,7 +111,30 @@ namespace RoutineAPP.AllForms
             RefreshDataCounts();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void iconBtnView_Click(object sender, EventArgs e)
+        {
+            if (detail.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please select a comment from the table");
+            }
+            else
+            {
+                FormDailyRoutine open = new FormDailyRoutine();
+                open.isSummaryList = true;
+                open.detail = detail;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void iconBtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnSearch_Click(object sender, EventArgs e)
         {
             List<DailyTaskDetailDTO> list = dto.Summaries;
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)

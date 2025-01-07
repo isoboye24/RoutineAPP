@@ -34,6 +34,7 @@ namespace RoutineAPP.AllForms
             if (isUpdate)
             {
                 txtCategory.Text = detail.CategoryName;
+                labelTitle.Text = "Update Category";
             }
         }
         CategoryBLL bll = new CategoryBLL();

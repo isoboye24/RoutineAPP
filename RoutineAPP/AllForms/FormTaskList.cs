@@ -27,23 +27,6 @@ namespace RoutineAPP.AllForms
             RefreshDataCounts();
         }
 
-        private void btnAdd_Click_1(object sender, EventArgs e)
-        {
-            if (detailDailyRoutine.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please create a routine first");
-            }
-            else
-            {
-                FormTaskWithSummary open = new FormTaskWithSummary();
-                open.detailDailyRoutine = detailDailyRoutine;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
-        
         TaskBLL bll = new TaskBLL();
         TaskDTO dto = new TaskDTO();
         public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
@@ -51,13 +34,8 @@ namespace RoutineAPP.AllForms
         private void FormTaskList_Load(object sender, EventArgs e)
         {          
             label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtSummary.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbCategory.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            btnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnUpdate.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            txtSummary.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);            
 
             dto = bll.Select(detailDailyRoutine.DailyTaskID);
             cmbCategory.DataSource = dto.Categories;
@@ -112,44 +90,7 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        private void btnUpdate_Click_1(object sender, EventArgs e)
-        {
-            if (detail.TaskID == 0)
-            {
-                MessageBox.Show("Please choose a task from the table");
-            }
-            else
-            {
-                FormTaskWithSummary open = new FormTaskWithSummary();
-                open.detail = detail;
-                open.detailDailyRoutine = detailDailyRoutine;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
 
-        private void btnDelete_Click_1(object sender, EventArgs e)
-        {
-            if (detail.TaskID == 0)
-            {
-                MessageBox.Show("Please choose a task from the table");
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show("Are you sure?", "Waring!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Task was deleted successfully");
-                        ClearFilters();
-                    }
-                }
-            }
-        }
         private void RefreshDataCounts()
         {
             labelTotalTasks.Text = bll.TotalTasks(detailDailyRoutine.DailyTaskID).ToString();
@@ -164,26 +105,6 @@ namespace RoutineAPP.AllForms
             {
                 labelTotalTimeUsed.Text = hours + " hr" + (hours > 1? "s ":" ") + minutes + " min" + (minutes > 1 ? "s" : "");
             }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnSearch_Click_1(object sender, EventArgs e)
-        {
-            List<TaskDetailDTO> list = dto.Tasks;
-            if (cmbCategory.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
-            }            
-            dataGridView1.DataSource = list;
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
         }
 
         private void txtDay_KeyPress(object sender, KeyPressEventArgs e)
@@ -211,6 +132,82 @@ namespace RoutineAPP.AllForms
             detail.TimeInHoursAndMinutes = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
             detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
             txtSummary.Text = detail.Summary;            
+        }
+
+        private void iconBtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnSearch_Click(object sender, EventArgs e)
+        {
+            List<TaskDetailDTO> list = dto.Tasks;
+            if (cmbCategory.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
+            }
+            dataGridView1.DataSource = list;
+        }
+
+        private void iconBtnAdd_Click(object sender, EventArgs e)
+        {
+            if (detailDailyRoutine.DailyTaskID == 0)
+            {
+                MessageBox.Show("Please create a routine first");
+            }
+            else
+            {
+                FormTaskWithSummary open = new FormTaskWithSummary();
+                open.detailDailyRoutine = detailDailyRoutine;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void iconBtnEdit_Click(object sender, EventArgs e)
+        {
+            if (detail.TaskID == 0)
+            {
+                MessageBox.Show("Please choose a task from the table");
+            }
+            else
+            {
+                FormTaskWithSummary open = new FormTaskWithSummary();
+                open.detail = detail;
+                open.detailDailyRoutine = detailDailyRoutine;
+                open.isUpdate = true;
+                this.Hide();
+                open.ShowDialog();
+                this.Visible = true;
+                ClearFilters();
+            }
+        }
+
+        private void iconBtnDelete_Click(object sender, EventArgs e)
+        {
+            if (detail.TaskID == 0)
+            {
+                MessageBox.Show("Please choose a task from the table");
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Waring!", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    if (bll.Delete(detail))
+                    {
+                        MessageBox.Show("Task was deleted successfully");
+                        ClearFilters();
+                    }
+                }
+            }
+        }
+
+        private void iconBtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
