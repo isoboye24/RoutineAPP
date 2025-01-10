@@ -132,7 +132,17 @@ namespace RoutineAPP.DAL.DAO
         {
             try
             {
-                int total = db.TASKs.Count(x => x.isDeleted == false && x.dailiyRoutineID == ID);
+                int total = 0;
+                var list = (from t in db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID == ID)
+                            join c in db.CATEGORies.Where(x => x.isDeleted == false) on t.categoryID equals c.categoryID
+                            select new
+                            {
+                                t.taskID,
+                            });
+                foreach (var item in list)
+                {
+                    total += 1;
+                }
                 return total;
             }
             catch (Exception ex)
@@ -149,7 +159,12 @@ namespace RoutineAPP.DAL.DAO
                 int taskCount = db.TASKs.Count(x => x.isDeleted == false && x.dailiyRoutineID == ID);
                 if (taskCount > 0)
                 {
-                    var usedHours = db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID == ID);
+                    var usedHours = (from t in db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID == ID)
+                                     join c in db.CATEGORies.Where(x => x.isDeleted == false) on t.categoryID equals c.categoryID
+                                     select new
+                                     {
+                                         timeSpent = t.timeSpent
+                                     });
                     foreach (var time in usedHours)
                     {
                         totalUsedHours.Add(time.timeSpent);
