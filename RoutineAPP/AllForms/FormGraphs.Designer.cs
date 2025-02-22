@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pageAllCategoryMonthly = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -60,11 +60,13 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconSearchSingleCat = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbCategorySingleCat = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconBtnSingleCatClear = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbYearSingleCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -86,8 +88,6 @@
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.labelGraphTitleAnnualReport = new System.Windows.Forms.Label();
             this.chartAnnualReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.iconBtnSingleCatClear = new FontAwesome.Sharp.IconButton();
-            this.iconSearchSingleCat = new FontAwesome.Sharp.IconButton();
             this.tabControl1.SuspendLayout();
             this.pageAllCategoryMonthly.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -380,17 +380,17 @@
             // 
             // chartAllCategoryMonthly
             // 
-            chartArea7.Name = "ChartArea1";
-            this.chartAllCategoryMonthly.ChartAreas.Add(chartArea7);
+            chartArea1.Name = "ChartArea1";
+            this.chartAllCategoryMonthly.ChartAreas.Add(chartArea1);
             this.chartAllCategoryMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend7.Name = "Legend1";
-            this.chartAllCategoryMonthly.Legends.Add(legend7);
+            legend1.Name = "Legend1";
+            this.chartAllCategoryMonthly.Legends.Add(legend1);
             this.chartAllCategoryMonthly.Location = new System.Drawing.Point(3, 39);
             this.chartAllCategoryMonthly.Name = "chartAllCategoryMonthly";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartAllCategoryMonthly.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartAllCategoryMonthly.Series.Add(series1);
             this.chartAllCategoryMonthly.Size = new System.Drawing.Size(711, 323);
             this.chartAllCategoryMonthly.TabIndex = 1;
             this.chartAllCategoryMonthly.Text = "chart2";
@@ -459,6 +459,24 @@
             this.tableLayoutPanel13.Size = new System.Drawing.Size(100, 62);
             this.tableLayoutPanel13.TabIndex = 7;
             // 
+            // iconSearchSingleCat
+            // 
+            this.iconSearchSingleCat.BackColor = System.Drawing.Color.Transparent;
+            this.iconSearchSingleCat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconSearchSingleCat.FlatAppearance.BorderSize = 0;
+            this.iconSearchSingleCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconSearchSingleCat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconSearchSingleCat.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.iconSearchSingleCat.IconColor = System.Drawing.Color.DodgerBlue;
+            this.iconSearchSingleCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconSearchSingleCat.IconSize = 32;
+            this.iconSearchSingleCat.Location = new System.Drawing.Point(3, 15);
+            this.iconSearchSingleCat.Name = "iconSearchSingleCat";
+            this.iconSearchSingleCat.Size = new System.Drawing.Size(94, 44);
+            this.iconSearchSingleCat.TabIndex = 60;
+            this.iconSearchSingleCat.UseVisualStyleBackColor = false;
+            this.iconSearchSingleCat.Click += new System.EventHandler(this.iconSearchSingleCat_Click);
+            // 
             // tableLayoutPanel15
             // 
             this.tableLayoutPanel15.ColumnCount = 1;
@@ -522,6 +540,24 @@
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel17.Size = new System.Drawing.Size(103, 62);
             this.tableLayoutPanel17.TabIndex = 7;
+            // 
+            // iconBtnSingleCatClear
+            // 
+            this.iconBtnSingleCatClear.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnSingleCatClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSingleCatClear.FlatAppearance.BorderSize = 0;
+            this.iconBtnSingleCatClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSingleCatClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSingleCatClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
+            this.iconBtnSingleCatClear.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnSingleCatClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSingleCatClear.IconSize = 32;
+            this.iconBtnSingleCatClear.Location = new System.Drawing.Point(3, 15);
+            this.iconBtnSingleCatClear.Name = "iconBtnSingleCatClear";
+            this.iconBtnSingleCatClear.Size = new System.Drawing.Size(97, 44);
+            this.iconBtnSingleCatClear.TabIndex = 59;
+            this.iconBtnSingleCatClear.UseVisualStyleBackColor = false;
+            this.iconBtnSingleCatClear.Click += new System.EventHandler(this.iconBtnSingleCatClear_Click);
             // 
             // tableLayoutPanel18
             // 
@@ -604,17 +640,17 @@
             // 
             // chartSingleCategories
             // 
-            chartArea8.Name = "ChartArea1";
-            this.chartSingleCategories.ChartAreas.Add(chartArea8);
+            chartArea2.Name = "ChartArea1";
+            this.chartSingleCategories.ChartAreas.Add(chartArea2);
             this.chartSingleCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend8.Name = "Legend1";
-            this.chartSingleCategories.Legends.Add(legend8);
+            legend2.Name = "Legend1";
+            this.chartSingleCategories.Legends.Add(legend2);
             this.chartSingleCategories.Location = new System.Drawing.Point(3, 39);
             this.chartSingleCategories.Name = "chartSingleCategories";
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chartSingleCategories.Series.Add(series8);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartSingleCategories.Series.Add(series2);
             this.chartSingleCategories.Size = new System.Drawing.Size(705, 318);
             this.chartSingleCategories.TabIndex = 1;
             this.chartSingleCategories.Text = "chart2";
@@ -811,56 +847,20 @@
             // 
             // chartAnnualReport
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chartAnnualReport.ChartAreas.Add(chartArea9);
+            chartArea3.Name = "ChartArea1";
+            this.chartAnnualReport.ChartAreas.Add(chartArea3);
             this.chartAnnualReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend9.Name = "Legend1";
-            this.chartAnnualReport.Legends.Add(legend9);
+            legend3.Name = "Legend1";
+            this.chartAnnualReport.Legends.Add(legend3);
             this.chartAnnualReport.Location = new System.Drawing.Point(3, 39);
             this.chartAnnualReport.Name = "chartAnnualReport";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chartAnnualReport.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartAnnualReport.Series.Add(series3);
             this.chartAnnualReport.Size = new System.Drawing.Size(705, 318);
             this.chartAnnualReport.TabIndex = 1;
             this.chartAnnualReport.Text = "chart1";
-            // 
-            // iconBtnSingleCatClear
-            // 
-            this.iconBtnSingleCatClear.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnSingleCatClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnSingleCatClear.FlatAppearance.BorderSize = 0;
-            this.iconBtnSingleCatClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnSingleCatClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnSingleCatClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
-            this.iconBtnSingleCatClear.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnSingleCatClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnSingleCatClear.IconSize = 32;
-            this.iconBtnSingleCatClear.Location = new System.Drawing.Point(3, 15);
-            this.iconBtnSingleCatClear.Name = "iconBtnSingleCatClear";
-            this.iconBtnSingleCatClear.Size = new System.Drawing.Size(97, 44);
-            this.iconBtnSingleCatClear.TabIndex = 59;
-            this.iconBtnSingleCatClear.UseVisualStyleBackColor = false;
-            this.iconBtnSingleCatClear.Click += new System.EventHandler(this.iconBtnSingleCatClear_Click);
-            // 
-            // iconSearchSingleCat
-            // 
-            this.iconSearchSingleCat.BackColor = System.Drawing.Color.Transparent;
-            this.iconSearchSingleCat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconSearchSingleCat.FlatAppearance.BorderSize = 0;
-            this.iconSearchSingleCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconSearchSingleCat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconSearchSingleCat.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.iconSearchSingleCat.IconColor = System.Drawing.Color.DodgerBlue;
-            this.iconSearchSingleCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconSearchSingleCat.IconSize = 32;
-            this.iconSearchSingleCat.Location = new System.Drawing.Point(3, 15);
-            this.iconSearchSingleCat.Name = "iconSearchSingleCat";
-            this.iconSearchSingleCat.Size = new System.Drawing.Size(94, 44);
-            this.iconSearchSingleCat.TabIndex = 60;
-            this.iconSearchSingleCat.UseVisualStyleBackColor = false;
-            this.iconSearchSingleCat.Click += new System.EventHandler(this.iconSearchSingleCat_Click);
             // 
             // FormGraphs
             // 

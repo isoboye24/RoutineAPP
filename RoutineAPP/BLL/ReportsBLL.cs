@@ -13,12 +13,20 @@ namespace RoutineAPP.BLL
         ReportsDAO dao = new ReportsDAO();
         MonthDAO monthdao = new MonthDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
+        YearDAO yearDAO = new YearDAO();
         public ReportDTO Select()
+        {
+            throw new NotImplementedException();
+        }
+        public ReportDTO Select(int year)
         {
             ReportDTO dto = new ReportDTO();
             dto.MonthlyRoutineReports = dao.SelectMonthlyRoutineReports();
             dto.YearlyRoutineReports = dao.SelectYearlyRoutineReports();
             dto.Months = monthdao.Select();
+            dto.Years = yearDAO.Select();
+            dto.YearlyReports = dao.SelectYearlyReports(year);
+            dto.Categories = categoryDAO.Select();
             return dto;
         }
         public ReportDTO SelectMonthlyReports(int month, int year)
@@ -37,13 +45,6 @@ namespace RoutineAPP.BLL
             return dao.SelectTotalHoursInMonth(month, year);
         }
 
-        public ReportDTO SelectYearlyReports(int year)
-        {
-            ReportDTO dto = new ReportDTO();
-            dto.YearlyReports = dao.SelectYearlyReports(year);
-            dto.Categories = categoryDAO.Select();
-            return dto;
-        }
         public string SelectTotalHoursUsedInAYear(int year)
         {
             return dao.SelectTotalHoursUsedInAYear(year);

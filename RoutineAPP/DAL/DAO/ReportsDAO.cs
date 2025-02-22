@@ -48,49 +48,52 @@ namespace RoutineAPP.DAL.DAO
         {
             List<ReportsDetailDTO> monthlyReports = new List<ReportsDetailDTO>();          
             List<int> totalTime = new List<int>();
-            List<int> totalCategoryTime = new List<int>();           
+            List<int> totalCategoryTime = new List<int>();
+            List<int> populatedCategories = new List<int>();
 
             var categories = db.CATEGORies.Where(x => x.isDeleted == false).ToList();            
-            foreach (var item in categories)
+            foreach (var category in categories)
             {
-                int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == item.categoryID);
-                ReportsDetailDTO dto = new ReportsDetailDTO();
-                dto.ReportID += 1;
-                dto.CategoryID = item.categoryID;
-                dto.Category = item.categoryName;
+                int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == category.categoryID);
                 if (tasksCount > 0)
                 {
-                    var allTasks = db.TASKs.Where(x => x.isDeleted == false && x.monthID == month && x.year == year).ToList();
-                    foreach (var task in allTasks)
-                    {
-                        totalTime.Add(task.timeSpent);
-                    }
-                    int totalTimeSpent = totalTime.Sum();
-                    var tasks = db.TASKs.Where(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == item.categoryID).ToList();
-                    foreach (var task in tasks)
-                    {
-                        totalCategoryTime.Add(task.timeSpent);
-                    }
-                    double totalTimeSpentInCatgory = totalCategoryTime.Sum();
-                    dto.TotalTimeForFormatting = totalTimeSpentInCatgory/ totalTimeSpent;
-                    int hours = (int)Math.Floor(totalTimeSpentInCatgory / 60);
-                    int minutes = Convert.ToInt32(totalTimeSpentInCatgory % 60);
-                    if (hours < 1)
-                    {
-                        dto.TotalTimeUsed = minutes + " min" + (minutes > 1 ? "s" : "");
-                    }
-                    else
-                    {
-                        dto.TotalTimeUsed = hours + " hr" + (hours > 1 ? "s " : " ") + minutes + " min" + (minutes > 1 ? "s" : "");
-                    }
-                    dto.PercentageOfUsedTime = ((totalTimeSpentInCatgory / totalTimeSpent) * 100).ToString("0.00") + " %";
+                    populatedCategories.Add(category.categoryID);
+                }                
+            }
+            foreach (var category in populatedCategories)
+            {
+                int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == category);
+                ReportsDetailDTO dto = new ReportsDetailDTO();
+                dto.ReportID += 1;
+                dto.CategoryID = category;
+                CATEGORY categoryName = db.CATEGORies.First(x => x.isDeleted == false && x.categoryID == category);
+                dto.Category = categoryName.categoryName;
+                
+                var allTasks = db.TASKs.Where(x => x.isDeleted == false && x.monthID == month && x.year == year).ToList();
+                foreach (var task in allTasks)
+                {
+                    totalTime.Add(task.timeSpent);
+                }
+                int totalTimeSpent = totalTime.Sum();
+                var tasks = db.TASKs.Where(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == category).ToList();
+                foreach (var task in tasks)
+                {
+                    totalCategoryTime.Add(task.timeSpent);
+                }
+                double totalTimeSpentInCatgory = totalCategoryTime.Sum();
+                dto.TotalTimeForFormatting = totalTimeSpentInCatgory / totalTimeSpent;
+                int hours = (int)Math.Floor(totalTimeSpentInCatgory / 60);
+                int minutes = Convert.ToInt32(totalTimeSpentInCatgory % 60);
+                if (hours < 1)
+                {
+                    dto.TotalTimeUsed = minutes + " min" + (minutes > 1 ? "s" : "");
                 }
                 else
                 {
-                    dto.TotalTimeUsed = "0 min";
-                    dto.PercentageOfUsedTime = "0 %";
-                    dto.TotalTimeForFormatting = 0;
+                    dto.TotalTimeUsed = hours + " hr" + (hours > 1 ? "s " : " ") + minutes + " min" + (minutes > 1 ? "s" : "");
                 }
+                dto.PercentageOfUsedTime = ((totalTimeSpentInCatgory / totalTimeSpent) * 100).ToString("0.00") + " %";
+                
                 monthlyReports.Add(dto);
                 totalTime.Clear();
                 totalCategoryTime.Clear();

@@ -74,8 +74,6 @@
             this.panelSidebar = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.btnDeletedData = new FontAwesome.Sharp.IconButton();
-            this.btnTotalReports = new FontAwesome.Sharp.IconButton();
-            this.btnYearlyReports = new FontAwesome.Sharp.IconButton();
             this.btnMonthlyReports = new FontAwesome.Sharp.IconButton();
             this.btnGraphs = new FontAwesome.Sharp.IconButton();
             this.btnSummary = new FontAwesome.Sharp.IconButton();
@@ -704,8 +702,6 @@
             this.panelSidebar.BackColor = System.Drawing.Color.Maroon;
             this.panelSidebar.Controls.Add(this.label3);
             this.panelSidebar.Controls.Add(this.btnDeletedData);
-            this.panelSidebar.Controls.Add(this.btnTotalReports);
-            this.panelSidebar.Controls.Add(this.btnYearlyReports);
             this.panelSidebar.Controls.Add(this.btnMonthlyReports);
             this.panelSidebar.Controls.Add(this.btnGraphs);
             this.panelSidebar.Controls.Add(this.btnSummary);
@@ -750,48 +746,6 @@
             this.btnDeletedData.UseVisualStyleBackColor = true;
             this.btnDeletedData.Click += new System.EventHandler(this.btnDeletedData_Click);
             // 
-            // btnTotalReports
-            // 
-            this.btnTotalReports.FlatAppearance.BorderSize = 0;
-            this.btnTotalReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTotalReports.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTotalReports.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnTotalReports.IconChar = FontAwesome.Sharp.IconChar.ChartColumn;
-            this.btnTotalReports.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnTotalReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTotalReports.IconSize = 24;
-            this.btnTotalReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTotalReports.Location = new System.Drawing.Point(0, 458);
-            this.btnTotalReports.Name = "btnTotalReports";
-            this.btnTotalReports.Size = new System.Drawing.Size(210, 44);
-            this.btnTotalReports.TabIndex = 14;
-            this.btnTotalReports.Text = "Total Reports";
-            this.btnTotalReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTotalReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTotalReports.UseVisualStyleBackColor = true;
-            this.btnTotalReports.Click += new System.EventHandler(this.btnTotalReports_Click);
-            // 
-            // btnYearlyReports
-            // 
-            this.btnYearlyReports.FlatAppearance.BorderSize = 0;
-            this.btnYearlyReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnYearlyReports.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnYearlyReports.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnYearlyReports.IconChar = FontAwesome.Sharp.IconChar.ChartPie;
-            this.btnYearlyReports.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnYearlyReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnYearlyReports.IconSize = 24;
-            this.btnYearlyReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnYearlyReports.Location = new System.Drawing.Point(0, 406);
-            this.btnYearlyReports.Name = "btnYearlyReports";
-            this.btnYearlyReports.Size = new System.Drawing.Size(210, 44);
-            this.btnYearlyReports.TabIndex = 14;
-            this.btnYearlyReports.Text = "Yearly Reports";
-            this.btnYearlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnYearlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnYearlyReports.UseVisualStyleBackColor = true;
-            this.btnYearlyReports.Click += new System.EventHandler(this.btnYearlyReports_Click);
-            // 
             // btnMonthlyReports
             // 
             this.btnMonthlyReports.FlatAppearance.BorderSize = 0;
@@ -807,7 +761,7 @@
             this.btnMonthlyReports.Name = "btnMonthlyReports";
             this.btnMonthlyReports.Size = new System.Drawing.Size(210, 44);
             this.btnMonthlyReports.TabIndex = 14;
-            this.btnMonthlyReports.Text = "Monthly Reports";
+            this.btnMonthlyReports.Text = "Reports";
             this.btnMonthlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMonthlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMonthlyReports.UseVisualStyleBackColor = true;
@@ -966,8 +920,6 @@
         private System.Windows.Forms.Label label2;
         private FontAwesome.Sharp.IconButton btnRoutine;
         private FontAwesome.Sharp.IconButton btnDeletedData;
-        private FontAwesome.Sharp.IconButton btnTotalReports;
-        private FontAwesome.Sharp.IconButton btnYearlyReports;
         private FontAwesome.Sharp.IconButton btnMonthlyReports;
         private FontAwesome.Sharp.IconButton btnCategory;
         private System.Windows.Forms.Label label3;

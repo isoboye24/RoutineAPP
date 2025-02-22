@@ -58,6 +58,8 @@ namespace RoutineAPP.AllForms
         private void FormMonthlyReports_Load(object sender, EventArgs e)
         {            
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            label4.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            labelTotalCategories.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -70,6 +72,7 @@ namespace RoutineAPP.AllForms
             dataGridView1.Columns[3].HeaderText = "Total Time Used";
             dataGridView1.Columns[4].HeaderText = "Percentage in 2 dp";
             dataGridView1.Columns[5].HeaderText = "Complete value in %";
+            dataGridView1.Columns[6].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
@@ -80,6 +83,13 @@ namespace RoutineAPP.AllForms
             labelTitle.Text = routineDetail.MonthName + " Report";
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+
+            RefreshCounts();
+        }
+
+        private void RefreshCounts()
+        {
+            labelTotalCategories.Text = dataGridView1.Rows.Count.ToString();
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
@@ -151,6 +161,7 @@ namespace RoutineAPP.AllForms
                 list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
             }
             dataGridView1.DataSource = list;
+            RefreshCounts();
         }
         ReportsDetailDTO detail = new ReportsDetailDTO();
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -169,6 +180,7 @@ namespace RoutineAPP.AllForms
             bll = new ReportsBLL();
             dto = bll.SelectMonthlyReports(routineDetail.MonthID, routineDetail.Year);
             dataGridView1.DataSource = dto.MonthlyReports;
+            RefreshCounts();
         }
 
         private void btnClear_Click(object sender, EventArgs e)

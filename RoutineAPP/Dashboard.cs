@@ -151,20 +151,6 @@ namespace RoutineAPP
             OpenChildForm(new FormMonthlyRoutineReportsList());
         }
 
-        private void btnYearlyReports_Click(object sender, EventArgs e)
-        {
-            buttonWasClicked = true;
-            ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormYearlyReportsList());
-        }
-
-        private void btnTotalReports_Click(object sender, EventArgs e)
-        {
-            buttonWasClicked = true;
-            ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormTotalReportsList());
-        }
-
         private void btnDeletedData_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
