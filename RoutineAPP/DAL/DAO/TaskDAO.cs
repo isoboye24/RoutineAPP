@@ -31,12 +31,12 @@ namespace RoutineAPP.DAL.DAO
             throw new NotImplementedException();
         }
         
-        public string SelectTimeInMonth(int month, string category)
+        public string SelectCategoryInMonth(int month, int year, string category)
         {
             try
             {
                 string result;                
-                var time = (from t in db.TASKs.Where(x => x.monthID == month && x.isDeleted==false)
+                var time = (from t in db.TASKs.Where(x => x.monthID == month && x.year == year && x.isDeleted==false)
                             join c in db.CATEGORies.Where(x=>x.categoryName == category && x.isDeleted == false) on t.categoryID equals c.categoryID
                             select new
                             {
@@ -73,7 +73,7 @@ namespace RoutineAPP.DAL.DAO
                 throw ex;
             }
         }
-        public string SelectTimeInYear(int year, string category)
+        public string SelectCategoryInYear(int year, string category)
         {
             try
             {

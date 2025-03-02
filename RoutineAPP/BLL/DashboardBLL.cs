@@ -15,13 +15,13 @@ namespace RoutineAPP.BLL
         {
             return categoryDAO.TotalCategory();
         }
-        public string SelectTimeInMonth(int month, string category)
+        public string SelectCategoryInMonth(int month, int year, string category)
         {
-            return task.SelectTimeInMonth(month, category);
+            return task.SelectCategoryInMonth(month, year, category);
         }
-        public string SelectTimeInYear(int year, string category)
+        public string SelectCategoryInYear(int year, string category)
         {
-            return task.SelectTimeInYear(year, category);
+            return task.SelectCategoryInYear(year, category);
         }
     }
 }

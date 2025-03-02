@@ -102,22 +102,24 @@ namespace RoutineAPP
             labelTitleChildForm.Text = childForm.Text;
         }
         DashboardBLL bll = new DashboardBLL();
+        int currentMonth = DateTime.Today.Month;
+        int currentYear = DateTime.Today.Year;
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             RefreshCards();
         }
         private void RefreshCards()
         {
-            labelTimeOnExercise.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Exercise").ToString();
-            labelTimeOnFamilyInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Family").ToString();
-            labelTimeOnGermanInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "German").ToString();
-            labelTimeOnGodInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "God T").ToString();
-            labelTimeOnProgrammingInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Programming").ToString();
-            labelTimeOnBooksInMonth.Text = bll.SelectTimeInMonth(DateTime.Today.Month, "Books").ToString();
+            labelTimeOnExercise.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Exercise").ToString();
+            labelTimeOnFamilyInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Family").ToString();
+            labelTimeOnGermanInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "German").ToString();
+            labelTimeOnGodInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "God T").ToString();
+            labelTimeOnProgrammingInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Programming").ToString();
+            labelTimeOnBooksInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Books").ToString();
 
-            labelTimeOnRussianInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Russian").ToString();
-            labelTimeOnGermanInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "German").ToString();
-            labelTimeOnProgrammingInYear.Text = bll.SelectTimeInYear(DateTime.Today.Year, "Programming").ToString();
+            labelTimeOnRussianInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Russian").ToString();
+            labelTimeOnGermanInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "German").ToString();
+            labelTimeOnProgrammingInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Programming").ToString();
 
             label4.Text = "In " + DateTime.Today.Year + " (annualy)";
             label8.Text = "In " + General.ConventIntToMonth(DateTime.Today.Month) + " (monthly)";
