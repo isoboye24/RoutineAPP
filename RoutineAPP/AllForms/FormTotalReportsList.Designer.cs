@@ -350,7 +350,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(725, 291);
             this.dataGridView1.TabIndex = 6;
             // 
-            // FormYearlyReportsList
+            // FormTotalReportsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -358,7 +358,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "FormYearlyReportsList";
+            this.Name = "FormTotalReportsList";
             this.Text = "Yearly Reports";
             this.Load += new System.EventHandler(this.FormYearlyReportsList_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

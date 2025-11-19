@@ -27,12 +27,15 @@ namespace RoutineAPP.AllForms
         private void FormMonthlyReportsList_Load(object sender, EventArgs e)
         {
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            labelYearReportTitle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             cmbYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbYearAnually.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbCategoryAnually.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            cmbCategoryTotal.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
             dto = bll.Select(year);
             cmbMonth.DataSource = dto.Months;
@@ -41,8 +44,11 @@ namespace RoutineAPP.AllForms
             General.ComboBoxProps(cmbYear, "Year", "YearID");
             cmbYearAnually.DataSource = dto.Years;
             General.ComboBoxProps(cmbYearAnually, "Year", "YearID");
+
             cmbCategoryAnually.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategoryAnually, "CategoryName", "CategoryID");
+            cmbCategoryTotal.DataSource = dto.Categories;
+            General.ComboBoxProps(cmbCategoryTotal, "CategoryName", "CategoryID");
 
             dataGridViewMonthly.DataSource = dto.MonthlyRoutineReports;
             dataGridViewMonthly.Columns[0].Visible = false;
@@ -94,6 +100,7 @@ namespace RoutineAPP.AllForms
         private void RefreshAnually(int year)
         {
             labelTotalYealyHours.Text = "Total hours in " + year + " :";
+            labelYearReportTitle.Text =  year + " Report";
             labelTotalHoursInYear.Text = bll.SelectTotalHoursInYear(year).ToString();
             labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInAYear(year).ToString();
         }
@@ -159,7 +166,7 @@ namespace RoutineAPP.AllForms
                 double cellValue;
                 if (double.TryParse(e.Value.ToString(), out cellValue))
                 {
-                    if (cellValue * 100 <= 5)
+                    if (cellValue * 100 < 5)
                     {
                         DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
                         foreach (DataGridViewCell cell in row.Cells)
@@ -168,7 +175,8 @@ namespace RoutineAPP.AllForms
                             cell.Style.ForeColor = Color.Black;
                         }
                     }
-                    else if (cellValue * 100 > 5 && cellValue * 100 <= 10)
+                    
+                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
                     {
                         DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
                         foreach (DataGridViewCell cell in row.Cells)
@@ -242,6 +250,23 @@ namespace RoutineAPP.AllForms
         private void iconBtnClearAnually_Click(object sender, EventArgs e)
         {
             ClearFilters();
+        }
+
+        private void dataGridViewAnually_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // Draw row numbers on the row header
+            using (Font font = new Font("Segoe UI", 14, FontStyle.Regular))
+            using (SolidBrush brush = new SolidBrush(dataGridViewAnually.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(
+                    rowNumber,
+                    font,
+                    brush,
+                    e.RowBounds.Location.X + 15,
+                    e.RowBounds.Location.Y + 4
+                );
+            }
         }
     }
 }

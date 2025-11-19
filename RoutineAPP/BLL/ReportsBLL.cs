@@ -27,12 +27,15 @@ namespace RoutineAPP.BLL
             dto.Years = yearDAO.Select();
             dto.YearlyReports = dao.SelectYearlyReports(year);
             dto.Categories = categoryDAO.Select();
+
             return dto;
         }
         public ReportDTO SelectMonthlyReports(int month, int year)
         {
             ReportDTO dto = new ReportDTO();
             dto.MonthlyReports = dao.SelectMonthlyReports(month, year);
+            dto.MonthlyTop5Reports = dao.SelectMonthlyTop5Reports(month, year);
+            dto.YearlyTop5Reports = dao.SelectYearlyTop5Reports(year);
             dto.Categories = categoryDAO.Select();
             return dto;
         }

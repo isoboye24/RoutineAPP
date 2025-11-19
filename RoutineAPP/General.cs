@@ -135,5 +135,21 @@ namespace RoutineAPP
                     break;
             }
         }
+
+        public static void StyleDataGridView(DataGridView dataGridView)
+        {
+            // Set the overall background color
+            dataGridView.BackgroundColor = Color.Brown;
+
+            // Set the header background color
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Brown;
+
+            // Set the header text color for better contrast (optional)
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            // You may need to disable visual styles for headers to apply your custom color
+            dataGridView.EnableHeadersVisualStyles = false;
+
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +51,7 @@ namespace RoutineAPP.DAL.DAO
             List<int> totalTime = new List<int>();
             List<int> totalCategoryTime = new List<int>();
             List<int> populatedCategories = new List<int>();
+            int counter = 0;
 
             var categories = db.CATEGORies.Where(x => x.isDeleted == false).ToList();            
             foreach (var category in categories)
@@ -64,7 +66,7 @@ namespace RoutineAPP.DAL.DAO
             {
                 int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.monthID == month && x.year == year && x.categoryID == category);
                 ReportsDetailDTO dto = new ReportsDetailDTO();
-                dto.ReportID += 1;
+                dto.ReportID = ++counter;
                 dto.CategoryID = category;
                 CATEGORY categoryName = db.CATEGORies.First(x => x.isDeleted == false && x.categoryID == category);
                 dto.Category = categoryName.categoryName;
@@ -98,7 +100,10 @@ namespace RoutineAPP.DAL.DAO
                 totalTime.Clear();
                 totalCategoryTime.Clear();
             }
-            return monthlyReports;
+            var orderedList = monthlyReports
+                                .OrderByDescending(x => x.TotalTimeForFormatting).ToList();
+
+            return orderedList;            
         }
 
         public string SelectTotalHoursUsedInMonth(int month, int year)
@@ -148,15 +153,17 @@ namespace RoutineAPP.DAL.DAO
                 dto.Year = yearItem;
                 yearlyRoutineReports.Add(dto);                
             }
+
             return yearlyRoutineReports;
         }
 
         public List<ReportsDetailDTO> SelectYearlyReports(int year)
         {
-            List<ReportsDetailDTO> monthlyReports = new List<ReportsDetailDTO>();
+            List<ReportsDetailDTO> yearlyReports = new List<ReportsDetailDTO>();
             List<int> totalTime = new List<int>();
             List<int> totalCategoryTime = new List<int>();
             List<int> allTimes = new List<int>();
+            int counter = 0;
 
             var allTime = db.TASKs.Where(x => x.isDeleted == false && x.year == year).ToList();
             foreach (var time in allTime)
@@ -169,7 +176,7 @@ namespace RoutineAPP.DAL.DAO
             {
                 int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.year == year && x.categoryID == item.categoryID);
                 ReportsDetailDTO dto = new ReportsDetailDTO();
-                dto.ReportID += 1;
+                dto.ReportID = ++counter; ;
                 dto.CategoryID = item.categoryID;
                 dto.Category = item.categoryName;
                 dto.Year = year;
@@ -206,11 +213,13 @@ namespace RoutineAPP.DAL.DAO
                     dto.PercentageOfUsedTime = "0 %";
                     dto.TotalTimeForFormatting = 0;
                 }
-                monthlyReports.Add(dto);
+                yearlyReports.Add(dto);
                 totalTime.Clear();
                 totalCategoryTime.Clear();
             }
-            return monthlyReports;
+            var orderedList = yearlyReports
+                               .OrderByDescending(x => x.TotalTimeForFormatting).ToList();
+            return orderedList;
         }
 
         public string SelectTotalHoursUsedInAYear(int year)
@@ -271,6 +280,126 @@ namespace RoutineAPP.DAL.DAO
             }
             int count = totalMonths.Count();
             return count;
+        }
+
+        // Well improved code
+        public List<ReportsDetailDTO> SelectMonthlyTop5Reports(int month, int year)
+        {
+            List<ReportsDetailDTO> monthlyReports = new List<ReportsDetailDTO>();
+            int counter = 0;
+
+            var allTasks = db.TASKs
+                .Where(x => !x.isDeleted && x.monthID == month && x.year == year)
+                .ToList();
+
+            if (!allTasks.Any())
+                return monthlyReports;
+
+            int totalTimeSpent = allTasks.Sum(x => x.timeSpent);
+
+            var categoryGroups = allTasks
+                .GroupBy(t => t.categoryID)
+                .Select(g => new
+                {
+                    CategoryID = g.Key,
+                    TotalCategoryTime = g.Sum(t => t.timeSpent)
+                })
+                .ToList();
+
+            foreach (var group in categoryGroups)
+            {
+                var category = db.CATEGORies.FirstOrDefault(x => !x.isDeleted && x.categoryID == group.CategoryID);
+                if (category == null) continue;
+
+                ReportsDetailDTO dto = new ReportsDetailDTO
+                {
+                    ReportID = ++counter,
+                    CategoryID = category.categoryID,
+                    Category = category.categoryName
+                };
+
+                double categoryTime = group.TotalCategoryTime;
+                dto.TotalTimeForFormatting = categoryTime / totalTimeSpent;
+
+                int hours = (int)Math.Floor(categoryTime / 60);
+                int minutes = Convert.ToInt32(categoryTime % 60);
+
+                dto.TotalTimeUsed = hours < 1
+                    ? $"{minutes} min{(minutes != 1 ? "s" : "")}"
+                    : $"{hours} hr{(hours != 1 ? "s " : " ")}{minutes} min{(minutes != 1 ? "s" : "")}";
+
+                dto.PercentageOfUsedTime = ((categoryTime / totalTimeSpent) * 100).ToString("0.00") + " %";
+
+                monthlyReports.Add(dto);
+            }
+
+            // ✅ Return only top 5
+            var top5 = monthlyReports
+                .OrderByDescending(x => x.TotalTimeForFormatting)
+                .Take(5)
+                .ToList();
+
+            return top5;
+        }
+
+
+        public List<ReportsDetailDTO> SelectYearlyTop5Reports( int year)
+        {
+            List<ReportsDetailDTO> monthlyReports = new List<ReportsDetailDTO>();
+            int counter = 0;
+
+            var allTasks = db.TASKs
+                .Where(x => !x.isDeleted && x.year == year)
+                .ToList();
+
+            if (!allTasks.Any())
+                return monthlyReports;
+
+            int totalTimeSpent = allTasks.Sum(x => x.timeSpent);
+
+            var categoryGroups = allTasks
+                .GroupBy(t => t.categoryID)
+                .Select(g => new
+                {
+                    CategoryID = g.Key,
+                    TotalCategoryTime = g.Sum(t => t.timeSpent)
+                })
+                .ToList();
+
+            foreach (var group in categoryGroups)
+            {
+                var category = db.CATEGORies.FirstOrDefault(x => !x.isDeleted && x.categoryID == group.CategoryID);
+                if (category == null) continue;
+
+                ReportsDetailDTO dto = new ReportsDetailDTO
+                {
+                    ReportID = ++counter,
+                    CategoryID = category.categoryID,
+                    Category = category.categoryName
+                };
+
+                double categoryTime = group.TotalCategoryTime;
+                dto.TotalTimeForFormatting = categoryTime / totalTimeSpent;
+
+                int hours = (int)Math.Floor(categoryTime / 60);
+                int minutes = Convert.ToInt32(categoryTime % 60);
+
+                dto.TotalTimeUsed = hours < 1
+                    ? $"{minutes} min{(minutes != 1 ? "s" : "")}"
+                    : $"{hours} hr{(hours != 1 ? "s " : " ")}{minutes} min{(minutes != 1 ? "s" : "")}";
+
+                dto.PercentageOfUsedTime = ((categoryTime / totalTimeSpent) * 100).ToString("0.00") + " %";
+
+                monthlyReports.Add(dto);
+            }
+
+            // ✅ Return only top 5
+            var top5 = monthlyReports
+                .OrderByDescending(x => x.TotalTimeForFormatting)
+                .Take(5)
+                .ToList();
+
+            return top5;
         }
     }
 }

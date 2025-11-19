@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using RoutineAPP.AllForms;
 using RoutineAPP.BLL;
+using RoutineAPP.DAL.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,8 +105,43 @@ namespace RoutineAPP
         DashboardBLL bll = new DashboardBLL();
         int currentMonth = DateTime.Today.Month;
         int currentYear = DateTime.Today.Year;
+
+        ReportsBLL reportsBLL = new ReportsBLL();
+        ReportDTO reportDTO = new ReportDTO();
         private void FormDashboard_Load(object sender, EventArgs e)
         {
+            reportDTO = reportsBLL.SelectMonthlyReports(currentMonth, currentYear);
+
+            dataGridViewTop5Monthly.DataSource = reportDTO.MonthlyTop5Reports;
+            dataGridViewTop5Monthly.Columns[0].Visible = false;
+            dataGridViewTop5Monthly.Columns[1].Visible = false;
+            dataGridViewTop5Monthly.Columns[2].HeaderText = "Cat.";
+            dataGridViewTop5Monthly.Columns[3].HeaderText = "Time";
+            dataGridViewTop5Monthly.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTop5Monthly.Columns[4].HeaderText = "%";
+            dataGridViewTop5Monthly.Columns[5].Visible = false;
+            dataGridViewTop5Monthly.Columns[6].Visible = false;
+            foreach (DataGridViewColumn column in dataGridViewTop5Monthly.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            }
+            General.StyleDataGridView(dataGridViewTop5Monthly);
+
+            dataGridViewTop5Yearly.DataSource = reportDTO.YearlyTop5Reports;
+            dataGridViewTop5Yearly.Columns[0].Visible = false;
+            dataGridViewTop5Yearly.Columns[1].Visible = false;
+            dataGridViewTop5Yearly.Columns[2].HeaderText = "Cat.";
+            dataGridViewTop5Yearly.Columns[3].HeaderText = "Time";
+            dataGridViewTop5Yearly.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTop5Yearly.Columns[4].HeaderText = "%";
+            dataGridViewTop5Yearly.Columns[5].Visible = false;
+            dataGridViewTop5Yearly.Columns[6].Visible = false;
+            foreach (DataGridViewColumn column in dataGridViewTop5Yearly.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            }
+            General.StyleDataGridView(dataGridViewTop5Yearly);
+
             RefreshCards();
         }
         private void RefreshCards()
@@ -124,7 +160,8 @@ namespace RoutineAPP
             label4.Text = "In " + DateTime.Today.Year + " (annualy)";
             label8.Text = "In " + General.ConventIntToMonth(DateTime.Today.Month) + " (monthly)";
 
-            
+            labeltop5InYear.Text = "Top 5 in " + DateTime.Today.Year;
+            labeltop5InMonth.Text = "Top 5 in " + General.ConventIntToMonth(DateTime.Today.Month);
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)

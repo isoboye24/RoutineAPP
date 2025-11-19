@@ -104,7 +104,7 @@ namespace RoutineAPP.AllForms
                 double cellValue;
                 if (double.TryParse(e.Value.ToString(), out cellValue))
                 {
-                    if (cellValue*100 <= 5)
+                    if (cellValue*100 < 5)
                     {
                         DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                         foreach (DataGridViewCell cell in row.Cells)
@@ -112,8 +112,8 @@ namespace RoutineAPP.AllForms
                             cell.Style.BackColor = Color.Red;
                             cell.Style.ForeColor = Color.Black;
                         }
-                    }
-                    else if (cellValue * 100 > 5 && cellValue * 100 <= 10)
+                    }                    
+                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
                     {
                         DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                         foreach (DataGridViewCell cell in row.Cells)
@@ -186,6 +186,23 @@ namespace RoutineAPP.AllForms
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFilters();
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // Draw row numbers on the row header
+            using (Font font = new Font("Segoe UI", 14, FontStyle.Regular))
+            using (SolidBrush brush = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(
+                    rowNumber,
+                    font,
+                    brush,
+                    e.RowBounds.Location.X + 15,
+                    e.RowBounds.Location.Y + 4
+                );
+            }
         }
     }
 }

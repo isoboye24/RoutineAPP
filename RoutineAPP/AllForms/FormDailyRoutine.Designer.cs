@@ -38,12 +38,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
+            this.iconBtnSave = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePickerRoutine = new System.Windows.Forms.DateTimePicker();
             this.txtSummary = new System.Windows.Forms.TextBox();
-            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
-            this.iconBtnSave = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
@@ -194,6 +194,41 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(752, 55);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
+            // iconBtnClose
+            // 
+            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnClose.FlatAppearance.BorderSize = 0;
+            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClose.IconSize = 32;
+            this.iconBtnClose.Location = new System.Drawing.Point(273, 11);
+            this.iconBtnClose.Name = "iconBtnClose";
+            this.iconBtnClose.Size = new System.Drawing.Size(91, 32);
+            this.iconBtnClose.TabIndex = 51;
+            this.iconBtnClose.UseVisualStyleBackColor = false;
+            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
+            // 
+            // iconBtnSave
+            // 
+            this.iconBtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnSave.FlatAppearance.BorderSize = 0;
+            this.iconBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnSave.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconBtnSave.IconColor = System.Drawing.Color.DarkGreen;
+            this.iconBtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnSave.IconSize = 32;
+            this.iconBtnSave.Location = new System.Drawing.Point(385, 11);
+            this.iconBtnSave.Name = "iconBtnSave";
+            this.iconBtnSave.Size = new System.Drawing.Size(91, 32);
+            this.iconBtnSave.TabIndex = 52;
+            this.iconBtnSave.UseVisualStyleBackColor = true;
+            this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 4;
@@ -242,41 +277,6 @@
             this.txtSummary.Name = "txtSummary";
             this.txtSummary.Size = new System.Drawing.Size(752, 281);
             this.txtSummary.TabIndex = 7;
-            // 
-            // iconBtnClose
-            // 
-            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnClose.FlatAppearance.BorderSize = 0;
-            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnClose.IconSize = 32;
-            this.iconBtnClose.Location = new System.Drawing.Point(273, 11);
-            this.iconBtnClose.Name = "iconBtnClose";
-            this.iconBtnClose.Size = new System.Drawing.Size(91, 32);
-            this.iconBtnClose.TabIndex = 51;
-            this.iconBtnClose.UseVisualStyleBackColor = false;
-            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
-            // 
-            // iconBtnSave
-            // 
-            this.iconBtnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnSave.FlatAppearance.BorderSize = 0;
-            this.iconBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnSave.IconChar = FontAwesome.Sharp.IconChar.Check;
-            this.iconBtnSave.IconColor = System.Drawing.Color.DarkGreen;
-            this.iconBtnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnSave.IconSize = 32;
-            this.iconBtnSave.Location = new System.Drawing.Point(385, 11);
-            this.iconBtnSave.Name = "iconBtnSave";
-            this.iconBtnSave.Size = new System.Drawing.Size(91, 32);
-            this.iconBtnSave.TabIndex = 52;
-            this.iconBtnSave.UseVisualStyleBackColor = true;
-            this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
             // 
             // FormDailyRoutine
             // 

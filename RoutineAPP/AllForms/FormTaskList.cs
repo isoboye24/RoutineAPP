@@ -57,6 +57,12 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Transparent;
+            dataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridView1.EnableHeadersVisualStyles = false;
+
             labelTitle.Text = detailDailyRoutine.Day + "." + detailDailyRoutine.MonthID + "." + detailDailyRoutine.Year;
             RefreshDataCounts();
         }        
@@ -208,6 +214,54 @@ namespace RoutineAPP.AllForms
         private void iconBtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            using (Font font = new Font("Segoe UI", 14, FontStyle.Regular))
+            using (SolidBrush brush = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(
+                    rowNumber,
+                    font,
+                    brush,
+                    e.RowBounds.Location.X + 15,
+                    e.RowBounds.Location.Y + 4
+                );
+            }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+
+        }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+            if (e.RowIndex == 0)
+            {
+                row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else if (e.RowIndex == 1)
+            {
+                row.DefaultCellStyle.BackColor = Color.YellowGreen;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else if (e.RowIndex == 2)
+            {
+                row.DefaultCellStyle.BackColor = Color.Yellow;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else
+            {
+                row.DefaultCellStyle.BackColor = Color.IndianRed;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
         }
     }
 }

@@ -250,7 +250,9 @@ namespace RoutineAPP.DAL.DAO
                     }                    
                     tasks.Add(dto);
                 }
-                return tasks;
+                var orderedList = tasks
+                               .OrderByDescending(x => x.TimeSpent).ToList();
+                return orderedList;
             }
             catch (Exception ex)
             {
