@@ -202,39 +202,30 @@ Displays total hours per category, yearly summaries, and average monthly statist
 ![Dashboard](images/dashboard.png)
 
 
-### 📅 Daily Routine Entry
-Interface for logging daily activities and summaries.
 
 
-![Dashboard](images/daily_tasks.png)
+### 📅 Task Entry & View
+Interface for adding each task with optional summary and daily tasks view.
+
+<p align="center">
+  <img src="images/daily_tasks.png" width="32%" height="120"/>
+  <img src="images/add_task.png" width="32%" height="120"/>
+  <img src="images/task_view.png" width="32%" height="120" />
+</p>
 
 
-### 📅 Task Entry
-Interface for adding each task and its optional summary.
-
-![Dashboard](images/add_task.png)
-
-
-### 📅 View Tasks
-Interface for viewing daily tasks.
-
-![Dashboard](images/task_view.png)
-
-### 📊 Monthly Report
-Aggregated monthly time distribution per category.
-
-![Dashboard](images/month_report.png)
+### Reports
+Aggregated monthly and annual time distribution per category, and 
+Bar chart visualization of annual category performance
 
 
-### 📊 Yearly Category Chart
-Bar chart visualization of annual category performance.
+<p align="center">
+  <img src="images/month_report.png" width="32%" height="120"/>
+  <img src="images/yearly_barchart.png" width="32%" height="120"/>
+  <img src="images/annual.png" width="32%" height="120" />
+</p>
 
-![Dashboard](images/yearly_barchart.png)
 
-### 📊 Annual Report
-Aggregated annually time distribution per category.
-
-![Dashboard](images/annual.png)
 
 
 
