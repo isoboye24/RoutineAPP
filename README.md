@@ -68,15 +68,15 @@ boundaries between layers.
 +--------------------------------------------------+
 |                  Presentation Layer              |
 |--------------------------------------------------|
-| Windows Forms (AllForms)                        |
-| - Dashboard                                     |
-| - Daily Routine Forms                           |
-| - Reports & Graph Forms                         |
+| Windows Forms (AllForms)                         |
+| - Dashboard                                      |
+| - Daily Routine Forms                            |
+| - Reports & Graph Forms                          |
 +-------------------------▲------------------------+
                           |
                           |
 +-------------------------|------------------------+
-|               Business Logic Layer (BLL)        |
+|               Business Logic Layer (BLL)         |
 |--------------------------------------------------|
 | - DailyTaskBLL                                   |
 | - CategoryBLL                                    |
@@ -92,21 +92,33 @@ boundaries between layers.
                           |
                           |
 +-------------------------|------------------------+
-|               Data Access Layer (DAL)           |
+|               Data Access Layer (DAL)            |
 |--------------------------------------------------|
 | DAO                                              |
 | - DailyTaskDAO                                   |
 | - CategoryDAO                                    |
 | - ReportsDAO                                     |
-| - MonthDAO / YearDAO                             |
+| - MonthDAO & YearDAO                             |
 |                                                  |
 | DTO                                              |
-| - DailyTaskDTO                                   |
+| - AllYearsDetailDTO                              |
+| - YearDTO                                        |
+| - CategoryDetailDTO                              |
+| - CategoryDTO                                    |
+| - MonthDetailDTO                                 |
+| - MonthDTO                                       |
 | - DailyTaskDetailDTO                             |
+| - DailyTaskDTO                                   |
+| - TaskDetailDTO                                  |
+| - TaskDTO                                        |
+| - MonthlyRoutinesDetailDTO                       |
+| - MonthlyRoutineDTO                              |
+| - ReportsDetailDTO                               |
 | - ReportDTO                                      |
+| - GraphDetailDTO                                 |
 | - GraphDTO                                       |
 |                                                  |
-| Entity Framework (EDMX - Database First)        |
+| Entity Framework (EDMX - Database First)         |
 +-------------------------▲------------------------+
                           |
                           |
@@ -117,7 +129,7 @@ boundaries between layers.
 | - DAILY_ROUTINE                                  |
 | - MONTHs                                         |
 | - TASK                                           |
-| - CATEGORY                       |
+| - CATEGORY                                       |
 +--------------------------------------------------+
 ````
 
