@@ -208,9 +208,9 @@ Displays total hours per category, yearly summaries, and average monthly statist
 Interface for adding each task with optional summary and daily tasks view.
 
 <p align="center">
-  <img src="images/daily_tasks.png" width="32%" height="120"/>
-  <img src="images/add_task.png" width="32%" height="120"/>
-  <img src="images/task_view.png" width="32%" height="120" />
+  <img src="images/daily_tasks.png" width="32%" height="150"/>
+  <img src="images/add_task.png" width="32%" height="150"/>
+  <img src="images/task_view.png" width="32%" height="150" />
 </p>
 
 
@@ -220,9 +220,9 @@ Bar chart visualization of annual category performance
 
 
 <p align="center">
-  <img src="images/month_report.png" width="32%" height="120"/>
-  <img src="images/yearly_barchart.png" width="32%" height="120"/>
-  <img src="images/annual.png" width="32%" height="120" />
+  <img src="images/month_report.png" width="32%" height="150"/>
+  <img src="images/yearly_barchart.png" width="32%" height="150"/>
+  <img src="images/annual.png" width="32%" height="150" />
 </p>
 
 
