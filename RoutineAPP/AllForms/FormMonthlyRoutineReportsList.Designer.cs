@@ -979,6 +979,8 @@
             this.dataGridViewTotal.RowTemplate.Height = 30;
             this.dataGridViewTotal.Size = new System.Drawing.Size(711, 332);
             this.dataGridViewTotal.TabIndex = 6;
+            this.dataGridViewTotal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewTotal_CellFormatting);
+            this.dataGridViewTotal.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewTotal_RowPostPaint);
             // 
             // FormMonthlyRoutineReportsList
             // 

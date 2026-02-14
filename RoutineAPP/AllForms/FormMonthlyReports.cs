@@ -70,8 +70,8 @@ namespace RoutineAPP.AllForms
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].HeaderText = "Category";
             dataGridView1.Columns[3].HeaderText = "Total Time Used";
-            dataGridView1.Columns[4].HeaderText = "Percentage in 2 dp";
-            dataGridView1.Columns[5].HeaderText = "Complete value in %";
+            dataGridView1.Columns[4].HeaderText = "% in 2 dp";
+            dataGridView1.Columns[5].HeaderText = "Complete %";
             dataGridView1.Columns[6].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {

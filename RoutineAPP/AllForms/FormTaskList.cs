@@ -45,13 +45,13 @@ namespace RoutineAPP.AllForms
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].HeaderText = "Category";
-            dataGridView1.Columns[3].HeaderText = "Time in mins";
+            dataGridView1.Columns[3].HeaderText = "In mins";
             dataGridView1.Columns[4].Visible = false;
             dataGridView1.Columns[5].Visible = false;
             dataGridView1.Columns[6].Visible = false;
             dataGridView1.Columns[7].Visible = false;
             dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].HeaderText = "Time in Hours and mins";
+            dataGridView1.Columns[9].HeaderText = "In Hours";
             dataGridView1.Columns[10].Visible = false;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {

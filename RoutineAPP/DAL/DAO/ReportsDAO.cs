@@ -176,7 +176,7 @@ namespace RoutineAPP.DAL.DAO
             {
                 int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.year == year && x.categoryID == item.categoryID);
                 ReportsDetailDTO dto = new ReportsDetailDTO();
-                dto.ReportID = ++counter; ;
+                dto.ReportID = ++counter;
                 dto.CategoryID = item.categoryID;
                 dto.Category = item.categoryName;
                 dto.Year = year;
@@ -280,6 +280,71 @@ namespace RoutineAPP.DAL.DAO
             }
             int count = totalMonths.Count();
             return count;
+        }
+
+        public List<ReportsDetailDTO> SelectTotalReport()
+        {
+            List<ReportsDetailDTO> totalReports = new List<ReportsDetailDTO>();
+            List<int> totalTime = new List<int>();
+            List<int> totalCategoryTime = new List<int>();
+            List<int> allTimes = new List<int>();
+            int counter = 0;
+
+            var allTime = db.TASKs.Where(x => x.isDeleted == false).ToList();
+            foreach (var time in allTime)
+            {
+                allTimes.Add(time.timeSpent);
+            }
+            int totalAllTimes = allTimes.Sum();
+            var categories = db.CATEGORies.Where(x => x.isDeleted == false).ToList();
+            foreach (var item in categories)
+            {
+                int tasksCount = db.TASKs.Count(x => x.isDeleted == false && x.categoryID == item.categoryID);
+                ReportsDetailDTO dto = new ReportsDetailDTO();
+                dto.ReportID = ++counter;
+                dto.CategoryID = item.categoryID;
+                dto.Category = item.categoryName;
+                dto.Year = 0;
+                if (tasksCount > 0)
+                {
+                    var allTasks = db.TASKs.Where(x => x.isDeleted == false).ToList();
+                    foreach (var task in allTasks)
+                    {
+                        totalTime.Add(task.timeSpent);
+                    }
+                    int totalTimeSpent = totalTime.Sum();
+                    var tasks = db.TASKs.Where(x => x.isDeleted == false && x.categoryID == item.categoryID).ToList();
+                    foreach (var task in tasks)
+                    {
+                        totalCategoryTime.Add(task.timeSpent);
+                    }
+                    double totalTimeSpentInCatgory = totalCategoryTime.Sum();
+                    dto.TotalTimeForFormatting = totalTimeSpentInCatgory / totalTimeSpent;
+                    int hours = (int)Math.Floor(totalTimeSpentInCatgory / 60);
+                    int minutes = Convert.ToInt32(totalTimeSpentInCatgory % 60);
+                    if (hours < 1)
+                    {
+                        dto.TotalTimeUsed = minutes + " min" + (minutes > 1 ? "s" : "");
+                    }
+                    else
+                    {
+                        dto.TotalTimeUsed = hours + " hr" + (hours > 1 ? "s " : " ") + minutes + " min" + (minutes > 1 ? "s" : "");
+                    }
+                    dto.PercentageOfUsedTime = ((totalTimeSpentInCatgory / totalTimeSpent) * 100).ToString("0.00") + " %";
+                }
+                else
+                {
+                    dto.TotalTimeUsed = "0 min";
+                    dto.PercentageOfUsedTime = "0 %";
+                    dto.TotalTimeForFormatting = 0;
+                }
+                totalReports.Add(dto);
+                totalTime.Clear();
+                totalCategoryTime.Clear();
+            }
+            var orderedList = totalReports
+                               .OrderByDescending(x => x.TotalTimeForFormatting).ToList();
+            return orderedList;
         }
 
         // Well improved code

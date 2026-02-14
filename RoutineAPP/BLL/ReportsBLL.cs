@@ -26,6 +26,7 @@ namespace RoutineAPP.BLL
             dto.Months = monthdao.Select();
             dto.Years = yearDAO.Select();
             dto.YearlyReports = dao.SelectYearlyReports(year);
+            dto.TotalReports = dao.SelectTotalReport();
             dto.Categories = categoryDAO.Select();
 
             return dto;

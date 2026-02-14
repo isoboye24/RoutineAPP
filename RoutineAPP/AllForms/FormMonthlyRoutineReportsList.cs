@@ -73,6 +73,20 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
+
+            dataGridViewTotal.DataSource = dto.TotalReports;
+            dataGridViewTotal.Columns[0].Visible = false;
+            dataGridViewTotal.Columns[1].Visible = false;
+            dataGridViewTotal.Columns[2].HeaderText = "Category";
+            dataGridViewTotal.Columns[3].HeaderText = "Total Time Used";
+            dataGridViewTotal.Columns[4].HeaderText = "Percentage in 2 dp";
+            dataGridViewTotal.Columns[5].HeaderText = "Complete value in %";
+            dataGridViewTotal.Columns[6].Visible = false;
+            foreach (DataGridViewColumn column in dataGridViewTotal.Columns)
+            {
+                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            }
+
             RefreshAnually(year);
             RefreshCounts();
         }
@@ -257,6 +271,80 @@ namespace RoutineAPP.AllForms
             // Draw row numbers on the row header
             using (Font font = new Font("Segoe UI", 14, FontStyle.Regular))
             using (SolidBrush brush = new SolidBrush(dataGridViewAnually.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(
+                    rowNumber,
+                    font,
+                    brush,
+                    e.RowBounds.Location.X + 15,
+                    e.RowBounds.Location.Y + 4
+                );
+            }
+        }
+
+        private void dataGridViewTotal_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 5 && e.Value != null)
+            {
+                double cellValue;
+                if (double.TryParse(e.Value.ToString(), out cellValue))
+                {
+                    if (cellValue * 100 < 5)
+                    {
+                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.Red;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+
+                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
+                    {
+                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.Yellow;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+                    else if (cellValue * 100 > 10 && cellValue * 100 <= 25)
+                    {
+                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.DarkGreen;
+                            cell.Style.ForeColor = Color.White;
+                        }
+                    }
+                    else if (cellValue * 100 > 25)
+                    {
+                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = Color.DarkGoldenrod;
+                            cell.Style.ForeColor = Color.Black;
+                        }
+                    }
+                    else
+                    {
+                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            cell.Style.BackColor = dataGridViewTotal.DefaultCellStyle.BackColor;
+                            cell.Style.ForeColor = dataGridViewTotal.DefaultCellStyle.ForeColor;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewTotal_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // Draw row numbers on the row header
+            using (Font font = new Font("Segoe UI", 14, FontStyle.Regular))
+            using (SolidBrush brush = new SolidBrush(dataGridViewTotal.RowHeadersDefaultCellStyle.ForeColor))
             {
                 string rowNumber = (e.RowIndex + 1).ToString();
                 e.Graphics.DrawString(

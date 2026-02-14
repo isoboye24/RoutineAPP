@@ -1,79 +1,224 @@
-### Daily Routine Todo App
+﻿### RoutineAPP – Daily Productivity Analytics System
 
-This is a windows todo app that allows you to add, edit, view and delete daily tasks. 
-The aim of the app is to help you save and track all your daily tasks in one place. Even for years to come, 
-you can always look back and see what you did on a particular day. You can also view each category of tasks in a year graphically.
+## Overview
+RoutineAPP is a desktop-based productivity and time analytics system developed using C# and .NET Framework.
 
-### Features
-- Add a task
-- Edit a task
-- Delete a task
-- View all tasks
-- View tasks by category
-- View tasks by date
-- View tasks by year
-- View tasks by month
-- View tasks graphically by year
-- View tasks graphically by month
-- View tasks graphically by category
+The application was initially designed for structured personal productivity tracking
+but was architected using a modular and layered design, making it suitable for
+general-purpose time management and analytical reporting.
 
-### Technologies
+The system has been actively used in production for over two years, demonstrating
+long-term stability, maintainability, and real-world usability.
+
+## Architecture
+The application follows a structured 3-Tier Layered Architecture, ensuring 
+separation of concerns and maintainable code organization.
+
+### Presentation Layer
+- Windows Forms (UI)
+- Responsible for user interaction and data presentation
+- Located in AllForms
+- Fully decoupled from database logic
+
+### Business Logic Layer (BLL)
+- Encapsulates application rules
+- Handles validation and aggregation logic
+- Coordinates communication between UI and Data Layer
+- Implements generic IBLL<T> interface for structured abstraction
+- Centralizes calculation and reporting logic
+
+### Data Access Layer (DAL)
+- DAO (Data Access Object) pattern implementation
+- DTO (Data Transfer Object) pattern for structured data exchange
+- Entity Framework (Database-First, EDMX model)
+- Soft delete strategy (isDeleted, deletedDate) for safe record management
+- Encapsulated and isolated database operations
+
+
+## Analytics & Reporting Engine
+The system includes a fully integrated productivity analytics module with structured
+statistical reporting capabilities.
+#### Core Features:
+- Daily activity logging with persistent storage
+- Category-based time tracking and distribution
+- Monthly aggregated reporting (GROUP BY month logic)
+- Yearly productivity summaries per category
+- Total hours per category per year
+- Average hours per month calculations
+- Dynamic bar chart visualization per selected category
+- Cross-category comparison dashboard (monthly & annual)
+- Time-series sorting and historical search functionality
+- Centralized dashboard summary screen for productivity overview
+
+
+#### Statistical Processing
+
+Data aggregation and statistical calculations are performed using structured LINQ queries and database-level filtering to ensure:
+
+
+- Accurate time summation
+- Efficient grouped queries
+- Optimized ordering by year → month → day
+- Clean separation between calculation logic (BLL) and persistence logic (DAL)
+
+This design ensures scalability, maintainability, and clear responsibility 
+boundaries between layers.
+
+````
++--------------------------------------------------+
+|                  Presentation Layer              |
+|--------------------------------------------------|
+| Windows Forms (AllForms)                        |
+| - Dashboard                                     |
+| - Daily Routine Forms                           |
+| - Reports & Graph Forms                         |
++-------------------------▲------------------------+
+                          |
+                          |
++-------------------------|------------------------+
+|               Business Logic Layer (BLL)        |
+|--------------------------------------------------|
+| - DailyTaskBLL                                   |
+| - CategoryBLL                                    |
+| - GraphBLL                                       |
+| - ReportsBLL                                     |
+| - MonthBLL / YearBLL                             |
+|                                                  |
+| Handles:                                         |
+| - Validation                                     |
+| - Aggregation Logic                              |
+| - Statistical Calculations                       |
++-------------------------▲------------------------+
+                          |
+                          |
++-------------------------|------------------------+
+|               Data Access Layer (DAL)           |
+|--------------------------------------------------|
+| DAO                                              |
+| - DailyTaskDAO                                   |
+| - CategoryDAO                                    |
+| - ReportsDAO                                     |
+| - MonthDAO / YearDAO                             |
+|                                                  |
+| DTO                                              |
+| - DailyTaskDTO                                   |
+| - DailyTaskDetailDTO                             |
+| - ReportDTO                                      |
+| - GraphDTO                                       |
+|                                                  |
+| Entity Framework (EDMX - Database First)        |
++-------------------------▲------------------------+
+                          |
+                          |
++-------------------------|------------------------+
+|                    Microsoft SQL Server          |
+|--------------------------------------------------|
+| Tables:                                          |
+| - DAILY_ROUTINE                                  |
+| - MONTHs                                         |
+| - YEAR                                           |
+| - CATEGORY (if applicable)                       |
++--------------------------------------------------+
+````
+
+````
+### Data Flow
+
+1. User interacts with Windows Forms UI.
+2. UI sends request to BLL.
+3. BLL performs validation and statistical calculations.
+4. BLL calls DAO layer.
+5. DAO interacts with Entity Framework.
+6. Entity Framework executes queries against MSSQL.
+7. Results are mapped into DTOs and returned upward.
+````
+
+## Technologies Used
 - C#
-- Entity Framework
-- SQL Server
+- .NET Framework
 - Windows Forms
-- Chart.js
+- Microsoft SQL Server
+- Entity Framework (Database-First / EDMX)
+- LINQ
+- System.Windows.Forms.DataVisualization (Charts)
+- Layered Architecture (3-Tier)
+- DAO & DTO Patterns
 
-### Installation
-- Clone the repository
-- ceate a database in MSSQL Server
-- create a table in the database with the following columns
-```sql
-CREATE TABLE CATEGORY (
-    categoryID INT PRIMARY KEY AUTO_INCREMENT,
-    categoryName VARCHAR(50) NOT NULL,
-    isDeleted BIT NOT NULL,
-    deletedDate DATETIME
-);
+## Production Stability
 
-CREATE TABLE TASK (
-    taskID INT PRIMARY KEY AUTO_INCREMENT,
-    categoryID INT NOT NULL,
-    timeSpent INT NOT NULL,
-    day INT NOT NULL,
-    monthID INT NOT NULL,
-    year INT NOT NULL,
-    dailyRoutineID INT NOT NULL,
-    isDeleted BIT NOT NULL,
-    deletedDate DATETIME NULL,
-    summary text NULL,
-    FOREIGN KEY (categoryID) REFERENCES
-    FOREIGN KEY (monthID) REFERENCES
-    FOREIGN KEY (dailyRoutineID) REFERENCES
-    );
+The application has been continuously used for over two years, validating:
 
-    CREATE TABLE DAILYROUTINE (
-    dailyRoutineID INT PRIMARY KEY AUTO_INCREMENT,
-    routineDate DATETIME NOT NULL,
-    day INT NOT NULL,
-    monthID INT NOT NULL,
-    year INT NOT NULL,
-    summary text NULL,
-    isDeleted BIT NOT NULL,
-    deletedDate DATETIME NULL
-    FOREIGN KEY (monthID) REFERENCES
-    );
+- Architectural robustness
+- Data consistency
+- Reporting accuracy
+- Long-term maintainability
 
-    CREATE TABLE MONTH (
-    monthID INT PRIMARY KEY AUTO_INCREMENT,
-    monthName VARCHAR(50) NOT NULL,
-    );
-```
-- Update the connection string in the `App.config` file
-- Open the project in Visual Studio
-- Run the project
+##  System Architecture
+
+
+
+## 🗄 Database Schema
+````
+
+    CATEGORY {
+        int categoryID PK
+        string categoryName
+        bool isDeleted
+        datetime deletedDate
+    }
+
+    MONTH {
+        int monthID PK
+        string monthName
+    }
+
+    DAILY_ROUTINE {
+        int dailyRoutineID PK
+        datetime routineDate
+        string summary
+        int day
+        int monthID FK
+        int year
+        bool isDeleted
+        datetime deletedDate
+    }
+
+    TASK {
+        int taskID PK
+        int categoryID FK
+        int dailyRoutineID FK
+        int monthID FK
+        int year
+        int day
+        decimal timeSpent
+        string summary
+        bool isDeleted
+        datetime deletedDate
+    }
+
+    MONTH ||--o{ DAILY_ROUTINE : contains
+    DAILY_ROUTINE ||--o{ TASK : includes
+    CATEGORY ||--o{ TASK : classifies
+    MONTH ||--o{ TASK : groups
+````
+
+````
+ Database Design Overview
+
+The database follows a normalized relational structure:
+
+- DAILY_ROUTINE represents a specific calendar day entry.
+- TASK represents categorized time entries associated with a routine.
+- CATEGORY provides classification for activity tracking.
+- MONTH acts as a lookup reference table.
+
+Soft delete strategy is implemented across core tables using:
+- isDeleted
+- deletedDate
+
+This ensures historical consistency and safe record management.
+````
 
 ### License
-Permission is hereby granted, free of charge, to any Firm and HR Recruiter obtaining a copy of this software and 
-associated documentation files (the "Software"), to deal in the Software without restriction, 
-including without limitation the rights to use, copy, modify and to merge.
+This project is provided for portfolio and demonstration purposes only.
+Unauthorized commercial use is not permitted.

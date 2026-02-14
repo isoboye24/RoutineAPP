@@ -40,24 +40,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboard));
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.labelTitleChildForm = new System.Windows.Forms.Label();
-            this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.iconMinimize = new FontAwesome.Sharp.IconPictureBox();
-            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
-            this.iconClose = new FontAwesome.Sharp.IconPictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelLogo = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.panelSidebar = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnDeletedData = new FontAwesome.Sharp.IconButton();
-            this.btnMonthlyReports = new FontAwesome.Sharp.IconButton();
-            this.btnGraphs = new FontAwesome.Sharp.IconButton();
-            this.btnSummary = new FontAwesome.Sharp.IconButton();
-            this.btnCategory = new FontAwesome.Sharp.IconButton();
-            this.btnRoutine = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panelRegMembers = new System.Windows.Forms.TableLayoutPanel();
@@ -90,18 +72,30 @@
             this.labelTimeOnBooksInMonth = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewTop5Monthly = new System.Windows.Forms.DataGridView();
             this.labeltop5InMonth = new System.Windows.Forms.Label();
             this.labeltop5InYear = new System.Windows.Forms.Label();
-            this.dataGridViewTop5Monthly = new System.Windows.Forms.DataGridView();
             this.dataGridViewTop5Yearly = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.labelTitleChildForm = new System.Windows.Forms.Label();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.iconMinimize = new FontAwesome.Sharp.IconPictureBox();
+            this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.iconClose = new FontAwesome.Sharp.IconPictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelLogo = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelLogo = new System.Windows.Forms.Panel();
+            this.panelSidebar = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnDeletedData = new FontAwesome.Sharp.IconButton();
+            this.btnMonthlyReports = new FontAwesome.Sharp.IconButton();
+            this.btnGraphs = new FontAwesome.Sharp.IconButton();
+            this.btnSummary = new FontAwesome.Sharp.IconButton();
+            this.btnCategory = new FontAwesome.Sharp.IconButton();
+            this.btnRoutine = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelDesktop.SuspendLayout();
-            this.panelTitleBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconClose)).BeginInit();
-            this.panelLogo.SuspendLayout();
-            this.panelSidebar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelRegMembers.SuspendLayout();
@@ -116,6 +110,12 @@
             this.tableLayoutPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTop5Monthly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTop5Yearly)).BeginInit();
+            this.panelTitleBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconClose)).BeginInit();
+            this.panelLogo.SuspendLayout();
+            this.panelSidebar.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -144,280 +144,6 @@
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(1024, 624);
             this.panelDesktop.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Maroon;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1283, 56);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 657);
-            this.panel3.TabIndex = 26;
-            // 
-            // labelTitleChildForm
-            // 
-            this.labelTitleChildForm.AutoSize = true;
-            this.labelTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitleChildForm.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelTitleChildForm.Location = new System.Drawing.Point(273, 3);
-            this.labelTitleChildForm.Name = "labelTitleChildForm";
-            this.labelTitleChildForm.Size = new System.Drawing.Size(188, 40);
-            this.labelTitleChildForm.TabIndex = 12;
-            this.labelTitleChildForm.Text = "Routine App";
-            // 
-            // panelTitleBar
-            // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.Maroon;
-            this.panelTitleBar.Controls.Add(this.iconMinimize);
-            this.panelTitleBar.Controls.Add(this.iconMaximize);
-            this.panelTitleBar.Controls.Add(this.iconClose);
-            this.panelTitleBar.Controls.Add(this.labelTitleChildForm);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(210, 0);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1078, 56);
-            this.panelTitleBar.TabIndex = 24;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
-            // 
-            // iconMinimize
-            // 
-            this.iconMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.iconMinimize.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.iconMinimize.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMinimize.Location = new System.Drawing.Point(935, 9);
-            this.iconMinimize.Name = "iconMinimize";
-            this.iconMinimize.Size = new System.Drawing.Size(32, 32);
-            this.iconMinimize.TabIndex = 13;
-            this.iconMinimize.TabStop = false;
-            this.iconMinimize.Click += new System.EventHandler(this.iconMinimize_Click);
-            // 
-            // iconMaximize
-            // 
-            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconMaximize.BackColor = System.Drawing.Color.Transparent;
-            this.iconMaximize.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
-            this.iconMaximize.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMaximize.Location = new System.Drawing.Point(978, 9);
-            this.iconMaximize.Name = "iconMaximize";
-            this.iconMaximize.Size = new System.Drawing.Size(32, 32);
-            this.iconMaximize.TabIndex = 14;
-            this.iconMaximize.TabStop = false;
-            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
-            // 
-            // iconClose
-            // 
-            this.iconClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconClose.BackColor = System.Drawing.Color.Transparent;
-            this.iconClose.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.iconClose.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconClose.Location = new System.Drawing.Point(1021, 9);
-            this.iconClose.Name = "iconClose";
-            this.iconClose.Size = new System.Drawing.Size(32, 32);
-            this.iconClose.TabIndex = 15;
-            this.iconClose.TabStop = false;
-            this.iconClose.Click += new System.EventHandler(this.iconClose_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.YellowGreen;
-            this.label1.Location = new System.Drawing.Point(55, 71);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Daily Routine";
-            // 
-            // labelLogo
-            // 
-            this.labelLogo.AutoSize = true;
-            this.labelLogo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLogo.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelLogo.Location = new System.Drawing.Point(12, 8);
-            this.labelLogo.Name = "labelLogo";
-            this.labelLogo.Size = new System.Drawing.Size(184, 45);
-            this.labelLogo.TabIndex = 0;
-            this.labelLogo.Text = "Dashboard";
-            this.labelLogo.Click += new System.EventHandler(this.labelLogo_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Maroon;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(210, 713);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1078, 5);
-            this.panel2.TabIndex = 25;
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.Controls.Add(this.label1);
-            this.panelLogo.Controls.Add(this.labelLogo);
-            this.panelLogo.Location = new System.Drawing.Point(0, 3);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(210, 100);
-            this.panelLogo.TabIndex = 13;
-            // 
-            // panelSidebar
-            // 
-            this.panelSidebar.BackColor = System.Drawing.Color.Maroon;
-            this.panelSidebar.Controls.Add(this.label3);
-            this.panelSidebar.Controls.Add(this.btnDeletedData);
-            this.panelSidebar.Controls.Add(this.btnMonthlyReports);
-            this.panelSidebar.Controls.Add(this.btnGraphs);
-            this.panelSidebar.Controls.Add(this.btnSummary);
-            this.panelSidebar.Controls.Add(this.btnCategory);
-            this.panelSidebar.Controls.Add(this.btnRoutine);
-            this.panelSidebar.Controls.Add(this.panelLogo);
-            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
-            this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(210, 718);
-            this.panelSidebar.TabIndex = 23;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkGray;
-            this.label3.Location = new System.Drawing.Point(3, 326);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 17);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "-------Reports-----";
-            // 
-            // btnDeletedData
-            // 
-            this.btnDeletedData.FlatAppearance.BorderSize = 0;
-            this.btnDeletedData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletedData.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeletedData.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnDeletedData.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-            this.btnDeletedData.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnDeletedData.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnDeletedData.IconSize = 24;
-            this.btnDeletedData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeletedData.Location = new System.Drawing.Point(0, 524);
-            this.btnDeletedData.Name = "btnDeletedData";
-            this.btnDeletedData.Size = new System.Drawing.Size(210, 44);
-            this.btnDeletedData.TabIndex = 14;
-            this.btnDeletedData.Text = "Deleted Data";
-            this.btnDeletedData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeletedData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDeletedData.UseVisualStyleBackColor = true;
-            this.btnDeletedData.Click += new System.EventHandler(this.btnDeletedData_Click);
-            // 
-            // btnMonthlyReports
-            // 
-            this.btnMonthlyReports.FlatAppearance.BorderSize = 0;
-            this.btnMonthlyReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMonthlyReports.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMonthlyReports.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMonthlyReports.IconChar = FontAwesome.Sharp.IconChar.BarChart;
-            this.btnMonthlyReports.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnMonthlyReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnMonthlyReports.IconSize = 24;
-            this.btnMonthlyReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMonthlyReports.Location = new System.Drawing.Point(0, 354);
-            this.btnMonthlyReports.Name = "btnMonthlyReports";
-            this.btnMonthlyReports.Size = new System.Drawing.Size(210, 44);
-            this.btnMonthlyReports.TabIndex = 14;
-            this.btnMonthlyReports.Text = "Reports";
-            this.btnMonthlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMonthlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMonthlyReports.UseVisualStyleBackColor = true;
-            this.btnMonthlyReports.Click += new System.EventHandler(this.btnMonthlyReports_Click);
-            // 
-            // btnGraphs
-            // 
-            this.btnGraphs.FlatAppearance.BorderSize = 0;
-            this.btnGraphs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGraphs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGraphs.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnGraphs.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
-            this.btnGraphs.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnGraphs.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnGraphs.IconSize = 24;
-            this.btnGraphs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGraphs.Location = new System.Drawing.Point(0, 271);
-            this.btnGraphs.Name = "btnGraphs";
-            this.btnGraphs.Size = new System.Drawing.Size(210, 44);
-            this.btnGraphs.TabIndex = 14;
-            this.btnGraphs.Text = "Graphs";
-            this.btnGraphs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGraphs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGraphs.UseVisualStyleBackColor = true;
-            this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
-            // 
-            // btnSummary
-            // 
-            this.btnSummary.FlatAppearance.BorderSize = 0;
-            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSummary.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnSummary.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
-            this.btnSummary.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnSummary.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSummary.IconSize = 24;
-            this.btnSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSummary.Location = new System.Drawing.Point(0, 211);
-            this.btnSummary.Name = "btnSummary";
-            this.btnSummary.Size = new System.Drawing.Size(210, 44);
-            this.btnSummary.TabIndex = 14;
-            this.btnSummary.Text = "Comments";
-            this.btnSummary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSummary.UseVisualStyleBackColor = true;
-            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
-            // 
-            // btnCategory
-            // 
-            this.btnCategory.FlatAppearance.BorderSize = 0;
-            this.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCategory.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnCategory.IconChar = FontAwesome.Sharp.IconChar.LayerGroup;
-            this.btnCategory.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnCategory.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCategory.IconSize = 24;
-            this.btnCategory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCategory.Location = new System.Drawing.Point(0, 160);
-            this.btnCategory.Name = "btnCategory";
-            this.btnCategory.Size = new System.Drawing.Size(210, 44);
-            this.btnCategory.TabIndex = 14;
-            this.btnCategory.Text = "Category";
-            this.btnCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCategory.UseVisualStyleBackColor = true;
-            this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
-            // 
-            // btnRoutine
-            // 
-            this.btnRoutine.FlatAppearance.BorderSize = 0;
-            this.btnRoutine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRoutine.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoutine.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnRoutine.IconChar = FontAwesome.Sharp.IconChar.ListCheck;
-            this.btnRoutine.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnRoutine.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnRoutine.IconSize = 24;
-            this.btnRoutine.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRoutine.Location = new System.Drawing.Point(0, 109);
-            this.btnRoutine.Name = "btnRoutine";
-            this.btnRoutine.Size = new System.Drawing.Size(210, 44);
-            this.btnRoutine.TabIndex = 14;
-            this.btnRoutine.Text = "Daily Routine";
-            this.btnRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRoutine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRoutine.UseVisualStyleBackColor = true;
-            this.btnRoutine.Click += new System.EventHandler(this.btnRoutine_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -905,34 +631,6 @@
             this.tableLayoutPanel12.Size = new System.Drawing.Size(322, 618);
             this.tableLayoutPanel12.TabIndex = 2;
             // 
-            // labeltop5InMonth
-            // 
-            this.labeltop5InMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labeltop5InMonth.AutoSize = true;
-            this.labeltop5InMonth.BackColor = System.Drawing.Color.Transparent;
-            this.labeltop5InMonth.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeltop5InMonth.ForeColor = System.Drawing.Color.White;
-            this.labeltop5InMonth.Location = new System.Drawing.Point(3, 9);
-            this.labeltop5InMonth.Name = "labeltop5InMonth";
-            this.labeltop5InMonth.Size = new System.Drawing.Size(316, 25);
-            this.labeltop5InMonth.TabIndex = 0;
-            this.labeltop5InMonth.Text = "Top 5 in month";
-            this.labeltop5InMonth.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // labeltop5InYear
-            // 
-            this.labeltop5InYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labeltop5InYear.AutoSize = true;
-            this.labeltop5InYear.BackColor = System.Drawing.Color.Transparent;
-            this.labeltop5InYear.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeltop5InYear.ForeColor = System.Drawing.Color.White;
-            this.labeltop5InYear.Location = new System.Drawing.Point(3, 336);
-            this.labeltop5InYear.Name = "labeltop5InYear";
-            this.labeltop5InYear.Size = new System.Drawing.Size(316, 25);
-            this.labeltop5InYear.TabIndex = 0;
-            this.labeltop5InYear.Text = "Top 5 in Year";
-            this.labeltop5InYear.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // dataGridViewTop5Monthly
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Brown;
@@ -980,6 +678,34 @@
             this.dataGridViewTop5Monthly.Size = new System.Drawing.Size(316, 241);
             this.dataGridViewTop5Monthly.TabIndex = 7;
             // 
+            // labeltop5InMonth
+            // 
+            this.labeltop5InMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labeltop5InMonth.AutoSize = true;
+            this.labeltop5InMonth.BackColor = System.Drawing.Color.Transparent;
+            this.labeltop5InMonth.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeltop5InMonth.ForeColor = System.Drawing.Color.White;
+            this.labeltop5InMonth.Location = new System.Drawing.Point(3, 9);
+            this.labeltop5InMonth.Name = "labeltop5InMonth";
+            this.labeltop5InMonth.Size = new System.Drawing.Size(316, 25);
+            this.labeltop5InMonth.TabIndex = 0;
+            this.labeltop5InMonth.Text = "Top 5 in month";
+            this.labeltop5InMonth.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labeltop5InYear
+            // 
+            this.labeltop5InYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labeltop5InYear.AutoSize = true;
+            this.labeltop5InYear.BackColor = System.Drawing.Color.Transparent;
+            this.labeltop5InYear.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeltop5InYear.ForeColor = System.Drawing.Color.White;
+            this.labeltop5InYear.Location = new System.Drawing.Point(3, 336);
+            this.labeltop5InYear.Name = "labeltop5InYear";
+            this.labeltop5InYear.Size = new System.Drawing.Size(316, 25);
+            this.labeltop5InYear.TabIndex = 0;
+            this.labeltop5InYear.Text = "Top 5 in Year";
+            this.labeltop5InYear.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // dataGridViewTop5Yearly
             // 
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Brown;
@@ -1019,6 +745,280 @@
             this.dataGridViewTop5Yearly.Size = new System.Drawing.Size(316, 242);
             this.dataGridViewTop5Yearly.TabIndex = 7;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Maroon;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(1283, 56);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(5, 657);
+            this.panel3.TabIndex = 26;
+            // 
+            // labelTitleChildForm
+            // 
+            this.labelTitleChildForm.AutoSize = true;
+            this.labelTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitleChildForm.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelTitleChildForm.Location = new System.Drawing.Point(271, 9);
+            this.labelTitleChildForm.Name = "labelTitleChildForm";
+            this.labelTitleChildForm.Size = new System.Drawing.Size(432, 40);
+            this.labelTitleChildForm.TabIndex = 12;
+            this.labelTitleChildForm.Text = "Daily Routine Tracking System";
+            // 
+            // panelTitleBar
+            // 
+            this.panelTitleBar.BackColor = System.Drawing.Color.Maroon;
+            this.panelTitleBar.Controls.Add(this.iconMinimize);
+            this.panelTitleBar.Controls.Add(this.iconMaximize);
+            this.panelTitleBar.Controls.Add(this.iconClose);
+            this.panelTitleBar.Controls.Add(this.labelTitleChildForm);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(210, 0);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(1078, 56);
+            this.panelTitleBar.TabIndex = 24;
+            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // iconMinimize
+            // 
+            this.iconMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.iconMinimize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.iconMinimize.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconMinimize.Location = new System.Drawing.Point(935, 9);
+            this.iconMinimize.Name = "iconMinimize";
+            this.iconMinimize.Size = new System.Drawing.Size(32, 32);
+            this.iconMinimize.TabIndex = 13;
+            this.iconMinimize.TabStop = false;
+            this.iconMinimize.Click += new System.EventHandler(this.iconMinimize_Click);
+            // 
+            // iconMaximize
+            // 
+            this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.iconMaximize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            this.iconMaximize.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconMaximize.Location = new System.Drawing.Point(978, 9);
+            this.iconMaximize.Name = "iconMaximize";
+            this.iconMaximize.Size = new System.Drawing.Size(32, 32);
+            this.iconMaximize.TabIndex = 14;
+            this.iconMaximize.TabStop = false;
+            this.iconMaximize.Click += new System.EventHandler(this.iconMaximize_Click);
+            // 
+            // iconClose
+            // 
+            this.iconClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconClose.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconClose.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconClose.Location = new System.Drawing.Point(1021, 9);
+            this.iconClose.Name = "iconClose";
+            this.iconClose.Size = new System.Drawing.Size(32, 32);
+            this.iconClose.TabIndex = 15;
+            this.iconClose.TabStop = false;
+            this.iconClose.Click += new System.EventHandler(this.iconClose_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.YellowGreen;
+            this.label1.Location = new System.Drawing.Point(55, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Daily Routine";
+            // 
+            // labelLogo
+            // 
+            this.labelLogo.AutoSize = true;
+            this.labelLogo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLogo.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelLogo.Location = new System.Drawing.Point(12, 8);
+            this.labelLogo.Name = "labelLogo";
+            this.labelLogo.Size = new System.Drawing.Size(184, 45);
+            this.labelLogo.TabIndex = 0;
+            this.labelLogo.Text = "Dashboard";
+            this.labelLogo.Click += new System.EventHandler(this.labelLogo_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Maroon;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(210, 713);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1078, 5);
+            this.panel2.TabIndex = 25;
+            // 
+            // panelLogo
+            // 
+            this.panelLogo.Controls.Add(this.label1);
+            this.panelLogo.Controls.Add(this.labelLogo);
+            this.panelLogo.Location = new System.Drawing.Point(0, 3);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(210, 100);
+            this.panelLogo.TabIndex = 13;
+            // 
+            // panelSidebar
+            // 
+            this.panelSidebar.BackColor = System.Drawing.Color.Maroon;
+            this.panelSidebar.Controls.Add(this.label3);
+            this.panelSidebar.Controls.Add(this.btnDeletedData);
+            this.panelSidebar.Controls.Add(this.btnMonthlyReports);
+            this.panelSidebar.Controls.Add(this.btnGraphs);
+            this.panelSidebar.Controls.Add(this.btnSummary);
+            this.panelSidebar.Controls.Add(this.btnCategory);
+            this.panelSidebar.Controls.Add(this.btnRoutine);
+            this.panelSidebar.Controls.Add(this.panelLogo);
+            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
+            this.panelSidebar.Name = "panelSidebar";
+            this.panelSidebar.Size = new System.Drawing.Size(210, 718);
+            this.panelSidebar.TabIndex = 23;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkGray;
+            this.label3.Location = new System.Drawing.Point(3, 326);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(115, 17);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "-------Reports-----";
+            // 
+            // btnDeletedData
+            // 
+            this.btnDeletedData.FlatAppearance.BorderSize = 0;
+            this.btnDeletedData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletedData.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletedData.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnDeletedData.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+            this.btnDeletedData.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnDeletedData.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnDeletedData.IconSize = 24;
+            this.btnDeletedData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletedData.Location = new System.Drawing.Point(0, 524);
+            this.btnDeletedData.Name = "btnDeletedData";
+            this.btnDeletedData.Size = new System.Drawing.Size(210, 44);
+            this.btnDeletedData.TabIndex = 14;
+            this.btnDeletedData.Text = "Deleted Data";
+            this.btnDeletedData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletedData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDeletedData.UseVisualStyleBackColor = true;
+            this.btnDeletedData.Click += new System.EventHandler(this.btnDeletedData_Click);
+            // 
+            // btnMonthlyReports
+            // 
+            this.btnMonthlyReports.FlatAppearance.BorderSize = 0;
+            this.btnMonthlyReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMonthlyReports.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMonthlyReports.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnMonthlyReports.IconChar = FontAwesome.Sharp.IconChar.BarChart;
+            this.btnMonthlyReports.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnMonthlyReports.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnMonthlyReports.IconSize = 24;
+            this.btnMonthlyReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMonthlyReports.Location = new System.Drawing.Point(0, 354);
+            this.btnMonthlyReports.Name = "btnMonthlyReports";
+            this.btnMonthlyReports.Size = new System.Drawing.Size(210, 44);
+            this.btnMonthlyReports.TabIndex = 14;
+            this.btnMonthlyReports.Text = "Reports";
+            this.btnMonthlyReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMonthlyReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnMonthlyReports.UseVisualStyleBackColor = true;
+            this.btnMonthlyReports.Click += new System.EventHandler(this.btnMonthlyReports_Click);
+            // 
+            // btnGraphs
+            // 
+            this.btnGraphs.FlatAppearance.BorderSize = 0;
+            this.btnGraphs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraphs.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraphs.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
+            this.btnGraphs.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnGraphs.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnGraphs.IconSize = 24;
+            this.btnGraphs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.Location = new System.Drawing.Point(0, 271);
+            this.btnGraphs.Name = "btnGraphs";
+            this.btnGraphs.Size = new System.Drawing.Size(210, 44);
+            this.btnGraphs.TabIndex = 14;
+            this.btnGraphs.Text = "Graphs";
+            this.btnGraphs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGraphs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGraphs.UseVisualStyleBackColor = true;
+            this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
+            // 
+            // btnSummary
+            // 
+            this.btnSummary.FlatAppearance.BorderSize = 0;
+            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSummary.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnSummary.IconChar = FontAwesome.Sharp.IconChar.CommentDots;
+            this.btnSummary.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnSummary.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSummary.IconSize = 24;
+            this.btnSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSummary.Location = new System.Drawing.Point(0, 211);
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.Size = new System.Drawing.Size(210, 44);
+            this.btnSummary.TabIndex = 14;
+            this.btnSummary.Text = "Comments";
+            this.btnSummary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSummary.UseVisualStyleBackColor = true;
+            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
+            // 
+            // btnCategory
+            // 
+            this.btnCategory.FlatAppearance.BorderSize = 0;
+            this.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCategory.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnCategory.IconChar = FontAwesome.Sharp.IconChar.LayerGroup;
+            this.btnCategory.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnCategory.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCategory.IconSize = 24;
+            this.btnCategory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCategory.Location = new System.Drawing.Point(0, 160);
+            this.btnCategory.Name = "btnCategory";
+            this.btnCategory.Size = new System.Drawing.Size(210, 44);
+            this.btnCategory.TabIndex = 14;
+            this.btnCategory.Text = "Category";
+            this.btnCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCategory.UseVisualStyleBackColor = true;
+            this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
+            // 
+            // btnRoutine
+            // 
+            this.btnRoutine.FlatAppearance.BorderSize = 0;
+            this.btnRoutine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRoutine.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRoutine.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnRoutine.IconChar = FontAwesome.Sharp.IconChar.ListCheck;
+            this.btnRoutine.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnRoutine.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRoutine.IconSize = 24;
+            this.btnRoutine.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRoutine.Location = new System.Drawing.Point(0, 109);
+            this.btnRoutine.Name = "btnRoutine";
+            this.btnRoutine.Size = new System.Drawing.Size(210, 44);
+            this.btnRoutine.TabIndex = 14;
+            this.btnRoutine.Text = "Daily Routine";
+            this.btnRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRoutine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRoutine.UseVisualStyleBackColor = true;
+            this.btnRoutine.Click += new System.EventHandler(this.btnRoutine_Click);
+            // 
             // FormDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1038,15 +1038,6 @@
             this.Load += new System.EventHandler(this.FormDashboard_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panelDesktop.ResumeLayout(false);
-            this.panelTitleBar.ResumeLayout(false);
-            this.panelTitleBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconClose)).EndInit();
-            this.panelLogo.ResumeLayout(false);
-            this.panelLogo.PerformLayout();
-            this.panelSidebar.ResumeLayout(false);
-            this.panelSidebar.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -1072,6 +1063,15 @@
             this.tableLayoutPanel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTop5Monthly)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTop5Yearly)).EndInit();
+            this.panelTitleBar.ResumeLayout(false);
+            this.panelTitleBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconClose)).EndInit();
+            this.panelLogo.ResumeLayout(false);
+            this.panelLogo.PerformLayout();
+            this.panelSidebar.ResumeLayout(false);
+            this.panelSidebar.PerformLayout();
             this.ResumeLayout(false);
 
         }
