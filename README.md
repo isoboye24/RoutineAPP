@@ -69,20 +69,33 @@ boundaries between layers.
 |                  Presentation Layer              |
 |--------------------------------------------------|
 | Windows Forms (AllForms)                         |
-| - Dashboard                                      |
-| - Daily Routine Forms                            |
-| - Reports & Graph Forms                          |
+| - FormCategory                                   |
+| - FormCategoryList                               |
+| - FormDailyRoutine                               |
+| - FormDailyRoutineList                           |
+| - FormDeletedData                                |
+| - FormGraphs                                     |
+| - FormMonthlyReports                             |
+| - FormMonthlyRoutineReportsList                  |
+| - FormSummaryList                                |
+| - FormTaskList                                   |
+| - FormTaskWithSummary                            |
+| - FormTotalReportsList                           |
 +-------------------------▲------------------------+
                           |
                           |
 +-------------------------|------------------------+
 |               Business Logic Layer (BLL)         |
 |--------------------------------------------------|
-| - DailyTaskBLL                                   |
 | - CategoryBLL                                    |
+| - DailyTaskBLL                                   |
+| - DashboardBLL                                   |
 | - GraphBLL                                       |
+| - IBLL                                           |
+| - MonthBLL                                       |
 | - ReportsBLL                                     |
-| - MonthBLL / YearBLL                             |
+| - TaskBLL                                        |
+| - YearBLL                                        |
 |                                                  |
 | Handles:                                         |
 | - Validation                                     |
@@ -95,10 +108,15 @@ boundaries between layers.
 |               Data Access Layer (DAL)            |
 |--------------------------------------------------|
 | DAO                                              |
-| - DailyTaskDAO                                   |
+| - APPContext                                     |
 | - CategoryDAO                                    |
+| - DailyTaskDAO                                   |
+| - GraphDAO                                       |
+| - IDAO                                           |
+| - MonthDAO                                       |
 | - ReportsDAO                                     |
-| - MonthDAO & YearDAO                             |
+| - TaskDAO                                        |
+| - YearDAO                                        |
 |                                                  |
 | DTO                                              |
 | - AllYearsDetailDTO                              |
@@ -214,8 +232,6 @@ Displays total hours per category, yearly summaries, and average monthly statist
 ![Dashboard](images/dashboard.png)
 
 
-
-
 ### 📅 Task Entry & View
 Interface for adding each task with optional summary and daily tasks view.
 
@@ -236,13 +252,6 @@ Bar chart visualization of annual category performance
   <img src="images/yearly_barchart.png" width="32%" height="150"/>
   <img src="images/annual.png" width="32%" height="150" />
 </p>
-
-
-
-
-
-
-
 
 
 ## Technologies Used
