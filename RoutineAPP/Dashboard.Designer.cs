@@ -759,11 +759,11 @@
             this.labelTitleChildForm.AutoSize = true;
             this.labelTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitleChildForm.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelTitleChildForm.Location = new System.Drawing.Point(271, 9);
+            this.labelTitleChildForm.Location = new System.Drawing.Point(232, 9);
             this.labelTitleChildForm.Name = "labelTitleChildForm";
-            this.labelTitleChildForm.Size = new System.Drawing.Size(432, 40);
+            this.labelTitleChildForm.Size = new System.Drawing.Size(500, 40);
             this.labelTitleChildForm.TabIndex = 12;
-            this.labelTitleChildForm.Text = "Daily Routine Tracking System";
+            this.labelTitleChildForm.Text = "Daily Productivity Analytics System";
             // 
             // panelTitleBar
             // 

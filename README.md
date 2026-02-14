@@ -116,8 +116,8 @@ boundaries between layers.
 | Tables:                                          |
 | - DAILY_ROUTINE                                  |
 | - MONTHs                                         |
-| - YEAR                                           |
-| - CATEGORY (if applicable)                       |
+| - TASK                                           |
+| - CATEGORY                       |
 +--------------------------------------------------+
 ````
 

@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e08384958df40398cc864fdefe8d250" Name="Diagram1">
-        <EntityTypeShape EntityType="DailyTaskModel.CATEGORY" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DailyTaskModel.DAILY_ROUTINE" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DailyTaskModel.MONTH" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DailyTaskModel.TASK" Width="1.5" PointX="7.875" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="427155a87fab41218ab12c85edc7ee9d" Name="Diagram1">
+        <EntityTypeShape EntityType="DataModel.CATEGORY" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.DAILY_ROUTINE" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.MONTH" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.TASK" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -80,7 +80,7 @@ namespace RoutineAPP.AllForms
             labelTotalHours.Text = bll.SelectTotalHoursInMonth(routineDetail.MonthID, routineDetail.Year).ToString();
             labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInMonth(routineDetail.MonthID, routineDetail.Year);
             label7.Text = "Total hours in " + General.ConventIntToMonth(routineDetail.MonthID);
-            labelTitle.Text = routineDetail.MonthName + " Report";
+            labelTitle.Text = routineDetail.MonthName + " " + routineDetail.Year + " Report";
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
 

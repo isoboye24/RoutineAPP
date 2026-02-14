@@ -83,7 +83,7 @@ namespace RoutineAPP
         {
             DisableButton();
             leftBorderBtn.Visible = false;            
-            labelTitleChildForm.Text = "Routine App";
+            labelTitleChildForm.Text = "Daily Productivity Analytics System";
         }
         private void OpenChildForm(Form childForm)
         {
@@ -157,8 +157,8 @@ namespace RoutineAPP
             labelTimeOnGermanInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "German").ToString();
             labelTimeOnProgrammingInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Programming").ToString();
 
-            label4.Text = "In " + DateTime.Today.Year + " (annualy)";
-            label8.Text = "In " + General.ConventIntToMonth(DateTime.Today.Month) + " (monthly)";
+            label4.Text = DateTime.Today.Year.ToString();
+            label8.Text = General.ConventIntToMonth(DateTime.Today.Month);
 
             labeltop5InYear.Text = "Top 5 in " + DateTime.Today.Year;
             labeltop5InMonth.Text = "Top 5 in " + General.ConventIntToMonth(DateTime.Today.Month);

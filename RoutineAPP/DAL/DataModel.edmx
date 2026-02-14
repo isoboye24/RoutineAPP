@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DailyTaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="categoryID" />
@@ -49,7 +49,7 @@
           <Property Name="dailiyRoutineID" Type="int" Nullable="false" />
           <Property Name="summary" Type="text" />
         </EntityType>
-        <EntityContainer Name="DailyTaskModelStoreContainer">
+        <EntityContainer Name="DataModelStoreContainer">
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DAILY_ROUTINE" EntityType="Self.DAILY_ROUTINE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MONTH" EntityType="Self.MONTH" Schema="dbo" store:Type="Tables" />
@@ -59,7 +59,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DailyTaskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="categoryID" />
@@ -104,7 +104,7 @@
           <Property Name="dailiyRoutineID" Type="Int32" Nullable="false" />
           <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="DailyTaskEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DailyTaskEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
           <EntitySet Name="DAILY_ROUTINE" EntityType="Self.DAILY_ROUTINE" />
           <EntitySet Name="MONTHs" EntityType="Self.MONTH" />
@@ -115,9 +115,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DailyTaskModelStoreContainer" CdmEntityContainer="DailyTaskEntities">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DailyTaskEntities1">
           <EntitySetMapping Name="CATEGORies">
-            <EntityTypeMapping TypeName="DailyTaskModel.CATEGORY">
+            <EntityTypeMapping TypeName="DataModel.CATEGORY">
               <MappingFragment StoreEntitySet="CATEGORY">
                 <ScalarProperty Name="categoryID" ColumnName="categoryID" />
                 <ScalarProperty Name="categoryName" ColumnName="categoryName" />
@@ -127,7 +127,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DAILY_ROUTINE">
-            <EntityTypeMapping TypeName="DailyTaskModel.DAILY_ROUTINE">
+            <EntityTypeMapping TypeName="DataModel.DAILY_ROUTINE">
               <MappingFragment StoreEntitySet="DAILY_ROUTINE">
                 <ScalarProperty Name="dailyRoutineID" ColumnName="dailyRoutineID" />
                 <ScalarProperty Name="routineDate" ColumnName="routineDate" />
@@ -141,7 +141,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MONTHs">
-            <EntityTypeMapping TypeName="DailyTaskModel.MONTH">
+            <EntityTypeMapping TypeName="DataModel.MONTH">
               <MappingFragment StoreEntitySet="MONTH">
                 <ScalarProperty Name="monthID" ColumnName="monthID" />
                 <ScalarProperty Name="monthName" ColumnName="monthName" />
@@ -149,7 +149,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TASKs">
-            <EntityTypeMapping TypeName="DailyTaskModel.TASK">
+            <EntityTypeMapping TypeName="DataModel.TASK">
               <MappingFragment StoreEntitySet="TASK">
                 <ScalarProperty Name="taskID" ColumnName="taskID" />
                 <ScalarProperty Name="categoryID" ColumnName="categoryID" />
