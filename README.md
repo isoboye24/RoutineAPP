@@ -14,20 +14,20 @@ long-term stability, maintainability, and real-world usability.
 The application follows a structured 3-Tier Layered Architecture, ensuring 
 separation of concerns and maintainable code organization.
 
-### Presentation Layer
+#### Presentation Layer
 - Windows Forms (UI)
 - Responsible for user interaction and data presentation
 - Located in AllForms
 - Fully decoupled from database logic
 
-### Business Logic Layer (BLL)
+#### Business Logic Layer (BLL)
 - Encapsulates application rules
 - Handles validation and aggregation logic
 - Coordinates communication between UI and Data Layer
 - Implements generic IBLL<T> interface for structured abstraction
 - Centralizes calculation and reporting logic
 
-### Data Access Layer (DAL)
+#### Data Access Layer (DAL)
 - DAO (Data Access Object) pattern implementation
 - DTO (Data Transfer Object) pattern for structured data exchange
 - Entity Framework (Database-First, EDMX model)
@@ -121,8 +121,8 @@ boundaries between layers.
 +--------------------------------------------------+
 ````
 
+## Data Flow
 ````
-### Data Flow
 
 1. User interacts with Windows Forms UI.
 2. UI sends request to BLL.
@@ -132,30 +132,6 @@ boundaries between layers.
 6. Entity Framework executes queries against MSSQL.
 7. Results are mapped into DTOs and returned upward.
 ````
-
-## Technologies Used
-- C#
-- .NET Framework
-- Windows Forms
-- Microsoft SQL Server
-- Entity Framework (Database-First / EDMX)
-- LINQ
-- System.Windows.Forms.DataVisualization (Charts)
-- Layered Architecture (3-Tier)
-- DAO & DTO Patterns
-
-## Production Stability
-
-The application has been continuously used for over two years, validating:
-
-- Architectural robustness
-- Data consistency
-- Reporting accuracy
-- Long-term maintainability
-
-##  System Architecture
-
-
 
 ## 🗄 Database Schema
 ````
@@ -218,6 +194,75 @@ Soft delete strategy is implemented across core tables using:
 
 This ensures historical consistency and safe record management.
 ````
+
+### 🏠 Dashboard Overview
+Displays total hours per category, yearly summaries, and average monthly statistics.
+
+
+![Dashboard](images/dashboard.png)
+
+
+### 📅 Daily Routine Entry
+Interface for logging daily activities and summaries.
+
+
+![Dashboard](images/daily_tasks.png)
+
+
+### 📅 Task Entry
+Interface for adding each task and its optional summary.
+
+![Dashboard](images/add_task.png)
+
+
+### 📅 View Tasks
+Interface for viewing daily tasks.
+
+![Dashboard](images/task_view.png)
+
+### 📊 Monthly Report
+Aggregated monthly time distribution per category.
+
+![Dashboard](images/month_report.png)
+
+
+### 📊 Yearly Category Chart
+Bar chart visualization of annual category performance.
+
+![Dashboard](images/yearly_barchart.png)
+
+### 📊 Annual Report
+Aggregated annually time distribution per category.
+
+![Dashboard](images/annual.png)
+
+
+
+
+
+
+
+## Technologies Used
+- C#
+- .NET Framework
+- Windows Forms
+- Microsoft SQL Server
+- Entity Framework (Database-First / EDMX)
+- LINQ
+- System.Windows.Forms.DataVisualization (Charts)
+- Layered Architecture (3-Tier)
+- DAO & DTO Patterns
+
+## Production Stability
+
+The application has been continuously used for over two years, validating:
+
+- Architectural robustness
+- Data consistency
+- Reporting accuracy
+- Long-term maintainability
+
+
 
 ### License
 This project is provided for portfolio and demonstration purposes only.
