@@ -245,6 +245,37 @@ namespace RoutineAPP.DAL.DAO
             return totalUsedTime;
         }
 
+        public string SelectTotalHoursUnusedInAYear(int year)
+        {
+            int days = db.DAILY_ROUTINE.Count(x => x.isDeleted == false && x.year == year);
+            int overallTotalMinutes = days * 24 * 60;
+
+            List<int> minutes = new List<int>();
+            var list = db.TASKs.Where(x => x.isDeleted == false && x.year == year).ToList();
+            foreach (var item in list)
+            {
+                minutes.Add(item.timeSpent);
+            }
+            int totalUsedMinutes = minutes.Sum();
+
+            int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
+
+
+            int totalHours = totalUnusedMinutes / 60;
+            int remainingMinutes = Convert.ToInt32(totalUnusedMinutes % 60);
+
+            string totalUsedTime;
+            if (totalHours < 1)
+            {
+                totalUsedTime = remainingMinutes + " min" + (remainingMinutes > 1 ? "s" : "");
+            }
+            else
+            {
+                totalUsedTime = totalHours + " hr" + (totalHours > 1 ? "s " : " ") + remainingMinutes + " min" + (remainingMinutes > 1 ? "s" : "");
+            }
+            return totalUsedTime;
+        }
+
         public int SelectOverallTotalHours()
         {
             int days = db.DAILY_ROUTINE.Count(x => x.isDeleted == false);

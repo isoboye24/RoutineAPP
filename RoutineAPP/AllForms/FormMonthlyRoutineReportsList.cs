@@ -120,10 +120,10 @@ namespace RoutineAPP.AllForms
         
         private void RefreshAnually(int year)
         {
-            labelTotalYealyHours.Text = "Total hours in " + year + " :";
             labelYearReportTitle.Text =  year + " Report";
-            labelTotalHoursInYear.Text = bll.SelectTotalHoursInYear(year).ToString();
-            labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInAYear(year).ToString();
+            labelTotalHoursInYear.Text = "Total hours in " + year + " : " + bll.SelectTotalHoursInYear(year).ToString();
+            labelTotalHoursUsedInYear.Text = "Total hours used in " + year + " : " + bll.SelectTotalHoursUsedInAYear(year).ToString();
+            labelTotalHoursUnusedInYear.Text = "Total hours unused in " + year + " : " + bll.SelectTotalHoursUnusedInAYear(year).ToString();
         }
 
         private void iconBtnSearch_Click(object sender, EventArgs e)

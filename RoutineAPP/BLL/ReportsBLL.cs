@@ -54,6 +54,11 @@ namespace RoutineAPP.BLL
             return dao.SelectTotalHoursUsedInAYear(year);
         }
 
+        public string SelectTotalHoursUnusedInAYear(int year)
+        {
+            return dao.SelectTotalHoursUnusedInAYear(year);
+        }
+
         public int SelectOverallTotalHours()
         {
             return dao.SelectOverallTotalHours();
