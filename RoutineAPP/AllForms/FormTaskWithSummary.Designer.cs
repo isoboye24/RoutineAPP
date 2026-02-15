@@ -267,9 +267,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(13, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 21);
+            this.label1.Size = new System.Drawing.Size(198, 21);
             this.label1.TabIndex = 35;
-            this.label1.Text = "Additional Time";
+            this.label1.Text = "Additional Time (in min)";
             // 
             // txtAdditionalTime
             // 
@@ -287,9 +287,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(13, 107);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 21);
+            this.label2.Size = new System.Drawing.Size(161, 21);
             this.label2.TabIndex = 37;
-            this.label2.Text = "Time Spent";
+            this.label2.Text = "Time Spent (in min)";
             // 
             // txtTimeSpent
             // 

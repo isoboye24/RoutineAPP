@@ -79,6 +79,8 @@ namespace RoutineAPP.AllForms
                 txtSummary.Text = detail.Summary;
                 txtTimeSpent.Text = detail.TimeSpent.ToString();
                 cmbCategory.SelectedValue = detail.CategoryID;
+
+                labelTitle.Text = "Update " + detail.CategoryName;
             }
         }
 
