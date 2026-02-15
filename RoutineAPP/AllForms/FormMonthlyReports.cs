@@ -58,7 +58,6 @@ namespace RoutineAPP.AllForms
         private void FormMonthlyReports_Load(object sender, EventArgs e)
         {            
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            label4.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             labelTotalCategories.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -77,9 +76,9 @@ namespace RoutineAPP.AllForms
             {
                 column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
             }
-            labelTotalHours.Text = bll.SelectTotalHoursInMonth(routineDetail.MonthID, routineDetail.Year).ToString();
-            labelTotalHoursUsed.Text = bll.SelectTotalHoursUsedInMonth(routineDetail.MonthID, routineDetail.Year);
-            label7.Text = "Total hours in " + General.ConventIntToMonth(routineDetail.MonthID);
+            labelTotalHours.Text = "Total hours in " + General.ConventIntToMonth(routineDetail.MonthID) + " : "+ bll.SelectTotalHoursInMonth(routineDetail.MonthID, routineDetail.Year).ToString();
+            labelTotalHoursUsed.Text = "Total hours used : " + bll.SelectTotalHoursUsedInMonth(routineDetail.MonthID, routineDetail.Year);
+            labelTotalHoursUnused.Text = "Total hours unused : " + bll.SelectTotalHoursUnusedInMonth(routineDetail.MonthID, routineDetail.Year);
             labelTitle.Text = routineDetail.MonthName + " " + routineDetail.Year + " Report";
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
@@ -89,7 +88,7 @@ namespace RoutineAPP.AllForms
 
         private void RefreshCounts()
         {
-            labelTotalCategories.Text = dataGridView1.Rows.Count.ToString();
+            labelTotalCategories.Text = "Categor" + (dataGridView1.Rows.Count > 1? "ies : " : "y : ")  + dataGridView1.Rows.Count.ToString();
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)

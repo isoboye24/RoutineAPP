@@ -44,6 +44,12 @@ namespace RoutineAPP.BLL
         {
             return dao.SelectTotalHoursUsedInMonth(month, year);
         }
+
+        public string SelectTotalHoursUnusedInMonth(int month, int year)
+        {
+            return dao.SelectTotalHoursUnusedInMonth(month, year);
+        }
+
         public decimal SelectTotalHoursInMonth(int month, int year)
         {
             return dao.SelectTotalHoursInMonth(month, year);

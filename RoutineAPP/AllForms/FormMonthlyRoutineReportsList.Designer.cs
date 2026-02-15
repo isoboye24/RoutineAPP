@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMonthlyReport = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -64,8 +64,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelYearReportTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalHoursUsedInYear = new System.Windows.Forms.Label();
             this.labelTotalHoursInYear = new System.Windows.Forms.Label();
+            this.labelTotalHoursUnusedInYear = new System.Windows.Forms.Label();
+            this.labelTotalHoursUsedInYear = new System.Windows.Forms.Label();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewAnually = new System.Windows.Forms.DataGridView();
             this.tabPageTotalReport = new System.Windows.Forms.TabPage();
@@ -92,7 +93,6 @@
             this.labelTotalHoursTotal = new System.Windows.Forms.Label();
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewTotal = new System.Windows.Forms.DataGridView();
-            this.labelTotalHoursUnusedInYear = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageMonthlyReport.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -378,8 +378,8 @@
             this.dataGridViewMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMonthly.Location = new System.Drawing.Point(3, 68);
             this.dataGridViewMonthly.Name = "dataGridViewMonthly";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewMonthly.RowTemplate.Height = 30;
             this.dataGridViewMonthly.Size = new System.Drawing.Size(711, 290);
             this.dataGridViewMonthly.TabIndex = 6;
@@ -609,16 +609,6 @@
             this.tableLayoutPanel13.Size = new System.Drawing.Size(711, 25);
             this.tableLayoutPanel13.TabIndex = 7;
             // 
-            // labelTotalHoursUsedInYear
-            // 
-            this.labelTotalHoursUsedInYear.AutoSize = true;
-            this.labelTotalHoursUsedInYear.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalHoursUsedInYear.Location = new System.Drawing.Point(237, 0);
-            this.labelTotalHoursUsedInYear.Name = "labelTotalHoursUsedInYear";
-            this.labelTotalHoursUsedInYear.Size = new System.Drawing.Size(15, 17);
-            this.labelTotalHoursUsedInYear.TabIndex = 0;
-            this.labelTotalHoursUsedInYear.Text = "0";
-            // 
             // labelTotalHoursInYear
             // 
             this.labelTotalHoursInYear.AutoSize = true;
@@ -628,6 +618,26 @@
             this.labelTotalHoursInYear.Size = new System.Drawing.Size(15, 17);
             this.labelTotalHoursInYear.TabIndex = 0;
             this.labelTotalHoursInYear.Text = "0";
+            // 
+            // labelTotalHoursUnusedInYear
+            // 
+            this.labelTotalHoursUnusedInYear.AutoSize = true;
+            this.labelTotalHoursUnusedInYear.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalHoursUnusedInYear.Location = new System.Drawing.Point(471, 0);
+            this.labelTotalHoursUnusedInYear.Name = "labelTotalHoursUnusedInYear";
+            this.labelTotalHoursUnusedInYear.Size = new System.Drawing.Size(15, 17);
+            this.labelTotalHoursUnusedInYear.TabIndex = 0;
+            this.labelTotalHoursUnusedInYear.Text = "0";
+            // 
+            // labelTotalHoursUsedInYear
+            // 
+            this.labelTotalHoursUsedInYear.AutoSize = true;
+            this.labelTotalHoursUsedInYear.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalHoursUsedInYear.Location = new System.Drawing.Point(237, 0);
+            this.labelTotalHoursUsedInYear.Name = "labelTotalHoursUsedInYear";
+            this.labelTotalHoursUsedInYear.Size = new System.Drawing.Size(15, 17);
+            this.labelTotalHoursUsedInYear.TabIndex = 0;
+            this.labelTotalHoursUsedInYear.Text = "0";
             // 
             // tableLayoutPanel16
             // 
@@ -651,8 +661,8 @@
             this.dataGridViewAnually.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAnually.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewAnually.Name = "dataGridViewAnually";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewAnually.RowTemplate.Height = 30;
             this.dataGridViewAnually.Size = new System.Drawing.Size(705, 328);
             this.dataGridViewAnually.TabIndex = 6;
@@ -988,23 +998,13 @@
             this.dataGridViewTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTotal.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewTotal.Name = "dataGridViewTotal";
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTotal.RowTemplate.Height = 30;
             this.dataGridViewTotal.Size = new System.Drawing.Size(711, 332);
             this.dataGridViewTotal.TabIndex = 6;
             this.dataGridViewTotal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewTotal_CellFormatting);
             this.dataGridViewTotal.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewTotal_RowPostPaint);
-            // 
-            // labelTotalHoursUnusedInYear
-            // 
-            this.labelTotalHoursUnusedInYear.AutoSize = true;
-            this.labelTotalHoursUnusedInYear.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalHoursUnusedInYear.Location = new System.Drawing.Point(471, 0);
-            this.labelTotalHoursUnusedInYear.Name = "labelTotalHoursUnusedInYear";
-            this.labelTotalHoursUnusedInYear.Size = new System.Drawing.Size(15, 17);
-            this.labelTotalHoursUnusedInYear.TabIndex = 0;
-            this.labelTotalHoursUnusedInYear.Text = "0";
             // 
             // FormMonthlyRoutineReportsList
             // 
