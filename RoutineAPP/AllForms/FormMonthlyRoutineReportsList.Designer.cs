@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMonthlyReport = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -378,8 +378,8 @@
             this.dataGridViewMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMonthly.Location = new System.Drawing.Point(3, 68);
             this.dataGridViewMonthly.Name = "dataGridViewMonthly";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewMonthly.RowTemplate.Height = 30;
             this.dataGridViewMonthly.Size = new System.Drawing.Size(711, 290);
             this.dataGridViewMonthly.TabIndex = 6;
@@ -651,8 +651,8 @@
             this.dataGridViewAnually.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAnually.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewAnually.Name = "dataGridViewAnually";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewAnually.RowTemplate.Height = 30;
             this.dataGridViewAnually.Size = new System.Drawing.Size(705, 328);
             this.dataGridViewAnually.TabIndex = 6;
@@ -741,6 +741,7 @@
             this.iconBtnSearchTotal.Size = new System.Drawing.Size(74, 38);
             this.iconBtnSearchTotal.TabIndex = 60;
             this.iconBtnSearchTotal.UseVisualStyleBackColor = false;
+            this.iconBtnSearchTotal.Click += new System.EventHandler(this.iconBtnSearchTotal_Click);
             // 
             // tableLayoutPanel21
             // 
@@ -774,6 +775,7 @@
             this.iconBtnClearTotal.Size = new System.Drawing.Size(74, 38);
             this.iconBtnClearTotal.TabIndex = 61;
             this.iconBtnClearTotal.UseVisualStyleBackColor = false;
+            this.iconBtnClearTotal.Click += new System.EventHandler(this.iconBtnClearTotal_Click);
             // 
             // tableLayoutPanel22
             // 
@@ -986,8 +988,8 @@
             this.dataGridViewTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTotal.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewTotal.Name = "dataGridViewTotal";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTotal.RowTemplate.Height = 30;
             this.dataGridViewTotal.Size = new System.Drawing.Size(711, 332);
             this.dataGridViewTotal.TabIndex = 6;

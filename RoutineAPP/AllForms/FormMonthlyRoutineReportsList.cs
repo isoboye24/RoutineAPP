@@ -105,10 +105,14 @@ namespace RoutineAPP.AllForms
             cmbMonth.SelectedIndex = -1;
             cmbCategoryAnually.SelectedIndex = -1;
             cmbYearAnually.SelectedIndex = -1;
+            cmbCategoryTotal.SelectedIndex = -1;
+
             bll = new ReportsBLL();
             dto = bll.Select(year);
             dataGridViewMonthly.DataSource = dto.MonthlyRoutineReports;
             dataGridViewAnually.DataSource = dto.YearlyReports;
+            dataGridViewTotal.DataSource = dto.TotalReports;
+
             RefreshCounts();
             RefreshAnually(year);
         }
@@ -361,6 +365,25 @@ namespace RoutineAPP.AllForms
                     e.RowBounds.Location.X + 15,
                     e.RowBounds.Location.Y + 4
                 );
+            }
+        }
+
+        private void iconBtnClearTotal_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnSearchTotal_Click(object sender, EventArgs e)
+        {
+            if (cmbCategoryTotal.SelectedIndex != -1)
+            {
+                List<ReportsDetailDTO> list = dto.TotalReports;
+                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategoryTotal.SelectedValue)).ToList();
+                dataGridViewTotal.DataSource = list;
+            }            
+            else
+            {
+                MessageBox.Show("Please choose a category");
             }
         }
     }
