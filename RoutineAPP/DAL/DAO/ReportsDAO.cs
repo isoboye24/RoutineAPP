@@ -244,11 +244,74 @@ namespace RoutineAPP.DAL.DAO
             }
             return totalUsedTime;
         }
+
+        public int SelectOverallTotalHours()
+        {
+            int days = db.DAILY_ROUTINE.Count(x => x.isDeleted == false);
+            return days * 24;
+        }
+
+        public string SelectOverallTotalUnusedHours()
+        {
+            int days = db.DAILY_ROUTINE.Count(x => x.isDeleted == false);
+            int overallTotalMinutes = days * 24 * 60;
+
+            List<int> minutes = new List<int>();
+            var list = db.TASKs.Where(x => x.isDeleted == false).ToList();
+            foreach (var item in list)
+            {
+                minutes.Add(item.timeSpent);
+            }
+            int totalUsedMinutes = minutes.Sum();
+
+            int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
+
+
+            int totalHours = totalUnusedMinutes / 60;
+            int remainingMinutes = Convert.ToInt32(totalUnusedMinutes % 60);
+
+            string totalUsedTime;
+            if (totalHours < 1)
+            {
+                totalUsedTime = remainingMinutes + " min" + (remainingMinutes > 1 ? "s" : "");
+            }
+            else
+            {
+                totalUsedTime = totalHours + " hr" + (totalHours > 1 ? "s " : " ") + remainingMinutes + " min" + (remainingMinutes > 1 ? "s" : "");
+            }
+            return totalUsedTime;
+        }
+
+        public string SelectOverallTotalUsedHours()
+        {
+            List<decimal> minutes = new List<decimal>();
+            var list = db.TASKs.Where(x => x.isDeleted == false).ToList();
+            foreach (var item in list)
+            {
+                minutes.Add(item.timeSpent);
+            }
+            decimal totalMinutes = minutes.Sum();
+            int totalHours = (int)Math.Floor(totalMinutes / 60);
+            int min = Convert.ToInt32(totalMinutes % 60);
+            string totalUsedTime;
+            if (totalHours < 1)
+            {
+                totalUsedTime = totalMinutes + " min" + (min > 1 ? "s" : "");
+            }
+            else
+            {
+                totalUsedTime = totalHours + " hr" + (totalHours > 1 ? "s " : " ") + min + " min" + (min > 1 ? "s" : "");
+            }
+            return totalUsedTime;
+        }
+
+
         public decimal SelectTotalHoursInYear(int year)
         {
             int days = db.DAILY_ROUTINE.Count(x => x.isDeleted == false && x.year == year);
             return days * 24;
         }
+
         public int SelectTotalMonths()
         {
             List<MonthlyRoutinesDetailDTO> monthlyRoutineReports = new List<MonthlyRoutinesDetailDTO>();
@@ -281,6 +344,34 @@ namespace RoutineAPP.DAL.DAO
             int count = totalMonths.Count();
             return count;
         }
+
+        public string SelectReportDateRange()
+        {
+            var first = db.DAILY_ROUTINE
+                .Where(x => x.isDeleted == false)
+                .OrderBy(x => x.year)
+                .ThenBy(x => x.monthID)
+                .ThenBy(x => x.day)
+                .Select(x => new { x.year, x.monthID, x.day })
+                .FirstOrDefault();
+
+            var last = db.DAILY_ROUTINE
+                .Where(x => x.isDeleted == false)
+                .OrderByDescending(x => x.year)
+                .ThenByDescending(x => x.monthID)
+                .ThenByDescending(x => x.day)
+                .Select(x => new { x.year, x.monthID, x.day })
+                .FirstOrDefault();
+
+            if (first == null || last == null)
+                return "No data available";
+
+            var firstDate = new DateTime(first.year, first.monthID, first.day);
+            var lastDate = new DateTime(last.year, last.monthID, last.day);
+
+            return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
+        }
+
 
         public List<ReportsDetailDTO> SelectTotalReport()
         {
@@ -398,7 +489,7 @@ namespace RoutineAPP.DAL.DAO
                 monthlyReports.Add(dto);
             }
 
-            // ✅ Return only top 5
+            // Return only top 5
             var top5 = monthlyReports
                 .OrderByDescending(x => x.TotalTimeForFormatting)
                 .Take(5)

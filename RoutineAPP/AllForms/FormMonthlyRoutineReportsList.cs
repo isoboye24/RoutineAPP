@@ -26,6 +26,7 @@ namespace RoutineAPP.AllForms
         
         private void FormMonthlyReportsList_Load(object sender, EventArgs e)
         {
+            labelDateRange.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             labelYearReportTitle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
@@ -89,6 +90,12 @@ namespace RoutineAPP.AllForms
 
             RefreshAnually(year);
             RefreshCounts();
+
+            labelDateRange.Text = bll.SelectReportDateRange().ToString();
+
+            labelTotalHoursInTotal.Text = bll.SelectOverallTotalHours().ToString();
+            labelTotalHoursUsedInTotal.Text = bll.SelectOverallTotalUsedHours().ToString();
+            labelTotalHoursUnusedInTotal.Text = bll.SelectOverallTotalUnusedHours().ToString();
         }
         MonthlyRoutinesDetailDTO detail = new MonthlyRoutinesDetailDTO();
         
