@@ -8,6 +8,6 @@ namespace RoutineAPP.DAL.DAO
 {
     public class APPContext
     {
-        public DailyTaskEntities1 db = new DailyTaskEntities1();
+        public RoutineDBEntities db = new RoutineDBEntities();
     }
 }

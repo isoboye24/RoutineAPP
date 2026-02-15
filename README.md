@@ -1,7 +1,7 @@
 ﻿### RoutineAPP – Daily Productivity Analytics System
 
 ## Overview
-RoutineAPP is a desktop-based productivity and time analytics system developed using C# and .NET Framework.
+A production-used, 3-tier desktop analytics system for structured time tracking and statistical productivity reporting.
 
 The application was initially designed for structured personal productivity tracking
 but was architected using a modular and layered design, making it suitable for
@@ -225,14 +225,15 @@ Soft delete strategy is implemented across core tables using:
 This ensures historical consistency and safe record management.
 ````
 
-### 🏠 Dashboard Overview
+
+## 🏠 Dashboard Overview
 Displays total hours per category, yearly summaries, and average monthly statistics.
 
 
 ![Dashboard](images/dashboard.png)
 
 
-### 📅 Task Entry & View
+## 📅 Task Entry & View
 Interface for adding each task with optional summary and daily tasks view.
 
 <p align="center">
@@ -242,7 +243,7 @@ Interface for adding each task with optional summary and daily tasks view.
 </p>
 
 
-### Reports
+## Reports
 Aggregated monthly and annual time distribution per category, and 
 Bar chart visualization of annual category performance
 
@@ -253,6 +254,15 @@ Bar chart visualization of annual category performance
   <img src="images/annual.png" width="32%" height="150" />
 </p>
 
+
+## Technical Highlights
+
+- Clean 3-tier layered architecture
+- Separation of UI, business logic, and data access concerns
+- Soft delete implementation across core entities
+- LINQ-based aggregation and statistical computation
+- DTO-based data transport for decoupled communication
+- Production-validated stability over extended use
 
 ## Technologies Used
 - C#
@@ -267,12 +277,75 @@ Bar chart visualization of annual category performance
 
 ## Production Stability
 
-The application has been continuously used for over two years, validating:
+The system has been actively used in real-world daily operations for two years, demonstrating:
 
 - Architectural robustness
 - Data consistency
 - Reporting accuracy
 - Long-term maintainability
+
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Windows OS
+- Visual Studio (2022 or later recommended)
+- .NET Framework 4.7.2 or later
+- Microsoft SQL Server SQLEXPRESS
+- SQL Server Management Studio 
+
+---
+
+### 1️. Clone the Repository
+
+```bash
+git clone https://github.com/isoboye24/RoutineAPP.git
+
+````
+
+### 2. Open the Solution
+
+Open RoutineAPP.sln in Visual Studio.
+
+
+### 3. Configure Database Connection
+
+- Open App.config
+- Locate the connection string
+- Update the Data Source if necessary:
+
+````
+<connectionStrings>
+  <add name="RoutineDBEntities"
+       connectionString="metadata=res://*/DataModel.csdl|res://*/DataModel.ssdl|res://*/DataModel.msl;
+       provider=System.Data.SqlClient;
+       provider connection string=&quot;
+       Data Source=localhost\SQLEXPRESS;
+       Initial Catalog=RoutineDB;
+       Integrated Security=True;
+       MultipleActiveResultSets=True;&quot;"
+       providerName="System.Data.EntityClient" />
+</connectionStrings>
+
+````
+- SQL Server instance is running
+- The database exists
+
+A sanitized demo database backup is provided for testing purposes.
+
+
+### 4. Restore Database
+Option A: Use the provided .bak file (if included)
+
+Or
+
+Option B: Recreate database from the .edmx model.
+
+### 5. Build and Run
+
+- Build the solution (Ctrl + Shift + B)
+- Run the application (F5)
 
 
 

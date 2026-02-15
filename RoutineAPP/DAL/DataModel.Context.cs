@@ -13,10 +13,10 @@ namespace RoutineAPP.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DailyTaskEntities1 : DbContext
+    public partial class RoutineDBEntities : DbContext
     {
-        public DailyTaskEntities1()
-            : base("name=DailyTaskEntities1")
+        public RoutineDBEntities()
+            : base("name=RoutineDBEntities")
         {
         }
     

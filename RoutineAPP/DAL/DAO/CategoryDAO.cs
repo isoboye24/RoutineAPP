@@ -43,7 +43,14 @@ namespace RoutineAPP.DAL.DAO
             try
             {
                 int total = db.CATEGORies.Count(x=>x.isDeleted==false);
-                return total;
+                if (total > 0)
+                {
+                    return total;
+                }
+                else
+                {
+                    return 0;
+                }                
             }
             catch (Exception ex)
             {
