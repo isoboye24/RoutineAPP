@@ -24,10 +24,6 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private void iconMaximize_Click(object sender, EventArgs e)
         {
@@ -59,9 +55,9 @@ namespace RoutineAPP.AllForms
         {            
             cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
             labelTotalCategories.Font = new Font("Segoe UI", 10, FontStyle.Regular);
-            btnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            btnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            iconBtnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
             dto = bll.SelectMonthlyReports(routineDetail.MonthID, routineDetail.Year);
             dataGridView1.DataSource = dto.MonthlyReports;
@@ -152,16 +148,6 @@ namespace RoutineAPP.AllForms
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            List<ReportsDetailDTO> list = dto.MonthlyReports;
-            if (cmbCategory.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
-            }
-            dataGridView1.DataSource = list;
-            RefreshCounts();
-        }
         ReportsDetailDTO detail = new ReportsDetailDTO();
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -181,12 +167,7 @@ namespace RoutineAPP.AllForms
             dataGridView1.DataSource = dto.MonthlyReports;
             RefreshCounts();
         }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFilters();
-        }
-
+        
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             // Draw row numbers on the row header
@@ -201,6 +182,31 @@ namespace RoutineAPP.AllForms
                     e.RowBounds.Location.X + 15,
                     e.RowBounds.Location.Y + 4
                 );
+            }
+        }
+
+        private void iconBtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void iconBtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFilters();
+        }
+
+        private void iconBtnSearch_Click(object sender, EventArgs e)
+        {
+            List<ReportsDetailDTO> list = dto.MonthlyReports;
+            if (cmbCategory.SelectedIndex != -1)
+            {
+                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
+                dataGridView1.DataSource = list;
+                RefreshCounts();
+            }
+            else
+            {
+                MessageBox.Show("Please select category");
             }
         }
     }
