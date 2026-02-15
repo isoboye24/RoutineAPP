@@ -309,40 +309,25 @@ git clone https://github.com/isoboye24/RoutineAPP.git
 Open RoutineAPP.sln in Visual Studio.
 
 
-### 3. Configure Database Connection
+### 3. Database Configuration
 
-- Open App.config
-- Locate the connection string
-- Update the Data Source if necessary:
+RoutineAPP is configured to use a local SQL Server Express instance with 
+Windows Integrated Security.
 
-````
-<connectionStrings>
-  <add name="RoutineDBEntities"
-       connectionString="metadata=res://*/DataModel.csdl|res://*/DataModel.ssdl|res://*/DataModel.msl;
-       provider=System.Data.SqlClient;
-       provider connection string=&quot;
-       Data Source=localhost\SQLEXPRESS;
-       Initial Catalog=RoutineDB;
-       Integrated Security=True;
-       MultipleActiveResultSets=True;&quot;"
-       providerName="System.Data.EntityClient" />
-</connectionStrings>
+The connection string is preconfigured in `App.config` and does not require 
+manual adjustment for standard local environments.
 
-````
-- SQL Server instance is running
-- The database exists
+Requirements:
 
-A sanitized demo database backup is provided for testing purposes.
+- Microsoft SQL Server Express installed
+- SQL Server (SQLEXPRESS) service running
+- Windows Authentication enabled
+
+On first execution, the application automatically verifies the existence of 
+the target database and creates it if it does not already exist.
 
 
-### 4. Restore Database
-Option A: Use the provided .bak file (if included)
-
-Or
-
-Option B: Recreate database from the .edmx model.
-
-### 5. Build and Run
+### 4. Build and Run
 
 - Build the solution (Ctrl + Shift + B)
 - Run the application (F5)
