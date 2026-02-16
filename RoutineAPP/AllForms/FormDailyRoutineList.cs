@@ -21,7 +21,7 @@ namespace RoutineAPP.AllForms
 
         private void RefreshDataCounts()
         {
-            labelTotalRoutine.Text = dataGridView1.RowCount.ToString();
+            labelTotalRoutine.Text = dataGridView1.RowCount + " Day" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
         DailyTaskBLL bll = new DailyTaskBLL();

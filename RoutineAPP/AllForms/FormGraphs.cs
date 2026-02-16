@@ -127,7 +127,6 @@ namespace RoutineAPP.AllForms
             {
                 new SqlParameter("@year", SqlDbType.VarChar) { Value = year },
                 new SqlParameter("@month", SqlDbType.VarChar) { Value = month },
-                new SqlParameter("@category", SqlDbType.VarChar) { Value = category }
             };
             General.CreateChart(chartAllCategoryMonthly, AllMonthlyCategoryQuery, allMonthlyCatparameters, SeriesChartType.Column, "Hours", "");
             allCatMonthlyReport.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " Reports";

@@ -13,7 +13,7 @@ namespace RoutineAPP
 {
     public class General
     {
-        static string connectingString = "Server=localhost\\sqlexpress;Database=DailyTask;integrated security=True;encrypt=True;trustservercertificate=True;";
+        static string connectingString = "Server=localhost\\sqlexpress;Database=RoutineDB;integrated security=True;encrypt=True;trustservercertificate=True;";
         public static bool isNumber(KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -138,18 +138,10 @@ namespace RoutineAPP
 
         public static void StyleDataGridView(DataGridView dataGridView)
         {
-            // Set the overall background color
             dataGridView.BackgroundColor = Color.Brown;
-
-            // Set the header background color
             dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Brown;
-
-            // Set the header text color for better contrast (optional)
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            // You may need to disable visual styles for headers to apply your custom color
             dataGridView.EnableHeadersVisualStyles = false;
-
         }
     }
 }
