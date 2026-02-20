@@ -119,7 +119,7 @@ namespace RoutineAPP.AllForms
 
         private void RefreshCounts()
         {
-            labelTotal.Text = dataGridViewMonthly.RowCount.ToString();
+            labelTotal.Text = dataGridViewMonthly.RowCount + " Month" + (dataGridViewMonthly.RowCount > 0 ? "s" : "");
         }
         
         private void RefreshAnually(int year)

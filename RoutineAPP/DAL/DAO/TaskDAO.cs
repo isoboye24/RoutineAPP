@@ -128,28 +128,6 @@ namespace RoutineAPP.DAL.DAO
                 throw ex;
             }
         }
-        public int TotalTasks(int ID)
-        {
-            try
-            {
-                int total = 0;
-                var list = (from t in db.TASKs.Where(x => x.isDeleted == false && x.dailiyRoutineID == ID)
-                            join c in db.CATEGORies.Where(x => x.isDeleted == false) on t.categoryID equals c.categoryID
-                            select new
-                            {
-                                t.taskID,
-                            });
-                foreach (var item in list)
-                {
-                    total += 1;
-                }
-                return total;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
         
         public decimal TotalUsedHours(int ID)
         {

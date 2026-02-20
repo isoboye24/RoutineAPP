@@ -99,7 +99,7 @@ namespace RoutineAPP.AllForms
 
         private void RefreshDataCounts()
         {
-            labelTotalTasks.Text = bll.TotalTasks(detailDailyRoutine.DailyTaskID).ToString();
+            labelTotalTasks.Text = "Total Task" + (dataGridView1.RowCount > 1 ? "s " : " ") + dataGridView1.RowCount.ToString();
             decimal totalMinutes = bll.TotalUsedHours(detailDailyRoutine.DailyTaskID);
             int hours = (int)Math.Floor(totalMinutes/60);
             int minutes = Convert.ToInt32(totalMinutes % 60);

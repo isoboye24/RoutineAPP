@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMonthlyReport = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -44,9 +44,7 @@
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotal = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.iconBtnView = new FontAwesome.Sharp.IconButton();
             this.dataGridViewMonthly = new System.Windows.Forms.DataGridView();
             this.tabPageYearlyReport = new System.Windows.Forms.TabPage();
@@ -100,7 +98,6 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonthly)).BeginInit();
             this.tabPageYearlyReport.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -305,8 +302,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.5F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel9, 2, 2);
             this.tableLayoutPanel3.Controls.Add(this.iconBtnView, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.labelTotal, 2, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 364);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -317,41 +314,17 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(711, 69);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.labelTotal, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(404, 47);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(304, 19);
-            this.tableLayoutPanel9.TabIndex = 6;
-            // 
             // labelTotal
             // 
+            this.labelTotal.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelTotal.AutoSize = true;
             this.labelTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotal.Location = new System.Drawing.Point(155, 0);
+            this.labelTotal.Location = new System.Drawing.Point(693, 48);
             this.labelTotal.Name = "labelTotal";
             this.labelTotal.Size = new System.Drawing.Size(15, 17);
             this.labelTotal.TabIndex = 0;
             this.labelTotal.Text = "0";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(109, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 17);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Total:";
+            this.labelTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // iconBtnView
             // 
@@ -378,8 +351,8 @@
             this.dataGridViewMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMonthly.Location = new System.Drawing.Point(3, 68);
             this.dataGridViewMonthly.Name = "dataGridViewMonthly";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMonthly.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewMonthly.RowTemplate.Height = 30;
             this.dataGridViewMonthly.Size = new System.Drawing.Size(711, 290);
             this.dataGridViewMonthly.TabIndex = 6;
@@ -661,8 +634,8 @@
             this.dataGridViewAnually.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewAnually.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewAnually.Name = "dataGridViewAnually";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewAnually.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewAnually.RowTemplate.Height = 30;
             this.dataGridViewAnually.Size = new System.Drawing.Size(705, 328);
             this.dataGridViewAnually.TabIndex = 6;
@@ -998,8 +971,8 @@
             this.dataGridViewTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewTotal.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewTotal.Name = "dataGridViewTotal";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTotal.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTotal.RowTemplate.Height = 30;
             this.dataGridViewTotal.Size = new System.Drawing.Size(711, 332);
             this.dataGridViewTotal.TabIndex = 6;
@@ -1024,8 +997,7 @@
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonthly)).EndInit();
             this.tabPageYearlyReport.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1075,9 +1047,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label labelTotal;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridViewMonthly;
         private System.Windows.Forms.TabPage tabPageYearlyReport;
         private System.Windows.Forms.TabPage tabPageTotalReport;

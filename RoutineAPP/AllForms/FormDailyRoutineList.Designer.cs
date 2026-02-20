@@ -31,11 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalRoutine = new System.Windows.Forms.Label();
             this.iconBtnAdd = new FontAwesome.Sharp.IconButton();
             this.iconBtnEdit = new FontAwesome.Sharp.IconButton();
             this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
             this.iconBtnView = new FontAwesome.Sharp.IconButton();
+            this.labelTotalRoutine = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.cmbYear = new System.Windows.Forms.ComboBox();
@@ -110,18 +110,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(725, 75);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
-            // labelTotalRoutine
-            // 
-            this.labelTotalRoutine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalRoutine.AutoSize = true;
-            this.labelTotalRoutine.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRoutine.Location = new System.Drawing.Point(573, 53);
-            this.labelTotalRoutine.Name = "labelTotalRoutine";
-            this.labelTotalRoutine.Size = new System.Drawing.Size(149, 17);
-            this.labelTotalRoutine.TabIndex = 0;
-            this.labelTotalRoutine.Text = "0";
-            this.labelTotalRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // iconBtnAdd
             // 
             this.iconBtnAdd.BackColor = System.Drawing.Color.Transparent;
@@ -193,6 +181,18 @@
             this.iconBtnView.TabIndex = 55;
             this.iconBtnView.UseVisualStyleBackColor = false;
             this.iconBtnView.Click += new System.EventHandler(this.iconBtnView_Click);
+            // 
+            // labelTotalRoutine
+            // 
+            this.labelTotalRoutine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalRoutine.AutoSize = true;
+            this.labelTotalRoutine.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalRoutine.Location = new System.Drawing.Point(573, 53);
+            this.labelTotalRoutine.Name = "labelTotalRoutine";
+            this.labelTotalRoutine.Size = new System.Drawing.Size(149, 17);
+            this.labelTotalRoutine.TabIndex = 0;
+            this.labelTotalRoutine.Text = "0";
+            this.labelTotalRoutine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel2
             // 

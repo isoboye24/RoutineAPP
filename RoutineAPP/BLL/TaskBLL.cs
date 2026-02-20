@@ -26,10 +26,6 @@ namespace RoutineAPP.BLL
             throw new NotImplementedException();
         }
 
-        public int TotalTasks(int ID)
-        {
-            return dao.TotalTasks(ID);
-        }
         public int CheckTask(int categoryID, int routineID)
         {
             return dao.CheckTask(categoryID, routineID);

@@ -42,9 +42,7 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalTimeUsed = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalTasks = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.iconBtnAdd = new FontAwesome.Sharp.IconButton();
             this.iconBtnEdit = new FontAwesome.Sharp.IconButton();
             this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
@@ -70,7 +68,6 @@
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
@@ -207,11 +204,11 @@
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
             this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel11, 8, 2);
-            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.tableLayoutPanel10.Controls.Add(this.iconBtnAdd, 1, 1);
             this.tableLayoutPanel10.Controls.Add(this.iconBtnEdit, 3, 1);
             this.tableLayoutPanel10.Controls.Add(this.iconBtnDelete, 5, 1);
             this.tableLayoutPanel10.Controls.Add(this.iconBtnClose, 7, 1);
+            this.tableLayoutPanel10.Controls.Add(this.labelTotalTasks, 0, 2);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 435);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -258,41 +255,17 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Used time:";
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.labelTotalTasks, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 56);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(207, 24);
-            this.tableLayoutPanel1.TabIndex = 6;
-            // 
             // labelTotalTasks
             // 
+            this.labelTotalTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTotalTasks.AutoSize = true;
             this.labelTotalTasks.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTasks.Location = new System.Drawing.Point(106, 0);
+            this.labelTotalTasks.Location = new System.Drawing.Point(3, 59);
             this.labelTotalTasks.Name = "labelTotalTasks";
-            this.labelTotalTasks.Size = new System.Drawing.Size(15, 17);
+            this.labelTotalTasks.Size = new System.Drawing.Size(207, 17);
             this.labelTotalTasks.TabIndex = 0;
             this.labelTotalTasks.Text = "0";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(28, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 17);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Total tasks";
+            this.labelTotalTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // iconBtnAdd
             // 
@@ -598,10 +571,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconClose)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -637,9 +609,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.Label labelTotalTimeUsed;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelTotalTasks;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

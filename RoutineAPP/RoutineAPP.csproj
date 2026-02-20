@@ -226,6 +226,7 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="General.cs" />
+    <Compile Include="HelperService\GeneralHelperService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AllForms\FormCategory.resx">
