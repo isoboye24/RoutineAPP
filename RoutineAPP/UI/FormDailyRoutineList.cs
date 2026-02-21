@@ -1,5 +1,9 @@
-﻿using RoutineAPP.BLL;
+﻿using RoutineAPP.Application.Services;
+using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.HelperService;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +18,16 @@ namespace RoutineAPP.AllForms
 {
     public partial class FormDailyRoutineList : Form
     {
-        public FormDailyRoutineList()
+        private readonly IMonthService _monthService;
+        private readonly IYearsService _yearService;
+        private readonly IDailyRoutineService _dailyService;
+        private List<DailyRoutineViewModel> _dailyRoutineVM;
+
+        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService)
         {
             InitializeComponent();
+            _monthService = monthService;
+            _dailyService = dailyService;
         }
 
         private void RefreshDataCounts()
@@ -24,43 +35,61 @@ namespace RoutineAPP.AllForms
             labelTotalRoutine.Text = dataGridView1.RowCount + " Day" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
-        DailyTaskBLL bll = new DailyTaskBLL();
-        DailyTaskDTO dto = new DailyTaskDTO();
+        private void resizeControls()
+        {
+            GeneralHelperService.ApplyBoldFont(12, label1, label4, iconBtnAdd, iconBtnClear, iconBtnDelete, iconBtnSearch, iconBtnEdit);
+            GeneralHelperService.ApplyRegularFont(14, txtDay, cmbYear, cmbMonth);
+        }
+
+        private void FillCombos()
+        {
+            var months = _monthService.GetAll();
+            var years = _yearService.GetAll();
+            cmbMonth.DataSource = months;
+            General.ComboBoxProps(cmbMonth, "Name", "Id");
+            cmbYear.DataSource = years;
+            General.ComboBoxProps(cmbYear, "Year", "YearID");
+        }
+
         private void FormDailyRoutineList_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtDay.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbYear.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 14, FontStyle.Regular);
-            iconBtnAdd.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            iconBtnClear.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            iconBtnDelete.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            iconBtnSearch.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            iconBtnEdit.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            resizeControls();
 
-            dto = bll.Select();
-            cmbMonth.DataSource = dto.Months;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-            cmbYear.DataSource = dto.Years;
-            General.ComboBoxProps(cmbYear, "Year", "YearID");
+            FillCombos();
 
-            dataGridView1.DataSource = dto.DailyRoutines;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].Visible = false;
-            dataGridView1.Columns[3].HeaderText = "Day";
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].HeaderText = "Month";
-            dataGridView1.Columns[6].HeaderText = "Year";
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
+            LoadDailyRoutine();
             RefreshDataCounts();
         }
-        DailyTaskDetailDTO detail = new DailyTaskDetailDTO();
-        
+
+        private void LoadDailyRoutine()
+        {
+            var domainList = _dailyService.GetAll();
+
+            _dailyRoutineVM = domainList
+                .Select(x => new DailyRoutineViewModel
+                {
+                    Id = x.Id,
+                    RoutineDate = x.Date,
+                    Summary = x.Summary,
+                    Day = x.Date.Day,
+                    MonthID = x.Date.Month,
+                    MonthName = General.ConventIntToMonth(x.Date.Month),
+                    Year = x.Date.Year
+
+                })
+                .ToList();
+
+            dataGridView1.DataSource = _dailyRoutineVM;
+
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Year"].HeaderText = "Year";
+            dataGridView1.Columns["MonthName"].HeaderText = "Month";
+            dataGridView1.Columns["Day"].HeaderText = "Day";
+            dataGridView1.Columns["RoutineDate"].Visible = false;
+            dataGridView1.Columns["Summary"].Visible = false;
+            dataGridView1.Columns["MonthID"].Visible = false;
+        }
+
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -74,10 +103,17 @@ namespace RoutineAPP.AllForms
 
         private void txtDay_TextChanged(object sender, EventArgs e)
         {
-            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
-            list = list.Where(x => x.Day.ToString().Contains(txtDay.Text.Trim())).ToList();
-            dataGridView1.DataSource = list;
-            RefreshDataCounts();
+            int search = Convert.ToInt32(txtDay.Text.Trim());
+            var filtered = _dailyRoutineVM.Where(x => x.Day == search).ToList();
+            dataGridView1.DataSource = filtered;
+        }
+
+        private DailyRoutineViewModel GetSelected()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as DailyRoutineViewModel;
         }
 
         private void ClearFilters()
@@ -85,105 +121,99 @@ namespace RoutineAPP.AllForms
             txtDay.Clear();
             cmbMonth.SelectedIndex = -1;
             cmbYear.SelectedIndex = -1;
-            bll = new DailyTaskBLL();
-            dto = bll.Select();
-            dataGridView1.DataSource = dto.DailyRoutines;
+            LoadDailyRoutine();
+
             RefreshDataCounts();
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = new DailyTaskDetailDTO();
-            detail.DailyTaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.RoutineDate = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
-            txtSummary.Text = detail.Summary;
-        }
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            FormDailyRoutine open = new FormDailyRoutine();
-            this.Hide();
-            open.ShowDialog();
-            this.Visible = true;
+            var form = new FormDailyRoutine(_dailyService);
+            form.ShowDialog();
+
             ClearFilters();
         }
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            if (detail.DailyTaskID == 0)
+            var selected = GetSelected();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a routine from the table");
+                MessageBox.Show("Please select a category.");
+                return;
             }
-            else
-            {
-                FormDailyRoutine open = new FormDailyRoutine();
-                open.isUpdate = true;
-                open.detail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormDailyRoutine(_dailyService);
+            form.LoadForEdit(selected.Id, selected.RoutineDate, selected.Summary);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            if (detail.DailyTaskID == 0)
+            var selected = GetSelected();
+
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a routine from the table");
+                MessageBox.Show("Please choose a routine from the table.");
+                return;
             }
-            else
-            {
-                FormTaskList open = new FormTaskList();
-                open.detailDailyRoutine = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormTaskList(_dailyService);
+
+            form.LoadForView(selected.Id);
+
+            form.ShowDialog();
         }
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            if (detail.DailyTaskID == 0)
+            var selected = GetSelected();
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a routine from the table");
+                MessageBox.Show("Please select a daily routine.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Warning!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Daily Routine was deleted successfully");
-                        ClearFilters();
-                    }
-                }
+                _dailyService.Delete(selected.Id);
+                ClearFilters();
             }
         }
 
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            List<DailyTaskDetailDTO> list = dto.DailyRoutines;
+            int searchedMonth;
+            int searchedYear;
+            List<DailyRoutineViewModel> filtered = new List<DailyRoutineViewModel>();
+
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
-            }
-            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
-            {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue) && x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
+                filtered = _dailyRoutineVM.Where(x => x.MonthID == searchedMonth).ToList();
             }
             else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
             {
-                list = list.Where(x => x.Year == Convert.ToInt32(cmbYear.Text)).ToList();
+                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear).ToList();
             }
-            dataGridView1.DataSource = list;
+            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
+            {
+                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
+                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
+            }
+            else
+            { 
+                MessageBox.Show("Please at least a month or year");
+            }           
+            dataGridView1.DataSource = filtered;
+
             RefreshDataCounts();
         }
 

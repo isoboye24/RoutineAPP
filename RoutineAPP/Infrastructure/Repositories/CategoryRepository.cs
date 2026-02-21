@@ -65,6 +65,19 @@ namespace RoutineAPP.Infrastructure.Repositories
             return true;
         }
 
+        public bool PermanentDelete(int id)
+        {
+            var entity = _db.CATEGORies.FirstOrDefault(x => x.categoryID == id);
+
+            if (entity == null)
+                return false;
+
+            _db.CATEGORies.Remove(entity);
+            _db.SaveChanges();
+
+            return true;
+        }
+
         public bool Exists(string name)
         {
             return _db.CATEGORies.Any(x =>

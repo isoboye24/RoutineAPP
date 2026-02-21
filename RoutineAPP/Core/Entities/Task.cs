@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.DAL.DTO
+namespace RoutineAPP.Core.Entities
 {
-    public class MonthDTO
+    public class Task
     {
-        public List<MonthDetailDTO> Months { get; set; }
+
     }
 }

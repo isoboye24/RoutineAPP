@@ -9,62 +9,28 @@ using System.Drawing;
 namespace RoutineAPP.HelperService
 {
     public class GeneralHelperService
-    {
-        public static void ApplyBoldFont11(params Control[] controls)
+    {        
+        public static void ApplyRegularFont(int size, params Control[] controls)
         {
             foreach (var control in controls)
             {
-                control.Font = new System.Drawing.Font("Segoe UI", 11, FontStyle.Bold);
-            }
-        }
-        public static void ApplyRegularFont11(params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                control.Font = new System.Drawing.Font("Segoe UI", 11, FontStyle.Regular);
-            }
-        }
-        public static void ApplyBoldFont12(params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                control.Font = new System.Drawing.Font("Segoe UI", 12, FontStyle.Bold);
-            }
-        }
-        public static void ApplyRegularFont12(params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                control.Font = new System.Drawing.Font("Segoe UI", 12, FontStyle.Regular);
+                control.Font = new System.Drawing.Font("Segoe UI", size, FontStyle.Regular);
             }
         }
 
-        public static void ApplyBoldFont14(params Control[] controls)
+        public static void ApplyBoldFont(int size, params Control[] controls)
         {
             foreach (var control in controls)
             {
-                control.Font = new System.Drawing.Font("Segoe UI", 14, FontStyle.Bold);
+                control.Font = new System.Drawing.Font("Segoe UI", size, FontStyle.Bold);
             }
         }
-        public static void ApplyRegularFont14(params Control[] controls)
+
+        public static void ApplyItalicFont(int size, params Control[] controls)
         {
             foreach (var control in controls)
             {
-                control.Font = new System.Drawing.Font("Segoe UI", 14, FontStyle.Regular);
-            }
-        }
-        public static void ApplyBoldFont16(params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                control.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Bold);
-            }
-        }
-        public static void ApplyRegularFont16(params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                control.Font = new System.Drawing.Font("Segoe UI", 16, FontStyle.Regular);
+                control.Font = new System.Drawing.Font("Segoe UI", size, FontStyle.Italic#);
             }
         }
 

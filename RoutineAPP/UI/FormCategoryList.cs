@@ -27,8 +27,8 @@ namespace RoutineAPP.AllForms
 
         private void resizeControls()
         {
-            GeneralHelperService.ApplyBoldFont12(label1, txtCategory, iconBtnAdd, iconBtnDelete, iconBtnEdit);
-            GeneralHelperService.ApplyRegularFont11(label2, labelTotalCategory);
+            GeneralHelperService.ApplyBoldFont(12, label1, txtCategory, iconBtnAdd, iconBtnDelete, iconBtnEdit);
+            GeneralHelperService.ApplyRegularFont(11, label2, labelTotalCategory);
         }
         private void FormCategoryList_Load(object sender, EventArgs e)
         {
@@ -88,7 +88,6 @@ namespace RoutineAPP.AllForms
         {
             var form = new FormCategory(_service);
             form.ShowDialog();
-            LoadCategories();
             ClearFilters();
         }
 
@@ -105,7 +104,6 @@ namespace RoutineAPP.AllForms
             form.LoadForEdit(selected.Id, selected.Category);
             form.ShowDialog();
 
-            LoadCategories();
             ClearFilters();
         }
 
@@ -123,7 +121,6 @@ namespace RoutineAPP.AllForms
             if (result == DialogResult.Yes)
             {
                 _service.Delete(selected.Id);
-                LoadCategories();
                 ClearFilters();
             }
         }

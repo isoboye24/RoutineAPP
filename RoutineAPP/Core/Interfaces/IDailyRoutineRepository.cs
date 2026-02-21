@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace RoutineAPP.Core.Interfaces
 {
-    public interface ICategoryRepository
+    public interface IDailyRoutineRepository
     {
-        List<Category> GetAll();
-        Category GetById(int id);
-        bool Insert(Category category);
-        bool Update(Category category);
+        List<DailyRoutine> GetAll();
+        DailyRoutine GetById(int id);
+        bool Insert(DailyRoutine routine);
+        bool Update(DailyRoutine routine);
         bool Delete(int id);
         bool PermanentDelete(int id);
-        bool Exists(string name);
+        bool Exists(DateTime date);
         int Count();
     }
 }

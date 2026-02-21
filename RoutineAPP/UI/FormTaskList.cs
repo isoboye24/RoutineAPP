@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
 using RoutineAPP.HelperService;
 using System;
@@ -15,9 +16,12 @@ namespace RoutineAPP.AllForms
 {
     public partial class FormTaskList : Form
     {
-        public FormTaskList()
+        private readonly IDailyRoutineService _dailyService;
+        private int _routineId = 0;
+        public FormTaskList(IDailyRoutineService dailyService)
         {
             InitializeComponent();
+            _dailyService = dailyService;
         }
         private void ClearFilters()
         {
@@ -30,13 +34,13 @@ namespace RoutineAPP.AllForms
 
         private void ApplyFontStyles()
         {
-            GeneralHelperService.ApplyBoldFont12(label3);
-            GeneralHelperService.ApplyRegularFont12(txtSummary, cmbCategory);
+            GeneralHelperService.ApplyBoldFont(12, label3);
+            GeneralHelperService.ApplyRegularFont(12, txtSummary, cmbCategory);
         }
 
         TaskBLL bll = new TaskBLL();
         TaskDTO dto = new TaskDTO();
-        public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
+
         TaskDetailDTO detail = new TaskDetailDTO();
         private void FormTaskList_Load(object sender, EventArgs e)
         {
@@ -56,7 +60,12 @@ namespace RoutineAPP.AllForms
 
             labelTitle.Text = detailDailyRoutine.Day + "." + detailDailyRoutine.MonthID + "." + detailDailyRoutine.Year;
             RefreshDataCounts();
-        }        
+        }
+
+        public void LoadForView(int id)
+        {
+            _routineId = id;
+        }
 
         private void iconMaximize_Click(object sender, EventArgs e)
         {

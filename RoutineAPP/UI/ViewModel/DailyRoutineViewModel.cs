@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.DAL.DTO
+namespace RoutineAPP.UI.ViewModel
 {
-    public class DailyTaskDetailDTO
+    public class DailyRoutineViewModel
     {
-        public int DailyTaskID { get; set; }
+        public int Id { get; set; }
         public DateTime RoutineDate { get; set; }
         public string Summary { get; set; }
         public int Day { get; set; }
