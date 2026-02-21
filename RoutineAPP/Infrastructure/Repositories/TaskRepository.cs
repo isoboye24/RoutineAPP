@@ -17,10 +17,10 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             _db = db;
         }
-        public List<Core.Entities.Task> GetAll()
+        public List<Core.Entities.Task> GetAll(int dailyId)
         {
             return _db.TASKs
-                .Where(x => !x.isDeleted)
+                .Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId)
                 .OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day)
                 .ToList()
                 .Select(x => Core.Entities.Task.Rehydrate(x.taskID, x.dailiyRoutineID, x.categoryID, x.timeSpent, x.day, x.monthID, x.year, x.summary))
@@ -91,15 +91,13 @@ namespace RoutineAPP.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(DateTime date)
+        public bool Exists(int year, int month, int day)
         {
-            DateTime onlyDate = date.Date;
-
             return _db.TASKs.Any(x =>
                 !x.isDeleted &&
-                x.year == onlyDate.Year &&
-                x.monthID == onlyDate.Month &&
-                x.day == onlyDate.Day);
+                x.year == year &&
+                x.monthID == month &&
+                x.day == day);
         }
 
         public int Count()

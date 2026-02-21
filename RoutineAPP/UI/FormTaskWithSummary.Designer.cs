@@ -299,6 +299,7 @@
             this.txtTimeSpent.Name = "txtTimeSpent";
             this.txtTimeSpent.Size = new System.Drawing.Size(221, 29);
             this.txtTimeSpent.TabIndex = 38;
+            this.txtTimeSpent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeSpent_KeyPress);
             // 
             // label3
             // 

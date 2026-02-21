@@ -43,6 +43,9 @@ namespace RoutineAPP.Application.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
+        public bool PermanentDelete(int id)
+            => _repository.PermanentDelete(id);
+
         public int Count()
             => _repository.Count();
     }

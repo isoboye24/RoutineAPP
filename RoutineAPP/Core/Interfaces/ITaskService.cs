@@ -10,8 +10,8 @@ namespace RoutineAPP.Core.Interfaces
     public interface ITaskService
     {
         List<Entities.Task> GetAll();
-        bool Create(int dailyRoutineId, int categoryId, DateTime date, string summary);
-        bool Update(int id, int dailyRoutineId, int categoryId, DateTime date, string summary);
+        bool Create(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary);
+        bool Update(int id, int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary);
         bool Delete(int id);
         bool PermanentDelete(int id);
         int Count();

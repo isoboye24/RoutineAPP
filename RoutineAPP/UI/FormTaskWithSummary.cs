@@ -1,5 +1,8 @@
 ﻿using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.HelperService;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +17,18 @@ namespace RoutineAPP.AllForms
 {
     public partial class FormTaskWithSummary : Form
     {
-        public FormTaskWithSummary()
+        private readonly IDailyRoutineService _dailyService;
+        private readonly ITaskService _taskService;
+        private readonly ICategoryService _categoryService;
+        private int _routineId;
+        private int _taskId = 0;
+        public FormTaskWithSummary(IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, int routineId)
         {
             InitializeComponent();
+            _dailyService = dailyService;
+            _taskService = taskService;
+            _categoryService = categoryService;
+            _routineId = routineId;
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)
@@ -43,45 +55,37 @@ namespace RoutineAPP.AllForms
             }
         }
 
+        private void resizeControls()
+        {
+            GeneralHelperService.ApplyBoldFont(12, label1, label2, label3, label5, iconBtnClose, iconBtnSave);
+            GeneralHelperService.ApplyRegularFont(12, txtTimeSpent, txtAdditionalTime, txtSummary, cmbCategory);
+        }
+
         private void iconClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }        
-        public bool isUpdate = false;
-        public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
-        TaskBLL bll = new TaskBLL();
-        TaskDTO dto = new TaskDTO();
-        public TaskDetailDTO detail = new TaskDetailDTO();
+
         private void FormTaskWithSummary_Load(object sender, EventArgs e)
         {
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtTimeSpent.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            txtAdditionalTime.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            txtSummary.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            iconBtnClose.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            iconBtnSave.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            resizeControls();
 
-            dto = bll.Select(detailDailyRoutine.DailyTaskID);
-            cmbCategory.DataSource = dto.Categories;
+            cmbCategory.DataSource = _categoryService.GetAll();
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+
             txtAdditionalTime.Hide();
             label1.Hide();
             label5.Hide(); 
             
-            if (isUpdate)
-            {
-                txtAdditionalTime.Visible = true;
-                label1.Visible = true;
-                label5.Visible = true;
-                txtSummary.Text = detail.Summary;
-                txtTimeSpent.Text = detail.TimeSpent.ToString();
-                cmbCategory.SelectedValue = detail.CategoryID;
+        }
 
-                labelTitle.Text = "Update " + detail.CategoryName;
-            }
+        public void LoadForEdit(TaskViewModel vm)
+        {
+            _taskId = vm.Id;
+            _routineId = vm.DailyRoutineId;
+            cmbCategory.SelectedValue = vm.CategoryId;
+            txtSummary.Text = vm.Summary;
+            txtTimeSpent.Text = vm.TimeSpent.ToString();
         }
 
         private void FormTaskWithSummary_FormClosing(object sender, FormClosingEventArgs e)
@@ -101,69 +105,58 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSave_Click(object sender, EventArgs e)
         {
-            if (txtTimeSpent.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Enter time spent");
-            }
-            else if (cmbCategory.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a category is empty");
-            }
-            else if (!isUpdate)
-            {
-                int checkTask = bll.CheckTask(Convert.ToInt32(cmbCategory.SelectedValue), detailDailyRoutine.DailyTaskID);
-                if (checkTask > 0)
+                if (_taskId == 0)
                 {
-                    MessageBox.Show("This task already exists");
-                }
-                else
-                {
-                    TaskDetailDTO task = new TaskDetailDTO();
-                    task.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
-                    task.TimeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
-                    task.Day = detailDailyRoutine.Day;
-                    task.MonthID = detailDailyRoutine.MonthID;
-                    task.Year = detailDailyRoutine.Year;
-                    task.DailyRoutineID = detailDailyRoutine.DailyTaskID;
-                    task.Summary = txtSummary.Text;
-                    if (bll.Insert(task))
+                    if (txtTimeSpent.Text.Trim() == "")
                     {
-                        MessageBox.Show("Task was added successfully");
-                        txtTimeSpent.Clear();
-                        txtSummary.Clear();
-                        cmbCategory.SelectedIndex = -1;
+                        MessageBox.Show("Please enter time spent in minutes");
+                        return;
                     }
-                }
-            }
-            else if (isUpdate)
-            {
-                if (detail.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue) && detail.TimeSpent == Convert.ToInt32(txtTimeSpent.Text.Trim()) && txtAdditionalTime.Text.Trim() == "" && detail.Summary == txtSummary.Text.Trim())
-                {
-                    MessageBox.Show("There is no change");
-                }
-                else
-                {
-                    detail.Day = detail.Day;
-                    detail.MonthID = detail.MonthID;
-                    detail.Year = detail.Year;
-                    if (txtAdditionalTime.Text.Trim() == "")
+                    else if (cmbCategory.SelectedIndex == -1)
                     {
-                        detail.TimeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim()) + 0;
+                        MessageBox.Show("Please select category");
+                        return;
                     }
                     else
                     {
-                        detail.TimeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim()) + Convert.ToInt32(txtAdditionalTime.Text.Trim());
-                    }
-                    detail.CategoryID = Convert.ToInt32(cmbCategory.SelectedValue);
-                    detail.DailyRoutineID = detail.DailyRoutineID;
-                    detail.Summary = txtSummary.Text;
-                    if (bll.Update(detail))
-                    {
-                        MessageBox.Show("Task was updated successfully");
-                        this.Close();
+                        int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
+                        _taskService.Create(_routineId, cmbCategory.SelectedIndex, timeSpent, DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, txtSummary.Text.Trim());
                     }
                 }
+                else
+                    {
+                    if (txtTimeSpent.Text.Trim() == "")
+                    {
+                        MessageBox.Show("Please enter summary");
+                        return;
+                    }
+                    else if (cmbCategory.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Please select category");
+                        return;
+                    }
+                    else
+                    {
+                        int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim()) + Convert.ToInt32(txtAdditionalTime.Text.Trim());
+                        _taskService.Update(_taskId, _routineId, cmbCategory.SelectedIndex, timeSpent, DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, txtSummary.Text.Trim());
+                    }
+                }
+                
+
+                MessageBox.Show("Operation successful");
+                this.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtTimeSpent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = General.isNumber(e);
         }
     }
 }

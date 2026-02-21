@@ -37,9 +37,7 @@ namespace RoutineAPP.Application.Services
             => _repository.GetAll();
 
         public bool PermanentDelete(int id)
-        {
-            throw new NotImplementedException();
-        }
+            => _repository.PermanentDelete(id);
 
         public bool Update(int id, DateTime date, string summary)
         {

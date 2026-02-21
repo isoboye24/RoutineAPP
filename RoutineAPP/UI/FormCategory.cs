@@ -50,9 +50,27 @@ namespace RoutineAPP.AllForms
             try
             {
                 if (_categoryId == 0)
-                    _service.Create(txtCategory.Text);
+                {
+                    if (txtCategory.Text.Trim() == "")
+                    {
+                        MessageBox.Show("Please enter category");
+                    }
+                    else
+                    {
+                        _service.Create(txtCategory.Text);
+                    }
+                }
                 else
-                    _service.Update(_categoryId, txtCategory.Text);
+                {
+                    if (txtCategory.Text.Trim() == "")
+                    {
+                        MessageBox.Show("Please enter category");
+                    }
+                    else
+                    {
+                        _service.Update(_categoryId, txtCategory.Text);
+                    }
+                }                
 
                 MessageBox.Show("Operation successful");
                 this.Close();

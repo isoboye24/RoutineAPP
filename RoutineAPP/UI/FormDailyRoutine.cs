@@ -67,7 +67,6 @@ namespace RoutineAPP.AllForms
             dateTimePickerRoutine.Value = date;
         }
 
-        public bool isUpdate = false;
         public bool isSummaryList = false;
         private void FormDailyRoutine_Load(object sender, EventArgs e)
         {

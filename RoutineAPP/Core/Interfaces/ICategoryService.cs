@@ -13,6 +13,7 @@ namespace RoutineAPP.Core.Interfaces
         bool Create(string name);
         bool Update(int id, string name);
         bool Delete(int id);
+        bool PermanentDelete(int id);
         int Count();
     }
 }
