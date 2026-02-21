@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RoutineAPP.DAL
+namespace RoutineAPP.Infrastructure.Data
 {
     using System;
     using System.Data.Entity;

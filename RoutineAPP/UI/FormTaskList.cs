@@ -1,5 +1,6 @@
 ﻿using RoutineAPP.BLL;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.HelperService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,36 +28,26 @@ namespace RoutineAPP.AllForms
             RefreshDataCounts();
         }
 
+        private void ApplyFontStyles()
+        {
+            GeneralHelperService.ApplyBoldFont12(label3);
+            GeneralHelperService.ApplyRegularFont12(txtSummary, cmbCategory);
+        }
+
         TaskBLL bll = new TaskBLL();
         TaskDTO dto = new TaskDTO();
         public DailyTaskDetailDTO detailDailyRoutine = new DailyTaskDetailDTO();
         TaskDetailDTO detail = new TaskDetailDTO();
         private void FormTaskList_Load(object sender, EventArgs e)
-        {          
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            txtSummary.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbCategory.Font = new Font("Segoe UI", 12, FontStyle.Regular);            
+        {
+            ApplyFontStyles();          
 
             dto = bll.Select(detailDailyRoutine.DailyTaskID);
             cmbCategory.DataSource = dto.Categories;
             General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
 
-            dataGridView1.DataSource = dto.Tasks;
-            dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[1].Visible = false;
-            dataGridView1.Columns[2].HeaderText = "Category";
-            dataGridView1.Columns[3].HeaderText = "In mins";
-            dataGridView1.Columns[4].Visible = false;
-            dataGridView1.Columns[5].Visible = false;
-            dataGridView1.Columns[6].Visible = false;
-            dataGridView1.Columns[7].Visible = false;
-            dataGridView1.Columns[8].Visible = false;
-            dataGridView1.Columns[9].HeaderText = "In Hours";
-            dataGridView1.Columns[10].Visible = false;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
+            LoadDataGridView.loadTasks(dataGridView1, dto);
+
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
             dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Transparent;
@@ -96,7 +87,6 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-
         private void RefreshDataCounts()
         {
             labelTotalTasks.Text = "Total Task" + (dataGridView1.RowCount > 1 ? "s " : " ") + dataGridView1.RowCount.ToString();
@@ -125,18 +115,8 @@ namespace RoutineAPP.AllForms
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            detail = new TaskDetailDTO();
-            detail.TaskID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
-            detail.CategoryID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value);
-            detail.CategoryName = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            detail.TimeSpent = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[3].Value);
-            detail.Day = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            detail.MonthID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value);
-            detail.MonthName = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            detail.Year = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
-            detail.DailyRoutineID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[8].Value);
-            detail.TimeInHoursAndMinutes = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-            detail.Summary = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
+            detail = GeneralHelperService.MapFromGrid<TaskDetailDTO>(dataGridView1, e.RowIndex);
+
             txtSummary.Text = detail.Summary;            
         }
 

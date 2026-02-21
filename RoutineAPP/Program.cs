@@ -1,4 +1,8 @@
-﻿using System;
+﻿using RoutineAPP.Application.Services;
+using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.Infrastructure.Repositories;
+using System;
 using System.Configuration;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
@@ -12,8 +16,15 @@ namespace RoutineAPP
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
+            var db = new RoutineDBEntities();
+
+            ICategoryRepository categoryRepository = new CategoryRepository(db);
+
+            ICategoryService categoryService = new CategoryService(categoryRepository);
+
 
             bool databaseWasCreated;
             string databaseName = EnsureDatabaseExists(out databaseWasCreated);
@@ -23,7 +34,8 @@ namespace RoutineAPP
                 RunSchemaScript(databaseName);
             }
 
-            Application.Run(new FormDashboard());
+
+            System.Windows.Forms.Application.Run(new FormDashboard(categoryService));
         }
 
         private static string EnsureDatabaseExists(out bool created)

@@ -42,11 +42,11 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTotalTimeUsed = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.labelTotalTasks = new System.Windows.Forms.Label();
             this.iconBtnAdd = new FontAwesome.Sharp.IconButton();
             this.iconBtnEdit = new FontAwesome.Sharp.IconButton();
             this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
             this.iconBtnClose = new FontAwesome.Sharp.IconButton();
+            this.labelTotalTasks = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSummary = new System.Windows.Forms.TextBox();
@@ -255,18 +255,6 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Used time:";
             // 
-            // labelTotalTasks
-            // 
-            this.labelTotalTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalTasks.AutoSize = true;
-            this.labelTotalTasks.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTasks.Location = new System.Drawing.Point(3, 59);
-            this.labelTotalTasks.Name = "labelTotalTasks";
-            this.labelTotalTasks.Size = new System.Drawing.Size(207, 17);
-            this.labelTotalTasks.TabIndex = 0;
-            this.labelTotalTasks.Text = "0";
-            this.labelTotalTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // iconBtnAdd
             // 
             this.iconBtnAdd.BackColor = System.Drawing.Color.Transparent;
@@ -338,6 +326,18 @@
             this.iconBtnClose.TabIndex = 59;
             this.iconBtnClose.UseVisualStyleBackColor = false;
             this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
+            // 
+            // labelTotalTasks
+            // 
+            this.labelTotalTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalTasks.AutoSize = true;
+            this.labelTotalTasks.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalTasks.Location = new System.Drawing.Point(3, 59);
+            this.labelTotalTasks.Name = "labelTotalTasks";
+            this.labelTotalTasks.Size = new System.Drawing.Size(207, 17);
+            this.labelTotalTasks.TabIndex = 0;
+            this.labelTotalTasks.Text = "0";
+            this.labelTotalTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel2
             // 

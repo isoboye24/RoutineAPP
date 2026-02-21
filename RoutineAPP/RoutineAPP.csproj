@@ -85,79 +85,79 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllForms\FormCategory.cs">
+    <Compile Include="UI\FormCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormCategory.Designer.cs">
+    <Compile Include="UI\FormCategory.Designer.cs">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormGraphs.cs">
+    <Compile Include="UI\FormGraphs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormGraphs.Designer.cs">
+    <Compile Include="UI\FormGraphs.Designer.cs">
       <DependentUpon>FormGraphs.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormSummaryList.cs">
+    <Compile Include="UI\FormSummaryList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormSummaryList.Designer.cs">
+    <Compile Include="UI\FormSummaryList.Designer.cs">
       <DependentUpon>FormSummaryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormDailyRoutine.cs">
+    <Compile Include="UI\FormDailyRoutine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormDailyRoutine.Designer.cs">
+    <Compile Include="UI\FormDailyRoutine.Designer.cs">
       <DependentUpon>FormDailyRoutine.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormDailyRoutineList.cs">
+    <Compile Include="UI\FormDailyRoutineList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormDailyRoutineList.Designer.cs">
+    <Compile Include="UI\FormDailyRoutineList.Designer.cs">
       <DependentUpon>FormDailyRoutineList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormMonthlyReports.cs">
+    <Compile Include="UI\FormMonthlyReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormMonthlyReports.Designer.cs">
+    <Compile Include="UI\FormMonthlyReports.Designer.cs">
       <DependentUpon>FormMonthlyReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormCategoryList.cs">
+    <Compile Include="UI\FormCategoryList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormCategoryList.Designer.cs">
+    <Compile Include="UI\FormCategoryList.Designer.cs">
       <DependentUpon>FormCategoryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormDeletedData.cs">
+    <Compile Include="UI\FormDeletedData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormDeletedData.Designer.cs">
+    <Compile Include="UI\FormDeletedData.Designer.cs">
       <DependentUpon>FormDeletedData.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormMonthlyRoutineReportsList.cs">
+    <Compile Include="UI\FormMonthlyRoutineReportsList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormMonthlyRoutineReportsList.Designer.cs">
+    <Compile Include="UI\FormMonthlyRoutineReportsList.Designer.cs">
       <DependentUpon>FormMonthlyRoutineReportsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormTaskList.cs">
+    <Compile Include="UI\FormTaskList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormTaskList.Designer.cs">
+    <Compile Include="UI\FormTaskList.Designer.cs">
       <DependentUpon>FormTaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormTaskWithSummary.cs">
+    <Compile Include="UI\FormTaskWithSummary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormTaskWithSummary.Designer.cs">
+    <Compile Include="UI\FormTaskWithSummary.Designer.cs">
       <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\FormTotalReportsList.cs">
+    <Compile Include="UI\FormTotalReportsList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\FormTotalReportsList.Designer.cs">
+    <Compile Include="UI\FormTotalReportsList.Designer.cs">
       <DependentUpon>FormTotalReportsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="BLL\CategoryBLL.cs" />
+    <Compile Include="Application\Services\CategoryService.cs" />
     <Compile Include="BLL\DailyTaskBLL.cs" />
     <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\GraphBLL.cs" />
@@ -166,14 +166,16 @@
     <Compile Include="BLL\ReportsBLL.cs" />
     <Compile Include="BLL\TaskBLL.cs" />
     <Compile Include="BLL\YearBLL.cs" />
-    <Compile Include="DAL\CATEGORY.cs">
+    <Compile Include="Core\Entities\Category.cs" />
+    <Compile Include="Core\Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Core\Interfaces\ICategoryService.cs" />
+    <Compile Include="Infrastructure\Data\CATEGORY.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DAILY_ROUTINE.cs">
+    <Compile Include="Infrastructure\Data\DAILY_ROUTINE.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DAO\APPContext.cs" />
-    <Compile Include="DAL\DAO\CategoryDAO.cs" />
+    <Compile Include="Infrastructure\Data\APPContext.cs" />
     <Compile Include="DAL\DAO\DailyTaskDAO.cs" />
     <Compile Include="DAL\DAO\GraphDAO.cs" />
     <Compile Include="DAL\DAO\IDAO.cs" />
@@ -181,24 +183,22 @@
     <Compile Include="DAL\DAO\ReportsDAO.cs" />
     <Compile Include="DAL\DAO\TaskDAO.cs" />
     <Compile Include="DAL\DAO\YearDAO.cs" />
-    <Compile Include="DAL\DataModel.Context.cs">
+    <Compile Include="Infrastructure\Data\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DataModel.cs">
+    <Compile Include="Infrastructure\Data\DataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DataModel.Designer.cs">
+    <Compile Include="Infrastructure\Data\DataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DAL\DTO\AllYearsDetailDTO.cs" />
-    <Compile Include="DAL\DTO\CategoryDetailDTO.cs" />
-    <Compile Include="DAL\DTO\CategoryDTO.cs" />
     <Compile Include="DAL\DTO\DailyTaskDetailDTO.cs" />
     <Compile Include="DAL\DTO\DailyTaskDTO.cs" />
     <Compile Include="DAL\DTO\GraphDetailDTO.cs" />
@@ -213,10 +213,10 @@
     <Compile Include="DAL\DTO\TaskDTO.cs" />
     <Compile Include="DAL\DTO\YearDTO.cs" />
     <Compile Include="DAL\DTO\YearDetailDTO.cs" />
-    <Compile Include="DAL\MONTH.cs">
+    <Compile Include="Infrastructure\Data\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\TASK.cs">
+    <Compile Include="Infrastructure\Data\TASK.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.cs">
@@ -227,43 +227,46 @@
     </Compile>
     <Compile Include="General.cs" />
     <Compile Include="HelperService\GeneralHelperService.cs" />
+    <Compile Include="HelperService\LoadDataGridView.cs" />
     <Compile Include="HelperService\TaskHelperService.cs" />
+    <Compile Include="Infrastructure\Repositories\CategoryRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AllForms\FormCategory.resx">
+    <Compile Include="UI\ViewModel\CategoryViewModel.cs" />
+    <EmbeddedResource Include="UI\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormGraphs.resx">
+    <EmbeddedResource Include="UI\FormGraphs.resx">
       <DependentUpon>FormGraphs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormSummaryList.resx">
+    <EmbeddedResource Include="UI\FormSummaryList.resx">
       <DependentUpon>FormSummaryList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormDailyRoutine.resx">
+    <EmbeddedResource Include="UI\FormDailyRoutine.resx">
       <DependentUpon>FormDailyRoutine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormDailyRoutineList.resx">
+    <EmbeddedResource Include="UI\FormDailyRoutineList.resx">
       <DependentUpon>FormDailyRoutineList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormMonthlyReports.resx">
+    <EmbeddedResource Include="UI\FormMonthlyReports.resx">
       <DependentUpon>FormMonthlyReports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormCategoryList.resx">
+    <EmbeddedResource Include="UI\FormCategoryList.resx">
       <DependentUpon>FormCategoryList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormDeletedData.resx">
+    <EmbeddedResource Include="UI\FormDeletedData.resx">
       <DependentUpon>FormDeletedData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormMonthlyRoutineReportsList.resx">
+    <EmbeddedResource Include="UI\FormMonthlyRoutineReportsList.resx">
       <DependentUpon>FormMonthlyRoutineReportsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormTaskList.resx">
+    <EmbeddedResource Include="UI\FormTaskList.resx">
       <DependentUpon>FormTaskList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormTaskWithSummary.resx">
+    <EmbeddedResource Include="UI\FormTaskWithSummary.resx">
       <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\FormTotalReportsList.resx">
+    <EmbeddedResource Include="UI\FormTotalReportsList.resx">
       <DependentUpon>FormTotalReportsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
@@ -278,11 +281,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="DAL\DataModel.edmx">
+    <EntityDeploy Include="Infrastructure\Data\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DAL\DataModel.edmx.diagram">
+    <None Include="Infrastructure\Data\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -304,12 +307,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dailyRoutine.ico" />
-    <Content Include="DAL\DataModel.Context.tt">
+    <Content Include="Infrastructure\Data\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DAL\DataModel.tt">
+    <Content Include="Infrastructure\Data\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>

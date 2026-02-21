@@ -7,14 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RoutineAPP.DAL
+namespace RoutineAPP.Infrastructure.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MONTH
+    public partial class CATEGORY
     {
-        public int monthID { get; set; }
-        public string monthName { get; set; }
+        public int categoryID { get; set; }
+        public string categoryName { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> deletedDate { get; set; }
     }
 }

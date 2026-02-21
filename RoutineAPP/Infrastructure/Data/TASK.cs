@@ -7,20 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RoutineAPP.DAL
+namespace RoutineAPP.Infrastructure.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DAILY_ROUTINE
+    public partial class TASK
     {
-        public int dailyRoutineID { get; set; }
-        public System.DateTime routineDate { get; set; }
-        public string summary { get; set; }
+        public int taskID { get; set; }
+        public int categoryID { get; set; }
+        public int timeSpent { get; set; }
         public int day { get; set; }
         public int monthID { get; set; }
         public int year { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> deletedDate { get; set; }
+        public int dailiyRoutineID { get; set; }
+        public string summary { get; set; }
     }
 }

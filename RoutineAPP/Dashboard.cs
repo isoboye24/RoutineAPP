@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using RoutineAPP.AllForms;
 using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,17 @@ namespace RoutineAPP
 {
     public partial class FormDashboard : Form
     {
+        private readonly ICategoryService _categoryService;
+
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        public FormDashboard()
+        public FormDashboard(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
+
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(5, 40);
             panelSidebar.Controls.Add(leftBorderBtn);
