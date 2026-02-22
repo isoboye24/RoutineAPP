@@ -143,5 +143,13 @@ namespace RoutineAPP
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView.EnableHeadersVisualStyles = false;
         }
+
+        public static T GetSelected<T>(DataGridView grid) where T : class
+        {
+            if (grid.CurrentRow == null)
+                return null;
+
+            return grid.CurrentRow.DataBoundItem as T;
+        }
     }
 }

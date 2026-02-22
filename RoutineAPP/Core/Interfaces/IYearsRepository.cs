@@ -9,7 +9,6 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface IYearsRepository
     {
-        List<Years> GetAll();
-        Years GetById(int id);
+        List<int> GetAll();
     }
 }

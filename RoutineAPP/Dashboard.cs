@@ -19,14 +19,22 @@ namespace RoutineAPP
     public partial class FormDashboard : Form
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMonthService _monthService;
+        private readonly IYearsService _yearService;
+        private readonly IDailyRoutineService _dailyService;
+        private readonly ITaskService _taskService;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        public FormDashboard(ICategoryService categoryService)
+        public FormDashboard(ICategoryService categoryService, IMonthService monthService, IYearsService yearService, IDailyRoutineService dailyService, ITaskService taskService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _monthService = monthService;
+            _yearService = yearService;
+            _dailyService = dailyService;
+            _taskService = taskService;
 
 
             leftBorderBtn = new Panel();
@@ -178,7 +186,7 @@ namespace RoutineAPP
 
         private void iconClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
         private bool buttonWasClicked = false;
 
@@ -186,7 +194,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormCategoryList());
+            OpenChildForm(new FormCategoryList(_categoryService));
         }
 
         private void btnMonthlyReports_Click(object sender, EventArgs e)
@@ -241,7 +249,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormDailyRoutineList());
+            OpenChildForm(new FormDailyRoutineList(_monthService, _dailyService, _taskService, _categoryService));
         }        
 
         private void btnSummary_Click(object sender, EventArgs e)

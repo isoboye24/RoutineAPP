@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,14 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface ITaskService
     {
-        List<Entities.Task> GetAll();
-        bool Create(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary);
-        bool Update(int id, int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary);
+        List<Entities.Task> GetAll(int routineId);
+        bool Create(Entities.Task task);
+        bool Update(Entities.Task task);
         bool Delete(int id);
         bool PermanentDelete(int id);
         int Count();
+        string DailyUsedTimeCount(int routineId);
+        string DailyUnusedTimeCount(int routineId);
+        List<TaskViewModel> GetTaskDetails(int routineId);
     }
 }

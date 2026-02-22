@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RoutineAPP.Infrastructure.Repositories
 {
-    public class MonthRepository
+    public class MonthRepository : IMonthRepository
     {
         private readonly RoutineDBEntities _db;
 

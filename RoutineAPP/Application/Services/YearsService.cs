@@ -17,7 +17,7 @@ namespace RoutineAPP.Application.Services
             _repository = repository;
         }
 
-        public List<Years> GetAll()
+        public List<int> GetAll()
         {
             return _repository.GetAll();
         }

@@ -21,21 +21,20 @@ namespace RoutineAPP.AllForms
         private readonly IMonthService _monthService;
         private readonly IYearsService _yearService;
         private readonly IDailyRoutineService _dailyService;
+        private readonly ITaskService _taskService;
+        private readonly ICategoryService _categoryService;
         private List<DailyRoutineViewModel> _dailyRoutineVM;
 
-        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService)
+        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService)
         {
             InitializeComponent();
             _monthService = monthService;
             _dailyService = dailyService;
+            _taskService = taskService;
+            _categoryService = categoryService;
         }
 
-        private void RefreshDataCounts()
-        {
-            labelTotalRoutine.Text = dataGridView1.RowCount + " Day" + (dataGridView1.RowCount > 1 ? "s" : "");
-        }
-
-        private void resizeControls()
+        private void ApplyFontStyles()
         {
             GeneralHelperService.ApplyBoldFont(12, label1, label4, iconBtnAdd, iconBtnClear, iconBtnDelete, iconBtnSearch, iconBtnEdit);
             GeneralHelperService.ApplyRegularFont(14, txtDay, cmbYear, cmbMonth);
@@ -44,21 +43,27 @@ namespace RoutineAPP.AllForms
         private void FillCombos()
         {
             var months = _monthService.GetAll();
-            var years = _yearService.GetAll();
             cmbMonth.DataSource = months;
             General.ComboBoxProps(cmbMonth, "Name", "Id");
+
+            var years = _yearService.GetAll();
             cmbYear.DataSource = years;
             General.ComboBoxProps(cmbYear, "Year", "YearID");
         }
 
         private void FormDailyRoutineList_Load(object sender, EventArgs e)
         {
-            resizeControls();
+            ApplyFontStyles();
 
             FillCombos();
 
             LoadDailyRoutine();
             RefreshDataCounts();
+        }
+
+        private void RefreshDataCounts()
+        {
+            labelTotalRoutine.Text = dataGridView1.RowCount + " Day" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
         private void LoadDailyRoutine()
@@ -108,14 +113,6 @@ namespace RoutineAPP.AllForms
             dataGridView1.DataSource = filtered;
         }
 
-        private DailyRoutineViewModel GetSelected()
-        {
-            if (dataGridView1.CurrentRow == null)
-                return null;
-
-            return dataGridView1.CurrentRow.DataBoundItem as DailyRoutineViewModel;
-        }
-
         private void ClearFilters()
         {
             txtDay.Clear();
@@ -137,7 +134,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = GetSelected();
+            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -153,7 +150,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = GetSelected();
+            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
 
             if (selected == null)
             {
@@ -161,16 +158,14 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormTaskList(_dailyService);
-
-            form.LoadForView(selected.Id);
-
+            var form = new FormTaskList(_taskService, _categoryService);
+            form.LoadForView(selected.Id, selected.RoutineDate);
             form.ShowDialog();
         }
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = GetSelected();
+            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a daily routine.");

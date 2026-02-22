@@ -178,14 +178,10 @@
       <DependentUpon>FormTotalReportsList.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\Services\CategoryService.cs" />
-    <Compile Include="BLL\DailyTaskBLL.cs" />
     <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\GraphBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
-    <Compile Include="BLL\MonthBLL.cs" />
     <Compile Include="BLL\ReportsBLL.cs" />
-    <Compile Include="BLL\TaskBLL.cs" />
-    <Compile Include="BLL\YearBLL.cs" />
     <Compile Include="Core\Entities\Category.cs" />
     <Compile Include="Core\Interfaces\ICategoryRepository.cs" />
     <Compile Include="Core\Interfaces\ICategoryService.cs" />
@@ -221,8 +217,6 @@
     <Compile Include="DAL\DTO\MonthlyRoutineDTO.cs" />
     <Compile Include="DAL\DTO\ReportDTO.cs" />
     <Compile Include="DAL\DTO\ReportsDetailDTO.cs" />
-    <Compile Include="DAL\DTO\TaskDetailDTO.cs" />
-    <Compile Include="DAL\DTO\TaskDTO.cs" />
     <Compile Include="Infrastructure\Data\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

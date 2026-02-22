@@ -9,6 +9,6 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface IYearsService
     {
-        List<Years> GetAll();
+        List<int> GetAll();
     }
 }

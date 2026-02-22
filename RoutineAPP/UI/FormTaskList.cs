@@ -2,6 +2,7 @@
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
 using RoutineAPP.HelperService;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,24 +12,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static RoutineAPP.HelperService.TaskHelperService;
 
 namespace RoutineAPP.AllForms
 {
     public partial class FormTaskList : Form
     {
-        private readonly IDailyRoutineService _dailyService;
-        private int _routineId = 0;
-        public FormTaskList(IDailyRoutineService dailyService)
+        private readonly ITaskService _taskService;
+        private readonly ICategoryService _categoryService;
+        private int _routineId;
+        private DateTime _routineDate;
+        private List<TaskViewModel> _taskVM;
+
+        public FormTaskList(ITaskService taskService, ICategoryService categoryService)
         {
             InitializeComponent();
-            _dailyService = dailyService;
+            _taskService = taskService;
+            _categoryService = categoryService;
         }
+
+        public void LoadForView(int id, DateTime date)
+        {
+            _routineId = id;
+            _routineDate = date;
+        }
+
+
+        private void loadTasks()
+        {
+            var domainList = _taskService.GetTaskDetails(_routineId);
+
+            _taskVM = domainList.ToList();
+
+            dataGridView1.DataSource = _taskVM;
+            ConfigureTaskGrid(dataGridView1, TaskGridType.Basic);
+        }
+
         private void ClearFilters()
         {
             cmbCategory.SelectedIndex = -1;
-            bll = new TaskBLL();
-            dto = bll.Select(detailDailyRoutine.DailyTaskID);
-            dataGridView1.DataSource = dto.Tasks;
+            
+            loadTasks();
             RefreshDataCounts();
         }
 
@@ -38,33 +62,27 @@ namespace RoutineAPP.AllForms
             GeneralHelperService.ApplyRegularFont(12, txtSummary, cmbCategory);
         }
 
-        TaskBLL bll = new TaskBLL();
-        TaskDTO dto = new TaskDTO();
+        private void LoadCombo() {
+            cmbCategory.DataSource = _categoryService.GetAll();
+            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+        }
 
-        TaskDetailDTO detail = new TaskDetailDTO();
         private void FormTaskList_Load(object sender, EventArgs e)
         {
-            ApplyFontStyles();          
+            ApplyFontStyles();
+            LoadCombo();
 
-            dto = bll.Select(detailDailyRoutine.DailyTaskID);
-            cmbCategory.DataSource = dto.Categories;
-            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+            loadTasks();
 
-            LoadDataGridView.loadTasks(dataGridView1, dto);
-
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Transparent;
-            dataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.EnableHeadersVisualStyles = false;
-
-            labelTitle.Text = detailDailyRoutine.Day + "." + detailDailyRoutine.MonthID + "." + detailDailyRoutine.Year;
+            labelTitle.Text = _routineDate.ToString("dd.MM.yyyy");
             RefreshDataCounts();
         }
 
-        public void LoadForView(int id)
+        private void RefreshDataCounts()
         {
-            _routineId = id;
+            labelTotalTimeUsed.Text = _taskService.DailyUsedTimeCount(_routineId);
+            labelTotalUnusedTime.Text = _taskService.DailyUnusedTimeCount(_routineId);
+            labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)
@@ -96,39 +114,6 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        private void RefreshDataCounts()
-        {
-            labelTotalTasks.Text = "Total Task" + (dataGridView1.RowCount > 1 ? "s " : " ") + dataGridView1.RowCount.ToString();
-            decimal totalMinutes = bll.TotalUsedHours(detailDailyRoutine.DailyTaskID);
-            int hours = (int)Math.Floor(totalMinutes/60);
-            int minutes = Convert.ToInt32(totalMinutes % 60);
-            if (hours < 1)
-            {
-                labelTotalTimeUsed.Text = minutes + " min" + (minutes > 1 ? "s" : "");
-            }
-            else
-            {
-                labelTotalTimeUsed.Text = hours + " hr" + (hours > 1? "s ":" ") + minutes + " min" + (minutes > 1 ? "s" : "");
-            }
-        }
-
-        private void txtDay_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = General.isNumber(e);
-        }
-
-        private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = General.isNumber(e);
-        }
-
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = GeneralHelperService.MapFromGrid<TaskDetailDTO>(dataGridView1, e.RowIndex);
-
-            txtSummary.Text = detail.Summary;            
-        }
-
         private void iconBtnClear_Click(object sender, EventArgs e)
         {
             ClearFilters();
@@ -136,67 +121,63 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            List<TaskDetailDTO> list = dto.Tasks;
+            List<TaskViewModel> filtered = new List<TaskViewModel>();
+
             if (cmbCategory.SelectedIndex != -1)
             {
-                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategory.SelectedValue)).ToList();
+                int searchedCategory = Convert.ToInt32(cmbCategory.SelectedValue);
+                filtered = _taskVM.Where(x => x.CategoryId == searchedCategory).ToList();
+            }            
+            else
+            {
+                MessageBox.Show("Please select a category");
             }
-            dataGridView1.DataSource = list;
+            dataGridView1.DataSource = filtered;
+
+            RefreshDataCounts();
         }
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            if (detailDailyRoutine.DailyTaskID == 0)
-            {
-                MessageBox.Show("Please create a routine first");
-            }
-            else
-            {
-                FormTaskWithSummary open = new FormTaskWithSummary();
-                open.detailDailyRoutine = detailDailyRoutine;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            var form = new FormTaskWithSummary(_taskService, _categoryService);
+            form.LoadForAddTask(selected.DailyRoutineId, selected.DailyRoutineDate);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            if (detail.TaskID == 0)
+            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a task from the table");
+                MessageBox.Show("Please select a category.");
+                return;
             }
-            else
-            {
-                FormTaskWithSummary open = new FormTaskWithSummary();
-                open.detail = detail;
-                open.detailDailyRoutine = detailDailyRoutine;
-                open.isUpdate = true;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
+
+            var form = new FormTaskWithSummary(_taskService, _categoryService);
+            form.LoadForEdit(selected);
+            form.ShowDialog();
+
+            ClearFilters();
         }
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            if (detail.TaskID == 0)
+            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            if (selected == null)
             {
-                MessageBox.Show("Please choose a task from the table");
+                MessageBox.Show("Please select a task.");
+                return;
             }
-            else
+
+            var result = MessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", "Waring!", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (bll.Delete(detail))
-                    {
-                        MessageBox.Show("Task was deleted successfully");
-                        ClearFilters();
-                    }
-                }
+                _taskService.Delete(selected.Id);
+                ClearFilters();
             }
         }
 

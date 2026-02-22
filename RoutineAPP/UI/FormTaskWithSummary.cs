@@ -17,18 +17,16 @@ namespace RoutineAPP.AllForms
 {
     public partial class FormTaskWithSummary : Form
     {
-        private readonly IDailyRoutineService _dailyService;
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private int _routineId;
-        private int _taskId = 0;
-        public FormTaskWithSummary(IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, int routineId)
+        private DateTime _routineDate;
+        private int _taskId;
+        public FormTaskWithSummary(ITaskService taskService, ICategoryService categoryService)
         {
             InitializeComponent();
-            _dailyService = dailyService;
             _taskService = taskService;
             _categoryService = categoryService;
-            _routineId = routineId;
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)
@@ -78,6 +76,11 @@ namespace RoutineAPP.AllForms
             label5.Hide(); 
             
         }
+        public void LoadForAddTask(int id, DateTime date)
+        {
+            _routineId = id;
+            _routineDate = date;
+        }
 
         public void LoadForEdit(TaskViewModel vm)
         {
@@ -107,45 +110,45 @@ namespace RoutineAPP.AllForms
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(txtTimeSpent.Text))
+                {
+                    MessageBox.Show("Please enter time spent in minutes");
+                    return;
+                }
+
+                if (cmbCategory.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select category");
+                    return;
+                }
+
+                int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
+
+                // Use SelectedValue, NOT SelectedIndex
+                int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
+
+                var task = new RoutineAPP.Core.Entities.Task(
+                    _routineId,
+                    categoryId,
+                    timeSpent,
+                    _routineDate.Day,
+                    _routineDate.Month,
+                    _routineDate.Year,
+                    txtSummary.Text.Trim()
+                );
+
                 if (_taskId == 0)
                 {
-                    if (txtTimeSpent.Text.Trim() == "")
-                    {
-                        MessageBox.Show("Please enter time spent in minutes");
-                        return;
-                    }
-                    else if (cmbCategory.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Please select category");
-                        return;
-                    }
-                    else
-                    {
-                        int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
-                        _taskService.Create(_routineId, cmbCategory.SelectedIndex, timeSpent, DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, txtSummary.Text.Trim());
-                    }
+                    _taskService.Create(task);
+                    MessageBox.Show("Task created successfully!");
                 }
                 else
-                    {
-                    if (txtTimeSpent.Text.Trim() == "")
-                    {
-                        MessageBox.Show("Please enter summary");
-                        return;
-                    }
-                    else if (cmbCategory.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Please select category");
-                        return;
-                    }
-                    else
-                    {
-                        int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim()) + Convert.ToInt32(txtAdditionalTime.Text.Trim());
-                        _taskService.Update(_taskId, _routineId, cmbCategory.SelectedIndex, timeSpent, DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, txtSummary.Text.Trim());
-                    }
+                {
+                    task.SetId(_taskId);
+                    _taskService.Update(task);
+                    MessageBox.Show("Task updated successfully!");
                 }
                 
-
-                MessageBox.Show("Operation successful");
                 this.Close();
             }
             catch (Exception ex)

@@ -1,6 +1,8 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
+using RoutineAPP.DAL.DTO;
 using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,33 +25,55 @@ namespace RoutineAPP.Application.Services
         public int Count()
             => _repository.Count();
 
-        public bool Create(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary = null)
+        public bool Create(Core.Entities.Task task)
         {
-            if (_repository.Exists(year, month, day))
+            if (_repository.Exists(task.Year, task.Month, task.Day))
                 throw new Exception("Task already exists");
 
-            var task = new Core.Entities.Task(dailyRoutineId, categoryId, timeSpent, day, month, year, summary);
             return _repository.Insert(task);
         }
 
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Core.Entities.Task> GetAll()
-            => _repository.GetAll();
+        public List<Core.Entities.Task> GetAll(int routineId)
+            => _repository.GetAll(routineId);
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
-        public bool Update(int id, int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary)
+        public bool Update(Core.Entities.Task task)
         {
-            var task = _repository.GetById(id);
-            if (task == null)
+            var existing = _repository.GetById(task.Id);
+
+            if (existing == null)
                 throw new Exception("Task not found");
 
-            task.Update(dailyRoutineId, categoryId, timeSpent, day, month, year, summary);
-            return _repository.Update(task);
+            existing.Update(
+                task.DailyRoutineId,
+                task.CategoryId,
+                task.TimeSpent,
+                task.Day,
+                task.Month,
+                task.Year,
+                task.Summary);
+
+            return _repository.Update(existing);
         }
 
+        public List<TaskViewModel> GetTaskDetails(int dailyId)
+        {
+            return _repository.GetTaskDetails(dailyId);
+        }
+
+        public string DailyUsedTimeCount(int routineId)
+        {
+            return _repository.DailyUsedTimeCount(routineId);
+        }
+
+        public string DailyUnusedTimeCount(int routineId)
+        {
+            return _repository.DailyUnusedTimeCount(routineId);
+        }
     }
 }

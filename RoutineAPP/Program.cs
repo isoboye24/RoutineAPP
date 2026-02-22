@@ -22,8 +22,19 @@ namespace RoutineAPP
             var db = new RoutineDBEntities();
 
             ICategoryRepository categoryRepository = new CategoryRepository(db);
-
             ICategoryService categoryService = new CategoryService(categoryRepository);
+
+            IMonthRepository monthRepository = new MonthRepository(db);
+            IMonthService monthService = new MonthService(monthRepository);
+
+            IDailyRoutineRepository DailyRoutineRepository = new DailyRoutineRepository(db);
+            IDailyRoutineService dailyRoutineService = new DailyRoutineService(DailyRoutineRepository);
+
+            IYearsRepository yearRepository = new YearsRepository(db);
+            IYearsService yearService = new YearsService(yearRepository);
+
+            ITaskRepository taskRepository = new TaskRepository(db);
+            ITaskService taskService = new TaskService(taskRepository);
 
 
             bool databaseWasCreated;
@@ -35,7 +46,7 @@ namespace RoutineAPP
             }
 
 
-            System.Windows.Forms.Application.Run(new FormDashboard(categoryService));
+            System.Windows.Forms.Application.Run(new FormDashboard(categoryService, monthService, yearService, dailyRoutineService, taskService));
         }
 
         private static string EnsureDatabaseExists(out bool created)

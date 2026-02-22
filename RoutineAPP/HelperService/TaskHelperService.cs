@@ -19,7 +19,7 @@ namespace RoutineAPP.HelperService
             switch (type)
             {
                 case TaskGridType.Basic:
-                    GeneralHelperService.SetVisibleColumns(grid, "CategoryName", "TimeSpent", "TimeInHoursAndMinutes");
+                    GeneralHelperService.SetVisibleColumns(grid, "Category", "TimeSpent", "TimeInHoursAndMinutes");
                     GeneralHelperService.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "CategoryName", "Category" },

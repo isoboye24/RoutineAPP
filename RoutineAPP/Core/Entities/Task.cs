@@ -18,8 +18,6 @@ namespace RoutineAPP.Core.Entities
         public int Year { get; private set; }
         public string Summary { get; private set; }
 
-        private Task() { }
-
         public Task(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary = null)
         {
             DailyRoutineId = dailyRoutineId;

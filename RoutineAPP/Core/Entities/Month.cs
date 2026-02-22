@@ -11,8 +11,6 @@ namespace RoutineAPP.Core.Entities
         public int Id { get; private set; }
         public string Name { get; private set; }
 
-        private Month() { }
-
         public Month(string name)
         {
             Name = name;

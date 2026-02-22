@@ -12,8 +12,6 @@ namespace RoutineAPP.Core.Entities
         public DateTime Date { get; private set; }
         public string Summary { get; private set; }
 
-        private DailyRoutine() { }
-
         public DailyRoutine(DateTime date, string summary = null)
         {
             Date = date;

@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface ITaskRepository
     {
-        List<Entities.Task> GetAll(int dailyId);
+        List<Entities.Task> GetAll(int routineId);
         Entities.Task GetById(int id);
         bool Insert(Entities.Task routine);
         bool Update(Entities.Task routine);
@@ -17,5 +18,8 @@ namespace RoutineAPP.Core.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int year, int month, int day);
         int Count();
+        string DailyUsedTimeCount(int routineId);
+        string DailyUnusedTimeCount(int routineId);
+        List<TaskViewModel> GetTaskDetails(int dailyId);
     }
 }
