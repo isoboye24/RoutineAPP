@@ -20,22 +20,22 @@ namespace RoutineAPP
     {
         private readonly ICategoryService _categoryService;
         private readonly IMonthService _monthService;
-        private readonly IYearsService _yearService;
         private readonly IDailyRoutineService _dailyService;
         private readonly ITaskService _taskService;
+        private readonly IReportService _reportService;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        public FormDashboard(ICategoryService categoryService, IMonthService monthService, IYearsService yearService, IDailyRoutineService dailyService, ITaskService taskService)
+        public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
+            ITaskService taskService, IReportService reportService)
         {
             InitializeComponent();
             _categoryService = categoryService;
             _monthService = monthService;
-            _yearService = yearService;
             _dailyService = dailyService;
             _taskService = taskService;
-
+            _reportService = reportService;
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(5, 40);
@@ -201,7 +201,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormMonthlyRoutineReportsList());
+            OpenChildForm(new FormReportsBoard(_reportService, _monthService, _categoryService, _dailyService));
         }
 
         private void btnDeletedData_Click(object sender, EventArgs e)

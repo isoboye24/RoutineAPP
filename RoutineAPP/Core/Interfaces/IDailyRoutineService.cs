@@ -15,5 +15,6 @@ namespace RoutineAPP.Core.Interfaces
         bool Delete(int id);
         bool PermanentDelete(int id);
         int Count();
+        List<int> GetOnlyYears();
     }
 }

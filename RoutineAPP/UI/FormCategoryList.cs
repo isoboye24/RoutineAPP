@@ -27,8 +27,8 @@ namespace RoutineAPP.AllForms
 
         private void resizeControls()
         {
-            GeneralHelperService.ApplyBoldFont(12, label1, txtCategory, iconBtnAdd, iconBtnDelete, iconBtnEdit);
-            GeneralHelperService.ApplyRegularFont(11, label2, labelTotalCategory);
+            GeneralHelper.ApplyBoldFont(12, label1, txtCategory, iconBtnAdd, iconBtnDelete, iconBtnEdit);
+            GeneralHelper.ApplyRegularFont(11, label2, labelTotalCategory);
         }
         private void FormCategoryList_Load(object sender, EventArgs e)
         {

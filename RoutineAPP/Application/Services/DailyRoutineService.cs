@@ -36,6 +36,10 @@ namespace RoutineAPP.Application.Services
         public List<DailyRoutine> GetAll()
             => _repository.GetAll();
 
+        public List<int> GetOnlyYears()
+            => _repository.GetOnlyYears();
+        
+
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 

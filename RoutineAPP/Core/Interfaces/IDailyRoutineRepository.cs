@@ -1,4 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +19,10 @@ namespace RoutineAPP.Core.Interfaces
         bool PermanentDelete(int id);
         bool Exists(DateTime date);
         int Count();
+        int CountByMonth(int month, int year);
+        int CountByYear(int year);
+        List<int> GetOnlyYears();
+        List<GetAllMonthsViewModel> GetAllMonths();
+        string GetDateRange();
     }
 }

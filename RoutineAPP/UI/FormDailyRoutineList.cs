@@ -2,6 +2,7 @@
 using RoutineAPP.BLL;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.Helper;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -13,16 +14,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static RoutineAPP.Helper.RoutineHelper;
 
 namespace RoutineAPP.AllForms
 {
     public partial class FormDailyRoutineList : Form
     {
         private readonly IMonthService _monthService;
-        private readonly IYearsService _yearService;
         private readonly IDailyRoutineService _dailyService;
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
+        private readonly IReportService _reportService;
+
         private List<DailyRoutineViewModel> _dailyRoutineVM;
 
         public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService)
@@ -36,8 +39,8 @@ namespace RoutineAPP.AllForms
 
         private void ApplyFontStyles()
         {
-            GeneralHelperService.ApplyBoldFont(12, label1, label4, iconBtnAdd, iconBtnClear, iconBtnDelete, iconBtnSearch, iconBtnEdit);
-            GeneralHelperService.ApplyRegularFont(14, txtDay, cmbYear, cmbMonth);
+            GeneralHelper.ApplyBoldFont(12, label1, label4, iconBtnAdd, iconBtnClear, iconBtnDelete, iconBtnSearch, iconBtnEdit);
+            GeneralHelper.ApplyRegularFont(14, txtDay, cmbYear, cmbMonth);
         }
 
         private void FillCombos()
@@ -46,8 +49,7 @@ namespace RoutineAPP.AllForms
             cmbMonth.DataSource = months;
             General.ComboBoxProps(cmbMonth, "Name", "Id");
 
-            var years = _yearService.GetAll();
-            cmbYear.DataSource = years;
+            cmbYear.DataSource = _dailyService.GetOnlyYears();
             General.ComboBoxProps(cmbYear, "Year", "YearID");
         }
 
@@ -85,14 +87,7 @@ namespace RoutineAPP.AllForms
                 .ToList();
 
             dataGridView1.DataSource = _dailyRoutineVM;
-
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["Year"].HeaderText = "Year";
-            dataGridView1.Columns["MonthName"].HeaderText = "Month";
-            dataGridView1.Columns["Day"].HeaderText = "Day";
-            dataGridView1.Columns["RoutineDate"].Visible = false;
-            dataGridView1.Columns["Summary"].Visible = false;
-            dataGridView1.Columns["MonthID"].Visible = false;
+            ConfigureDailyRoutineGrid(dataGridView1, RoutineGridType.Basic);
         }
 
 
@@ -158,7 +153,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormTaskList(_taskService, _categoryService);
+            var form = new FormTaskList(_taskService, _categoryService, _reportService);
             form.LoadForView(selected.Id, selected.RoutineDate);
             form.ShowDialog();
         }

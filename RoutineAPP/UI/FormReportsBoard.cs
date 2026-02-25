@@ -1,6 +1,11 @@
-﻿using RoutineAPP.BLL;
+﻿using RoutineAPP.Application.Services;
+using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DAO;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.Helper;
+using RoutineAPP.HelperService;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,94 +16,136 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using static RoutineAPP.Helper.ReportHelper;
 
 namespace RoutineAPP.AllForms
 {
-    public partial class FormMonthlyRoutineReportsList : Form
+    public partial class FormReportsBoard : Form
     {
-        public FormMonthlyRoutineReportsList()
+        private readonly IReportService _reportService;
+        private readonly IMonthService _monthService;
+        private readonly ICategoryService _categoryService;
+        private readonly IDailyRoutineService _dailyRoutineService;
+
+        private List<GetAllMonthsViewModel> _getAllMonthsVM;
+        private List<ReportDetailsViewModel> _reportDetailsVM;
+        private List<ReportDetailsViewModel> _yearlyReportDetailsVM;
+
+        public FormReportsBoard(IReportService reportService, IMonthService monthService, ICategoryService categoryService, IDailyRoutineService dailyRoutineService)
         {
             InitializeComponent();
+            _reportService = reportService;
+            _monthService = monthService;
+            _categoryService = categoryService;
+            _dailyRoutineService = dailyRoutineService;
         }
-        ReportsBLL bll = new ReportsBLL();
-        ReportDTO dto = new ReportDTO();
-        int year = DateTime.Now.Year;
-        
-        private void FormMonthlyReportsList_Load(object sender, EventArgs e)
-        {
-            labelDateRange.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label1.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            labelYearReportTitle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label2.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label3.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            label4.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-            cmbYear.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbYearAnually.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbMonth.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbCategoryAnually.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-            cmbCategoryTotal.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
-            dto = bll.Select(year);
-            cmbMonth.DataSource = dto.Months;
+        private void ResizeControls()
+        {
+            GeneralHelper.ApplyBoldFont(12, label1, labelYearReportTitle, label2, label3, label4);
+            GeneralHelper.ApplyRegularFont(12, labelDateRange, cmbYear, cmbYearAnually, cmbMonth, cmbCategoryAnually, cmbCategoryTotal);
+        }
+
+        private void FillCombos()
+        {
+            cmbMonth.DataSource = _monthService.GetAll();
             General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
-            cmbYear.DataSource = dto.Years;
+
+            cmbYear.DataSource = _dailyRoutineService.GetOnlyYears();
             General.ComboBoxProps(cmbYear, "Year", "YearID");
-            cmbYearAnually.DataSource = dto.Years;
+
+            cmbYearAnually.DataSource = _dailyRoutineService.GetOnlyYears();
             General.ComboBoxProps(cmbYearAnually, "Year", "YearID");
 
-            cmbCategoryAnually.DataSource = dto.Categories;
+            cmbCategoryAnually.DataSource = _categoryService.GetAll();
             General.ComboBoxProps(cmbCategoryAnually, "CategoryName", "CategoryID");
-            cmbCategoryTotal.DataSource = dto.Categories;
+
+            cmbCategoryTotal.DataSource = _categoryService.GetAll();
             General.ComboBoxProps(cmbCategoryTotal, "CategoryName", "CategoryID");
+        }
 
-            dataGridViewMonthly.DataSource = dto.MonthlyRoutineReports;
-            dataGridViewMonthly.Columns[0].Visible = false;
-            dataGridViewMonthly.Columns[1].Visible = false;
-            dataGridViewMonthly.Columns[2].HeaderText = "Month";
-            dataGridViewMonthly.Columns[3].HeaderText = "Year";
+        int year = DateTime.Now.Year;
+        int month = DateTime.Now.Month;
 
-            foreach (DataGridViewColumn column in dataGridViewMonthly.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
+        private void loadMonthlyReports()
+        {
+            var domainList = _reportService.GetAllMonths();
 
-            dataGridViewAnually.DataSource = dto.YearlyReports;
-            dataGridViewAnually.Columns[0].Visible = false;
-            dataGridViewAnually.Columns[1].Visible = false;
-            dataGridViewAnually.Columns[2].HeaderText = "Category";
-            dataGridViewAnually.Columns[3].HeaderText = "Total Time Used";
-            dataGridViewAnually.Columns[4].HeaderText = "Percentage in 2 dp";
-            dataGridViewAnually.Columns[5].HeaderText = "Complete value in %";
-            dataGridViewAnually.Columns[6].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewAnually.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
+            _getAllMonthsVM = domainList
+                .Select(x => new GetAllMonthsViewModel
+                {
+                    MonthID = x.MonthID,
+                    Month = x.Month,
+                    Year = x.Year,
+                })
+                .ToList();
 
-            dataGridViewTotal.DataSource = dto.TotalReports;
-            dataGridViewTotal.Columns[0].Visible = false;
-            dataGridViewTotal.Columns[1].Visible = false;
-            dataGridViewTotal.Columns[2].HeaderText = "Category";
-            dataGridViewTotal.Columns[3].HeaderText = "Total Time Used";
-            dataGridViewTotal.Columns[4].HeaderText = "Percentage in 2 dp";
-            dataGridViewTotal.Columns[5].HeaderText = "Complete value in %";
-            dataGridViewTotal.Columns[6].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewTotal.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
+            dataGridViewMonthly.DataSource = _getAllMonthsVM;
+            ConfigureGetAllMonthsGrid(dataGridViewMonthly, ReportGridType.GetAllMonths);
+        }
+
+        private void loadYearlyReports(int year)
+        {
+            var domainList = _reportService.GetReportDetailsByYear(year);
+
+            _yearlyReportDetailsVM = domainList
+                .Select(x => new ReportDetailsViewModel
+                {
+                    ReportID = x.ReportID,
+                    CategoryID = x.CategoryID,
+                    Category = x.Category,
+                    TotalTimeUsed = x.TotalTimeUsed,
+                    PercentageOfUsedTime = x.PercentageOfUsedTime,
+                    CompletePercentage = x.CompletePercentage,
+                })
+                .ToList();
+
+            dataGridViewAnually.DataSource = _yearlyReportDetailsVM;
+            ConfigureReportDetailsGrid(dataGridViewAnually, ReportGridType.ReportDetails);
+        }
+
+        private void loadOverallReports()
+        {
+            var domainList = _reportService.GetOverallReportDetails();
+
+            _reportDetailsVM = domainList
+                .Select(x => new ReportDetailsViewModel
+                {
+                    ReportID = x.ReportID,
+                    CategoryID = x.CategoryID,
+                    Category = x.Category,
+                    TotalTimeUsed = x.TotalTimeUsed,
+                    PercentageOfUsedTime = x.PercentageOfUsedTime,
+                    CompletePercentage = x.CompletePercentage,
+                })
+                .ToList();
+
+            dataGridViewTotal.DataSource = _reportDetailsVM;
+            ConfigureReportDetailsGrid(dataGridViewTotal, ReportGridType.ReportDetails);
+        }
+
+        private void FormMonthlyReportsList_Load(object sender, EventArgs e)
+        {
+            ResizeControls();
+            FillCombos();
+
+            loadMonthlyReports();
+
+            loadYearlyReports(year);
+
+            loadOverallReports();
 
             RefreshAnually(year);
             RefreshCounts();
 
-            labelDateRange.Text = bll.SelectReportDateRange().ToString();
+            labelDateRange.Text = _reportService.GetDateRange();
 
-            labelTotalHoursInTotal.Text = bll.SelectOverallTotalHours().ToString();
-            labelTotalHoursUsedInTotal.Text = bll.SelectOverallTotalUsedHours().ToString();
-            labelTotalHoursUnusedInTotal.Text = bll.SelectOverallTotalUnusedHours().ToString();
+            labelTotalHoursInTotal.Text = _reportService.GetTotalOverallHours();
+            labelTotalHoursUsedInTotal.Text = _reportService.GetTotalOverallUsedTime();
+            labelTotalHoursUnusedInTotal.Text = _reportService.GetTotalOverallUnusedTime();
         }
-        MonthlyRoutinesDetailDTO detail = new MonthlyRoutinesDetailDTO();
         
+
         private void ClearFilters()
         {
             cmbYear.SelectedIndex = -1;
@@ -107,11 +154,11 @@ namespace RoutineAPP.AllForms
             cmbYearAnually.SelectedIndex = -1;
             cmbCategoryTotal.SelectedIndex = -1;
 
-            bll = new ReportsBLL();
-            dto = bll.Select(year);
-            dataGridViewMonthly.DataSource = dto.MonthlyRoutineReports;
-            dataGridViewAnually.DataSource = dto.YearlyReports;
-            dataGridViewTotal.DataSource = dto.TotalReports;
+            loadMonthlyReports();
+
+            loadYearlyReports(year);
+
+            loadOverallReports();
 
             RefreshCounts();
             RefreshAnually(year);
@@ -125,31 +172,39 @@ namespace RoutineAPP.AllForms
         private void RefreshAnually(int year)
         {
             labelYearReportTitle.Text =  year + " Report";
-            labelTotalHoursInYear.Text = "Total hours in " + year + " : " + bll.SelectTotalHoursInYear(year).ToString();
-            labelTotalHoursUsedInYear.Text = "Total hours used in " + year + " : " + bll.SelectTotalHoursUsedInAYear(year).ToString();
-            labelTotalHoursUnusedInYear.Text = "Total hours unused in " + year + " : " + bll.SelectTotalHoursUnusedInAYear(year).ToString();
+            labelTotalHoursInYear.Text = "Total hours in " + year + " : " + _reportService.GetTotalHoursInYear(year);
+            labelTotalHoursUsedInYear.Text = "Total hours used in " + year + " : " + _reportService.GetTotalUsedTimeInYear(year);
+            labelTotalHoursUnusedInYear.Text = "Total hours unused in " + year + " : " + _reportService.GetTotalUnusedTimeInYear(year);
         }
 
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            List<MonthlyRoutinesDetailDTO> list = dto.MonthlyRoutineReports;
-            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != 1)
+            int searchedMonth;
+            int searchedYear;
+            List<GetAllMonthsViewModel> filtered = new List<GetAllMonthsViewModel>();
+
+            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {
-                list = list.Where(x => x.Year.ToString() == cmbYear.Text && x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
+                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
+                filtered = _getAllMonthsVM.Where(x => x.MonthID == searchedMonth).ToList();
             }
-            else if (cmbMonth.SelectedIndex != -1)
+            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
             {
-                list = list.Where(x => x.MonthID == Convert.ToInt32(cmbMonth.SelectedValue)).ToList();
+                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                filtered = _getAllMonthsVM.Where(x => x.Year == searchedYear).ToList();
             }
-            else if (cmbYear.SelectedIndex != -1)
+            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
             {
-                list = list.Where(x => x.Year.ToString() == cmbYear.Text).ToList();
+                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
+                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                filtered = _getAllMonthsVM.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
             }
             else
             {
-                MessageBox.Show("Unknown search");
+                MessageBox.Show("Please at least a month or year");
             }
-            dataGridViewMonthly.DataSource = list;
+            dataGridViewMonthly.DataSource = filtered;
+
             RefreshCounts();
         }
 
@@ -160,28 +215,18 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            if (detail.MonthlyReportID == 0)
-            {
-                MessageBox.Show("Please choose a report from the table");
-            }
-            else
-            {
-                FormMonthlyReports open = new FormMonthlyReports();
-                open.routineDetail = detail;
-                this.Hide();
-                open.ShowDialog();
-                this.Visible = true;
-                ClearFilters();
-            }
-        }
+           
+            var selected = General.GetSelected<ReportDetailsViewModel>(dataGridViewMonthly);
 
-        private void dataGridViewMonthly_RowEnter_1(object sender, DataGridViewCellEventArgs e)
-        {
-            detail = new MonthlyRoutinesDetailDTO();
-            detail.MonthlyReportID = Convert.ToInt32(dataGridViewMonthly.Rows[e.RowIndex].Cells[0].Value);
-            detail.MonthID = Convert.ToInt32(dataGridViewMonthly.Rows[e.RowIndex].Cells[1].Value);
-            detail.MonthName = dataGridViewMonthly.Rows[e.RowIndex].Cells[2].Value.ToString();
-            detail.Year = Convert.ToInt32(dataGridViewMonthly.Rows[e.RowIndex].Cells[3].Value);
+            if (selected == null)
+            {
+                MessageBox.Show("Please choose a routine from the table.");
+                return;
+            }
+
+            var form = new FormMonthlyReports(_reportService, _categoryService);
+            form.LoadForView(selected.ReportID);
+            form.ShowDialog();
         }
 
         private void dataGridViewAnually_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -242,34 +287,43 @@ namespace RoutineAPP.AllForms
         }
 
         private void iconBtnSearchAnually_Click(object sender, EventArgs e)
-        {            
-            if (cmbCategoryAnually.SelectedIndex != -1 && cmbYearAnually.SelectedIndex != -1)
+        {
+            int? searchedCategory = null;
+            int? searchedYear = null;
+
+            if (cmbYearAnually.SelectedIndex != -1)
             {
-                dto = bll.Select(Convert.ToInt32(cmbYearAnually.Text));
-                List<ReportsDetailDTO> list = dto.YearlyReports;
-                list = list.Where(x => x.Year == Convert.ToInt32(cmbYearAnually.Text) && x.CategoryID == Convert.ToInt32(cmbCategoryAnually.SelectedValue)).ToList();
-                dataGridViewAnually.DataSource = list;
-                RefreshAnually(Convert.ToInt32(cmbYearAnually.Text));
+                searchedYear = Convert.ToInt32(cmbYearAnually.SelectedValue);
             }
-            else if (cmbCategoryAnually.SelectedIndex != -1)
+
+            if (cmbCategoryAnually.SelectedIndex != -1)
             {
-                dto = bll.Select(year);
-                List<ReportsDetailDTO> list = dto.YearlyReports;
-                list = list.Where(x => x.Year == year && x.CategoryID == Convert.ToInt32(cmbCategoryAnually.SelectedValue)).ToList();
-                dataGridViewAnually.DataSource = list;
+                searchedCategory = Convert.ToInt32(cmbCategoryAnually.SelectedValue);
             }
-            else if (cmbYearAnually.SelectedIndex != -1)
+
+            if (searchedYear == null && searchedCategory == null)
             {
-                dto = bll.Select(Convert.ToInt32(cmbYearAnually.Text));
-                List<ReportsDetailDTO> list = dto.YearlyReports;
-                list = list.Where(x => x.Year == Convert.ToInt32(cmbYearAnually.Text)).ToList();
-                RefreshAnually(Convert.ToInt32(cmbYearAnually.Text));
-                dataGridViewAnually.DataSource = list;
+                MessageBox.Show("Please select at least a year or category");
+                return;
             }
-            else
+
+            if (searchedYear != null)
             {
-                MessageBox.Show("Unknown search");
-            }            
+                loadYearlyReports(searchedYear.Value);
+            }
+
+            var result = _yearlyReportDetailsVM;
+
+            if (searchedCategory != null)
+            {
+                result = result
+                    .Where(x => x.CategoryID == searchedCategory.Value)
+                    .ToList();
+            }
+
+            dataGridViewAnually.DataSource = result;
+
+            RefreshCounts();
         }
 
         private void iconBtnClearAnually_Click(object sender, EventArgs e)
@@ -375,16 +429,20 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearchTotal_Click(object sender, EventArgs e)
         {
+            int searchedCategory;
+            List<ReportDetailsViewModel> filtered = new List<ReportDetailsViewModel>();
+
             if (cmbCategoryTotal.SelectedIndex != -1)
-            {
-                List<ReportsDetailDTO> list = dto.TotalReports;
-                list = list.Where(x => x.CategoryID == Convert.ToInt32(cmbCategoryTotal.SelectedValue)).ToList();
-                dataGridViewTotal.DataSource = list;
+            {               
+                searchedCategory = Convert.ToInt32(cmbCategoryTotal.SelectedValue);
+                filtered = _reportDetailsVM.Where(x => x.CategoryID == searchedCategory).ToList();
             }            
             else
             {
                 MessageBox.Show("Please choose a category");
             }
+            dataGridViewTotal.DataSource = filtered;
+            RefreshCounts();
         }
     }
 }

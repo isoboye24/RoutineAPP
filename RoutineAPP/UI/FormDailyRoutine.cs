@@ -26,9 +26,9 @@ namespace RoutineAPP.AllForms
 
         private void ResizeControls()
         {
-            GeneralHelperService.ApplyBoldFont(12, iconBtnClose, iconBtnSave);
-            GeneralHelperService.ApplyBoldFont(14, labelTitle, dateTimePickerRoutine);
-            GeneralHelperService.ApplyRegularFont(18, txtSummary);
+            GeneralHelper.ApplyBoldFont(12, iconBtnClose, iconBtnSave);
+            GeneralHelper.ApplyBoldFont(14, labelTitle, dateTimePickerRoutine);
+            GeneralHelper.ApplyRegularFont(18, txtSummary);
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)

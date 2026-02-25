@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,10 @@ namespace RoutineAPP.Core.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int year, int month, int day);
         int Count();
-        string DailyUsedTimeCount(int routineId);
-        string DailyUnusedTimeCount(int routineId);
         List<TaskViewModel> GetTaskDetails(int dailyId);
+        List<TaskViewModel> GetTasksByDay(int routine);
+        List<TaskViewModel> GetTasksByMonth(int month, int year);
+        List<TaskViewModel> GetTasksByYear(int year);
+        List<TaskViewModel> GetTotalTasks();
     }
 }

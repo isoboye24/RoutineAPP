@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace RoutineAPP.HelperService
 {
-    public class TaskHelperService
+    public class TaskHelper
     {
         public enum TaskGridType
         {
@@ -19,8 +19,8 @@ namespace RoutineAPP.HelperService
             switch (type)
             {
                 case TaskGridType.Basic:
-                    GeneralHelperService.SetVisibleColumns(grid, "Category", "TimeSpent", "TimeInHoursAndMinutes");
-                    GeneralHelperService.RenameColumns(grid, new Dictionary<string, string>
+                    GeneralHelper.SetVisibleColumns(grid, "Category", "TimeSpent", "TimeInHoursAndMinutes");
+                    GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "CategoryName", "Category" },
                                     { "TimeSpent", "In Minute" },

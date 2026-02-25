@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.BLL;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,16 @@ namespace RoutineAPP.AllForms
 {
     public partial class FormMonthlyReports : Form
     {
-        public FormMonthlyReports()
+        IReportService _reportService;
+        ICategoryService _categoryService;
+        private int _reportId;
+
+
+        public FormMonthlyReports(IReportService reportService, ICategoryService categoryService)
         {
             InitializeComponent();
+            _reportService = reportService;
+            _categoryService = categoryService;
         }
 
         private void iconClose_Click(object sender, EventArgs e)
@@ -85,6 +93,12 @@ namespace RoutineAPP.AllForms
         private void RefreshCounts()
         {
             labelTotalCategories.Text = "Categor" + (dataGridView1.Rows.Count > 1? "ies : " : "y : ")  + dataGridView1.Rows.Count.ToString();
+        }
+
+
+        public void LoadForView(int id)
+        {
+            _reportId = id;
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)

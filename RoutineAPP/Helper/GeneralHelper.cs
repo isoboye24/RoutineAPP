@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace RoutineAPP.HelperService
 {
-    public class GeneralHelperService
+    public class GeneralHelper
     {        
         public static void ApplyRegularFont(int size, params Control[] controls)
         {

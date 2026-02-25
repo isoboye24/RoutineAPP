@@ -55,8 +55,8 @@ namespace RoutineAPP.AllForms
 
         private void resizeControls()
         {
-            GeneralHelperService.ApplyBoldFont(12, label1, label2, label3, label5, iconBtnClose, iconBtnSave);
-            GeneralHelperService.ApplyRegularFont(12, txtTimeSpent, txtAdditionalTime, txtSummary, cmbCategory);
+            GeneralHelper.ApplyBoldFont(12, label1, label2, label3, label5, iconBtnClose, iconBtnSave);
+            GeneralHelper.ApplyRegularFont(12, txtTimeSpent, txtAdditionalTime, txtSummary, cmbCategory);
         }
 
         private void iconClose_Click(object sender, EventArgs e)

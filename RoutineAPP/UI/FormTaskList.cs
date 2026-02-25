@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static RoutineAPP.HelperService.TaskHelperService;
+using static RoutineAPP.HelperService.TaskHelper;
 
 namespace RoutineAPP.AllForms
 {
@@ -20,15 +20,18 @@ namespace RoutineAPP.AllForms
     {
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
+        private readonly IReportService _reportService;
+
         private int _routineId;
         private DateTime _routineDate;
         private List<TaskViewModel> _taskVM;
 
-        public FormTaskList(ITaskService taskService, ICategoryService categoryService)
+        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
         {
             InitializeComponent();
             _taskService = taskService;
             _categoryService = categoryService;
+            _reportService = reportService;
         }
 
         public void LoadForView(int id, DateTime date)
@@ -58,8 +61,8 @@ namespace RoutineAPP.AllForms
 
         private void ApplyFontStyles()
         {
-            GeneralHelperService.ApplyBoldFont(12, label3);
-            GeneralHelperService.ApplyRegularFont(12, txtSummary, cmbCategory);
+            GeneralHelper.ApplyBoldFont(12, label3);
+            GeneralHelper.ApplyRegularFont(12, txtSummary, cmbCategory);
         }
 
         private void LoadCombo() {
@@ -80,8 +83,8 @@ namespace RoutineAPP.AllForms
 
         private void RefreshDataCounts()
         {
-            labelTotalTimeUsed.Text = _taskService.DailyUsedTimeCount(_routineId);
-            labelTotalUnusedTime.Text = _taskService.DailyUnusedTimeCount(_routineId);
+            labelTotalTimeUsed.Text = _reportService.GetTotalUsedTimeInDay(_routineId);
+            labelTotalUnusedTime.Text = _reportService.GetTotalUnusedTimeInDay(_routineId);
             labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 

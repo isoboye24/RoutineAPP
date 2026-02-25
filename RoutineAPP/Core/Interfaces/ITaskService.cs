@@ -16,8 +16,6 @@ namespace RoutineAPP.Core.Interfaces
         bool Delete(int id);
         bool PermanentDelete(int id);
         int Count();
-        string DailyUsedTimeCount(int routineId);
-        string DailyUnusedTimeCount(int routineId);
         List<TaskViewModel> GetTaskDetails(int routineId);
     }
 }

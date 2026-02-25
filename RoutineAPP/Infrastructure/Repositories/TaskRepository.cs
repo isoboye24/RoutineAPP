@@ -107,17 +107,27 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.TASKs.Count(x => !x.isDeleted);
         }
 
-        public string DailyUsedTimeCount(int routineId)
+        public List<TaskViewModel> GetTasksByDay(int routineId)
         {
-            int totalTime = _db.TASKs.Where(x => !x.isDeleted && x.dailiyRoutineID == routineId).Sum(x => x.timeSpent);
-            return totalTime / 60 >= 1 ? $"{totalTime / 60}h {totalTime % 60}m" : $"{totalTime % 60}m";
-        }
-
-        public string DailyUnusedTimeCount(int routineId)
-        {
-            int time = _db.TASKs.Where(x => !x.isDeleted && x.dailiyRoutineID == routineId).Sum(x => x.timeSpent);
-            int totalTime = (24 * 60) - time;
-            return totalTime / 60 >= 1 ? $"{totalTime / 60}h {totalTime % 60}m" : $"{totalTime % 60}m";
+            return (from t in _db.TASKs
+                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
+                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                    where !t.isDeleted && d.dailyRoutineID == routineId
+                    select new TaskViewModel
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = d.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = d.routineDate.Day,
+                        Month = d.routineDate.Month,
+                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        Year = d.routineDate.Year,
+                    })
+            .ToList();
         }
 
         public List<TaskViewModel> GetTaskDetails(int dailyId)
@@ -143,5 +153,76 @@ namespace RoutineAPP.Infrastructure.Repositories
                     })
             .ToList();
         }
+
+        public List<TaskViewModel> GetTasksByMonth(int month, int year)
+        {
+            return (from t in _db.TASKs
+                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
+                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                    where !t.isDeleted && d.routineDate.Month == month && d.routineDate.Year == year
+                    select new TaskViewModel
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = d.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = d.routineDate.Day,
+                        Month = d.routineDate.Month,
+                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        Year = d.routineDate.Year,
+                    })
+            .ToList();
+        }
+
+
+        public List<TaskViewModel> GetTasksByYear(int year)
+        {
+            return (from t in _db.TASKs
+                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
+                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                    where !t.isDeleted && d.routineDate.Year == year
+                    select new TaskViewModel
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = d.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = d.routineDate.Day,
+                        Month = d.routineDate.Month,
+                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        Year = d.routineDate.Year,
+                    })
+            .ToList();
+        }
+
+        public List<TaskViewModel> GetTotalTasks()
+        {
+            return (from t in _db.TASKs
+                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
+                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                    where !t.isDeleted
+                    select new TaskViewModel
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = d.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = d.routineDate.Day,
+                        Month = d.routineDate.Month,
+                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        Year = d.routineDate.Year,
+                    })
+            .ToList();
+        }
+
     }
 }

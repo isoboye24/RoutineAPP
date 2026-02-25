@@ -66,14 +66,5 @@ namespace RoutineAPP.Application.Services
             return _repository.GetTaskDetails(dailyId);
         }
 
-        public string DailyUsedTimeCount(int routineId)
-        {
-            return _repository.DailyUsedTimeCount(routineId);
-        }
-
-        public string DailyUnusedTimeCount(int routineId)
-        {
-            return _repository.DailyUnusedTimeCount(routineId);
-        }
     }
 }

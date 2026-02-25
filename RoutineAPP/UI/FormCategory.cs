@@ -31,7 +31,7 @@ namespace RoutineAPP.AllForms
 
         private void ResizeControls()
         {
-            GeneralHelperService.ApplyBoldFont(12, label1, labelTitle, iconBtnClose, iconBtnSave);
+            GeneralHelper.ApplyBoldFont(12, label1, labelTitle, iconBtnClose, iconBtnSave);
         }
 
         public void LoadForEdit(int id, string name)

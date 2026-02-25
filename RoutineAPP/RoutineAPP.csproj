@@ -85,25 +85,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Services\ReportService.cs" />
     <Compile Include="Application\Services\TaskService.cs" />
     <Compile Include="Application\Services\DailyRoutineService.cs" />
-    <Compile Include="Application\Services\YearsService.cs" />
     <Compile Include="Application\Services\MonthService.cs" />
     <Compile Include="Core\Entities\DailyRoutine.cs" />
     <Compile Include="Core\Entities\Month.cs" />
     <Compile Include="Core\Entities\Task.cs" />
     <Compile Include="Core\Entities\Years.cs" />
+    <Compile Include="Core\Interfaces\IReportService.cs" />
     <Compile Include="Core\Interfaces\ITaskService.cs" />
     <Compile Include="Core\Interfaces\ITaskRepository.cs" />
     <Compile Include="Core\Interfaces\IDailyRoutineRepository.cs" />
     <Compile Include="Core\Interfaces\IDailyRoutineService.cs" />
-    <Compile Include="Core\Interfaces\IYearsService.cs" />
-    <Compile Include="Core\Interfaces\IYearsRepository.cs" />
     <Compile Include="Core\Interfaces\IMonthRepository.cs" />
     <Compile Include="Core\Interfaces\IMonthService.cs" />
+    <Compile Include="Helper\ReportHelper.cs" />
+    <Compile Include="Helper\RoutineHelper.cs" />
     <Compile Include="Infrastructure\Repositories\CategoryRepository.cs" />
     <Compile Include="Infrastructure\Repositories\TaskRepository.cs" />
-    <Compile Include="Infrastructure\Repositories\YearsRepository.cs" />
     <Compile Include="Infrastructure\Repositories\MonthRepository.cs" />
     <Compile Include="UI\FormCategory.cs">
       <SubType>Form</SubType>
@@ -153,11 +153,11 @@
     <Compile Include="UI\FormDeletedData.Designer.cs">
       <DependentUpon>FormDeletedData.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FormMonthlyRoutineReportsList.cs">
+    <Compile Include="UI\FormReportsBoard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FormMonthlyRoutineReportsList.Designer.cs">
-      <DependentUpon>FormMonthlyRoutineReportsList.cs</DependentUpon>
+    <Compile Include="UI\FormReportsBoard.Designer.cs">
+      <DependentUpon>FormReportsBoard.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FormTaskList.cs">
       <SubType>Form</SubType>
@@ -170,12 +170,6 @@
     </Compile>
     <Compile Include="UI\FormTaskWithSummary.Designer.cs">
       <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\FormTotalReportsList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\FormTotalReportsList.Designer.cs">
-      <DependentUpon>FormTotalReportsList.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\Services\CategoryService.cs" />
     <Compile Include="BLL\DashboardBLL.cs" />
@@ -230,14 +224,15 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="General.cs" />
-    <Compile Include="HelperService\GeneralHelperService.cs" />
-    <Compile Include="HelperService\LoadDataGridView.cs" />
-    <Compile Include="HelperService\TaskHelperService.cs" />
+    <Compile Include="Helper\GeneralHelper.cs" />
+    <Compile Include="Helper\TaskHelper.cs" />
     <Compile Include="Infrastructure\Repositories\DailyRoutineRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ViewModel\CategoryViewModel.cs" />
     <Compile Include="UI\ViewModel\DailyRoutineViewModel.cs" />
+    <Compile Include="UI\ViewModel\GetAllMonthsViewModel.cs" />
+    <Compile Include="UI\ViewModel\ReportDetailsViewModel.cs" />
     <Compile Include="UI\ViewModel\TaskViewModel.cs" />
     <EmbeddedResource Include="UI\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
@@ -263,17 +258,14 @@
     <EmbeddedResource Include="UI\FormDeletedData.resx">
       <DependentUpon>FormDeletedData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormMonthlyRoutineReportsList.resx">
-      <DependentUpon>FormMonthlyRoutineReportsList.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FormReportsBoard.resx">
+      <DependentUpon>FormReportsBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormTaskList.resx">
       <DependentUpon>FormTaskList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormTaskWithSummary.resx">
       <DependentUpon>FormTaskWithSummary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormTotalReportsList.resx">
-      <DependentUpon>FormTotalReportsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

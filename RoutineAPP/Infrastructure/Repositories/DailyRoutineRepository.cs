@@ -1,6 +1,7 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +95,63 @@ namespace RoutineAPP.Infrastructure.Repositories
         public int Count()
         {
             return _db.DAILY_ROUTINE.Count(x => !x.isDeleted);
+        }
+
+        public int CountByMonth(int month, int year)
+        {
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.monthID == month && x.year == year);
+        }
+
+        public List<int> GetOnlyYears()
+        {
+            return _db.DAILY_ROUTINE
+                .Where(x => !x.isDeleted)
+                .Select(x => x.routineDate.Year)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .ToList();
+        }
+
+        public int CountByYear(int year)
+        {
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.year == year);
+        }
+
+        public List<GetAllMonthsViewModel> GetAllMonths()
+        {
+            return _db.DAILY_ROUTINE
+                .Where(x => !x.isDeleted)
+                .Select(x => new
+                {
+                    Year = x.routineDate.Year,
+                    Month = x.routineDate.Month
+                })
+                .Distinct()
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.Month)
+                .ToList()
+                .Select(x => new GetAllMonthsViewModel
+                {
+                    Year = x.Year,
+                    MonthID = x.Month,
+                    Month = new DateTime(x.Year, x.Month, 1).ToString("MMMM")
+                })
+                .ToList();
+        }
+
+        public string GetDateRange()
+        {
+            var dates = _db.DAILY_ROUTINE
+                .Where(x => !x.isDeleted)
+                .Select(x => x.routineDate);
+
+            if (!dates.Any())
+                return "No data available";
+
+            var firstDate = dates.Min();
+            var lastDate = dates.Max();
+
+            return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
         }
     }
 }

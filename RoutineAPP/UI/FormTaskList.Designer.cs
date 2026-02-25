@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconMaximize = new FontAwesome.Sharp.IconPictureBox();
             this.iconMinimize = new FontAwesome.Sharp.IconPictureBox();
@@ -41,17 +41,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalTimeUsed = new System.Windows.Forms.Label();
-            this.iconBtnAdd = new FontAwesome.Sharp.IconButton();
-            this.iconBtnEdit = new FontAwesome.Sharp.IconButton();
-            this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
-            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
-            this.labelTotalTasks = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtSummary = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -62,29 +52,39 @@
             this.iconBtnSearch = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.iconBtnClear = new FontAwesome.Sharp.IconButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTotalUnusedTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtSummary = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.dailyPieChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.iconBtnAdd = new FontAwesome.Sharp.IconButton();
+            this.iconBtnEdit = new FontAwesome.Sharp.IconButton();
+            this.iconBtnDelete = new FontAwesome.Sharp.IconButton();
+            this.iconBtnClose = new FontAwesome.Sharp.IconButton();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTotalTasks = new System.Windows.Forms.Label();
+            this.labelTotalTimeUsed = new System.Windows.Forms.Label();
+            this.labelTotalUnusedTime = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconClose)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dailyPieChart)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -200,128 +200,6 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(1021, 521);
             this.tableLayoutPanel9.TabIndex = 43;
             // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 9;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
-            this.tableLayoutPanel10.Controls.Add(this.iconBtnAdd, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.iconBtnEdit, 3, 0);
-            this.tableLayoutPanel10.Controls.Add(this.iconBtnDelete, 5, 0);
-            this.tableLayoutPanel10.Controls.Add(this.iconBtnClose, 7, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(1009, 43);
-            this.tableLayoutPanel10.TabIndex = 3;
-            // 
-            // labelTotalTimeUsed
-            // 
-            this.labelTotalTimeUsed.AutoSize = true;
-            this.labelTotalTimeUsed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTotalTimeUsed.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTimeUsed.Location = new System.Drawing.Point(339, 0);
-            this.labelTotalTimeUsed.Name = "labelTotalTimeUsed";
-            this.labelTotalTimeUsed.Size = new System.Drawing.Size(330, 28);
-            this.labelTotalTimeUsed.TabIndex = 0;
-            this.labelTotalTimeUsed.Text = "0";
-            this.labelTotalTimeUsed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // iconBtnAdd
-            // 
-            this.iconBtnAdd.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnAdd.FlatAppearance.BorderSize = 0;
-            this.iconBtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnAdd.IconChar = FontAwesome.Sharp.IconChar.Add;
-            this.iconBtnAdd.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnAdd.IconSize = 32;
-            this.iconBtnAdd.Location = new System.Drawing.Point(214, 3);
-            this.iconBtnAdd.Name = "iconBtnAdd";
-            this.iconBtnAdd.Size = new System.Drawing.Size(125, 37);
-            this.iconBtnAdd.TabIndex = 59;
-            this.iconBtnAdd.UseVisualStyleBackColor = false;
-            this.iconBtnAdd.Click += new System.EventHandler(this.iconBtnAdd_Click);
-            // 
-            // iconBtnEdit
-            // 
-            this.iconBtnEdit.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnEdit.FlatAppearance.BorderSize = 0;
-            this.iconBtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnEdit.IconChar = FontAwesome.Sharp.IconChar.Pen;
-            this.iconBtnEdit.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnEdit.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnEdit.IconSize = 32;
-            this.iconBtnEdit.Location = new System.Drawing.Point(365, 3);
-            this.iconBtnEdit.Name = "iconBtnEdit";
-            this.iconBtnEdit.Size = new System.Drawing.Size(125, 37);
-            this.iconBtnEdit.TabIndex = 59;
-            this.iconBtnEdit.UseVisualStyleBackColor = false;
-            this.iconBtnEdit.Click += new System.EventHandler(this.iconBtnEdit_Click);
-            // 
-            // iconBtnDelete
-            // 
-            this.iconBtnDelete.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnDelete.FlatAppearance.BorderSize = 0;
-            this.iconBtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnDelete.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            this.iconBtnDelete.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnDelete.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnDelete.IconSize = 32;
-            this.iconBtnDelete.Location = new System.Drawing.Point(516, 3);
-            this.iconBtnDelete.Name = "iconBtnDelete";
-            this.iconBtnDelete.Size = new System.Drawing.Size(125, 37);
-            this.iconBtnDelete.TabIndex = 59;
-            this.iconBtnDelete.UseVisualStyleBackColor = false;
-            this.iconBtnDelete.Click += new System.EventHandler(this.iconBtnDelete_Click);
-            // 
-            // iconBtnClose
-            // 
-            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
-            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconBtnClose.FlatAppearance.BorderSize = 0;
-            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
-            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnClose.IconSize = 32;
-            this.iconBtnClose.Location = new System.Drawing.Point(667, 3);
-            this.iconBtnClose.Name = "iconBtnClose";
-            this.iconBtnClose.Size = new System.Drawing.Size(125, 37);
-            this.iconBtnClose.TabIndex = 59;
-            this.iconBtnClose.UseVisualStyleBackColor = false;
-            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
-            // 
-            // labelTotalTasks
-            // 
-            this.labelTotalTasks.AutoSize = true;
-            this.labelTotalTasks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTotalTasks.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalTasks.Location = new System.Drawing.Point(3, 0);
-            this.labelTotalTasks.Name = "labelTotalTasks";
-            this.labelTotalTasks.Size = new System.Drawing.Size(330, 28);
-            this.labelTotalTasks.TabIndex = 0;
-            this.labelTotalTasks.Text = "0";
-            this.labelTotalTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -336,45 +214,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1015, 426);
             this.tableLayoutPanel2.TabIndex = 6;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.txtSummary, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 297);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(10);
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(496, 120);
-            this.tableLayoutPanel3.TabIndex = 8;
-            // 
-            // txtSummary
-            // 
-            this.txtSummary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSummary.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSummary.Location = new System.Drawing.Point(13, 43);
-            this.txtSummary.Multiline = true;
-            this.txtSummary.Name = "txtSummary";
-            this.txtSummary.ReadOnly = true;
-            this.txtSummary.Size = new System.Drawing.Size(470, 64);
-            this.txtSummary.TabIndex = 37;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 14);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 21);
-            this.label3.TabIndex = 36;
-            this.label3.Text = "Summary:";
             // 
             // tableLayoutPanel8
             // 
@@ -398,13 +237,12 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 87);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(495, 330);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
@@ -533,6 +371,77 @@
             this.iconBtnClear.UseVisualStyleBackColor = false;
             this.iconBtnClear.Click += new System.EventHandler(this.iconBtnClear_Click);
             // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 1;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.dailyPieChart, 0, 0);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(510, 3);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(502, 420);
+            this.tableLayoutPanel11.TabIndex = 10;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.txtSummary, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 297);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(496, 120);
+            this.tableLayoutPanel3.TabIndex = 8;
+            // 
+            // txtSummary
+            // 
+            this.txtSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSummary.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSummary.Location = new System.Drawing.Point(13, 43);
+            this.txtSummary.Multiline = true;
+            this.txtSummary.Name = "txtSummary";
+            this.txtSummary.ReadOnly = true;
+            this.txtSummary.Size = new System.Drawing.Size(470, 64);
+            this.txtSummary.TabIndex = 37;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(13, 14);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 21);
+            this.label3.TabIndex = 36;
+            this.label3.Text = "Summary:";
+            // 
+            // dailyPieChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.dailyPieChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.dailyPieChart.Legends.Add(legend1);
+            this.dailyPieChart.Location = new System.Drawing.Point(3, 3);
+            this.dailyPieChart.Name = "dailyPieChart";
+            this.dailyPieChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.dailyPieChart.Series.Add(series1);
+            this.dailyPieChart.Size = new System.Drawing.Size(300, 288);
+            this.dailyPieChart.TabIndex = 9;
+            this.dailyPieChart.Text = "Pie Chart";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -547,6 +456,104 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1015, 83);
             this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 9;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21F));
+            this.tableLayoutPanel10.Controls.Add(this.iconBtnAdd, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.iconBtnEdit, 3, 0);
+            this.tableLayoutPanel10.Controls.Add(this.iconBtnDelete, 5, 0);
+            this.tableLayoutPanel10.Controls.Add(this.iconBtnClose, 7, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1009, 43);
+            this.tableLayoutPanel10.TabIndex = 3;
+            // 
+            // iconBtnAdd
+            // 
+            this.iconBtnAdd.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnAdd.FlatAppearance.BorderSize = 0;
+            this.iconBtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnAdd.IconChar = FontAwesome.Sharp.IconChar.Add;
+            this.iconBtnAdd.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnAdd.IconSize = 32;
+            this.iconBtnAdd.Location = new System.Drawing.Point(214, 3);
+            this.iconBtnAdd.Name = "iconBtnAdd";
+            this.iconBtnAdd.Size = new System.Drawing.Size(125, 37);
+            this.iconBtnAdd.TabIndex = 59;
+            this.iconBtnAdd.UseVisualStyleBackColor = false;
+            this.iconBtnAdd.Click += new System.EventHandler(this.iconBtnAdd_Click);
+            // 
+            // iconBtnEdit
+            // 
+            this.iconBtnEdit.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnEdit.FlatAppearance.BorderSize = 0;
+            this.iconBtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnEdit.IconChar = FontAwesome.Sharp.IconChar.Pen;
+            this.iconBtnEdit.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnEdit.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnEdit.IconSize = 32;
+            this.iconBtnEdit.Location = new System.Drawing.Point(365, 3);
+            this.iconBtnEdit.Name = "iconBtnEdit";
+            this.iconBtnEdit.Size = new System.Drawing.Size(125, 37);
+            this.iconBtnEdit.TabIndex = 59;
+            this.iconBtnEdit.UseVisualStyleBackColor = false;
+            this.iconBtnEdit.Click += new System.EventHandler(this.iconBtnEdit_Click);
+            // 
+            // iconBtnDelete
+            // 
+            this.iconBtnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnDelete.FlatAppearance.BorderSize = 0;
+            this.iconBtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnDelete.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            this.iconBtnDelete.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnDelete.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnDelete.IconSize = 32;
+            this.iconBtnDelete.Location = new System.Drawing.Point(516, 3);
+            this.iconBtnDelete.Name = "iconBtnDelete";
+            this.iconBtnDelete.Size = new System.Drawing.Size(125, 37);
+            this.iconBtnDelete.TabIndex = 59;
+            this.iconBtnDelete.UseVisualStyleBackColor = false;
+            this.iconBtnDelete.Click += new System.EventHandler(this.iconBtnDelete_Click);
+            // 
+            // iconBtnClose
+            // 
+            this.iconBtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.iconBtnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.iconBtnClose.FlatAppearance.BorderSize = 0;
+            this.iconBtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconBtnClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.iconBtnClose.IconColor = System.Drawing.Color.Maroon;
+            this.iconBtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnClose.IconSize = 32;
+            this.iconBtnClose.Location = new System.Drawing.Point(667, 3);
+            this.iconBtnClose.Name = "iconBtnClose";
+            this.iconBtnClose.Size = new System.Drawing.Size(125, 37);
+            this.iconBtnClose.TabIndex = 59;
+            this.iconBtnClose.UseVisualStyleBackColor = false;
+            this.iconBtnClose.Click += new System.EventHandler(this.iconBtnClose_Click);
             // 
             // tableLayoutPanel12
             // 
@@ -565,6 +572,30 @@
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1009, 28);
             this.tableLayoutPanel12.TabIndex = 4;
             // 
+            // labelTotalTasks
+            // 
+            this.labelTotalTasks.AutoSize = true;
+            this.labelTotalTasks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTotalTasks.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalTasks.Location = new System.Drawing.Point(3, 0);
+            this.labelTotalTasks.Name = "labelTotalTasks";
+            this.labelTotalTasks.Size = new System.Drawing.Size(330, 28);
+            this.labelTotalTasks.TabIndex = 0;
+            this.labelTotalTasks.Text = "0";
+            this.labelTotalTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelTotalTimeUsed
+            // 
+            this.labelTotalTimeUsed.AutoSize = true;
+            this.labelTotalTimeUsed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTotalTimeUsed.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalTimeUsed.Location = new System.Drawing.Point(339, 0);
+            this.labelTotalTimeUsed.Name = "labelTotalTimeUsed";
+            this.labelTotalTimeUsed.Size = new System.Drawing.Size(330, 28);
+            this.labelTotalTimeUsed.TabIndex = 0;
+            this.labelTotalTimeUsed.Text = "0";
+            this.labelTotalTimeUsed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // labelTotalUnusedTime
             // 
             this.labelTotalUnusedTime.AutoSize = true;
@@ -576,38 +607,6 @@
             this.labelTotalUnusedTime.TabIndex = 0;
             this.labelTotalUnusedTime.Text = "0";
             this.labelTotalUnusedTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.ColumnCount = 1;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.dailyPieChart, 0, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(510, 3);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(502, 420);
-            this.tableLayoutPanel11.TabIndex = 10;
-            // 
-            // dailyPieChart
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.dailyPieChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.dailyPieChart.Legends.Add(legend2);
-            this.dailyPieChart.Location = new System.Drawing.Point(3, 3);
-            this.dailyPieChart.Name = "dailyPieChart";
-            this.dailyPieChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.dailyPieChart.Series.Add(series2);
-            this.dailyPieChart.Size = new System.Drawing.Size(300, 288);
-            this.dailyPieChart.TabIndex = 9;
-            this.dailyPieChart.Text = "Pie Chart";
             // 
             // FormTaskList
             // 
@@ -630,10 +629,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconClose)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -641,11 +637,14 @@
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dailyPieChart)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dailyPieChart)).EndInit();
             this.ResumeLayout(false);
 
         }
