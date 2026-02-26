@@ -25,6 +25,7 @@ namespace RoutineAPP
         private readonly ITaskService _taskService;
         private readonly IReportService _reportService;
         private readonly ICommentService _commentService;
+        private readonly IGraphService _graphService;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
@@ -274,7 +275,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormGraphs());
+            OpenChildForm(new FormGraphs(_graphService));
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using RoutineAPP.BLL;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
+﻿using RoutineAPP.Core.Interfaces;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;

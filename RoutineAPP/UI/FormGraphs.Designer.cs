@@ -73,7 +73,7 @@
             this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitleSingleCategory = new System.Windows.Forms.Label();
-            this.chartSingleCategories = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartSingleCategory = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.allCategoriesPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -110,7 +110,7 @@
             this.tableLayoutPanel18.SuspendLayout();
             this.tableLayoutPanel19.SuspendLayout();
             this.tableLayoutPanel20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartSingleCategories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSingleCategory)).BeginInit();
             this.allCategoriesPage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -600,7 +600,7 @@
             this.tableLayoutPanel19.ColumnCount = 1;
             this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel20, 0, 0);
-            this.tableLayoutPanel19.Controls.Add(this.chartSingleCategories, 0, 1);
+            this.tableLayoutPanel19.Controls.Add(this.chartSingleCategory, 0, 1);
             this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel19.Location = new System.Drawing.Point(3, 77);
             this.tableLayoutPanel19.Name = "tableLayoutPanel19";
@@ -638,22 +638,22 @@
             this.labelTitleSingleCategory.Text = "Graph Title";
             this.labelTitleSingleCategory.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // chartSingleCategories
+            // chartSingleCategory
             // 
             chartArea2.Name = "ChartArea1";
-            this.chartSingleCategories.ChartAreas.Add(chartArea2);
-            this.chartSingleCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartSingleCategory.ChartAreas.Add(chartArea2);
+            this.chartSingleCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             legend2.Name = "Legend1";
-            this.chartSingleCategories.Legends.Add(legend2);
-            this.chartSingleCategories.Location = new System.Drawing.Point(3, 39);
-            this.chartSingleCategories.Name = "chartSingleCategories";
+            this.chartSingleCategory.Legends.Add(legend2);
+            this.chartSingleCategory.Location = new System.Drawing.Point(3, 39);
+            this.chartSingleCategory.Name = "chartSingleCategory";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
-            this.chartSingleCategories.Series.Add(series2);
-            this.chartSingleCategories.Size = new System.Drawing.Size(705, 318);
-            this.chartSingleCategories.TabIndex = 1;
-            this.chartSingleCategories.Text = "chart2";
+            this.chartSingleCategory.Series.Add(series2);
+            this.chartSingleCategory.Size = new System.Drawing.Size(705, 318);
+            this.chartSingleCategory.TabIndex = 1;
+            this.chartSingleCategory.Text = "chart2";
             // 
             // allCategoriesPage
             // 
@@ -899,7 +899,7 @@
             this.tableLayoutPanel19.ResumeLayout(false);
             this.tableLayoutPanel20.ResumeLayout(false);
             this.tableLayoutPanel20.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartSingleCategories)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSingleCategory)).EndInit();
             this.allCategoriesPage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -938,7 +938,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
         private System.Windows.Forms.Label labelTitleSingleCategory;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartSingleCategories;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSingleCategory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
