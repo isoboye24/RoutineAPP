@@ -85,6 +85,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Services\CommentService.cs" />
     <Compile Include="Application\Services\ReportService.cs" />
     <Compile Include="Application\Services\TaskService.cs" />
     <Compile Include="Application\Services\DailyRoutineService.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Core\Entities\Month.cs" />
     <Compile Include="Core\Entities\Task.cs" />
     <Compile Include="Core\Entities\Years.cs" />
+    <Compile Include="Core\Interfaces\ICommentService.cs" />
     <Compile Include="Core\Interfaces\IReportService.cs" />
     <Compile Include="Core\Interfaces\ITaskService.cs" />
     <Compile Include="Core\Interfaces\ITaskRepository.cs" />
@@ -175,7 +177,6 @@
     <Compile Include="BLL\DashboardBLL.cs" />
     <Compile Include="BLL\GraphBLL.cs" />
     <Compile Include="BLL\IBLL.cs" />
-    <Compile Include="BLL\ReportsBLL.cs" />
     <Compile Include="Core\Entities\Category.cs" />
     <Compile Include="Core\Interfaces\ICategoryRepository.cs" />
     <Compile Include="Core\Interfaces\ICategoryService.cs" />
@@ -188,8 +189,6 @@
     <Compile Include="Infrastructure\Data\APPContext.cs" />
     <Compile Include="DAL\DAO\GraphDAO.cs" />
     <Compile Include="DAL\DAO\IDAO.cs" />
-    <Compile Include="DAL\DAO\ReportsDAO.cs" />
-    <Compile Include="DAL\DAO\TaskDAO.cs" />
     <Compile Include="Infrastructure\Data\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,10 +206,6 @@
     </Compile>
     <Compile Include="DAL\DTO\GraphDetailDTO.cs" />
     <Compile Include="DAL\DTO\GraphDTO.cs" />
-    <Compile Include="DAL\DTO\MonthlyRoutinesDetailDTO.cs" />
-    <Compile Include="DAL\DTO\MonthlyRoutineDTO.cs" />
-    <Compile Include="DAL\DTO\ReportDTO.cs" />
-    <Compile Include="DAL\DTO\ReportsDetailDTO.cs" />
     <Compile Include="Infrastructure\Data\MONTH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

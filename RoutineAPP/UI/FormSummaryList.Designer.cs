@@ -181,6 +181,7 @@
             this.txtDay.Size = new System.Drawing.Size(174, 27);
             this.txtDay.TabIndex = 2;
             this.txtDay.TextChanged += new System.EventHandler(this.txtDay_TextChanged);
+            this.txtDay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDay_KeyPress);
             // 
             // iconBtnSearch
             // 
@@ -395,8 +396,6 @@
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(794, 255);
             this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
             // FormSummaryList
             // 

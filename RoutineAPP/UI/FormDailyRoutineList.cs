@@ -37,13 +37,13 @@ namespace RoutineAPP.AllForms
             _categoryService = categoryService;
         }
 
-        private void ApplyFontStyles()
+        private void resizeControls()
         {
             GeneralHelper.ApplyBoldFont(12, label1, label4, iconBtnAdd, iconBtnClear, iconBtnDelete, iconBtnSearch, iconBtnEdit);
             GeneralHelper.ApplyRegularFont(14, txtDay, cmbYear, cmbMonth);
         }
 
-        private void FillCombos()
+        private void fillCombos()
         {
             var months = _monthService.GetAll();
             cmbMonth.DataSource = months;
@@ -55,20 +55,20 @@ namespace RoutineAPP.AllForms
 
         private void FormDailyRoutineList_Load(object sender, EventArgs e)
         {
-            ApplyFontStyles();
+            resizeControls();
 
-            FillCombos();
+            fillCombos();
 
-            LoadDailyRoutine();
-            RefreshDataCounts();
+            loadDailyRoutine();
+            refreshDataCounts();
         }
 
-        private void RefreshDataCounts()
+        private void refreshDataCounts()
         {
             labelTotalRoutine.Text = dataGridView1.RowCount + " Day" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
-        private void LoadDailyRoutine()
+        private void loadDailyRoutine()
         {
             var domainList = _dailyService.GetAll();
 
@@ -113,9 +113,9 @@ namespace RoutineAPP.AllForms
             txtDay.Clear();
             cmbMonth.SelectedIndex = -1;
             cmbYear.SelectedIndex = -1;
-            LoadDailyRoutine();
+            loadDailyRoutine();
 
-            RefreshDataCounts();
+            refreshDataCounts();
         }
 
 
@@ -204,7 +204,7 @@ namespace RoutineAPP.AllForms
             }           
             dataGridView1.DataSource = filtered;
 
-            RefreshDataCounts();
+            refreshDataCounts();
         }
 
         private void iconBtnClear_Click(object sender, EventArgs e)

@@ -216,7 +216,7 @@ namespace RoutineAPP.AllForms
         private void iconBtnView_Click(object sender, EventArgs e)
         {
            
-            var selected = General.GetSelected<ReportDetailsViewModel>(dataGridViewMonthly);
+            var selected = General.GetSelected<GetAllMonthsViewModel>(dataGridViewMonthly);
 
             if (selected == null)
             {
@@ -225,7 +225,7 @@ namespace RoutineAPP.AllForms
             }
 
             var form = new FormMonthlyReports(_reportService, _categoryService);
-            form.LoadForView(selected.ReportID);
+            form.LoadForView(selected.MonthID, selected.Year);
             form.ShowDialog();
         }
 

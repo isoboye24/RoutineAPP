@@ -3,6 +3,7 @@ using RoutineAPP.AllForms;
 using RoutineAPP.BLL;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.DAL.DTO;
+using RoutineAPP.HelperService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,12 +24,13 @@ namespace RoutineAPP
         private readonly IDailyRoutineService _dailyService;
         private readonly ITaskService _taskService;
         private readonly IReportService _reportService;
+        private readonly ICommentService _commentService;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
-            ITaskService taskService, IReportService reportService)
+            ITaskService taskService, IReportService reportService, ICommentService commentService)
         {
             InitializeComponent();
             _categoryService = categoryService;
@@ -36,6 +38,7 @@ namespace RoutineAPP
             _dailyService = dailyService;
             _taskService = taskService;
             _reportService = reportService;
+            _commentService = commentService;
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(5, 40);
@@ -43,7 +46,7 @@ namespace RoutineAPP
             //Form
             this.Text = string.Empty;
             this.ControlBox = false;
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = true;            
         }
         private struct RBGColors
         {
@@ -120,8 +123,16 @@ namespace RoutineAPP
         int currentMonth = DateTime.Today.Month;
         int currentYear = DateTime.Today.Year;
 
-        ReportsBLL reportsBLL = new ReportsBLL();
-        ReportDTO reportDTO = new ReportDTO();
+        private void loadTopMonthlyGrid()
+        {
+            
+        }
+
+        private void loadTopYearlyGrid()
+        {
+            
+        }
+
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             reportDTO = reportsBLL.SelectMonthlyReports(currentMonth, currentYear);
@@ -256,7 +267,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormSummaryList());
+            OpenChildForm(new FormSummaryList(_commentService, _dailyService, _monthService));
         }
 
         private void btnGraphs_Click(object sender, EventArgs e)
