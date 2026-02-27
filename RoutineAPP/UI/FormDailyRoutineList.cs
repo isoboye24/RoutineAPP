@@ -1,7 +1,5 @@
 ﻿using RoutineAPP.Application.Services;
-using RoutineAPP.BLL;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
 using RoutineAPP.Helper;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
@@ -47,10 +45,10 @@ namespace RoutineAPP.AllForms
         {
             var months = _monthService.GetAll();
             cmbMonth.DataSource = months;
-            General.ComboBoxProps(cmbMonth, "Name", "Id");
+            GeneralHelper.ComboBoxProps(cmbMonth, "Name", "Id");
 
             cmbYear.DataSource = _dailyService.GetOnlyYears();
-            General.ComboBoxProps(cmbYear, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYear, "Year", "YearID");
         }
 
         private void FormDailyRoutineList_Load(object sender, EventArgs e)
@@ -80,7 +78,7 @@ namespace RoutineAPP.AllForms
                     Summary = x.Summary,
                     Day = x.Date.Day,
                     MonthID = x.Date.Month,
-                    MonthName = General.ConventIntToMonth(x.Date.Month),
+                    MonthName = GeneralHelper.ConventIntToMonth(x.Date.Month),
                     Year = x.Date.Year
 
                 })
@@ -93,12 +91,12 @@ namespace RoutineAPP.AllForms
 
         private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = GeneralHelper.isNumber(e);
         }
 
         private void txtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = GeneralHelper.isNumber(e);
         }
 
         private void txtDay_TextChanged(object sender, EventArgs e)
@@ -129,7 +127,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -145,7 +143,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
 
             if (selected == null)
             {
@@ -160,7 +158,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a daily routine.");

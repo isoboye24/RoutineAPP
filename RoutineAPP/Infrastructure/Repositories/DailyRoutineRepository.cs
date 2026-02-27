@@ -192,5 +192,10 @@ namespace RoutineAPP.Infrastructure.Repositories
 
             return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
         }
+
+        public int GetSummaryCount()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -33,7 +33,12 @@ namespace RoutineAPP
             ITaskRepository taskRepository = new TaskRepository(db);
             ITaskService taskService = new TaskService(taskRepository);
 
-            IReportService reportService = new ReportService(taskRepository, dailyRoutineRepository);
+            IReportService reportService = new ReportService(taskRepository, dailyRoutineRepository, categoryRepository);
+
+            ICommentService commentService = new CommentService(dailyRoutineRepository);
+
+            IGraphRepository graphRepository = new GraphRepository(db);
+            IGraphService graphService = new GraphService(graphRepository);
 
 
             bool databaseWasCreated;
@@ -44,7 +49,7 @@ namespace RoutineAPP
                 RunSchemaScript(databaseName);
             }
 
-            System.Windows.Forms.Application.Run(new FormDashboard(categoryService, monthService, dailyRoutineService, taskService, reportService));
+            System.Windows.Forms.Application.Run(new FormDashboard(categoryService, monthService, dailyRoutineService, taskService, reportService, commentService, graphService));
         }
 
         private static string EnsureDatabaseExists(out bool created)

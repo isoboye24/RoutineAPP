@@ -1,6 +1,4 @@
-﻿using RoutineAPP.BLL;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
+﻿using RoutineAPP.Core.Interfaces;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -69,7 +67,7 @@ namespace RoutineAPP.AllForms
             resizeControls();
 
             cmbCategory.DataSource = _categoryService.GetAll();
-            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
 
             txtAdditionalTime.Hide();
             label1.Hide();
@@ -159,7 +157,7 @@ namespace RoutineAPP.AllForms
 
         private void txtTimeSpent_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = GeneralHelper.isNumber(e);
         }
     }
 }

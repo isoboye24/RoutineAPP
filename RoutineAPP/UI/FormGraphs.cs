@@ -51,7 +51,7 @@ namespace RoutineAPP.AllForms
             cmbCategorySingleCat.SelectedIndex = -1;
             cmbYearSingleCategory.SelectedIndex = -1;
 
-            allCatMonthlyReport.Text = General.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " Reports";
+            allCatMonthlyReport.Text = GeneralHelper.ConventIntToMonth(DateTime.Today.Month) + " " + DateTime.Today.Year + " Reports";
             cmbMonthMonthly.SelectedIndex = -1;
             cmbYearMonthly.SelectedIndex = -1;
 
@@ -71,7 +71,7 @@ namespace RoutineAPP.AllForms
         private void loadMonthlyCategoriesGraph(int month, int year)
         {
             var data = _graphService.GetMonthlyCategoriesReport(month, year);
-            string monthName = General.ConventIntToMonth(month);
+            string monthName = GeneralHelper.ConventIntToMonth(month);
 
 
             chartAllCategoryMonthly.Series.Clear();
@@ -134,19 +134,19 @@ namespace RoutineAPP.AllForms
         private void loadCombos()
         {
             cmbMonthMonthly.DataSource = _monthService.GetAll();
-            General.ComboBoxProps(cmbMonthMonthly, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonthMonthly, "MonthName", "MonthID");
 
             cmbCategorySingleCat.DataSource = _categoryService.GetAll();
-            General.ComboBoxProps(cmbCategorySingleCat, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategorySingleCat, "CategoryName", "CategoryID");
 
             cmbAnnualYear.DataSource = _dailyRoutineService.GetOnlyYears();
-            General.ComboBoxProps(cmbAnnualYear, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbAnnualYear, "Year", "YearID");
 
             cmbYearSingleCategory.DataSource = _dailyRoutineService.GetOnlyYears();
-            General.ComboBoxProps(cmbYearSingleCategory, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYearSingleCategory, "Year", "YearID");
 
             cmbYearMonthly.DataSource = _dailyRoutineService.GetOnlyYears();
-            General.ComboBoxProps(cmbYearMonthly, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYearMonthly, "Year", "YearID");
         }
 
 

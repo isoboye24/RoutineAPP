@@ -10,20 +10,20 @@ namespace RoutineAPP.Application.Services
 {
     public class CommentService : ICommentService
     {
-        private readonly ICommentService _commentService;
-        public CommentService(ICommentService commentService)
+        private readonly IDailyRoutineRepository _dailyRoutineRepository;
+        public CommentService(IDailyRoutineRepository dailyRoutineRepository)
         {
-            _commentService = commentService;
+            _dailyRoutineRepository = dailyRoutineRepository;
         }
 
         public List<DailyRoutineViewModel> GetCommentById(int Id)
-            => _commentService.GetCommentById(Id);
+            => _dailyRoutineRepository.GetCommentById(Id);
 
         public List<DailyRoutineViewModel> GetComments()
-            => _commentService.GetComments();
+            => _dailyRoutineRepository.GetComments();
 
         public int GetSummaryCount()
-            => _commentService.GetSummaryCount();
+            => _dailyRoutineRepository.GetSummaryCount();
 
     }
 }

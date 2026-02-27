@@ -1,6 +1,4 @@
-﻿using RoutineAPP.BLL;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
+﻿using RoutineAPP.Core.Interfaces;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -67,7 +65,7 @@ namespace RoutineAPP.AllForms
 
         private void LoadCombo() {
             cmbCategory.DataSource = _categoryService.GetAll();
-            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
 
         private void FormTaskList_Load(object sender, EventArgs e)
@@ -142,7 +140,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
             var form = new FormTaskWithSummary(_taskService, _categoryService);
             form.LoadForAddTask(selected.DailyRoutineId, selected.DailyRoutineDate);
             form.ShowDialog();
@@ -152,7 +150,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -168,7 +166,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<TaskViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a task.");

@@ -1,8 +1,5 @@
 ﻿using RoutineAPP.Application.Services;
-using RoutineAPP.BLL;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DAO;
-using RoutineAPP.DAL.DTO;
 using RoutineAPP.Helper;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
@@ -49,19 +46,19 @@ namespace RoutineAPP.AllForms
         private void FillCombos()
         {
             cmbMonth.DataSource = _monthService.GetAll();
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
 
             cmbYear.DataSource = _dailyRoutineService.GetOnlyYears();
-            General.ComboBoxProps(cmbYear, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYear, "Year", "YearID");
 
             cmbYearAnually.DataSource = _dailyRoutineService.GetOnlyYears();
-            General.ComboBoxProps(cmbYearAnually, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYearAnually, "Year", "YearID");
 
             cmbCategoryAnually.DataSource = _categoryService.GetAll();
-            General.ComboBoxProps(cmbCategoryAnually, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategoryAnually, "CategoryName", "CategoryID");
 
             cmbCategoryTotal.DataSource = _categoryService.GetAll();
-            General.ComboBoxProps(cmbCategoryTotal, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategoryTotal, "CategoryName", "CategoryID");
         }
 
         int year = DateTime.Now.Year;
@@ -81,7 +78,7 @@ namespace RoutineAPP.AllForms
                 .ToList();
 
             dataGridViewMonthly.DataSource = _getAllMonthsVM;
-            ConfigureGetAllMonthsGrid(dataGridViewMonthly, ReportGridType.GetAllMonths);
+            ConfigureReportDetailsGrid(dataGridViewMonthly, ReportGridType.GetAllMonths);
         }
 
         private void loadYearlyReports(int year)
@@ -216,7 +213,7 @@ namespace RoutineAPP.AllForms
         private void iconBtnView_Click(object sender, EventArgs e)
         {
            
-            var selected = General.GetSelected<GetAllMonthsViewModel>(dataGridViewMonthly);
+            var selected = GeneralHelper.GetSelected<GetAllMonthsViewModel>(dataGridViewMonthly);
 
             if (selected == null)
             {

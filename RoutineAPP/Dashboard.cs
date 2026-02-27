@@ -1,9 +1,9 @@
 ﻿using FontAwesome.Sharp;
 using RoutineAPP.AllForms;
-using RoutineAPP.BLL;
+using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
 using RoutineAPP.HelperService;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static RoutineAPP.Helper.ReportHelper;
 
 namespace RoutineAPP
 {
@@ -30,8 +31,15 @@ namespace RoutineAPP
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+
+        int currentMonth = DateTime.Today.Month;
+        int currentYear = DateTime.Today.Year;
+
+        List<Top5ReportViewModel> _top5MonthlyReportVM;
+        List<Top5ReportViewModel> _top5AnnualReportVM;
+
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
-            ITaskService taskService, IReportService reportService, ICommentService commentService)
+            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService)
         {
             InitializeComponent();
             _categoryService = categoryService;
@@ -40,6 +48,7 @@ namespace RoutineAPP
             _taskService = taskService;
             _reportService = reportService;
             _commentService = commentService;
+            _graphService = graphService;
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(5, 40);
@@ -120,56 +129,54 @@ namespace RoutineAPP
             childForm.Show();
             labelTitleChildForm.Text = childForm.Text;
         }
-        DashboardBLL bll = new DashboardBLL();
-        int currentMonth = DateTime.Today.Month;
-        int currentYear = DateTime.Today.Year;
 
-        private void loadTopMonthlyGrid()
+        private void loadTop5MonthlyReport(int month, int year)
         {
-            
+            var domainList = _reportService.GetFormattedTop5MonthlyReport(month, year);
+
+            _top5MonthlyReportVM  = domainList
+                .Select(x => new Top5ReportViewModel
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.CategoryName,
+                    TotalMinutes = x.TotalMinutes,
+                    FormattedTotalMinutes = x.FormattedTotalMinutes,
+                    Percentage = x.Percentage 
+                })
+                .ToList();
+
+            dataGridViewTop5Monthly.DataSource = _top5MonthlyReportVM;
+            ConfigureReportDetailsGrid(dataGridViewTop5Monthly, ReportGridType.Top5ReportDetails);
         }
 
-        private void loadTopYearlyGrid()
+        private void loadTop5AnnualReport(int year)
         {
-            
+            var domainList = _reportService.GetFormattedTop5AnnualReport(year);
+
+            _top5AnnualReportVM  = domainList
+                .Select(x => new Top5ReportViewModel
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.CategoryName,
+                    TotalMinutes = x.TotalMinutes,
+                    FormattedTotalMinutes = x.FormattedTotalMinutes,
+                    Percentage = x.Percentage 
+                })
+                .ToList();
+
+            dataGridViewTop5Yearly.DataSource = _top5AnnualReportVM;
+            ConfigureReportDetailsGrid(dataGridViewTop5Yearly, ReportGridType.Top5ReportDetails);
         }
+
 
         private void FormDashboard_Load(object sender, EventArgs e)
         {
-            reportDTO = reportsBLL.SelectMonthlyReports(currentMonth, currentYear);
-
-            dataGridViewTop5Monthly.DataSource = reportDTO.MonthlyTop5Reports;
-            dataGridViewTop5Monthly.Columns[0].Visible = false;
-            dataGridViewTop5Monthly.Columns[1].Visible = false;
-            dataGridViewTop5Monthly.Columns[2].HeaderText = "Cat.";
-            dataGridViewTop5Monthly.Columns[3].HeaderText = "Time";
-            dataGridViewTop5Monthly.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTop5Monthly.Columns[4].HeaderText = "%";
-            dataGridViewTop5Monthly.Columns[5].Visible = false;
-            dataGridViewTop5Monthly.Columns[6].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewTop5Monthly.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            General.StyleDataGridView(dataGridViewTop5Monthly);
-
-            dataGridViewTop5Yearly.DataSource = reportDTO.YearlyTop5Reports;
-            dataGridViewTop5Yearly.Columns[0].Visible = false;
-            dataGridViewTop5Yearly.Columns[1].Visible = false;
-            dataGridViewTop5Yearly.Columns[2].HeaderText = "Cat.";
-            dataGridViewTop5Yearly.Columns[3].HeaderText = "Time";
-            dataGridViewTop5Yearly.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTop5Yearly.Columns[4].HeaderText = "%";
-            dataGridViewTop5Yearly.Columns[5].Visible = false;
-            dataGridViewTop5Yearly.Columns[6].Visible = false;
-            foreach (DataGridViewColumn column in dataGridViewTop5Yearly.Columns)
-            {
-                column.HeaderCell.Style.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-            }
-            General.StyleDataGridView(dataGridViewTop5Yearly);
+            loadTop5MonthlyReport(currentMonth, currentYear);
+            loadTop5AnnualReport(currentYear);
 
             RefreshCards();
         }
+
         private void RefreshCards()
         {
             labelTimeOnExercise.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Exercise").ToString();
@@ -184,10 +191,10 @@ namespace RoutineAPP
             labelTimeOnProgrammingInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Programming").ToString();
 
             label4.Text = DateTime.Today.Year.ToString();
-            label8.Text = General.ConventIntToMonth(DateTime.Today.Month);
+            label8.Text = GeneralHelper.ConventIntToMonth(DateTime.Today.Month);
 
             labeltop5InYear.Text = "Top 5 in " + DateTime.Today.Year;
-            labeltop5InMonth.Text = "Top 5 in " + General.ConventIntToMonth(DateTime.Today.Month);
+            labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(DateTime.Today.Month);
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -275,7 +282,7 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormGraphs(_graphService));
+            OpenChildForm(new FormGraphs(_graphService, _dailyService, _monthService, _categoryService));
         }
     }
 }

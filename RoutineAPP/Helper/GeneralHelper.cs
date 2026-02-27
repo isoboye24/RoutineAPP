@@ -9,7 +9,96 @@ using System.Drawing;
 namespace RoutineAPP.HelperService
 {
     public class GeneralHelper
-    {        
+    {
+        public static bool isNumber(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static void ComboBoxProps(ComboBox cmb, string name, string ID)
+        {
+            cmb.DisplayMember = name;
+            cmb.ValueMember = ID;
+            cmb.SelectedIndex = -1;
+        }
+        public static string ConventIntToMonth(int month)
+        {
+            if (month == 1)
+            {
+                return "January";
+            }
+            else if (month == 2)
+            {
+                return "February";
+            }
+            else if (month == 3)
+            {
+                return "March";
+            }
+            else if (month == 4)
+            {
+                return "April";
+            }
+            else if (month == 5)
+            {
+                return "May";
+            }
+            else if (month == 6)
+            {
+                return "June";
+            }
+            else if (month == 7)
+            {
+                return "July";
+            }
+            else if (month == 8)
+            {
+                return "August";
+            }
+            else if (month == 9)
+            {
+                return "September";
+            }
+            else if (month == 10)
+            {
+                return "October";
+            }
+            else if (month == 11)
+            {
+                return "November";
+            }
+            else if (month == 12)
+            {
+                return "December";
+            }
+            else
+            {
+                return "Unknown month";
+            }
+        }
+
+        public static void StyleDataGridView(DataGridView dataGridView)
+        {
+            dataGridView.BackgroundColor = Color.Brown;
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Brown;
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView.EnableHeadersVisualStyles = false;
+        }
+
+        public static T GetSelected<T>(DataGridView grid) where T : class
+        {
+            if (grid.CurrentRow == null)
+                return null;
+
+            return grid.CurrentRow.DataBoundItem as T;
+        }
+
         public static void ApplyRegularFont(int size, params Control[] controls)
         {
             foreach (var control in controls)
@@ -30,7 +119,7 @@ namespace RoutineAPP.HelperService
         {
             foreach (var control in controls)
             {
-                control.Font = new System.Drawing.Font("Segoe UI", size, FontStyle.Italic#);
+                control.Font = new Font("Segoe UI", size, FontStyle.Italic);
             }
         }
 
@@ -74,6 +163,26 @@ namespace RoutineAPP.HelperService
             }
 
             return obj;
+        }
+
+        public static string FormatTime(int minutes)
+        {
+            int hours = minutes / 60;
+            int mins = minutes % 60;
+
+            if (hours == 0)
+                return $"{mins} min{(mins != 1 ? "s" : "")}";
+
+            return $"{hours} hr{(hours != 1 ? "s" : "")} {mins} min{(mins != 1 ? "s" : "")}";
+        }
+
+        public static string CalculatePercentage(int categoryMinutes, int totalMinutes)
+        {
+            if (totalMinutes == 0)
+                return "0 %";
+
+            double percent = (double)categoryMinutes / totalMinutes * 100;
+            return percent.ToString("0.00") + " %";
         }
 
     }

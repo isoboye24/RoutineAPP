@@ -1,7 +1,5 @@
 ﻿using RoutineAPP.Application.Services;
-using RoutineAPP.BLL;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -103,7 +101,7 @@ namespace RoutineAPP.AllForms
 
             fillCombos();
             
-            labelTitle.Text = General.ConventIntToMonth(month) + " " + year + " Report";
+            labelTitle.Text = GeneralHelper.ConventIntToMonth(month) + " " + year + " Report";
 
             RefreshCounts();            
         }
@@ -112,7 +110,7 @@ namespace RoutineAPP.AllForms
         {
             var categories = _categoryService.GetAll();
             cmbCategory.DataSource = categories;
-            General.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+            GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)

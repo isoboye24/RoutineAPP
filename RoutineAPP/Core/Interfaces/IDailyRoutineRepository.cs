@@ -24,5 +24,10 @@ namespace RoutineAPP.Core.Interfaces
         List<int> GetOnlyYears();
         List<GetAllMonthsViewModel> GetAllMonths();
         string GetDateRange();
+
+        List<DailyRoutineViewModel> GetComments();
+        List<DailyRoutineViewModel> GetCommentById(int Id);
+
+        int GetSummaryCount();
     }
 }

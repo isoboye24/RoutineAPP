@@ -96,6 +96,7 @@
     <Compile Include="Core\Entities\Task.cs" />
     <Compile Include="Core\Entities\Years.cs" />
     <Compile Include="Core\Interfaces\ICommentService.cs" />
+    <Compile Include="Core\Interfaces\IDashboardService.cs" />
     <Compile Include="Core\Interfaces\IGraphRepository.cs" />
     <Compile Include="Core\Interfaces\IGraphService.cs" />
     <Compile Include="Core\Interfaces\IReportService.cs" />
@@ -215,7 +216,6 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="General.cs" />
     <Compile Include="Helper\GeneralHelper.cs" />
     <Compile Include="Helper\TaskHelper.cs" />
     <Compile Include="Infrastructure\Repositories\DailyRoutineRepository.cs" />
@@ -228,6 +228,7 @@
     <Compile Include="UI\ViewModel\GetSingleCategoryViewModel.cs" />
     <Compile Include="UI\ViewModel\ReportDetailsViewModel.cs" />
     <Compile Include="UI\ViewModel\TaskViewModel.cs" />
+    <Compile Include="UI\ViewModel\Top5ReportViewModel.cs" />
     <EmbeddedResource Include="UI\FormCategory.resx">
       <DependentUpon>FormCategory.cs</DependentUpon>
     </EmbeddedResource>

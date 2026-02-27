@@ -1,6 +1,4 @@
-﻿using RoutineAPP.BLL;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
+﻿using RoutineAPP.Core.Interfaces;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -45,11 +43,11 @@ namespace RoutineAPP.AllForms
         {
             var monthList = _monthlyService.GetAll();
             cmbMonth.DataSource = monthList;
-            General.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
 
             var yearList = _dailyRoutineService.GetOnlyYears();
             cmbYear.DataSource = yearList;
-            General.ComboBoxProps(cmbYear, "Year", "YearID");
+            GeneralHelper.ComboBoxProps(cmbYear, "Year", "YearID");
         }
 
         private void loadSummaries()
@@ -128,7 +126,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = General.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -179,7 +177,7 @@ namespace RoutineAPP.AllForms
 
         private void txtDay_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = General.isNumber(e);
+            e.Handled = GeneralHelper.isNumber(e);
         }
     }
 }

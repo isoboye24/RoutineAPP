@@ -24,5 +24,8 @@ namespace RoutineAPP.Core.Interfaces
         List<TaskViewModel> GetTasksByMonth(int month, int year);
         List<TaskViewModel> GetTasksByYear(int year);
         List<TaskViewModel> GetTotalTasks();
+
+        List<Top5ReportViewModel> GetTop5MonthlyReport(int month, int year);
+        List<Top5ReportViewModel> GetTop5AnnualReport(int year);
     }
 }

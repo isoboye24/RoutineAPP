@@ -30,5 +30,8 @@ namespace RoutineAPP.Core.Interfaces
         string GetTotalOverallUnusedTime();
 
         string GetDateRange();
+
+        List<Top5ReportViewModel> GetFormattedTop5MonthlyReport(int month, int year);
+        List<Top5ReportViewModel> GetFormattedTop5AnnualReport(int year);
     }
 }

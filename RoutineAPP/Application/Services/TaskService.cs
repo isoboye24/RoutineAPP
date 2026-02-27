@@ -1,6 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
 using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.UI.ViewModel;
 using System;

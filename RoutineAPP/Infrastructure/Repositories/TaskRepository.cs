@@ -1,6 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
-using RoutineAPP.DAL.DTO;
+using RoutineAPP.HelperService;
 using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -124,7 +124,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         Summary = t.summary,
                         Day = d.routineDate.Day,
                         Month = d.routineDate.Month,
-                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -147,7 +147,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         Summary = t.summary,
                         Day = d.routineDate.Day,
                         Month = d.routineDate.Month,
-                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
                         Year = d.routineDate.Year,
                         TimeInHoursAndMinutes = t.timeSpent / 60 >= 1 ? $"{t.timeSpent / 60}h {t.timeSpent % 60}m" : $"{t.timeSpent % 60}m"
                     })
@@ -171,7 +171,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         Summary = t.summary,
                         Day = d.routineDate.Day,
                         Month = d.routineDate.Month,
-                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -195,7 +195,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         Summary = t.summary,
                         Day = d.routineDate.Day,
                         Month = d.routineDate.Month,
-                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -218,11 +218,71 @@ namespace RoutineAPP.Infrastructure.Repositories
                         Summary = t.summary,
                         Day = d.routineDate.Day,
                         Month = d.routineDate.Month,
-                        MonthName = General.ConventIntToMonth(d.routineDate.Month),
+                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
                         Year = d.routineDate.Year,
                     })
             .ToList();
         }
 
+        public List<Top5ReportViewModel> GetTop5AnnualReport(int year)
+        {
+            var query = (
+                from t in _db.TASKs
+                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                join c in _db.CATEGORies
+                    on t.categoryID equals c.categoryID
+                where !t.isDeleted
+                      && !c.isDeleted
+                      && !d.isDeleted
+                      && d.routineDate.Year == year
+                group new { t, c } by new
+                {
+                    t.categoryID,
+                    c.categoryName
+                }
+                into g
+                orderby g.Sum(x => x.t.timeSpent) descending
+                select new Top5ReportViewModel
+                {
+                    CategoryId = g.Key.categoryID,
+                    CategoryName = g.Key.categoryName,
+                    TotalMinutes = g.Sum(x => x.t.timeSpent)
+                }
+            )
+            .Take(5);
+
+            return query.ToList();
+        }
+
+        public List<Top5ReportViewModel> GetTop5MonthlyReport(int month, int year)
+        {
+            var query = (
+                from t in _db.TASKs
+                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                join c in _db.CATEGORies
+                    on t.categoryID equals c.categoryID
+                where !t.isDeleted
+                      && !c.isDeleted
+                      && !d.isDeleted
+                      && d.routineDate.Month == month
+                      && d.routineDate.Year == year
+                group new { t, c } by new
+                {
+                    t.categoryID,
+                    c.categoryName
+                }
+                into g
+                orderby g.Sum(x => x.t.timeSpent) descending
+                select new Top5ReportViewModel
+                {
+                    CategoryId = g.Key.categoryID,
+                    CategoryName = g.Key.categoryName,
+                    TotalMinutes = g.Sum(x => x.t.timeSpent)
+                }
+            )
+            .Take(5);
+
+            return query.ToList();
+        }
     }
 }

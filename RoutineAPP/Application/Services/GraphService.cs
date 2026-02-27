@@ -11,22 +11,22 @@ namespace RoutineAPP.Application.Services
 {
     public class GraphService : IGraphService
     {
-        private readonly IGraphService _graphService;
-        public GraphService(IGraphService graphService) 
-        { 
-            _graphService = graphService;
+        private readonly IGraphRepository _graphRepository;
+        public GraphService(IGraphRepository graphRepository) 
+        {
+            _graphRepository = graphRepository;
         }
 
         public int GetAnnualSingleCategoryTime(int year, int categoryId)
-            => _graphService.GetAnnualSingleCategoryTime(year, categoryId);
+            => _graphRepository.GetAnnualSingleCategoryTime(year, categoryId);
 
         public List<GetAllCategoriesViewModel> GetMonthlyCategoriesReport(int month, int year)
-            => _graphService.GetMonthlyCategoriesReport(month, year);
+            => _graphRepository.GetMonthlyCategoriesReport(month, year);
 
         public List<GetSingleCategoryViewModel> GetSingleCategoryReport(int year, int categoryId)
-            => _graphService.GetSingleCategoryReport(year, categoryId);
+            => _graphRepository.GetSingleCategoryReport(year, categoryId);
 
         public List<GetAllCategoriesViewModel> GetAllCategoriesAnnualReport(int year)
-            => _graphService.GetAllCategoriesAnnualReport(year);
+            => _graphRepository.GetAllCategoriesAnnualReport(year);
     }
 }
