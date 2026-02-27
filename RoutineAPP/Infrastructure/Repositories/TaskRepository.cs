@@ -284,5 +284,36 @@ namespace RoutineAPP.Infrastructure.Repositories
 
             return query.ToList();
         }
+
+        public string GetCategoryMonthly(int month, int year, string category)
+        {
+            var totalMinutes = (from t in _db.TASKs
+                                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                                join c in _db.CATEGORies
+                                    on t.categoryID equals c.categoryID
+                                where !t.isDeleted
+                                      && !c.isDeleted
+                                      && !d.isDeleted
+                                      && d.routineDate.Month == month
+                                      && d.routineDate.Year == year
+                                      && c.categoryName == category
+                                select t.timeSpent).Sum();
+            return totalMinutes / 60 >= 1 ? $"{totalMinutes / 60}h {totalMinutes % 60}m" : $"{totalMinutes % 60}m";
+        }
+
+        public string GetCategoryAnually(int year, string category)
+        {
+            var totalMinutes = (from t in _db.TASKs
+                                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                                join c in _db.CATEGORies
+                                    on t.categoryID equals c.categoryID
+                                where !t.isDeleted
+                                      && !c.isDeleted
+                                      && !d.isDeleted
+                                      && d.routineDate.Year == year
+                                      && c.categoryName == category
+                                select t.timeSpent).Sum();
+            return totalMinutes / 60 >= 1 ? $"{totalMinutes / 60}h {totalMinutes % 60}m" : $"{totalMinutes % 60}m";
+        }
     }
 }

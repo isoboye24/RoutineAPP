@@ -27,5 +27,8 @@ namespace RoutineAPP.Core.Interfaces
 
         List<Top5ReportViewModel> GetTop5MonthlyReport(int month, int year);
         List<Top5ReportViewModel> GetTop5AnnualReport(int year);
+
+        string GetCategoryMonthly(int month, int year, string category);
+        string GetCategoryAnually(int year, string category);
     }
 }

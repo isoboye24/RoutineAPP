@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Services\CommentService.cs" />
+    <Compile Include="Application\Services\DashboardService.cs" />
     <Compile Include="Application\Services\GraphService.cs" />
     <Compile Include="Application\Services\ReportService.cs" />
     <Compile Include="Application\Services\TaskService.cs" />

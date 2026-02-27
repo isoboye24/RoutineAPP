@@ -27,6 +27,7 @@ namespace RoutineAPP
         private readonly IReportService _reportService;
         private readonly ICommentService _commentService;
         private readonly IGraphService _graphService;
+        private readonly IDashboardService _dashboardService;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
@@ -39,16 +40,9 @@ namespace RoutineAPP
         List<Top5ReportViewModel> _top5AnnualReportVM;
 
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
-            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService)
+            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService, IDashboardService dashboardService)
         {
             InitializeComponent();
-            _categoryService = categoryService;
-            _monthService = monthService;
-            _dailyService = dailyService;
-            _taskService = taskService;
-            _reportService = reportService;
-            _commentService = commentService;
-            _graphService = graphService;
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(5, 40);
@@ -56,7 +50,16 @@ namespace RoutineAPP
             //Form
             this.Text = string.Empty;
             this.ControlBox = false;
-            this.DoubleBuffered = true;            
+            this.DoubleBuffered = true;
+
+            _categoryService = categoryService;
+            _monthService = monthService;
+            _dailyService = dailyService;
+            _taskService = taskService;
+            _reportService = reportService;
+            _commentService = commentService;
+            _graphService = graphService;
+            _dashboardService = dashboardService;            
         }
         private struct RBGColors
         {
@@ -179,22 +182,22 @@ namespace RoutineAPP
 
         private void RefreshCards()
         {
-            labelTimeOnExercise.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Exercise").ToString();
-            labelTimeOnFamilyInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Family").ToString();
-            labelTimeOnGermanInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "German").ToString();
-            labelTimeOnGodInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "God T").ToString();
-            labelTimeOnProgrammingInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Programming").ToString();
-            labelTimeOnBooksInMonth.Text = bll.SelectCategoryInMonth(currentMonth, currentYear, "Books").ToString();
+            labelTimeOnExercise.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Exercise");
+            labelTimeOnFamilyInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Family");
+            labelTimeOnGermanInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "German");
+            labelTimeOnGodInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "God T");
+            labelTimeOnProgrammingInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Programming");
+            labelTimeOnBooksInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Books");
 
-            labelTimeOnRussianInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Russian").ToString();
-            labelTimeOnGermanInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "German").ToString();
-            labelTimeOnProgrammingInYear.Text = bll.SelectCategoryInYear(DateTime.Today.Year, "Programming").ToString();
+            labelTimeOnRussianInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "Russian");
+            labelTimeOnGermanInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "German");
+            labelTimeOnProgrammingInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "Programming");
 
-            label4.Text = DateTime.Today.Year.ToString();
-            label8.Text = GeneralHelper.ConventIntToMonth(DateTime.Today.Month);
+            label4.Text = currentYear.ToString();
+            label8.Text = GeneralHelper.ConventIntToMonth(currentMonth);
 
-            labeltop5InYear.Text = "Top 5 in " + DateTime.Today.Year;
-            labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(DateTime.Today.Month);
+            labeltop5InYear.Text = "Top 5 in " + currentYear;
+            labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(currentYear);
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
