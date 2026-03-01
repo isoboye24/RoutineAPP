@@ -72,7 +72,7 @@ namespace RoutineAPP.AllForms
                 .Select(x => new GetAllMonthsViewModel
                 {
                     MonthID = x.MonthID,
-                    Month = x.Month,
+                    Month = GeneralHelper.ConventIntToMonth(x.MonthID),
                     Year = x.Year,
                 })
                 .ToList();
@@ -228,59 +228,7 @@ namespace RoutineAPP.AllForms
 
         private void dataGridViewAnually_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 5 && e.Value != null)
-            {
-                double cellValue;
-                if (double.TryParse(e.Value.ToString(), out cellValue))
-                {
-                    if (cellValue * 100 < 5)
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Red;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    
-                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Yellow;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else if (cellValue * 100 > 10 && cellValue * 100 <= 25)
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGreen;
-                            cell.Style.ForeColor = Color.White;
-                        }
-                    }
-                    else if (cellValue * 100 > 25)
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGoldenrod;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = dataGridViewAnually.DefaultCellStyle.BackColor;
-                            cell.Style.ForeColor = dataGridViewAnually.DefaultCellStyle.ForeColor;
-                        }
-                    }
-                }
-            }
+           
         }
 
         private void iconBtnSearchAnually_Click(object sender, EventArgs e)
@@ -347,59 +295,7 @@ namespace RoutineAPP.AllForms
 
         private void dataGridViewTotal_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 5 && e.Value != null)
-            {
-                double cellValue;
-                if (double.TryParse(e.Value.ToString(), out cellValue))
-                {
-                    if (cellValue * 100 < 5)
-                    {
-                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Red;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-
-                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
-                    {
-                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Yellow;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else if (cellValue * 100 > 10 && cellValue * 100 <= 25)
-                    {
-                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGreen;
-                            cell.Style.ForeColor = Color.White;
-                        }
-                    }
-                    else if (cellValue * 100 > 25)
-                    {
-                        DataGridViewRow row = dataGridViewTotal.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGoldenrod;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else
-                    {
-                        DataGridViewRow row = dataGridViewAnually.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = dataGridViewTotal.DefaultCellStyle.BackColor;
-                            cell.Style.ForeColor = dataGridViewTotal.DefaultCellStyle.ForeColor;
-                        }
-                    }
-                }
-            }
+            
         }
 
         private void dataGridViewTotal_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -440,6 +336,21 @@ namespace RoutineAPP.AllForms
             }
             dataGridViewTotal.DataSource = filtered;
             RefreshCounts();
+        }
+
+        private void dataGridViewMonthly_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            
+        }
+
+        private void dataGridViewAnually_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
+        }
+
+        private void dataGridViewTotal_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
         }
     }
 }

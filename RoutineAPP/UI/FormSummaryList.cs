@@ -15,22 +15,25 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace RoutineAPP.AllForms
 {
-    public partial class FormSummaryList : Form
+    public partial class FormCommentList : Form
     {
         private readonly ICommentService _commentService;
         private readonly IDailyRoutineService _dailyRoutineService;
         private readonly IMonthService _monthlyService;
+        private readonly IDateProvider _dateProvider;
         private bool _isView = false;
 
         List<DailyRoutineViewModel> _dailyRoutineVM;
-        public FormSummaryList(ICommentService commentService, IDailyRoutineService dailyRoutineService, IMonthService monthService)
+        public FormCommentList(ICommentService commentService, IDailyRoutineService dailyRoutineService, IMonthService monthService, IDateProvider dateProvider)
         {
             InitializeComponent();
             _commentService = commentService;
             _dailyRoutineService = dailyRoutineService;
             _monthlyService = monthService;
+            _dateProvider = dateProvider;
         }
         
+        private int year => _dateProvider.Today.Year;
 
         private void resizeControls()
         {
@@ -50,9 +53,9 @@ namespace RoutineAPP.AllForms
             GeneralHelper.ComboBoxProps(cmbYear, "Year", "YearID");
         }
 
-        private void loadSummaries()
+        private void loadComments(int year)
         {
-            var summaries = _commentService.GetComments();
+            var summaries = _commentService.GetComments(year);
 
             _dailyRoutineVM = summaries.Select(x => new DailyRoutineViewModel
             {
@@ -72,7 +75,7 @@ namespace RoutineAPP.AllForms
 
             fillCombos();
 
-            loadSummaries();
+            loadComments(year);
 
             RefreshDataCounts();
         }
@@ -88,8 +91,8 @@ namespace RoutineAPP.AllForms
             txtDay.Clear();
             cmbMonth.SelectedIndex = -1;
             cmbYear.SelectedIndex = -1;
-            
-            loadSummaries();
+
+            loadComments(year);
 
             RefreshDataCounts();
         }
@@ -159,12 +162,14 @@ namespace RoutineAPP.AllForms
             else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
             {
                 searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                loadComments(searchedYear);
                 filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear).ToList();
             }
             else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
             {
                 searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
                 searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
+                loadComments(searchedYear);
                 filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
             }
             else

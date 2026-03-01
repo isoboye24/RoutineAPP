@@ -15,7 +15,7 @@ namespace RoutineAPP.UI.ViewModel
         public string Category { get; set; }
         public int TimeSpent { get; set; }
         public int Day { get; set; }
-        public int Month { get; set; }
+        public int MonthID { get; set; }
         public string MonthName { get; set; }
         public int Year { get; set; }
         public string Summary { get; set; }

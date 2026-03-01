@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RoutineAPP.UI.ViewModel
 {
-    public class CategoryViewModel
+    public class MonthViewModel
     {
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
+        public int MonthID { get; set; }
+        public string MonthName { get; set; }
     }
 }

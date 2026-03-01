@@ -13,6 +13,7 @@ namespace RoutineAPP.UI.ViewModel
         public int MonthID { get; set; }
         public string Month { get; set; }
         public int Year { get; set; }
+        public int TotalMinutes { get; set; }
         public int TotalHours { get; set; }
     }
 }

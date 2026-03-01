@@ -130,58 +130,7 @@ namespace RoutineAPP.AllForms
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {            
-            if (e.ColumnIndex == 5 && e.Value != null)
-            {
-                double cellValue;
-                if (double.TryParse(e.Value.ToString(), out cellValue))
-                {
-                    if (cellValue*100 < 5)
-                    {
-                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Red;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }                    
-                    else if (cellValue * 100 >= 5 && cellValue * 100 <= 10)
-                    {
-                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.Yellow;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else if (cellValue * 100 > 10 && cellValue * 100 <= 25)
-                    {
-                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGreen;
-                            cell.Style.ForeColor = Color.White;
-                        }
-                    }
-                    else if (cellValue * 100 > 25)
-                    {
-                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = Color.DarkGoldenrod;
-                            cell.Style.ForeColor = Color.Black;
-                        }
-                    }
-                    else
-                    {
-                        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            cell.Style.BackColor = dataGridView1.DefaultCellStyle.BackColor;
-                            cell.Style.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
-                        }
-                    }
-                }
-            }
+           
         }
 
        
@@ -235,6 +184,11 @@ namespace RoutineAPP.AllForms
             }
             dataGridView1.DataSource = filtered;
             RefreshCounts();
+        }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
         }
     }
 }

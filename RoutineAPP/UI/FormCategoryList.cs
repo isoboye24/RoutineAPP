@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static RoutineAPP.Helper.CategoryHelper;
 
 namespace RoutineAPP.AllForms
 {
@@ -32,34 +33,32 @@ namespace RoutineAPP.AllForms
         {
             resizeControls();
 
-            LoadCategories();
+            loadCategories();
 
             RefreshDataCounts();
         }
 
-        private void LoadCategories()
+        private void loadCategories()
         {
             var domainList = _service.GetAll();
 
             _categories = domainList
                 .Select(x => new CategoryViewModel
                 {
-                    Id = x.Id,
-                    Category = x.Name
+                    CategoryID = x.CategoryID,
+                    CategoryName = x.CategoryName
                 })
                 .ToList();
 
             dataGridView1.DataSource = _categories;
-
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["Category"].HeaderText = "Category";
+            ConfigureCategoryGrid(dataGridView1, CategoryGridType.Basic);
         }
 
 
         private void ClearFilters()
         {
             txtCategory.Clear();
-            LoadCategories();
+            loadCategories();
             RefreshDataCounts();
         }
         private void RefreshDataCounts()
@@ -78,7 +77,7 @@ namespace RoutineAPP.AllForms
         private void txtCategory_TextChanged(object sender, EventArgs e)
         {
             string search = txtCategory.Text.Trim().ToLower();
-            var filtered = _categories.Where(x => x.Category.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            var filtered = _categories.Where(x => x.CategoryName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             dataGridView1.DataSource = filtered;
         }
 
@@ -99,7 +98,7 @@ namespace RoutineAPP.AllForms
             }
 
             var form = new FormCategory(_service);
-            form.LoadForEdit(selected.Id, selected.Category);
+            form.LoadForEdit(selected.CategoryID, selected.CategoryName);
             form.ShowDialog();
 
             ClearFilters();
@@ -118,7 +117,7 @@ namespace RoutineAPP.AllForms
 
             if (result == DialogResult.Yes)
             {
-                _service.Delete(selected.Id);
+                _service.Delete(selected.CategoryID);
                 ClearFilters();
             }
         }

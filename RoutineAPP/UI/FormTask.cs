@@ -13,14 +13,17 @@ using System.Windows.Forms;
 
 namespace RoutineAPP.AllForms
 {
-    public partial class FormTaskWithSummary : Form
+    public partial class FormTask : Form
     {
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private int _routineId;
         private DateTime _routineDate;
         private int _taskId;
-        public FormTaskWithSummary(ITaskService taskService, ICategoryService categoryService)
+        private int _prevTimeSpent;
+        private int _prevCategoryId;
+        private bool _isUpdate = false;
+        public FormTask(ITaskService taskService, ICategoryService categoryService)
         {
             InitializeComponent();
             _taskService = taskService;
@@ -60,33 +63,52 @@ namespace RoutineAPP.AllForms
         private void iconClose_Click(object sender, EventArgs e)
         {
             this.Close();
-        }        
+        }
+
+        public void LoadForAddTask(int id, DateTime date)
+        {
+            _routineId = id;
+            _routineDate = date;            
+        }
+
+        public void LoadForEdit(TaskViewModel vm, bool isUpdate)
+        {
+            loadCombos();
+
+            _taskId = vm.Id;
+            _routineId = vm.DailyRoutineId;
+            cmbCategory.SelectedValue = vm.CategoryId;
+            _prevCategoryId = vm.CategoryId;
+            txtSummary.Text = vm.Summary;
+            txtTimeSpent.Text = vm.TimeSpent.ToString();
+            _prevTimeSpent = vm.TimeSpent;
+            _isUpdate = isUpdate;           
+        }
+
+        private void loadCombos()
+        {
+            cmbCategory.DataSource = _categoryService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+        }
 
         private void FormTaskWithSummary_Load(object sender, EventArgs e)
         {
             resizeControls();
 
-            cmbCategory.DataSource = _categoryService.GetAll();
-            GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
+            if (!_isUpdate)
+            {
+                labelTitle.Text = "Add Task";
+                txtAdditionalTime.Hide();
+                label1.Hide();
+                label5.Hide();
 
-            txtAdditionalTime.Hide();
-            label1.Hide();
-            label5.Hide(); 
-            
-        }
-        public void LoadForAddTask(int id, DateTime date)
-        {
-            _routineId = id;
-            _routineDate = date;
-        }
+                loadCombos();
+            }
+            else
+            {
+                labelTitle.Text = "Edit Task";                
+            }
 
-        public void LoadForEdit(TaskViewModel vm)
-        {
-            _taskId = vm.Id;
-            _routineId = vm.DailyRoutineId;
-            cmbCategory.SelectedValue = vm.CategoryId;
-            txtSummary.Text = vm.Summary;
-            txtTimeSpent.Text = vm.TimeSpent.ToString();
         }
 
         private void FormTaskWithSummary_FormClosing(object sender, FormClosingEventArgs e)
@@ -108,7 +130,7 @@ namespace RoutineAPP.AllForms
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtTimeSpent.Text))
+                if (!int.TryParse(txtTimeSpent.Text.Trim(), out int timeSpent))
                 {
                     MessageBox.Show("Please enter time spent in minutes");
                     return;
@@ -120,10 +142,16 @@ namespace RoutineAPP.AllForms
                     return;
                 }
 
-                int timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
-
                 // Use SelectedValue, NOT SelectedIndex
                 int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
+
+                timeSpent = Convert.ToInt32(txtTimeSpent.Text.Trim());
+                int additionalTime = string.IsNullOrWhiteSpace(txtAdditionalTime.Text.Trim()) ? 0 : Convert.ToInt32(txtAdditionalTime.Text.Trim());
+
+                if (_isUpdate)
+                {
+                    timeSpent += additionalTime;                                        
+                }                
 
                 var task = new RoutineAPP.Core.Entities.Task(
                     _routineId,
@@ -142,9 +170,16 @@ namespace RoutineAPP.AllForms
                 }
                 else
                 {
-                    task.SetId(_taskId);
-                    _taskService.Update(task);
-                    MessageBox.Show("Task updated successfully!");
+                    if (string.IsNullOrWhiteSpace(txtAdditionalTime.Text.Trim()) && _prevTimeSpent == timeSpent && _prevCategoryId == categoryId)
+                    {
+                        MessageBox.Show("No changes");
+                    }
+                    else
+                    {
+                        task.SetId(_taskId);
+                        _taskService.Update(task);
+                        MessageBox.Show("Task updated successfully!");
+                    }
                 }
                 
                 this.Close();
@@ -156,6 +191,11 @@ namespace RoutineAPP.AllForms
         }
 
         private void txtTimeSpent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = GeneralHelper.isNumber(e);
+        }
+
+        private void txtAdditionalTime_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = GeneralHelper.isNumber(e);
         }

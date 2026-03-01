@@ -8,7 +8,7 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface IDashboardService
     {
-        string GetCategoryMonthly(int month, int year, string category);
-        string GetCategoryAnually(int year, string category);
+        string GetCategoryTimeMonthly(int month, int year, string category);
+        string GetCategoryTimeAnually(int year, string category);
     }
 }

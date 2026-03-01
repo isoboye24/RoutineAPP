@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Interfaces;
+using RoutineAPP.HelperService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,18 @@ namespace RoutineAPP.Application.Services
             _taskRepository = taskRepository;
         }
 
-        public string GetCategoryAnually(int year, string category)
-            => _taskRepository.GetCategoryAnually(year, category);
+        public string GetCategoryTimeAnually(int year, string category)
+        {
+            int totalTimeSpent = _taskRepository.GetCategoryTimeAnually(year, category);
 
-        public string GetCategoryMonthly(int month, int year, string category)
-            => _taskRepository.GetCategoryMonthly(month, year, category);
+            return GeneralHelper.FormatTimeShort(totalTimeSpent);
+        }
+
+        public string GetCategoryTimeMonthly(int month, int year, string category)
+        {
+            int totalTimeSpent = _taskRepository.GetCategoryTimeMonthly(month, year, category);
+
+            return GeneralHelper.FormatTimeShort(totalTimeSpent);
+        }
     }
 }

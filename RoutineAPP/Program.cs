@@ -1,4 +1,6 @@
-﻿using RoutineAPP.Application.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RoutineAPP.AllForms;
+using RoutineAPP.Application.Services;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.Infrastructure.Repositories;
@@ -8,6 +10,7 @@ using System.Data.EntityClient;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace RoutineAPP
 {
@@ -19,29 +22,43 @@ namespace RoutineAPP
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-            var db = new RoutineDBEntities();
+            var services = new ServiceCollection();
 
-            ICategoryRepository categoryRepository = new CategoryRepository(db);
-            ICategoryService categoryService = new CategoryService(categoryRepository);
+            // DbContext 
+            services.AddScoped<RoutineDBEntities>();
 
-            IMonthRepository monthRepository = new MonthRepository(db);
-            IMonthService monthService = new MonthService(monthRepository);
+            // Repositories
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IMonthRepository, MonthRepository>();
+            services.AddScoped<IDailyRoutineRepository, DailyRoutineRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IGraphRepository, GraphRepository>();
 
-            IDailyRoutineRepository dailyRoutineRepository = new DailyRoutineRepository(db);
-            IDailyRoutineService dailyRoutineService = new DailyRoutineService(dailyRoutineRepository);
+            // Services
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IMonthService, MonthService>();
+            services.AddScoped<IDailyRoutineService, DailyRoutineService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IGraphService, GraphService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
-            ITaskRepository taskRepository = new TaskRepository(db);
-            ITaskService taskService = new TaskService(taskRepository);
+            // Date Provider
+            services.AddScoped<IDateProvider, SystemDateProvider>();
 
-            IReportService reportService = new ReportService(taskRepository, dailyRoutineRepository, categoryRepository);
-
-            ICommentService commentService = new CommentService(dailyRoutineRepository);
-
-            IGraphRepository graphRepository = new GraphRepository(db);
-            IGraphService graphService = new GraphService(graphRepository);
-
-            IDashboardService dashboardService = new DashboardService(taskRepository);
-
+            // Forms
+            services.AddTransient<FormDashboard>();
+            services.AddTransient<FormCategoryList>();
+            services.AddTransient<FormCategory>();
+            services.AddTransient<FormReportsBoard>();
+            services.AddTransient<FormDailyRoutineList>();
+            services.AddTransient<FormDailyRoutine>();
+            services.AddTransient<FormCommentList>();
+            services.AddTransient<FormGraphs>();
+            services.AddTransient<FormTaskList>();
+            services.AddTransient<FormTask>();
+            services.AddTransient<FormDeletedData>();
 
             bool databaseWasCreated;
             string databaseName = EnsureDatabaseExists(out databaseWasCreated);
@@ -51,7 +68,9 @@ namespace RoutineAPP
                 RunSchemaScript(databaseName);
             }
 
-            System.Windows.Forms.Application.Run(new FormDashboard(categoryService, monthService, dailyRoutineService, taskService, reportService, commentService, graphService, dashboardService));
+            var provider = services.BuildServiceProvider();
+
+            System.Windows.Forms.Application.Run(provider.GetRequiredService<FormDashboard>());
         }
 
         private static string EnsureDatabaseExists(out bool created)

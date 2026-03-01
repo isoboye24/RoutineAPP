@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using Microsoft.Extensions.DependencyInjection;
 using RoutineAPP.AllForms;
 using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
@@ -28,19 +29,22 @@ namespace RoutineAPP
         private readonly ICommentService _commentService;
         private readonly IGraphService _graphService;
         private readonly IDashboardService _dashboardService;
+        private readonly IDateProvider _dateProvider;
+        private readonly IServiceProvider _serviceProvider;
+
+        private int currentMonth;
+        private int currentYear;
 
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
-        int currentMonth = DateTime.Today.Month;
-        int currentYear = DateTime.Today.Year;
-
         List<Top5ReportViewModel> _top5MonthlyReportVM;
         List<Top5ReportViewModel> _top5AnnualReportVM;
 
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
-            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService, IDashboardService dashboardService)
+            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService, IDashboardService dashboardService, 
+            IDateProvider dateProvider, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
@@ -59,8 +63,14 @@ namespace RoutineAPP
             _reportService = reportService;
             _commentService = commentService;
             _graphService = graphService;
-            _dashboardService = dashboardService;            
+            _dashboardService = dashboardService;
+            _dateProvider = dateProvider;
+            _serviceProvider = serviceProvider;
+
+            currentMonth = _dateProvider.Today.Month;
+             currentYear = _dateProvider.Today.Year;
         }
+
         private struct RBGColors
         {
             public static Color color1 = Color.FromArgb(172, 126, 241);
@@ -182,22 +192,22 @@ namespace RoutineAPP
 
         private void RefreshCards()
         {
-            labelTimeOnExercise.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Exercise");
-            labelTimeOnFamilyInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Family");
-            labelTimeOnGermanInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "German");
-            labelTimeOnGodInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "God T");
-            labelTimeOnProgrammingInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Programming");
-            labelTimeOnBooksInMonth.Text = _dashboardService.GetCategoryMonthly(currentMonth, currentYear, "Books");
+            labelTimeOnExercise.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "Exercise");
+            labelTimeOnFamilyInMonth.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "Family");
+            labelTimeOnGermanInMonth.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "German");
+            labelTimeOnGodInMonth.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "God T");
+            labelTimeOnProgrammingInMonth.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "Programming");
+            labelTimeOnBooksInMonth.Text = _dashboardService.GetCategoryTimeMonthly(currentMonth, currentYear, "Books");
 
-            labelTimeOnRussianInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "Russian");
-            labelTimeOnGermanInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "German");
-            labelTimeOnProgrammingInYear.Text = _dashboardService.GetCategoryAnually(currentYear, "Programming");
+            labelTimeOnRussianInYear.Text = _dashboardService.GetCategoryTimeAnually(currentYear, "Russian");
+            labelTimeOnGermanInYear.Text = _dashboardService.GetCategoryTimeAnually(currentYear, "German");
+            labelTimeOnProgrammingInYear.Text = _dashboardService.GetCategoryTimeAnually(currentYear, "Programming");
 
             label4.Text = currentYear.ToString();
-            label8.Text = GeneralHelper.ConventIntToMonth(currentMonth);
+            label8.Text = GeneralHelper.ConventIntToMonth(currentMonth) + " " + currentYear;
 
             labeltop5InYear.Text = "Top 5 in " + currentYear;
-            labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(currentYear);
+            labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(currentMonth) + " " + currentYear;
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -216,21 +226,24 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormCategoryList(_categoryService));
+            var form = _serviceProvider.GetRequiredService<FormCategoryList>();
+            OpenChildForm(form);
         }
 
         private void btnMonthlyReports_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormReportsBoard(_reportService, _monthService, _categoryService, _dailyService));
+            var form = _serviceProvider.GetRequiredService<FormReportsBoard>();
+            OpenChildForm(form);
         }
 
         private void btnDeletedData_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormDeletedData());
+            var form = _serviceProvider.GetRequiredService<FormDeletedData>();
+            OpenChildForm(form);
         }
 
         private void labelLogo_Click(object sender, EventArgs e)
@@ -271,21 +284,24 @@ namespace RoutineAPP
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormDailyRoutineList(_monthService, _dailyService, _taskService, _categoryService));
+            var form = _serviceProvider.GetRequiredService<FormDailyRoutineList>();
+            OpenChildForm(form);
         }        
 
         private void btnSummary_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormSummaryList(_commentService, _dailyService, _monthService));
+            var form = _serviceProvider.GetRequiredService<FormCommentList>();
+            OpenChildForm(form);
         }
 
         private void btnGraphs_Click(object sender, EventArgs e)
         {
             buttonWasClicked = true;
             ActivateButton(sender, RBGColors.color2);
-            OpenChildForm(new FormGraphs(_graphService, _dailyService, _monthService, _categoryService));
+            var form = _serviceProvider.GetRequiredService<FormGraphs>();
+            OpenChildForm(form);
         }
     }
 }

@@ -99,13 +99,13 @@ namespace RoutineAPP.Infrastructure.Repositories
 
         public int CountByMonth(int month, int year)
         {
-            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.monthID == month && x.year == year);
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.monthID == month && x.year == year) + 1;
         }
 
-        public List<DailyRoutineViewModel> GetComments()
+        public List<DailyRoutineViewModel> GetComments(int year)
         {
             return _db.DAILY_ROUTINE
-                    .Where(x => !x.isDeleted && x.summary != null)
+                    .Where(x => !x.isDeleted && x.summary != null && x.year == year)
                     .OrderByDescending(x => x.routineDate)
                     .Select(x => new DailyRoutineViewModel
                     {
@@ -136,19 +136,24 @@ namespace RoutineAPP.Infrastructure.Repositories
                     .ToList();
         }
 
-        public List<int> GetOnlyYears()
+        public List<YearViewModel> GetOnlyYears()
         {
             return _db.DAILY_ROUTINE
                 .Where(x => !x.isDeleted)
                 .Select(x => x.routineDate.Year)
                 .Distinct()
                 .OrderByDescending(x => x)
+                .Select(x => new YearViewModel
+                {
+                    YearID = x,
+                    Year = x
+                })                
                 .ToList();
         }
 
         public int CountByYear(int year)
         {
-            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.year == year);
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.year == year) + 1;
         }
 
         public int GetSummaryCount(int year)
@@ -172,25 +177,27 @@ namespace RoutineAPP.Infrastructure.Repositories
                 .Select(x => new GetAllMonthsViewModel
                 {
                     Year = x.Year,
-                    MonthID = x.Month,
-                    Month = new DateTime(x.Year, x.Month, 1).ToString("MMMM")
+                    MonthID = x.Month, 
                 })
                 .ToList();
         }
 
-        public string GetDateRange()
+        public (DateTime? FirstDate, DateTime? LastDate) GetDateRange()
         {
-            var dates = _db.DAILY_ROUTINE
+            var result = _db.DAILY_ROUTINE
                 .Where(x => !x.isDeleted)
-                .Select(x => x.routineDate);
+                .GroupBy(x => 1)
+                .Select(g => new
+                {
+                    FirstDate = g.Min(x => x.routineDate),
+                    LastDate = g.Max(x => x.routineDate)
+                })
+                .FirstOrDefault();
 
-            if (!dates.Any())
-                return "No data available";
+            if (result == null)
+                return (null, null);
 
-            var firstDate = dates.Min();
-            var lastDate = dates.Max();
-
-            return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
+            return (result.FirstDate, result.LastDate);
         }
 
         public int GetSummaryCount()

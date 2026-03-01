@@ -19,11 +19,11 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             _db = db;
         }
+
         public List<Core.Entities.Task> GetAll(int dailyId)
         {
             return _db.TASKs
                 .Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId)
-                .OrderByDescending(x => x.year).ThenByDescending(x => x.monthID).ThenByDescending(x => x.day)
                 .ToList()
                 .Select(x => Core.Entities.Task.Rehydrate(x.taskID, x.dailiyRoutineID, x.categoryID, x.timeSpent, x.day, x.monthID, x.year, x.summary))
                 .ToList();
@@ -93,13 +93,13 @@ namespace RoutineAPP.Infrastructure.Repositories
             return true;
         }
 
-        public bool Exists(int year, int month, int day)
+        public bool Exists(int categoryId, int routineId)
         {
             return _db.TASKs.Any(x =>
-                !x.isDeleted &&
-                x.year == year &&
-                x.monthID == month &&
-                x.day == day);
+                !x.isDeleted 
+                && x.categoryID == categoryId
+                && x.dailiyRoutineID == routineId
+                );
         }
 
         public int Count()
@@ -123,8 +123,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         TimeSpent = t.timeSpent,
                         Summary = t.summary,
                         Day = d.routineDate.Day,
-                        Month = d.routineDate.Month,
-                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
+                        MonthID = d.routineDate.Month,
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -146,12 +145,9 @@ namespace RoutineAPP.Infrastructure.Repositories
                         TimeSpent = t.timeSpent,
                         Summary = t.summary,
                         Day = d.routineDate.Day,
-                        Month = d.routineDate.Month,
-                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
+                        MonthID = d.routineDate.Month,
                         Year = d.routineDate.Year,
-                        TimeInHoursAndMinutes = t.timeSpent / 60 >= 1 ? $"{t.timeSpent / 60}h {t.timeSpent % 60}m" : $"{t.timeSpent % 60}m"
-                    })
-            .ToList();
+                    }).OrderByDescending(x => x.TimeSpent).OrderBy(x => x.Category).ToList();
         }
 
         public List<TaskViewModel> GetTasksByMonth(int month, int year)
@@ -170,8 +166,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         TimeSpent = t.timeSpent,
                         Summary = t.summary,
                         Day = d.routineDate.Day,
-                        Month = d.routineDate.Month,
-                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
+                        MonthID = d.routineDate.Month,
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -194,8 +189,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         TimeSpent = t.timeSpent,
                         Summary = t.summary,
                         Day = d.routineDate.Day,
-                        Month = d.routineDate.Month,
-                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
+                        MonthID = d.routineDate.Month,
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -217,8 +211,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                         TimeSpent = t.timeSpent,
                         Summary = t.summary,
                         Day = d.routineDate.Day,
-                        Month = d.routineDate.Month,
-                        MonthName = GeneralHelper.ConventIntToMonth(d.routineDate.Month),
+                        MonthID = d.routineDate.Month,
                         Year = d.routineDate.Year,
                     })
             .ToList();
@@ -259,8 +252,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             var query = (
                 from t in _db.TASKs
                 join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                join c in _db.CATEGORies
-                    on t.categoryID equals c.categoryID
+                join c in _db.CATEGORies on t.categoryID equals c.categoryID
                 where !t.isDeleted
                       && !c.isDeleted
                       && !d.isDeleted
@@ -285,9 +277,9 @@ namespace RoutineAPP.Infrastructure.Repositories
             return query.ToList();
         }
 
-        public string GetCategoryMonthly(int month, int year, string category)
+        public int GetCategoryTimeMonthly(int month, int year, string category)
         {
-            var totalMinutes = (from t in _db.TASKs
+            return (from t in _db.TASKs
                                 join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                                 join c in _db.CATEGORies
                                     on t.categoryID equals c.categoryID
@@ -297,13 +289,13 @@ namespace RoutineAPP.Infrastructure.Repositories
                                       && d.routineDate.Month == month
                                       && d.routineDate.Year == year
                                       && c.categoryName == category
-                                select t.timeSpent).Sum();
-            return totalMinutes / 60 >= 1 ? $"{totalMinutes / 60}h {totalMinutes % 60}m" : $"{totalMinutes % 60}m";
+                                select (int?)t.timeSpent).Sum() ?? 0;
+
         }
 
-        public string GetCategoryAnually(int year, string category)
+        public int GetCategoryTimeAnually(int year, string category)
         {
-            var totalMinutes = (from t in _db.TASKs
+            return (from t in _db.TASKs
                                 join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                                 join c in _db.CATEGORies
                                     on t.categoryID equals c.categoryID
@@ -312,8 +304,8 @@ namespace RoutineAPP.Infrastructure.Repositories
                                       && !d.isDeleted
                                       && d.routineDate.Year == year
                                       && c.categoryName == category
-                                select t.timeSpent).Sum();
-            return totalMinutes / 60 >= 1 ? $"{totalMinutes / 60}h {totalMinutes % 60}m" : $"{totalMinutes % 60}m";
+                                select (int?)t.timeSpent).Sum() ?? 0;
+
         }
     }
 }

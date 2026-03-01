@@ -1,5 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,39 @@ namespace RoutineAPP.Application.Services
             => _graphRepository.GetAnnualSingleCategoryTime(year, categoryId);
 
         public List<GetAllCategoriesViewModel> GetMonthlyCategoriesReport(int month, int year)
-            => _graphRepository.GetMonthlyCategoriesReport(month, year);
+        {
+            var data = _graphRepository.GetMonthlyCategoriesReport(month, year);
+
+            return data.Select(x => new GetAllCategoriesViewModel
+            {
+                CategoryId = x.CategoryId,
+                CategoryName = x.CategoryName,
+                TotalHours = x.TotalMinutes / 60
+            }).ToList();
+        }
 
         public List<GetSingleCategoryViewModel> GetSingleCategoryReport(int year, int categoryId)
-            => _graphRepository.GetSingleCategoryReport(year, categoryId);
+        {
+            var data = _graphRepository.GetSingleCategoryReport(year, categoryId);
+
+            return data.Select(x => new GetSingleCategoryViewModel
+            {
+                CategoryId = x.CategoryId,
+                CategoryName = x.CategoryName,
+                TotalHours = x.TotalMinutes / 60
+            }).ToList();
+        }
 
         public List<GetAllCategoriesViewModel> GetAllCategoriesAnnualReport(int year)
-            => _graphRepository.GetAllCategoriesAnnualReport(year);
+        {
+            var data = _graphRepository.GetAllCategoriesAnnualReport(year);
+
+            return data.Select(x => new GetAllCategoriesViewModel
+            {
+                CategoryId = x.CategoryId,
+                CategoryName = x.CategoryName,
+                TotalHours = x.TotalMinutes / 60
+            }).ToList();
+        }
     }
 }

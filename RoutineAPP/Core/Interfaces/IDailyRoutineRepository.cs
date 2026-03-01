@@ -21,11 +21,11 @@ namespace RoutineAPP.Core.Interfaces
         int Count();
         int CountByMonth(int month, int year);
         int CountByYear(int year);
-        List<int> GetOnlyYears();
+        List<YearViewModel> GetOnlyYears();
         List<GetAllMonthsViewModel> GetAllMonths();
-        string GetDateRange();
+        (DateTime? FirstDate, DateTime? LastDate) GetDateRange();
 
-        List<DailyRoutineViewModel> GetComments();
+        List<DailyRoutineViewModel> GetComments(int year);
         List<DailyRoutineViewModel> GetCommentById(int Id);
 
         int GetSummaryCount();

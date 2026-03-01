@@ -1,5 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace RoutineAPP.Application.Services
         public List<DailyRoutine> GetAll()
             => _repository.GetAll();
 
-        public List<int> GetOnlyYears()
+        public List<YearViewModel> GetOnlyYears()
             => _repository.GetOnlyYears();
         
 
@@ -52,5 +53,6 @@ namespace RoutineAPP.Application.Services
             routine.Update(date, summary);
             return _repository.Update(routine);
         }
+        
     }
 }

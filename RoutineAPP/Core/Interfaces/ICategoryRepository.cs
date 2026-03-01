@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface ICategoryRepository
     {
-        List<Category> GetAll();
+        List<CategoryViewModel> GetAll();
         Category GetById(int id);
         bool Insert(Category category);
         bool Update(Category category);

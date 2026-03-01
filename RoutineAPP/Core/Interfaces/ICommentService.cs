@@ -9,7 +9,7 @@ namespace RoutineAPP.Core.Interfaces
 {
     public interface ICommentService
     {
-        List<DailyRoutineViewModel> GetComments();
+        List<DailyRoutineViewModel> GetComments(int year);
         List<DailyRoutineViewModel> GetCommentById(int Id);
 
         int GetSummaryCount();

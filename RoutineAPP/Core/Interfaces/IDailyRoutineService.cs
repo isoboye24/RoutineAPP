@@ -1,4 +1,5 @@
 ﻿using RoutineAPP.Core.Entities;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace RoutineAPP.Core.Interfaces
         bool Delete(int id);
         bool PermanentDelete(int id);
         int Count();
-        List<int> GetOnlyYears();
+        List<YearViewModel> GetOnlyYears();
     }
 }

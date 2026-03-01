@@ -438,7 +438,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.dailyPieChart.Series.Add(series1);
-            this.dailyPieChart.Size = new System.Drawing.Size(300, 288);
+            this.dailyPieChart.Size = new System.Drawing.Size(496, 288);
             this.dailyPieChart.TabIndex = 9;
             this.dailyPieChart.Text = "Pie Chart";
             // 
@@ -683,8 +683,8 @@
         private FontAwesome.Sharp.IconButton iconBtnClose;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.DataVisualization.Charting.Chart dailyPieChart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.Label labelTotalUnusedTime;
+        private System.Windows.Forms.DataVisualization.Charting.Chart dailyPieChart;
     }
 }

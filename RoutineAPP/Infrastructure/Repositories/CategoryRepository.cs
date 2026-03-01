@@ -1,6 +1,7 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,16 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             _db = db;
         }
-        public List<Category> GetAll()
+        public List<CategoryViewModel> GetAll()
         {
             return _db.CATEGORies
                 .Where(x => !x.isDeleted)
                 .OrderBy(x => x.categoryName)
-                .ToList()
-                .Select(x => Category.Rehydrate(x.categoryID, x.categoryName))
+                .Select(x => new CategoryViewModel
+                {
+                    CategoryID = x.categoryID,
+                    CategoryName = x.categoryName
+                })
                 .ToList();
         }
 

@@ -120,7 +120,7 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Brown;
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
@@ -162,7 +162,7 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Maroon;
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel3.ColumnCount = 7;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.25F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.5F));
@@ -245,7 +245,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ForeColor = System.Drawing.Color.IndianRed;
             this.label4.Location = new System.Drawing.Point(238, 400);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(211, 25);
@@ -388,7 +388,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.ForeColor = System.Drawing.Color.IndianRed;
             this.label8.Location = new System.Drawing.Point(238, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(211, 25);
@@ -637,7 +637,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             this.dataGridViewTop5Monthly.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTop5Monthly.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewTop5Monthly.BackgroundColor = System.Drawing.Color.Brown;
+            this.dataGridViewTop5Monthly.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewTop5Monthly.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Brown;
@@ -657,7 +657,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTop5Monthly.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTop5Monthly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTop5Monthly.GridColor = System.Drawing.Color.LightCoral;
+            this.dataGridViewTop5Monthly.GridColor = System.Drawing.Color.DarkGray;
             this.dataGridViewTop5Monthly.Location = new System.Drawing.Point(3, 46);
             this.dataGridViewTop5Monthly.Name = "dataGridViewTop5Monthly";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -672,8 +672,8 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
             this.dataGridViewTop5Monthly.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTop5Monthly.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Brown;
-            this.dataGridViewTop5Monthly.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridViewTop5Monthly.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dataGridViewTop5Monthly.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Gray;
             this.dataGridViewTop5Monthly.RowTemplate.Height = 30;
             this.dataGridViewTop5Monthly.Size = new System.Drawing.Size(316, 241);
             this.dataGridViewTop5Monthly.TabIndex = 7;
@@ -684,7 +684,7 @@
             this.labeltop5InMonth.AutoSize = true;
             this.labeltop5InMonth.BackColor = System.Drawing.Color.Transparent;
             this.labeltop5InMonth.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeltop5InMonth.ForeColor = System.Drawing.Color.White;
+            this.labeltop5InMonth.ForeColor = System.Drawing.Color.IndianRed;
             this.labeltop5InMonth.Location = new System.Drawing.Point(3, 9);
             this.labeltop5InMonth.Name = "labeltop5InMonth";
             this.labeltop5InMonth.Size = new System.Drawing.Size(316, 25);
@@ -698,7 +698,7 @@
             this.labeltop5InYear.AutoSize = true;
             this.labeltop5InYear.BackColor = System.Drawing.Color.Transparent;
             this.labeltop5InYear.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeltop5InYear.ForeColor = System.Drawing.Color.White;
+            this.labeltop5InYear.ForeColor = System.Drawing.Color.IndianRed;
             this.labeltop5InYear.Location = new System.Drawing.Point(3, 336);
             this.labeltop5InYear.Name = "labeltop5InYear";
             this.labeltop5InYear.Size = new System.Drawing.Size(316, 25);
@@ -712,7 +712,7 @@
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
             this.dataGridViewTop5Yearly.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTop5Yearly.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewTop5Yearly.BackgroundColor = System.Drawing.Color.Brown;
+            this.dataGridViewTop5Yearly.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewTop5Yearly.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewTop5Yearly.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -739,8 +739,8 @@
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
             this.dataGridViewTop5Yearly.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewTop5Yearly.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Brown;
-            this.dataGridViewTop5Yearly.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridViewTop5Yearly.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dataGridViewTop5Yearly.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Gray;
             this.dataGridViewTop5Yearly.RowTemplate.Height = 30;
             this.dataGridViewTop5Yearly.Size = new System.Drawing.Size(316, 242);
             this.dataGridViewTop5Yearly.TabIndex = 7;
@@ -758,7 +758,7 @@
             // 
             this.labelTitleChildForm.AutoSize = true;
             this.labelTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitleChildForm.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelTitleChildForm.ForeColor = System.Drawing.Color.IndianRed;
             this.labelTitleChildForm.Location = new System.Drawing.Point(232, 9);
             this.labelTitleChildForm.Name = "labelTitleChildForm";
             this.labelTitleChildForm.Size = new System.Drawing.Size(500, 40);
@@ -767,7 +767,7 @@
             // 
             // panelTitleBar
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.Maroon;
+            this.panelTitleBar.BackColor = System.Drawing.Color.White;
             this.panelTitleBar.Controls.Add(this.iconMinimize);
             this.panelTitleBar.Controls.Add(this.iconMaximize);
             this.panelTitleBar.Controls.Add(this.iconClose);
@@ -783,9 +783,9 @@
             // 
             this.iconMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.iconMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.iconMinimize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconMinimize.ForeColor = System.Drawing.Color.IndianRed;
             this.iconMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.iconMinimize.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconMinimize.IconColor = System.Drawing.Color.IndianRed;
             this.iconMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconMinimize.Location = new System.Drawing.Point(935, 9);
             this.iconMinimize.Name = "iconMinimize";
@@ -798,9 +798,9 @@
             // 
             this.iconMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.iconMaximize.BackColor = System.Drawing.Color.Transparent;
-            this.iconMaximize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconMaximize.ForeColor = System.Drawing.Color.IndianRed;
             this.iconMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
-            this.iconMaximize.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconMaximize.IconColor = System.Drawing.Color.IndianRed;
             this.iconMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconMaximize.Location = new System.Drawing.Point(978, 9);
             this.iconMaximize.Name = "iconMaximize";
@@ -813,9 +813,9 @@
             // 
             this.iconClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.iconClose.BackColor = System.Drawing.Color.Transparent;
-            this.iconClose.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconClose.ForeColor = System.Drawing.Color.IndianRed;
             this.iconClose.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.iconClose.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconClose.IconColor = System.Drawing.Color.IndianRed;
             this.iconClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconClose.Location = new System.Drawing.Point(1021, 9);
             this.iconClose.Name = "iconClose";

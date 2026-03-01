@@ -1,11 +1,14 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Core.Interfaces;
+using RoutineAPP.HelperService;
 using RoutineAPP.Infrastructure.Data;
+using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace RoutineAPP.Infrastructure.Repositories
 {
@@ -18,21 +21,34 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<Month> GetAll()
+        public List<MonthViewModel> GetAll()
         {
             return _db.MONTHs
                 .OrderBy(x => x.monthID)
-                .ToList()
-                .Select(x => Month.Rehydrate(x.monthID, x.monthName))
+                .Select(x => new MonthViewModel
+                {
+                    MonthID = x.monthID,
+                    MonthName = x.monthName
+                })
                 .ToList();
         }
 
-        public Month GetById(int id)
+        public MonthViewModel GetById(int id)
         {
             var entity = _db.MONTHs.FirstOrDefault(x => x.monthID == id);
             if (entity == null) return null;
 
-            return Month.Rehydrate(entity.monthID, entity.monthName);
+            else
+            {
+                List<MonthViewModel> list = new List<MonthViewModel>();
+                list.Add(new MonthViewModel
+                {
+                    MonthID = entity.monthID,
+                    MonthName = entity.monthName
+                });
+
+                return list.FirstOrDefault();
+            }
         }
     }
 }

@@ -19,8 +19,8 @@ namespace RoutineAPP.Application.Services
         public List<DailyRoutineViewModel> GetCommentById(int Id)
             => _dailyRoutineRepository.GetCommentById(Id);
 
-        public List<DailyRoutineViewModel> GetComments()
-            => _dailyRoutineRepository.GetComments();
+        public List<DailyRoutineViewModel> GetComments(int year)
+            => _dailyRoutineRepository.GetComments(year);
 
         public int GetSummaryCount()
             => _dailyRoutineRepository.GetSummaryCount();

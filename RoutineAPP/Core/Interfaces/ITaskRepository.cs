@@ -17,7 +17,7 @@ namespace RoutineAPP.Core.Interfaces
         bool Update(Entities.Task routine);
         bool Delete(int id);
         bool PermanentDelete(int id);
-        bool Exists(int year, int month, int day);
+        bool Exists(int categoryId, int routineId);
         int Count();
         List<TaskViewModel> GetTaskDetails(int dailyId);
         List<TaskViewModel> GetTasksByDay(int routine);
@@ -28,7 +28,7 @@ namespace RoutineAPP.Core.Interfaces
         List<Top5ReportViewModel> GetTop5MonthlyReport(int month, int year);
         List<Top5ReportViewModel> GetTop5AnnualReport(int year);
 
-        string GetCategoryMonthly(int month, int year, string category);
-        string GetCategoryAnually(int year, string category);
+        int GetCategoryTimeMonthly(int month, int year, string category);
+        int GetCategoryTimeAnually(int year, string category);
     }
 }

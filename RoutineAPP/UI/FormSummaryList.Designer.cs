@@ -1,6 +1,6 @@
 ﻿namespace RoutineAPP.AllForms
 {
-    partial class FormSummaryList
+    partial class FormCommentList
     {
         /// <summary>
         /// Required designer variable.
@@ -397,13 +397,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(794, 255);
             this.dataGridView1.TabIndex = 6;
             // 
-            // FormSummaryList
+            // FormCommentList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "FormSummaryList";
+            this.Name = "FormCommentList";
             this.Text = "Comments";
             this.Load += new System.EventHandler(this.FormCommentList_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

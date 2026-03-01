@@ -1,4 +1,5 @@
-﻿using RoutineAPP.Application.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RoutineAPP.Application.Services;
 using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Helper;
 using RoutineAPP.HelperService;
@@ -23,16 +24,18 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
+        private readonly IServiceProvider _serviceProvider;
 
         private List<DailyRoutineViewModel> _dailyRoutineVM;
 
-        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService)
+        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _monthService = monthService;
             _dailyService = dailyService;
             _taskService = taskService;
             _categoryService = categoryService;
+            _serviceProvider = serviceProvider;
         }
 
         private void resizeControls()
@@ -43,9 +46,8 @@ namespace RoutineAPP.AllForms
 
         private void fillCombos()
         {
-            var months = _monthService.GetAll();
-            cmbMonth.DataSource = months;
-            GeneralHelper.ComboBoxProps(cmbMonth, "Name", "Id");
+            cmbMonth.DataSource = _monthService.GetAll();
+            GeneralHelper.ComboBoxProps(cmbMonth, "MonthName", "MonthID");
 
             cmbYear.DataSource = _dailyService.GetOnlyYears();
             GeneralHelper.ComboBoxProps(cmbYear, "Year", "YearID");
@@ -101,9 +103,12 @@ namespace RoutineAPP.AllForms
 
         private void txtDay_TextChanged(object sender, EventArgs e)
         {
-            int search = Convert.ToInt32(txtDay.Text.Trim());
-            var filtered = _dailyRoutineVM.Where(x => x.Day == search).ToList();
-            dataGridView1.DataSource = filtered;
+            if (txtDay.Text.Trim() != "")
+            {
+                int search = Convert.ToInt32(txtDay.Text.Trim());
+                var filtered = _dailyRoutineVM.Where(x => x.Day == search).ToList();
+                dataGridView1.DataSource = filtered;
+            }            
         }
 
         private void ClearFilters()
@@ -134,7 +139,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormDailyRoutine(_dailyService);
+            var form = _serviceProvider.GetRequiredService<FormDailyRoutine>();
             form.LoadForEdit(selected.Id, selected.RoutineDate, selected.Summary);
             form.ShowDialog();
 
@@ -151,7 +156,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormTaskList(_taskService, _categoryService, _reportService);
+            var form = _serviceProvider.GetRequiredService<FormTaskList>();
             form.LoadForView(selected.Id, selected.RoutineDate);
             form.ShowDialog();
         }

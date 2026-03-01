@@ -21,12 +21,14 @@ namespace RoutineAPP.HelperService
                 return false;
             }
         }
-        public static void ComboBoxProps(ComboBox cmb, string name, string ID)
+
+        public static void ComboBoxProps(ComboBox cmb, string displayMember, string valueMember)
         {
-            cmb.DisplayMember = name;
-            cmb.ValueMember = ID;
+            cmb.DisplayMember = displayMember;
+            cmb.ValueMember = valueMember;
             cmb.SelectedIndex = -1;
         }
+
         public static string ConventIntToMonth(int month)
         {
             if (month == 1)
@@ -176,6 +178,17 @@ namespace RoutineAPP.HelperService
             return $"{hours} hr{(hours != 1 ? "s" : "")} {mins} min{(mins != 1 ? "s" : "")}";
         }
 
+        public static string FormatTimeShort(int minutes)
+        {
+            int hours = minutes / 60;
+            int mins = minutes % 60;
+
+            if (hours == 0)
+                return $"{mins}m";
+
+            return $"{hours}h {mins}m";
+        }
+
         public static string CalculatePercentage(int categoryMinutes, int totalMinutes)
         {
             if (totalMinutes == 0)
@@ -183,6 +196,32 @@ namespace RoutineAPP.HelperService
 
             double percent = (double)categoryMinutes / totalMinutes * 100;
             return percent.ToString("0.00") + " %";
+        }
+
+        public static void ApplyRankingColors(DataGridView grid, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= grid.Rows.Count)
+                return;
+
+            var row = grid.Rows[e.RowIndex];
+
+            row.DefaultCellStyle.ForeColor = Color.Black;
+
+            switch (e.RowIndex)
+            {
+                case 0:
+                    row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                    break;
+                case 1:
+                    row.DefaultCellStyle.BackColor = Color.GreenYellow;
+                    break;
+                case 2:
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                    break;
+                default:
+                    row.DefaultCellStyle.BackColor = Color.LightYellow;
+                    break;
+            }
         }
 
     }

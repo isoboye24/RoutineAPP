@@ -34,7 +34,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                     {
                         CategoryId = g.Key.categoryID,
                         CategoryName = g.Key.categoryName,
-                        TotalHours = g.Sum(x => x.timeSpent) / 60
+                        TotalMinutes = g.Sum(x => x.timeSpent)
                     })
             .OrderBy(x => x.CategoryName)
             .ToList();
@@ -54,7 +54,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                     select new GetSingleCategoryViewModel
                     {
                         MonthID = g.Key.monthID,
-                        TotalHours = g.Sum(x => x.timeSpent) / 60,
+                        TotalMinutes = g.Sum(x => x.timeSpent),
                         CategoryName = g.Key.categoryName,
                     })
             .OrderBy(x => x.MonthID)
@@ -88,10 +88,10 @@ namespace RoutineAPP.Infrastructure.Repositories
                     {
                         CategoryId = g.Key.categoryID,
                         CategoryName = g.Key.categoryName,
-                        TotalHours = g.Sum(x => x.timeSpent) / 60
+                        TotalMinutes = g.Sum(x => x.timeSpent)
                     })
-            .OrderBy(x => x.CategoryName)
-            .ToList();
+    .OrderBy(x => x.CategoryName)
+    .ToList();
         }
 
     }

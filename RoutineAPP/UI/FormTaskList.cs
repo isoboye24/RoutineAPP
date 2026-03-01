@@ -1,4 +1,5 @@
-﻿using RoutineAPP.Core.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RoutineAPP.Core.Interfaces;
 using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
@@ -19,17 +20,19 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
+        private readonly IServiceProvider _serviceProvider;
 
         private int _routineId;
         private DateTime _routineDate;
         private List<TaskViewModel> _taskVM;
 
-        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
+        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _taskService = taskService;
             _categoryService = categoryService;
             _reportService = reportService;
+            _serviceProvider = serviceProvider;
         }
 
         public void LoadForView(int id, DateTime date)
@@ -44,6 +47,24 @@ namespace RoutineAPP.AllForms
             var domainList = _taskService.GetTaskDetails(_routineId);
 
             _taskVM = domainList.ToList();
+
+            _taskVM = domainList
+                .Select(x => new TaskViewModel
+                {
+                    Id = x.Id,
+                    DailyRoutineId = x.DailyRoutineId,
+                    DailyRoutineDate = x.DailyRoutineDate,
+                    CategoryId = x.CategoryId,
+                    Category = x.Category,
+                    TimeSpent = x.TimeSpent,
+                    Day = x.DailyRoutineDate.Day,
+                    MonthID = x.DailyRoutineDate.Month,
+                    MonthName = GeneralHelper.ConventIntToMonth(x.DailyRoutineDate.Month),
+                    Year = x.DailyRoutineDate.Year,
+                    Summary = x.Summary,
+                    TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.TimeSpent)
+                }).OrderByDescending(x => x.TimeSpent).ThenBy(x => x.Category)
+                .ToList();
 
             dataGridView1.DataSource = _taskVM;
             ConfigureTaskGrid(dataGridView1, TaskGridType.Basic);
@@ -76,13 +97,14 @@ namespace RoutineAPP.AllForms
             loadTasks();
 
             labelTitle.Text = _routineDate.ToString("dd.MM.yyyy");
+
             RefreshDataCounts();
         }
 
         private void RefreshDataCounts()
         {
-            labelTotalTimeUsed.Text = _reportService.GetTotalUsedTimeInDay(_routineId);
-            labelTotalUnusedTime.Text = _reportService.GetTotalUnusedTimeInDay(_routineId);
+            labelTotalTimeUsed.Text = "Used Time : " + _reportService.GetTotalUsedTimeInDay(_routineId);
+            labelTotalUnusedTime.Text = "Unused Time : " + _reportService.GetTotalUnusedTimeInDay(_routineId);
             labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "");
         }
 
@@ -140,9 +162,8 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
-            var form = new FormTaskWithSummary(_taskService, _categoryService);
-            form.LoadForAddTask(selected.DailyRoutineId, selected.DailyRoutineDate);
+            var form = _serviceProvider.GetRequiredService<FormTask>();
+            form.LoadForAddTask(_routineId, _routineDate);
             form.ShowDialog();
 
             ClearFilters();
@@ -157,8 +178,8 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormTaskWithSummary(_taskService, _categoryService);
-            form.LoadForEdit(selected);
+            var form = _serviceProvider.GetRequiredService<FormTask>();
+            form.LoadForEdit(selected, true);
             form.ShowDialog();
 
             ClearFilters();
@@ -211,28 +232,7 @@ namespace RoutineAPP.AllForms
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-            if (e.RowIndex == 0)
-            {
-                row.DefaultCellStyle.BackColor = Color.DarkOrange;
-                row.DefaultCellStyle.ForeColor = Color.Black;
-            }
-            else if (e.RowIndex == 1)
-            {
-                row.DefaultCellStyle.BackColor = Color.YellowGreen;
-                row.DefaultCellStyle.ForeColor = Color.Black;
-            }
-            else if (e.RowIndex == 2)
-            {
-                row.DefaultCellStyle.BackColor = Color.Yellow;
-                row.DefaultCellStyle.ForeColor = Color.Black;
-            }
-            else
-            {
-                row.DefaultCellStyle.BackColor = Color.IndianRed;
-                row.DefaultCellStyle.ForeColor = Color.Black;
-            }
+            GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
         }
     }
 }

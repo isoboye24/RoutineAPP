@@ -26,7 +26,7 @@ namespace RoutineAPP.Application.Services
 
         public bool Create(Core.Entities.Task task)
         {
-            if (_repository.Exists(task.Year, task.Month, task.Day))
+            if (_repository.Exists(task.CategoryId, task.DailyRoutineId))
                 throw new Exception("Task already exists");
 
             return _repository.Insert(task);

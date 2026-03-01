@@ -37,13 +37,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
 
-            int totalHours = totalUsedMinutes / 60;
-            int remainingMinutes = totalUsedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUsedMinutes);
         }
 
         public string GetTotalUnusedTimeInDay(int routine)
@@ -53,15 +47,9 @@ namespace RoutineAPP.Application.Services
 
             int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
 
-            int totalUnusedMinutes = 24 - totalUsedMinutes;
+            int totalUnusedMinutes = (24 * 60) - totalUsedMinutes;
 
-            int totalHours = totalUnusedMinutes / 60;
-            int remainingMinutes = totalUnusedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUnusedMinutes);
         }
 
 
@@ -85,7 +73,7 @@ namespace RoutineAPP.Application.Services
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.Id, c => c.Name);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
 
             int counter = 0;
 
@@ -94,13 +82,9 @@ namespace RoutineAPP.Application.Services
                 {
                     double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
 
-                    int hours = g.TotalMinutes / 60;
-                    int minutes = g.TotalMinutes % 60;
+                    
 
-                    string formattedTime =
-                        hours < 1
-                        ? $"{minutes} min{(minutes != 1 ? "s" : "")}"
-                        : $"{hours} hr{(hours != 1 ? "s" : "")} {minutes} min{(minutes != 1 ? "s" : "")}";
+                    string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
                     return new ReportDetailsViewModel
                     {
@@ -130,13 +114,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
 
-            int totalHours = totalUnusedMinutes / 60;
-            int remainingMinutes = totalUnusedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUnusedMinutes);
         }
 
         public string GetTotalUsedTimeInMonth(int month, int year)
@@ -148,13 +126,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
 
-            int totalHours = totalUsedMinutes / 60;
-            int remainingMinutes = totalUsedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUsedMinutes);
         }
 
         public string GetTotalHoursInMonth(int month, int year)
@@ -183,7 +155,7 @@ namespace RoutineAPP.Application.Services
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.Id, c => c.Name);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
 
             int counter = 0;
 
@@ -192,13 +164,9 @@ namespace RoutineAPP.Application.Services
                 {
                     double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
 
-                    int hours = g.TotalMinutes / 60;
-                    int minutes = g.TotalMinutes % 60;
+                    
 
-                    string formattedTime =
-                        hours < 1
-                        ? $"{minutes} min{(minutes != 1 ? "s" : "")}"
-                        : $"{hours} hr{(hours != 1 ? "s" : "")} {minutes} min{(minutes != 1 ? "s" : "")}";
+                    string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
                     return new ReportDetailsViewModel
                     {
@@ -231,13 +199,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
 
-            int totalHours = totalUsedMinutes / 60;
-            int remainingMinutes = totalUsedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUsedMinutes);
         }
 
         public string GetTotalUnusedTimeInYear(int year)
@@ -251,13 +213,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
 
-            int totalHours = totalUnusedMinutes / 60;
-            int remainingMinutes = totalUnusedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUnusedMinutes);
         }
 
 
@@ -278,7 +234,7 @@ namespace RoutineAPP.Application.Services
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.Id, c => c.Name);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
 
             int counter = 0;
 
@@ -287,13 +243,7 @@ namespace RoutineAPP.Application.Services
                 {
                     double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
 
-                    int hours = g.TotalMinutes / 60;
-                    int minutes = g.TotalMinutes % 60;
-
-                    string formattedTime =
-                        hours < 1
-                        ? $"{minutes} min{(minutes != 1 ? "s" : "")}"
-                        : $"{hours} hr{(hours != 1 ? "s" : "")} {minutes} min{(minutes != 1 ? "s" : "")}";
+                    string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
                     return new ReportDetailsViewModel
                     {
@@ -325,13 +275,7 @@ namespace RoutineAPP.Application.Services
 
             int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
 
-            int totalHours = totalUsedMinutes / 60;
-            int remainingMinutes = totalUsedMinutes % 60;
-
-            if (totalHours < 1)
-                return $"{remainingMinutes} min";
-
-            return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
+            return GeneralHelper.FormatTime(totalUsedMinutes);
         }
 
         public string GetTotalOverallUnusedTime()
@@ -354,9 +298,15 @@ namespace RoutineAPP.Application.Services
             return $"{totalHours} hr{(totalHours > 1 ? "s" : "")} {remainingMinutes} min";
         }
 
-        
         public string GetDateRange()
-            => _dailyRoutineRepository.GetDateRange();
+        {
+            var (firstDate, lastDate) = _dailyRoutineRepository.GetDateRange();
+
+            if (!firstDate.HasValue || !lastDate.HasValue)
+                return "No data available";
+
+            return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
+        }
 
         public List<Top5ReportViewModel> GetFormattedTop5MonthlyReport(int month, int year)
         {

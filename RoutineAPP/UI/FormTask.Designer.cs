@@ -1,6 +1,6 @@
 ﻿namespace RoutineAPP.AllForms
 {
-    partial class FormTaskWithSummary
+    partial class FormTask
     {
         /// <summary>
         /// Required designer variable.
@@ -279,6 +279,7 @@
             this.txtAdditionalTime.Name = "txtAdditionalTime";
             this.txtAdditionalTime.Size = new System.Drawing.Size(221, 29);
             this.txtAdditionalTime.TabIndex = 36;
+            this.txtAdditionalTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdditionalTime_KeyPress);
             // 
             // label2
             // 
@@ -397,7 +398,7 @@
             this.iconBtnSave.UseVisualStyleBackColor = true;
             this.iconBtnSave.Click += new System.EventHandler(this.iconBtnSave_Click);
             // 
-            // FormTaskWithSummary
+            // FormTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -408,7 +409,7 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormTaskWithSummary";
+            this.Name = "FormTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormTaskWithSummary";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTaskWithSummary_FormClosing);
