@@ -1,5 +1,5 @@
-﻿using RoutineAPP.Core.Interfaces;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,10 @@ namespace RoutineAPP.Application.Services
             _dailyRoutineRepository = dailyRoutineRepository;
         }
 
-        public List<DailyRoutineViewModel> GetCommentById(int Id)
+        public List<DailyRoutineDTO> GetCommentById(int Id)
             => _dailyRoutineRepository.GetCommentById(Id);
 
-        public List<DailyRoutineViewModel> GetComments(int year)
+        public List<DailyRoutineDTO> GetComments(int year)
             => _dailyRoutineRepository.GetComments(year);
 
         public int GetSummaryCount()

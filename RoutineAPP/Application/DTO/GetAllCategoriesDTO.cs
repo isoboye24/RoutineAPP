@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.UI.ViewModel
+namespace RoutineAPP.Application.DTO
 {
-    public class GetAllCategoriesViewModel
+    public class GetAllCategoriesDTO
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }

@@ -71,7 +71,7 @@ namespace RoutineAPP.AllForms
             _routineDate = date;            
         }
 
-        public void LoadForEdit(TaskViewModel vm, bool isUpdate)
+        public void LoadForEdit(TaskDTO vm, bool isUpdate)
         {
             loadCombos();
 

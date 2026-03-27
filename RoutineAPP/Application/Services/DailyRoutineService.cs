@@ -1,12 +1,10 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using RoutineAPP.Helper;
 
 namespace RoutineAPP.Application.Services
 {
@@ -22,35 +20,65 @@ namespace RoutineAPP.Application.Services
         public int Count()
             => _repository.Count();
 
-        public bool Create(DateTime date, string summary = null)
+        public bool Create(DailyRoutine routine)
         {
-            if (_repository.Exists(date))
+            if (_repository.Exists(routine.Date))
                 throw new Exception("Date already exists");
 
-            var routine = new DailyRoutine(date, summary);
             return _repository.Insert(routine);
         }
 
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<DailyRoutine> GetAll()
-            => _repository.GetAll();
+        public List<DailyRoutineDTO> GetAll()
+        {
+            return _repository.GetAll()
+                .Select(x => new DailyRoutineDTO
+                {
+                    Id = x.dailyRoutineID,
+                    RoutineDate = x.routineDate,
+                    Summary = x.summary,
+                    Day = x.routineDate.Day,
+                    MonthID = x.routineDate.Month,
+                    MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                    Year = x.routineDate.Year,
+                })
+                .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
+                .ToList();
+        }
+        
+        public List<DailyRoutineDTO> GetAllDeletedRoutines()
+        {
+            return _repository.GetAllDeletedRoutines()
+                .Select(x => new DailyRoutineDTO
+                {
+                    Id = x.dailyRoutineID,
+                    RoutineDate = x.routineDate,
+                    Summary = x.summary,
+                    Day = x.routineDate.Day,
+                    MonthID = x.routineDate.Month,
+                    MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                    Year = x.routineDate.Year,
+                })
+                .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
+                .ToList();
+        }
 
-        public List<YearViewModel> GetOnlyYears()
+        public List<YearDTO> GetOnlyYears()
             => _repository.GetOnlyYears();
         
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
-        public bool Update(int id, DateTime date, string summary)
+        public bool Update(DailyRoutine routine)
         {
-            var routine = _repository.GetById(id);
-            if (routine == null)
+            var check = _repository.GetById(routine.Id);
+            if (check == null)
                 throw new Exception("Daily not found");
 
-            routine.Update(date, summary);
+            routine.Update(routine.Date, routine.Summary);
             return _repository.Update(routine);
         }
         

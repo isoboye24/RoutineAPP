@@ -1,6 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace RoutineAPP.Application.Services
             _repository = repository;
         }
 
-        public List<MonthViewModel> GetAll()
+        public List<MonthDTO> GetAll()
         {
             return _repository.GetAll();
         }

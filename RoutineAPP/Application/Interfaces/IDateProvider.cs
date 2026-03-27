@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.Core.Interfaces
+namespace RoutineAPP.Application.Interfaces
 {
     public interface IDateProvider
     {

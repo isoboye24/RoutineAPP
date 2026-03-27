@@ -107,13 +107,13 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.TASKs.Count(x => !x.isDeleted);
         }
 
-        public List<TaskViewModel> GetTasksByDay(int routineId)
+        public List<TaskDTO> GetTasksByDay(int routineId)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
                     join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                     where !t.isDeleted && d.dailyRoutineID == routineId
-                    select new TaskViewModel
+                    select new TaskDTO
                     {
                         Id = t.taskID,
                         Category = c.categoryName,
@@ -129,13 +129,13 @@ namespace RoutineAPP.Infrastructure.Repositories
             .ToList();
         }
 
-        public List<TaskViewModel> GetTaskDetails(int dailyId)
+        public List<TaskDTO> GetTaskDetails(int dailyId)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
                     join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                     where !t.isDeleted && t.dailiyRoutineID == dailyId
-                    select new TaskViewModel
+                    select new TaskDTO
                     {
                         Id = t.taskID,
                         Category = c.categoryName,
@@ -150,13 +150,13 @@ namespace RoutineAPP.Infrastructure.Repositories
                     }).OrderByDescending(x => x.TimeSpent).OrderBy(x => x.Category).ToList();
         }
 
-        public List<TaskViewModel> GetTasksByMonth(int month, int year)
+        public List<TaskDTO> GetTasksByMonth(int month, int year)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
                     join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                     where !t.isDeleted && d.routineDate.Month == month && d.routineDate.Year == year
-                    select new TaskViewModel
+                    select new TaskDTO
                     {
                         Id = t.taskID,
                         Category = c.categoryName,
@@ -173,13 +173,13 @@ namespace RoutineAPP.Infrastructure.Repositories
         }
 
 
-        public List<TaskViewModel> GetTasksByYear(int year)
+        public List<TaskDTO> GetTasksByYear(int year)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
                     join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                     where !t.isDeleted && d.routineDate.Year == year
-                    select new TaskViewModel
+                    select new TaskDTO
                     {
                         Id = t.taskID,
                         Category = c.categoryName,
@@ -195,13 +195,13 @@ namespace RoutineAPP.Infrastructure.Repositories
             .ToList();
         }
 
-        public List<TaskViewModel> GetTotalTasks()
+        public List<TaskDTO> GetTotalTasks()
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
                     join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
                     where !t.isDeleted
-                    select new TaskViewModel
+                    select new TaskDTO
                     {
                         Id = t.taskID,
                         Category = c.categoryName,
@@ -217,7 +217,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             .ToList();
         }
 
-        public List<Top5ReportViewModel> GetTop5AnnualReport(int year)
+        public List<Top5ReportDTO> GetTop5AnnualReport(int year)
         {
             var query = (
                 from t in _db.TASKs
@@ -235,7 +235,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                 }
                 into g
                 orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportViewModel
+                select new Top5ReportDTO
                 {
                     CategoryId = g.Key.categoryID,
                     CategoryName = g.Key.categoryName,
@@ -247,7 +247,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             return query.ToList();
         }
 
-        public List<Top5ReportViewModel> GetTop5MonthlyReport(int month, int year)
+        public List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year)
         {
             var query = (
                 from t in _db.TASKs
@@ -265,7 +265,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                 }
                 into g
                 orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportViewModel
+                select new Top5ReportDTO
                 {
                     CategoryId = g.Key.categoryID,
                     CategoryName = g.Key.categoryName,

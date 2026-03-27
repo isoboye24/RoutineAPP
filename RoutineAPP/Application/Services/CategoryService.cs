@@ -1,11 +1,9 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Application.Services
 {
@@ -19,25 +17,45 @@ namespace RoutineAPP.Application.Services
             _repository = repository;
         }
 
-        public List<CategoryViewModel> GetAll()
-            => _repository.GetAll();
-
-        public bool Create(string name)
+        public List<CategoryDTO> GetAll()
         {
-            if (_repository.Exists(name))
+            return _repository.GetAll()
+                .Select(x => new CategoryDTO
+                {
+                    CategoryID = x.categoryID,
+                    CategoryName = x.categoryName
+                })
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+        }
+
+        public List<CategoryDTO> GetAllDeletedCategories()
+        {
+            return _repository.GetAllDeletedCategories()
+                .Select(x => new CategoryDTO
+                {
+                    CategoryID = x.categoryID,
+                    CategoryName = x.categoryName
+                })
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+        }
+        
+        public bool Create(Category category)
+        {
+            if (_repository.Exists(category.Name))
                 throw new Exception("Category already exists");
 
-            var category = new Category(name);
             return _repository.Insert(category);
         }
 
-        public bool Update(int id, string name)
+        public bool Update(Category category)
         {
-            var category = _repository.GetById(id);
-            if (category == null)
+            var check = _repository.GetById(category.Id);
+            if (check == null)
                 throw new Exception("Category not found");
 
-            category.UpdateName(name);
+            category.UpdateName(category.Name);
             return _repository.Update(category);
         }
 

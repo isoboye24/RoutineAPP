@@ -39,8 +39,8 @@ namespace RoutineAPP
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
-        List<Top5ReportViewModel> _top5MonthlyReportVM;
-        List<Top5ReportViewModel> _top5AnnualReportVM;
+        List<Top5ReportDTO> _top5MonthlyReportVM;
+        List<Top5ReportDTO> _top5AnnualReportVM;
 
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
             ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService, IDashboardService dashboardService, 
@@ -148,7 +148,7 @@ namespace RoutineAPP
             var domainList = _reportService.GetFormattedTop5MonthlyReport(month, year);
 
             _top5MonthlyReportVM  = domainList
-                .Select(x => new Top5ReportViewModel
+                .Select(x => new Top5ReportDTO
                 {
                     CategoryId = x.CategoryId,
                     CategoryName = x.CategoryName,
@@ -167,7 +167,7 @@ namespace RoutineAPP
             var domainList = _reportService.GetFormattedTop5AnnualReport(year);
 
             _top5AnnualReportVM  = domainList
-                .Select(x => new Top5ReportViewModel
+                .Select(x => new Top5ReportDTO
                 {
                     CategoryId = x.CategoryId,
                     CategoryName = x.CategoryName,

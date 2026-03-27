@@ -19,7 +19,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<GetAllCategoriesViewModel> GetMonthlyCategoriesReport(int month, int year)
+        public List<GetAllCategoriesDTO> GetMonthlyCategoriesReport(int month, int year)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
@@ -30,7 +30,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                           && d.routineDate.Month == month
                           && d.routineDate.Year == year
                     group t by new { c.categoryID, c.categoryName } into g
-                    select new GetAllCategoriesViewModel
+                    select new GetAllCategoriesDTO
                     {
                         CategoryId = g.Key.categoryID,
                         CategoryName = g.Key.categoryName,
@@ -40,7 +40,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             .ToList();
         }
 
-        public List<GetSingleCategoryViewModel> GetSingleCategoryReport(int year, int categoryId)
+        public List<GetSingleCategoryDTO> GetSingleCategoryReport(int year, int categoryId)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
@@ -51,7 +51,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                           && !d.isDeleted
                           && d.routineDate.Year == year
                     group t by new { d.monthID, c.categoryName } into g
-                    select new GetSingleCategoryViewModel
+                    select new GetSingleCategoryDTO
                     {
                         MonthID = g.Key.monthID,
                         TotalMinutes = g.Sum(x => x.timeSpent),
@@ -74,7 +74,7 @@ namespace RoutineAPP.Infrastructure.Repositories
 
         }
 
-        public List<GetAllCategoriesViewModel> GetAllCategoriesAnnualReport(int year)
+        public List<GetAllCategoriesDTO> GetAllCategoriesAnnualReport(int year)
         {
             return (from t in _db.TASKs
                     join c in _db.CATEGORies on t.categoryID equals c.categoryID
@@ -84,7 +84,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                           && !d.isDeleted
                           && d.routineDate.Year == year
                     group t by new { c.categoryID, c.categoryName } into g
-                    select new GetAllCategoriesViewModel
+                    select new GetAllCategoriesDTO
                     {
                         CategoryId = g.Key.categoryID,
                         CategoryName = g.Key.categoryName,

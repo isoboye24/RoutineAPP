@@ -1,7 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +20,11 @@ namespace RoutineAPP.Application.Services
         public int GetAnnualSingleCategoryTime(int year, int categoryId)
             => _graphRepository.GetAnnualSingleCategoryTime(year, categoryId);
 
-        public List<GetAllCategoriesViewModel> GetMonthlyCategoriesReport(int month, int year)
+        public List<GetAllCategoriesDTO> GetMonthlyCategoriesReport(int month, int year)
         {
             var data = _graphRepository.GetMonthlyCategoriesReport(month, year);
 
-            return data.Select(x => new GetAllCategoriesViewModel
+            return data.Select(x => new GetAllCategoriesDTO
             {
                 CategoryId = x.CategoryId,
                 CategoryName = x.CategoryName,
@@ -33,11 +32,11 @@ namespace RoutineAPP.Application.Services
             }).ToList();
         }
 
-        public List<GetSingleCategoryViewModel> GetSingleCategoryReport(int year, int categoryId)
+        public List<GetSingleCategoryDTO> GetSingleCategoryReport(int year, int categoryId)
         {
             var data = _graphRepository.GetSingleCategoryReport(year, categoryId);
 
-            return data.Select(x => new GetSingleCategoryViewModel
+            return data.Select(x => new GetSingleCategoryDTO
             {
                 CategoryId = x.CategoryId,
                 CategoryName = x.CategoryName,
@@ -45,11 +44,11 @@ namespace RoutineAPP.Application.Services
             }).ToList();
         }
 
-        public List<GetAllCategoriesViewModel> GetAllCategoriesAnnualReport(int year)
+        public List<GetAllCategoriesDTO> GetAllCategoriesAnnualReport(int year)
         {
             var data = _graphRepository.GetAllCategoriesAnnualReport(year);
 
-            return data.Select(x => new GetAllCategoriesViewModel
+            return data.Select(x => new GetAllCategoriesDTO
             {
                 CategoryId = x.CategoryId,
                 CategoryName = x.CategoryName,

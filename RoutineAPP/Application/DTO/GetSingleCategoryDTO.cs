@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.UI.ViewModel
+namespace RoutineAPP.Application.DTO
 {
-    public class Top5ReportViewModel
+    public class GetSingleCategoryDTO
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public int MonthID { get; set; }
+        public string Month { get; set; }
+        public int Year { get; set; }
         public int TotalMinutes { get; set; }
-        public string FormattedTotalMinutes { get; set; }
-        public string Percentage { get; set; }
+        public int TotalHours { get; set; }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.Core.Interfaces
+namespace RoutineAPP.Application.Interfaces
 {
     public interface IMonthService
     {
-        List<MonthViewModel> GetAll();
+        List<MonthDTO> GetAll();
     }
 }

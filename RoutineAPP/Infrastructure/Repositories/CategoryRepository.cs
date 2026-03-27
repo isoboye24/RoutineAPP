@@ -1,12 +1,8 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Infrastructure.Repositories
 {
@@ -18,27 +14,20 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             _db = db;
         }
-        public List<CategoryViewModel> GetAll()
+
+        public IQueryable<CATEGORY> GetAll()
         {
-            return _db.CATEGORies
-                .Where(x => !x.isDeleted)
-                .OrderBy(x => x.categoryName)
-                .Select(x => new CategoryViewModel
-                {
-                    CategoryID = x.categoryID,
-                    CategoryName = x.categoryName
-                })
-                .ToList();
+            return _db.CATEGORies.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<CATEGORY> GetAllDeletedCategories()
+        {
+            return _db.CATEGORies.Where(x => x.isDeleted);
         }
 
-        public Category GetById(int id)
+        public IQueryable<CATEGORY> GetById(int id)
         {
-            var entity = _db.CATEGORies.FirstOrDefault(x => x.categoryID == id && !x.isDeleted);
-            if (entity == null) return null;
-
-            var category = new Category(entity.categoryName);
-            category.SetId(entity.categoryID);
-            return category;
+            return _db.CATEGORies.Where(x => !x.isDeleted && x.categoryID == id);
         }
 
         public bool Insert(Category category)

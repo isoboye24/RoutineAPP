@@ -1,32 +1,32 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RoutineAPP.Core.Interfaces
+namespace RoutineAPP.Application.Interfaces
 {
     public interface IDailyRoutineRepository
     {
-        List<DailyRoutine> GetAll();
-        DailyRoutine GetById(int id);
+        IQueryable<DAILY_ROUTINE> GetAll();
+        IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines();
+        IQueryable<DAILY_ROUTINE> GetById(int id);
         bool Insert(DailyRoutine routine);
         bool Update(DailyRoutine routine);
         bool Delete(int id);
         bool PermanentDelete(int id);
         bool Exists(DateTime date);
         int Count();
+
         int CountByMonth(int month, int year);
         int CountByYear(int year);
-        List<YearViewModel> GetOnlyYears();
-        List<GetAllMonthsViewModel> GetAllMonths();
+        List<YearDTO> GetOnlyYears();
+        List<GetAllMonthsDTO> GetAllMonths();
         (DateTime? FirstDate, DateTime? LastDate) GetDateRange();
 
-        List<DailyRoutineViewModel> GetComments(int year);
-        List<DailyRoutineViewModel> GetCommentById(int Id);
+        List<DailyRoutineDTO> GetComments(int year);
+        List<DailyRoutineDTO> GetCommentById(int Id);
 
         int GetSummaryCount();
     }

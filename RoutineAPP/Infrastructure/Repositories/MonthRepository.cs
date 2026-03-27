@@ -21,11 +21,11 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<MonthViewModel> GetAll()
+        public List<MonthDTO> GetAll()
         {
             return _db.MONTHs
                 .OrderBy(x => x.monthID)
-                .Select(x => new MonthViewModel
+                .Select(x => new MonthDTO
                 {
                     MonthID = x.monthID,
                     MonthName = x.monthName
@@ -33,15 +33,15 @@ namespace RoutineAPP.Infrastructure.Repositories
                 .ToList();
         }
 
-        public MonthViewModel GetById(int id)
+        public MonthDTO GetById(int id)
         {
             var entity = _db.MONTHs.FirstOrDefault(x => x.monthID == id);
             if (entity == null) return null;
 
             else
             {
-                List<MonthViewModel> list = new List<MonthViewModel>();
-                list.Add(new MonthViewModel
+                List<MonthDTO> list = new List<MonthDTO>();
+                list.Add(new MonthDTO
                 {
                     MonthID = entity.monthID,
                     MonthName = entity.monthName

@@ -1,17 +1,14 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.UI.ViewModel;
-using System;
-using System.Collections.Generic;
+using RoutineAPP.Infrastructure.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RoutineAPP.Core.Interfaces
+namespace RoutineAPP.Application.Interfaces
 {
     public interface ICategoryRepository
     {
-        List<CategoryViewModel> GetAll();
-        Category GetById(int id);
+        IQueryable<CATEGORY> GetAll();
+        IQueryable<CATEGORY> GetAllDeletedCategories();
+        IQueryable<CATEGORY> GetById(int id);
         bool Insert(Category category);
         bool Update(Category category);
         bool Delete(int id);

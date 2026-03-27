@@ -1,9 +1,7 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using RoutineAPP.HelperService;
-using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.Infrastructure.Repositories;
-using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,15 +51,15 @@ namespace RoutineAPP.Application.Services
         }
 
 
-        public List<GetAllMonthsViewModel> GetAllMonths()
+        public List<GetAllMonthsDTO> GetAllMonths()
             => _dailyRoutineRepository.GetAllMonths();
 
-        public List<ReportDetailsViewModel> GetReportDetailsByMonth(int month, int year)
+        public List<ReportDTO> GetReportDetailsByMonth(int month, int year)
         {
             var tasks = _taskRepository.GetTasksByMonth(month, year).ToList();
 
             if (!tasks.Any())
-                return new List<ReportDetailsViewModel>();
+                return new List<ReportDTO>();
 
             int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
 
@@ -86,7 +84,7 @@ namespace RoutineAPP.Application.Services
 
                     string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
-                    return new ReportDetailsViewModel
+                    return new ReportDTO
                     {
                         ReportID = ++counter,
                         CategoryID = g.CategoryId,
@@ -138,12 +136,12 @@ namespace RoutineAPP.Application.Services
         }
 
 
-        public List<ReportDetailsViewModel> GetReportDetailsByYear(int year)
+        public List<ReportDTO> GetReportDetailsByYear(int year)
         {
             var tasks = _taskRepository.GetTasksByYear(year).ToList();
 
             if (!tasks.Any())
-                return new List<ReportDetailsViewModel>();
+                return new List<ReportDTO>();
 
             int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
 
@@ -168,7 +166,7 @@ namespace RoutineAPP.Application.Services
 
                     string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
-                    return new ReportDetailsViewModel
+                    return new ReportDTO
                     {
                         ReportID = ++counter,
                         CategoryID = g.CategoryId,
@@ -217,12 +215,12 @@ namespace RoutineAPP.Application.Services
         }
 
 
-        public List<ReportDetailsViewModel> GetOverallReportDetails()
+        public List<ReportDTO> GetOverallReportDetails()
         {
             var tasks = _taskRepository.GetTotalTasks().ToList();
 
             if (!tasks.Any())
-                return new List<ReportDetailsViewModel>();
+                return new List<ReportDTO>();
 
             int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
 
@@ -245,7 +243,7 @@ namespace RoutineAPP.Application.Services
 
                     string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
-                    return new ReportDetailsViewModel
+                    return new ReportDTO
                     {
                         ReportID = ++counter,
                         CategoryID = g.CategoryId,
@@ -308,16 +306,16 @@ namespace RoutineAPP.Application.Services
             return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
         }
 
-        public List<Top5ReportViewModel> GetFormattedTop5MonthlyReport(int month, int year)
+        public List<Top5ReportDTO> GetFormattedTop5MonthlyReport(int month, int year)
         {
             var data = _taskRepository.GetTop5MonthlyReport(month, year);
 
             if (!data.Any())
-                return new List<Top5ReportViewModel>();
+                return new List<Top5ReportDTO>();
 
             int totalMinutes = data.Sum(x => x.TotalMinutes);
 
-            return data.Select(x => new Top5ReportViewModel
+            return data.Select(x => new Top5ReportDTO
             {
                 CategoryName = x.CategoryName,
                 FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),
@@ -325,16 +323,16 @@ namespace RoutineAPP.Application.Services
             }).ToList();
         }
 
-        public List<Top5ReportViewModel> GetFormattedTop5AnnualReport(int year)
+        public List<Top5ReportDTO> GetFormattedTop5AnnualReport(int year)
         {
             var data = _taskRepository.GetTop5AnnualReport(year);
 
             if (!data.Any())
-                return new List<Top5ReportViewModel>();
+                return new List<Top5ReportDTO>();
 
             int totalMinutes = data.Sum(x => x.TotalMinutes);
 
-            return data.Select(x => new Top5ReportViewModel
+            return data.Select(x => new Top5ReportDTO
             {
                 CategoryName = x.CategoryName,
                 FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),

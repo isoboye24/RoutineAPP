@@ -1,7 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +59,7 @@ namespace RoutineAPP.Application.Services
             return _repository.Update(existing);
         }
 
-        public List<TaskViewModel> GetTaskDetails(int dailyId)
+        public List<TaskDTO> GetTaskDetails(int dailyId)
         {
             return _repository.GetTaskDetails(dailyId);
         }

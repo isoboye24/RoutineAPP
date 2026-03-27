@@ -23,7 +23,7 @@ namespace RoutineAPP.AllForms
         private int month;
         private int year;
 
-        private List<ReportDetailsViewModel> _reportDetailsVM;
+        private List<ReportDTO> _reportDetailsVM;
 
         public FormMonthlyReports(IReportService reportService, ICategoryService categoryService)
         {
@@ -79,7 +79,7 @@ namespace RoutineAPP.AllForms
         {
             var domainList = _reportService.GetReportDetailsByMonth(month, year);
 
-            _reportDetailsVM = domainList.Select(x => new ReportDetailsViewModel
+            _reportDetailsVM = domainList.Select(x => new ReportDTO
             {
                 ReportID = x.ReportID,
                 CategoryID = x.CategoryID,
@@ -171,7 +171,7 @@ namespace RoutineAPP.AllForms
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
             int searchedCategory;
-            List<ReportDetailsViewModel> filtered = new List<ReportDetailsViewModel>();
+            List<ReportDTO> filtered = new List<ReportDTO>();
 
             if (cmbCategory.SelectedIndex != -1)
             {

@@ -24,7 +24,7 @@ namespace RoutineAPP.AllForms
 
         private int _routineId;
         private DateTime _routineDate;
-        private List<TaskViewModel> _taskVM;
+        private List<TaskDTO> _taskVM;
 
         public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService, IServiceProvider serviceProvider)
         {
@@ -49,7 +49,7 @@ namespace RoutineAPP.AllForms
             _taskVM = domainList.ToList();
 
             _taskVM = domainList
-                .Select(x => new TaskViewModel
+                .Select(x => new TaskDTO
                 {
                     Id = x.Id,
                     DailyRoutineId = x.DailyRoutineId,
@@ -144,7 +144,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            List<TaskViewModel> filtered = new List<TaskViewModel>();
+            List<TaskDTO> filtered = new List<TaskDTO>();
 
             if (cmbCategory.SelectedIndex != -1)
             {
@@ -171,7 +171,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<TaskDTO>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -187,7 +187,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<TaskViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<TaskDTO>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a task.");

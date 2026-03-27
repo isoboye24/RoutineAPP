@@ -1,12 +1,9 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Infrastructure.Repositories
 {
@@ -18,24 +15,20 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             _db = db;
         }
-        public List<DailyRoutine> GetAll()
+
+        public IQueryable<DAILY_ROUTINE> GetAll()
         {
-            return _db.DAILY_ROUTINE
-                .Where(x => !x.isDeleted)
-                .OrderByDescending(x => x.routineDate.Year).ThenByDescending(x => x.routineDate.Month).ThenByDescending(x => x.routineDate.Day)
-                .ToList()
-                .Select(x => DailyRoutine.Rehydrate(x.dailyRoutineID, x.routineDate, x.summary))
-                .ToList();
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted);
         }
 
-        public DailyRoutine GetById(int id)
+        public IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines()
         {
-            var entity = _db.DAILY_ROUTINE.FirstOrDefault(x => x.dailyRoutineID == id && !x.isDeleted);
-            if (entity == null) return null;
+            return _db.DAILY_ROUTINE.Where(x => x.isDeleted);
+        }
 
-            var routine = new DailyRoutine(entity.routineDate);
-            routine.SetId(entity.dailyRoutineID);
-            return routine;
+        public IQueryable<DAILY_ROUTINE> GetById(int id)
+        {
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.dailyRoutineID == id);
         }
 
         public bool Insert(DailyRoutine routine)
@@ -99,15 +92,15 @@ namespace RoutineAPP.Infrastructure.Repositories
 
         public int CountByMonth(int month, int year)
         {
-            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.monthID == month && x.year == year) + 1;
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.routineDate.Month == month && x.routineDate.Year == year);
         }
 
-        public List<DailyRoutineViewModel> GetComments(int year)
+        public List<DailyRoutineDTO> GetComments(int year)
         {
             return _db.DAILY_ROUTINE
                     .Where(x => !x.isDeleted && x.summary != null && x.year == year)
                     .OrderByDescending(x => x.routineDate)
-                    .Select(x => new DailyRoutineViewModel
+                    .Select(x => new DailyRoutineDTO
                     {
                         Id = x.dailyRoutineID,
                         RoutineDate = x.routineDate,
@@ -119,12 +112,12 @@ namespace RoutineAPP.Infrastructure.Repositories
                     .ToList();
         }
 
-        public List<DailyRoutineViewModel> GetCommentById(int Id)
+        public List<DailyRoutineDTO> GetCommentById(int Id)
         {
             return _db.DAILY_ROUTINE
                     .Where(x => !x.isDeleted && x.dailyRoutineID == Id && x.summary != null)
                     .OrderByDescending(x => x.routineDate)
-                    .Select(x => new DailyRoutineViewModel
+                    .Select(x => new DailyRoutineDTO
                     {
                         Id = x.dailyRoutineID,
                         RoutineDate = x.routineDate,
@@ -136,14 +129,14 @@ namespace RoutineAPP.Infrastructure.Repositories
                     .ToList();
         }
 
-        public List<YearViewModel> GetOnlyYears()
+        public List<YearDTO> GetOnlyYears()
         {
             return _db.DAILY_ROUTINE
                 .Where(x => !x.isDeleted)
                 .Select(x => x.routineDate.Year)
                 .Distinct()
                 .OrderByDescending(x => x)
-                .Select(x => new YearViewModel
+                .Select(x => new YearDTO
                 {
                     YearID = x,
                     Year = x
@@ -153,7 +146,7 @@ namespace RoutineAPP.Infrastructure.Repositories
 
         public int CountByYear(int year)
         {
-            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.year == year) + 1;
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.routineDate.Year == year);
         }
 
         public int GetSummaryCount(int year)
@@ -161,7 +154,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.summary != null);
         }
 
-        public List<GetAllMonthsViewModel> GetAllMonths()
+        public List<GetAllMonthsDTO> GetAllMonths()
         {
             return _db.DAILY_ROUTINE
                 .Where(x => !x.isDeleted)
@@ -174,7 +167,7 @@ namespace RoutineAPP.Infrastructure.Repositories
                 .OrderByDescending(x => x.Year)
                 .ThenByDescending(x => x.Month)
                 .ToList()
-                .Select(x => new GetAllMonthsViewModel
+                .Select(x => new GetAllMonthsDTO
                 {
                     Year = x.Year,
                     MonthID = x.Month, 

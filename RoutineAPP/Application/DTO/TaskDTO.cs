@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoutineAPP.UI.ViewModel
+namespace RoutineAPP.Application.DTO
 {
-    public class TaskViewModel
+    public class TaskDTO
     {
         public int Id { get; set; }
         public int DailyRoutineId { get; set; }

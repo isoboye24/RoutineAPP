@@ -26,7 +26,7 @@ namespace RoutineAPP.AllForms
         private readonly IReportService _reportService;
         private readonly IServiceProvider _serviceProvider;
 
-        private List<DailyRoutineViewModel> _dailyRoutineVM;
+        private List<DailyRoutineDTO> _dailyRoutineVM;
 
         public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IServiceProvider serviceProvider)
         {
@@ -73,7 +73,7 @@ namespace RoutineAPP.AllForms
             var domainList = _dailyService.GetAll();
 
             _dailyRoutineVM = domainList
-                .Select(x => new DailyRoutineViewModel
+                .Select(x => new DailyRoutineDTO
                 {
                     Id = x.Id,
                     RoutineDate = x.Date,
@@ -132,7 +132,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -148,7 +148,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
 
             if (selected == null)
             {
@@ -163,7 +163,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a daily routine.");
@@ -183,7 +183,7 @@ namespace RoutineAPP.AllForms
         {
             int searchedMonth;
             int searchedYear;
-            List<DailyRoutineViewModel> filtered = new List<DailyRoutineViewModel>();
+            List<DailyRoutineDTO> filtered = new List<DailyRoutineDTO>();
 
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {

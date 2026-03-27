@@ -17,7 +17,7 @@ namespace RoutineAPP.AllForms
     public partial class FormCategoryList : Form
     {
         private readonly ICategoryService _service;
-        private List<CategoryViewModel> _categories;
+        private List<CategoryDTO> _categories;
         public FormCategoryList(ICategoryService service)
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace RoutineAPP.AllForms
             var domainList = _service.GetAll();
 
             _categories = domainList
-                .Select(x => new CategoryViewModel
+                .Select(x => new CategoryDTO
                 {
                     CategoryID = x.CategoryID,
                     CategoryName = x.CategoryName
@@ -66,12 +66,12 @@ namespace RoutineAPP.AllForms
             labelTotalCategory.Text = dataGridView1.RowCount.ToString();
         }
 
-        private CategoryViewModel GetSelected()
+        private CategoryDTO GetSelected()
         {
             if (dataGridView1.CurrentRow == null)
                 return null;
 
-            return dataGridView1.CurrentRow.DataBoundItem as CategoryViewModel;
+            return dataGridView1.CurrentRow.DataBoundItem as CategoryDTO;
         }
 
         private void txtCategory_TextChanged(object sender, EventArgs e)

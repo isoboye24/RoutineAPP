@@ -23,7 +23,7 @@ namespace RoutineAPP.AllForms
         private readonly IDateProvider _dateProvider;
         private bool _isView = false;
 
-        List<DailyRoutineViewModel> _dailyRoutineVM;
+        List<DailyRoutineDTO> _dailyRoutineVM;
         public FormCommentList(ICommentService commentService, IDailyRoutineService dailyRoutineService, IMonthService monthService, IDateProvider dateProvider)
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace RoutineAPP.AllForms
             _dateProvider = dateProvider;
         }
         
-        private int year => _dateProvider.Today.Year;
+        private int year => DateTime.Now.Year;
 
         private void resizeControls()
         {
@@ -57,7 +57,7 @@ namespace RoutineAPP.AllForms
         {
             var summaries = _commentService.GetComments(year);
 
-            _dailyRoutineVM = summaries.Select(x => new DailyRoutineViewModel
+            _dailyRoutineVM = summaries.Select(x => new DailyRoutineDTO
             {
                 Id = x.Id,
                 RoutineDate = x.RoutineDate,
@@ -129,7 +129,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineViewModel>(dataGridView1);
+            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -152,7 +152,7 @@ namespace RoutineAPP.AllForms
         {
             int searchedMonth;
             int searchedYear;
-            List<DailyRoutineViewModel> filtered = new List<DailyRoutineViewModel>();
+            List<DailyRoutineDTO> filtered = new List<DailyRoutineDTO>();
 
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {

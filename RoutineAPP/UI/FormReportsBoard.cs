@@ -24,9 +24,9 @@ namespace RoutineAPP.AllForms
         private readonly ICategoryService _categoryService;
         private readonly IDailyRoutineService _dailyRoutineService;
 
-        private List<GetAllMonthsViewModel> _getAllMonthsVM;
-        private List<ReportDetailsViewModel> _reportDetailsVM;
-        private List<ReportDetailsViewModel> _yearlyReportDetailsVM;
+        private List<GetAllMonthsDTO> _getAllMonthsVM;
+        private List<ReportDTO> _reportDetailsVM;
+        private List<ReportDTO> _yearlyReportDetailsVM;
 
         public FormReportsBoard(IReportService reportService, IMonthService monthService, ICategoryService categoryService, IDailyRoutineService dailyRoutineService)
         {
@@ -61,15 +61,15 @@ namespace RoutineAPP.AllForms
             GeneralHelper.ComboBoxProps(cmbCategoryTotal, "CategoryName", "CategoryID");
         }
 
-        int year = DateTime.Now.Year;
-        int month = DateTime.Now.Month;
+        private int year = DateTime.Now.Year;
+        private int month = DateTime.Now.Month;
 
         private void loadMonthlyReports()
         {
             var domainList = _reportService.GetAllMonths();
 
             _getAllMonthsVM = domainList
-                .Select(x => new GetAllMonthsViewModel
+                .Select(x => new GetAllMonthsDTO
                 {
                     MonthID = x.MonthID,
                     Month = GeneralHelper.ConventIntToMonth(x.MonthID),
@@ -86,7 +86,7 @@ namespace RoutineAPP.AllForms
             var domainList = _reportService.GetReportDetailsByYear(year);
 
             _yearlyReportDetailsVM = domainList
-                .Select(x => new ReportDetailsViewModel
+                .Select(x => new ReportDTO
                 {
                     ReportID = x.ReportID,
                     CategoryID = x.CategoryID,
@@ -106,7 +106,7 @@ namespace RoutineAPP.AllForms
             var domainList = _reportService.GetOverallReportDetails();
 
             _reportDetailsVM = domainList
-                .Select(x => new ReportDetailsViewModel
+                .Select(x => new ReportDTO
                 {
                     ReportID = x.ReportID,
                     CategoryID = x.CategoryID,
@@ -178,7 +178,7 @@ namespace RoutineAPP.AllForms
         {
             int searchedMonth;
             int searchedYear;
-            List<GetAllMonthsViewModel> filtered = new List<GetAllMonthsViewModel>();
+            List<GetAllMonthsDTO> filtered = new List<GetAllMonthsDTO>();
 
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {
@@ -213,7 +213,7 @@ namespace RoutineAPP.AllForms
         private void iconBtnView_Click(object sender, EventArgs e)
         {
            
-            var selected = GeneralHelper.GetSelected<GetAllMonthsViewModel>(dataGridViewMonthly);
+            var selected = GeneralHelper.GetSelected<GetAllMonthsDTO>(dataGridViewMonthly);
 
             if (selected == null)
             {
@@ -255,6 +255,7 @@ namespace RoutineAPP.AllForms
             if (searchedYear != null)
             {
                 loadYearlyReports(searchedYear.Value);
+                
             }
 
             var result = _yearlyReportDetailsVM;
@@ -267,8 +268,7 @@ namespace RoutineAPP.AllForms
             }
 
             dataGridViewAnually.DataSource = result;
-
-            RefreshCounts();
+            RefreshAnually(searchedYear.Value);
         }
 
         private void iconBtnClearAnually_Click(object sender, EventArgs e)
@@ -323,7 +323,7 @@ namespace RoutineAPP.AllForms
         private void iconBtnSearchTotal_Click(object sender, EventArgs e)
         {
             int searchedCategory;
-            List<ReportDetailsViewModel> filtered = new List<ReportDetailsViewModel>();
+            List<ReportDTO> filtered = new List<ReportDTO>();
 
             if (cmbCategoryTotal.SelectedIndex != -1)
             {               
