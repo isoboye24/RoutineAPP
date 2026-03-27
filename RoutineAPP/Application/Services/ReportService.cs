@@ -1,7 +1,7 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Application.DTO;
-using RoutineAPP.HelperService;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,66 @@ namespace RoutineAPP.Application.Services
         public string GetTotalHoursInDay()
         {
             return $"24 hours";
+        }
+
+        public List<Top5ReportDTO> GetTop5AnnualReport(int year)
+        {
+            var query = (
+                from t in _db.TASKs
+                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                join c in _db.CATEGORies
+                    on t.categoryID equals c.categoryID
+                where !t.isDeleted
+                      && !c.isDeleted
+                      && !d.isDeleted
+                      && d.routineDate.Year == year
+                group new { t, c } by new
+                {
+                    t.categoryID,
+                    c.categoryName
+                }
+                into g
+                orderby g.Sum(x => x.t.timeSpent) descending
+                select new Top5ReportDTO
+                {
+                    CategoryId = g.Key.categoryID,
+                    CategoryName = g.Key.categoryName,
+                    TotalMinutes = g.Sum(x => x.t.timeSpent)
+                }
+            )
+            .Take(5);
+
+            return query.ToList();
+        }
+
+        public List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year)
+        {
+            var query = (
+                from t in _db.TASKs
+                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
+                join c in _db.CATEGORies on t.categoryID equals c.categoryID
+                where !t.isDeleted
+                      && !c.isDeleted
+                      && !d.isDeleted
+                      && d.routineDate.Month == month
+                      && d.routineDate.Year == year
+                group new { t, c } by new
+                {
+                    t.categoryID,
+                    c.categoryName
+                }
+                into g
+                orderby g.Sum(x => x.t.timeSpent) descending
+                select new Top5ReportDTO
+                {
+                    CategoryId = g.Key.categoryID,
+                    CategoryName = g.Key.categoryName,
+                    TotalMinutes = g.Sum(x => x.t.timeSpent)
+                }
+            )
+            .Take(5);
+
+            return query.ToList();
         }
 
         public string GetTotalUsedTimeInDay(int routine)

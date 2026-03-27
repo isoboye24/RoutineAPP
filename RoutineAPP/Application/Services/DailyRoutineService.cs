@@ -65,10 +65,6 @@ namespace RoutineAPP.Application.Services
                 .ToList();
         }
 
-        public List<YearDTO> GetOnlyYears()
-            => _repository.GetOnlyYears();
-        
-
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
@@ -81,6 +77,86 @@ namespace RoutineAPP.Application.Services
             routine.Update(routine.Date, routine.Summary);
             return _repository.Update(routine);
         }
+
+        public List<DailyRoutineDTO> GetComments(int year)
+        {
+            return _repository.GetComments(year)
+                 .Select(x => new DailyRoutineDTO
+                 {
+                     Id = x.dailyRoutineID,
+                     RoutineDate = x.routineDate,
+                     Summary = x.summary,
+                     Day = x.routineDate.Day,
+                     MonthID = x.routineDate.Month,
+                     MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                     Year = x.routineDate.Year,
+                 })
+                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
+                 .ToList();
+        }
         
+        public List<DailyRoutineDTO> GetCommentById(int id)
+        {
+            return _repository.GetCommentById(id)
+                 .Select(x => new DailyRoutineDTO
+                 {
+                     Id = x.dailyRoutineID,
+                     RoutineDate = x.routineDate,
+                     Summary = x.summary,
+                     Day = x.routineDate.Day,
+                     MonthID = x.routineDate.Month,
+                     MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                     Year = x.routineDate.Year,
+                 })
+                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
+                 .ToList();
+        }
+
+        public List<YearDTO> GetOnlyYears()
+        {
+            return _repository.GetYears()
+                .OrderByDescending(x => x)
+                .Select(x => new YearDTO
+                {
+                    YearID = x,
+                    Year = x
+                })
+                .ToList();
+        }
+
+        public List<GetAllMonthsDTO> GetAllMonths()
+        {
+            var data = _repository.GetAll()
+                        .Select(x => new
+                        {
+                            Year = x.routineDate.Year,
+                            Month = x.routineDate.Month
+                        })
+                        .Distinct()
+                        .OrderByDescending(x => x.Year)
+                        .ThenByDescending(x => x.Month)
+                        .ToList();
+
+                            return data.Select(x => new GetAllMonthsDTO
+                            {
+                                Year = x.Year,
+                                MonthID = x.Month,
+                                Month = new DateTime(x.Year, x.Month, 1).ToString("MMMM")
+                            }).ToList();
+        }
+
+        public (DateTime? FirstDate, DateTime? LastDate) GetDateRange()
+        {
+            var query = _repository.GetAll();
+
+            if (!query.Any())
+                return (null, null);
+
+            return (
+                query.Min(x => x.routineDate),
+                query.Max(x => x.routineDate)
+            );
+        }
+
     }
 }

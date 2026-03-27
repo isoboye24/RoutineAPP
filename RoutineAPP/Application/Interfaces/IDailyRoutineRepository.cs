@@ -1,8 +1,6 @@
 ﻿using RoutineAPP.Core.Entities;
 using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.Application.DTO;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RoutineAPP.Application.Interfaces
@@ -21,13 +19,13 @@ namespace RoutineAPP.Application.Interfaces
 
         int CountByMonth(int month, int year);
         int CountByYear(int year);
-        List<YearDTO> GetOnlyYears();
-        List<GetAllMonthsDTO> GetAllMonths();
-        (DateTime? FirstDate, DateTime? LastDate) GetDateRange();
 
-        List<DailyRoutineDTO> GetComments(int year);
-        List<DailyRoutineDTO> GetCommentById(int Id);
+        IQueryable<DAILY_ROUTINE> GetComments(int year);
+        IQueryable<DAILY_ROUTINE> GetCommentById(int id);
+
+        IQueryable<int> GetYears();
 
         int GetSummaryCount();
+        int GetSummaryCountByYear(int year);
     }
 }

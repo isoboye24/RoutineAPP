@@ -1,11 +1,7 @@
-﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Application.Interfaces;
+﻿using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Application.DTO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Application.Services
 {
@@ -20,7 +16,14 @@ namespace RoutineAPP.Application.Services
 
         public List<MonthDTO> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAll()
+                .OrderBy(x => x.monthID)
+                .Select(x => new MonthDTO
+                {
+                    MonthID = x.monthID,
+                    MonthName = x.monthName
+                })
+                .ToList();
         }
     }
 }

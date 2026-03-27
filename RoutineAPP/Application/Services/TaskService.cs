@@ -4,16 +4,13 @@ using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-
 namespace RoutineAPP.Application.Services
 {
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _repository;
+        private readonly IDailyRoutineRepository _routineRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public TaskService(ITaskRepository repository)
         {
@@ -23,7 +20,7 @@ namespace RoutineAPP.Application.Services
         public int Count()
             => _repository.Count();
 
-        public bool Create(Core.Entities.Task task)
+        public bool Create(Task task)
         {
             if (_repository.Exists(task.CategoryId, task.DailyRoutineId))
                 throw new Exception("Task already exists");
@@ -34,20 +31,127 @@ namespace RoutineAPP.Application.Services
         public bool Delete(int id)
             => _repository.Delete(id);
 
-        public List<Core.Entities.Task> GetAll(int routineId)
-            => _repository.GetAll(routineId);
+        public List<TaskDTO> GetTasksByDay(int routineId)
+        {
+            return (from t in _repository.GetAll(routineId)
+                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                    where !t.isDeleted && r.dailyRoutineID == routineId
+                    select new TaskDTO
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = r.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = r.routineDate.Day,
+                        MonthID = r.routineDate.Month,
+                        Year = r.routineDate.Year,
+                    })
+            .ToList();
+        }
+        
+        public List<TaskDTO> GetTasksByMonth(int month, int year)
+        {
+            return (from t in _repository.GetTasksByMonth(month, year)
+                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                    where !t.isDeleted
+                    select new TaskDTO
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = r.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = r.routineDate.Day,
+                        MonthID = r.routineDate.Month,
+                        Year = r.routineDate.Year,
+                    })
+            .ToList();
+        }
+        
+        public List<TaskDTO> GetTasksByYear(int year)
+        {
+            return (from t in _repository.GetTasksByYear(year)
+                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                    where !t.isDeleted
+                    select new TaskDTO
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = r.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = r.routineDate.Day,
+                        MonthID = r.routineDate.Month,
+                        Year = r.routineDate.Year,
+                    })
+            .ToList();
+        }
+
+        public List<TaskDTO> GetTotalTasks()
+        {
+            return (from t in _repository.GetTotalTasks()
+                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                    where !t.isDeleted
+                    select new TaskDTO
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = r.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = r.routineDate.Day,
+                        MonthID = r.routineDate.Month,
+                        Year = r.routineDate.Year,
+                    })
+            .ToList();
+        }
+        
+        public List<TaskDTO> GetAllDeletedTasks()
+        {
+            return (from t in _repository.GetAllDeletedTasks()
+                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                    where !t.isDeleted
+                    select new TaskDTO
+                    {
+                        Id = t.taskID,
+                        Category = c.categoryName,
+                        CategoryId = t.categoryID,
+                        DailyRoutineDate = r.routineDate,
+                        DailyRoutineId = t.dailiyRoutineID,
+                        TimeSpent = t.timeSpent,
+                        Summary = t.summary,
+                        Day = r.routineDate.Day,
+                        MonthID = r.routineDate.Month,
+                        Year = r.routineDate.Year,
+                    })
+            .ToList();
+        }
 
         public bool PermanentDelete(int id)
             => _repository.PermanentDelete(id);
 
-        public bool Update(Core.Entities.Task task)
+        public bool Update(Task task)
         {
             var existing = _repository.GetById(task.Id);
 
             if (existing == null)
                 throw new Exception("Task not found");
 
-            existing.Update(
+            task.Update(
                 task.DailyRoutineId,
                 task.CategoryId,
                 task.TimeSpent,
@@ -56,13 +160,7 @@ namespace RoutineAPP.Application.Services
                 task.Year,
                 task.Summary);
 
-            return _repository.Update(existing);
+            return _repository.Update(task);
         }
-
-        public List<TaskDTO> GetTaskDetails(int dailyId)
-        {
-            return _repository.GetTaskDetails(dailyId);
-        }
-
     }
 }

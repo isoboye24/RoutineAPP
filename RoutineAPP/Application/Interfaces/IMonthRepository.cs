@@ -1,5 +1,6 @@
-﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Application.DTO;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Core.Entities;
+using RoutineAPP.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace RoutineAPP.Application.Interfaces
 {
     public interface IMonthRepository
     {
-        List<MonthDTO> GetAll();
-        MonthDTO GetById(int id);
+        IQueryable<MONTH> GetAll();
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RoutineAPP.Application.Services;
-using RoutineAPP.Core.Interfaces;
 using RoutineAPP.Helper;
-using RoutineAPP.HelperService;
 using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;

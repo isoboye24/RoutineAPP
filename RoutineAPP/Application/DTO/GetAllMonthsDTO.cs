@@ -8,8 +8,8 @@ namespace RoutineAPP.Application.DTO
 {
     public class GetAllMonthsDTO
     {
-        public int MonthID { get; set; }
         public string Month { get; set; }
+        public int MonthID { get; set; }
         public int Year { get; set; }
     }
 }

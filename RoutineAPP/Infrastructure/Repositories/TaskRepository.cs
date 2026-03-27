@@ -1,13 +1,9 @@
 ﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Infrastructure.Data;
-using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Infrastructure.Repositories
 {
@@ -20,26 +16,22 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public List<Core.Entities.Task> GetAll(int dailyId)
+        public IQueryable<TASK> GetAll(int dailyId)
         {
-            return _db.TASKs
-                .Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId)
-                .ToList()
-                .Select(x => Core.Entities.Task.Rehydrate(x.taskID, x.dailiyRoutineID, x.categoryID, x.timeSpent, x.day, x.monthID, x.year, x.summary))
-                .ToList();
+            return _db.TASKs.Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId);
+        }
+        
+        public IQueryable<TASK> GetAllDeletedTasks()
+        {
+            return _db.TASKs.Where(x => x.isDeleted);
+        }
+        
+        public IQueryable<TASK> GetById(int id)
+        {
+            return _db.TASKs.Where(x => x.taskID == id && !x.isDeleted);
         }
 
-        public Core.Entities.Task GetById(int id)
-        {
-            var entity = _db.TASKs.FirstOrDefault(x => x.taskID == id && !x.isDeleted);
-            if (entity == null) return null;
-
-            var task = new Core.Entities.Task(entity.dailiyRoutineID, entity.categoryID, entity.timeSpent, entity.day, entity.monthID, entity.year, entity.summary);
-            task.SetId(entity.taskID);
-            return task;
-        }
-
-        public bool Insert(Core.Entities.Task task)
+        public bool Insert(Task task)
         {
             _db.TASKs.Add(new TASK
             {
@@ -56,7 +48,7 @@ namespace RoutineAPP.Infrastructure.Repositories
             return true;
         }
 
-        public bool Update(Core.Entities.Task task)
+        public bool Update(Task task)
         {
             var entity = _db.TASKs.First(x => x.taskID == task.Id);
             entity.dailiyRoutineID = task.DailyRoutineId;
@@ -107,174 +99,19 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.TASKs.Count(x => !x.isDeleted);
         }
 
-        public List<TaskDTO> GetTasksByDay(int routineId)
+        public IQueryable<TASK> GetTasksByMonth(int month, int year)
         {
-            return (from t in _db.TASKs
-                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                    where !t.isDeleted && d.dailyRoutineID == routineId
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = d.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = d.routineDate.Day,
-                        MonthID = d.routineDate.Month,
-                        Year = d.routineDate.Year,
-                    })
-            .ToList();
+            return _db.TASKs.Where(x => x.monthID == month && x.year == year && !x.isDeleted);
         }
 
-        public List<TaskDTO> GetTaskDetails(int dailyId)
+        public IQueryable<TASK> GetTasksByYear(int year)
         {
-            return (from t in _db.TASKs
-                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                    where !t.isDeleted && t.dailiyRoutineID == dailyId
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = d.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = d.routineDate.Day,
-                        MonthID = d.routineDate.Month,
-                        Year = d.routineDate.Year,
-                    }).OrderByDescending(x => x.TimeSpent).OrderBy(x => x.Category).ToList();
+            return _db.TASKs.Where(x => x.year == year && !x.isDeleted);
         }
 
-        public List<TaskDTO> GetTasksByMonth(int month, int year)
+        public IQueryable<TASK> GetTotalTasks()
         {
-            return (from t in _db.TASKs
-                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                    where !t.isDeleted && d.routineDate.Month == month && d.routineDate.Year == year
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = d.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = d.routineDate.Day,
-                        MonthID = d.routineDate.Month,
-                        Year = d.routineDate.Year,
-                    })
-            .ToList();
-        }
-
-
-        public List<TaskDTO> GetTasksByYear(int year)
-        {
-            return (from t in _db.TASKs
-                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                    where !t.isDeleted && d.routineDate.Year == year
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = d.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = d.routineDate.Day,
-                        MonthID = d.routineDate.Month,
-                        Year = d.routineDate.Year,
-                    })
-            .ToList();
-        }
-
-        public List<TaskDTO> GetTotalTasks()
-        {
-            return (from t in _db.TASKs
-                    join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                    join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                    where !t.isDeleted
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = d.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = d.routineDate.Day,
-                        MonthID = d.routineDate.Month,
-                        Year = d.routineDate.Year,
-                    })
-            .ToList();
-        }
-
-        public List<Top5ReportDTO> GetTop5AnnualReport(int year)
-        {
-            var query = (
-                from t in _db.TASKs
-                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                join c in _db.CATEGORies
-                    on t.categoryID equals c.categoryID
-                where !t.isDeleted
-                      && !c.isDeleted
-                      && !d.isDeleted
-                      && d.routineDate.Year == year
-                group new { t, c } by new
-                {
-                    t.categoryID,
-                    c.categoryName
-                }
-                into g
-                orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportDTO
-                {
-                    CategoryId = g.Key.categoryID,
-                    CategoryName = g.Key.categoryName,
-                    TotalMinutes = g.Sum(x => x.t.timeSpent)
-                }
-            )
-            .Take(5);
-
-            return query.ToList();
-        }
-
-        public List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year)
-        {
-            var query = (
-                from t in _db.TASKs
-                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                where !t.isDeleted
-                      && !c.isDeleted
-                      && !d.isDeleted
-                      && d.routineDate.Month == month
-                      && d.routineDate.Year == year
-                group new { t, c } by new
-                {
-                    t.categoryID,
-                    c.categoryName
-                }
-                into g
-                orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportDTO
-                {
-                    CategoryId = g.Key.categoryID,
-                    CategoryName = g.Key.categoryName,
-                    TotalMinutes = g.Sum(x => x.t.timeSpent)
-                }
-            )
-            .Take(5);
-
-            return query.ToList();
+            return _db.TASKs.Where(x => !x.isDeleted);
         }
 
         public int GetCategoryTimeMonthly(int month, int year, string category)
