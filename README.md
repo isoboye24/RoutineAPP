@@ -1,166 +1,186 @@
 ﻿### RoutineAPP – Daily Productivity Analytics System
 
 ## Overview
-A production-used, 3-tier desktop analytics system for structured time tracking and statistical productivity reporting.
+RoutineAPP is a production-grade desktop analytics system for structured time tracking 
+and advanced productivity reporting.
 
-The application was initially designed for structured personal productivity tracking
-but was architected using a modular and layered design, making it suitable for
-general-purpose time management and analytical reporting.
+Originally designed for personal productivity management with the integration of N-tier design 
+pattern, the system has evolved into a Clean Architecture–based application, emphasizing 
+maintainability, scalability, and clear separation of concerns.
 
-The system has been actively used in production for over two years, demonstrating
-long-term stability, maintainability, and real-world usability.
+The application has been actively used in a real-world production environment for over 
+two years, demonstrating long-term stability, reliability, and practical usability.
 
-## Architecture
-The application follows a structured 3-Tier Layered Architecture, ensuring 
-separation of concerns and maintainable code organization.
+## Architecture (Clean Architecture)
 
-#### Presentation Layer
-- Windows Forms (UI)
-- Responsible for user interaction and data presentation
-- Located in AllForms
-- Fully decoupled from database logic
+The system follows Clean Architecture principles, organizing the codebase into distinct layers with strict dependency direction:
 
-#### Business Logic Layer (BLL)
-- Encapsulates application rules
-- Handles validation and aggregation logic
-- Coordinates communication between UI and Data Layer
-- Implements generic IBLL<T> interface for structured abstraction
-- Centralizes calculation and reporting logic
+Dependencies flow inward — outer layers depend on inner layers, never the reverse.
 
-#### Data Access Layer (DAL)
-- DAO (Data Access Object) pattern implementation
-- DTO (Data Transfer Object) pattern for structured data exchange
-- Entity Framework (Database-First, EDMX model)
-- Soft delete strategy (isDeleted, deletedDate) for safe record management
-- Encapsulated and isolated database operations
+### 1. Core Layer (Domain)
 
+📁 Core/Entities
+
+- Contains enterprise business entities
+- Represents the core domain model
+- No dependencies on other layers
+
+Examples:
+
+Category, DailyRoutine, Task, Month, Year
+
+- ✅ Pure business objects
+- ✅ Framework-independent
+- ✅ Highly stable
+
+### 2. Application Layer
+
+📁 Application/
+
+Interfaces
+- Defines contracts for:
+  - Services (e.g., ITaskService)
+  - Repositories (e.g., ITaskRepository)
+
+Services
+  - Implements use cases / business workflows
+- Handles:
+    - Validation
+  - Aggregation
+  - Reporting logic
+
+DTOs
+- Structured data transfer between layers
+- Prevents leakage of domain entities to UI
+
+- ✅ Central orchestration layer
+- ✅ Depends only on Core
+- ❌ No dependency on Infrastructure or UI
+
+### 3. Infrastructure Layer
+
+📁 Infrastructure/
+
+- Implements Application interfaces
+- Handles:
+  - Database access
+  - Repository implementations
+  - External dependencies
+
+Components:
+- Data → APPContext (Entity Framework / EDMX)
+- Repositories → Concrete repository implementations
+
+Patterns Used:
+- Repository Pattern
+- DAO Pattern
+- Entity Framework (Database-First)
+
+- ✅ Depends on Application
+- ❌ Not referenced by Core
+
+
+### 4. Presentation Layer (UI)
+
+📁 UI/
+
+- Built with Windows Forms
+- Responsible for:
+- User interaction
+- Data visualization
+
+Forms include:
+
+- Dashboard
+- Daily Routine
+- Reports
+- Graphs
+- Categories
+
+- ✅ Depends on Application
+- ✅ Uses Services via interfaces
+- ❌ No direct database access
+
+
+````
+        ┌──────────────────────────┐
+        │        UI (Forms)        │
+        └────────────▲─────────────┘
+                     │
+        ┌────────────┴─────────────┐
+        │     Application Layer    │
+        │ (Services, Interfaces,   │
+        │  DTOs)                   │
+        └────────────▲─────────────┘
+                     │
+        ┌────────────┴─────────────┐
+        │        Core Layer        │
+        │       (Entities)         │
+        └──────────────────────────┘
+
+        ┌──────────────────────────┐
+        │    Infrastructure Layer  │
+        │ (EF, Repositories, DB)   │
+        └──────────────────────────┘
+````
+
+## Key Architectural Principles
+- Separation of Concerns – each layer has a single responsibility
+- Dependency Inversion – high-level modules do not depend on low-level modules
+- Testability – business logic can be tested independently
+- Maintainability – changes in UI or DB do not affect core logic
+- Scalability – easy migration to Web API or .NET Core
 
 ## Analytics & Reporting Engine
-The system includes a fully integrated productivity analytics module with structured
-statistical reporting capabilities.
-#### Core Features:
-- Daily activity logging with persistent storage
-- Category-based time tracking and distribution
-- Monthly aggregated reporting (GROUP BY month logic)
-- Yearly productivity summaries per category
-- Total hours per category per year
-- Average hours per month calculations
-- Dynamic bar chart visualization per selected category
-- Cross-category comparison dashboard (monthly & annual)
-- Time-series sorting and historical search functionality
-- Centralized dashboard summary screen for productivity overview
+
+The system includes a powerful analytics module built on top of the Application layer.
+
+Features
+- Daily activity tracking
+- Category-based time allocation
+- Monthly and yearly aggregation
+- Total and average calculations
+- Top-N category analysis
+- Time-series filtering (Year → Month → Day)
+- Graphical visualization (bar charts)
+- Dashboard summaries
+
+## Data Processing Strategy
+- LINQ-based aggregation
+- Database-level filtering
+- Optimized grouping queries
+- DTO projection for lightweight data transfer
 
 
-#### Statistical Processing
+## Database Design
 
-Data aggregation and statistical calculations are performed using structured LINQ queries and database-level filtering to ensure:
+Core Tables
+- CATEGORY
+- TASK
+- DAILY_ROUTINE
+- MONTH
 
+## Design Characteristics
+- Normalized relational structure
+- Foreign key constraints for consistency
+- Soft delete support:
+  - isDeleted
+  - deletedDate
 
-- Accurate time summation
-- Efficient grouped queries
-- Optimized ordering by year → month → day
-- Clean separation between calculation logic (BLL) and persistence logic (DAL)
-
-This design ensures scalability, maintainability, and clear responsibility 
-boundaries between layers.
-
-````
-+--------------------------------------------------+
-|                  Presentation Layer              |
-|--------------------------------------------------|
-| Windows Forms (AllForms)                         |
-| - FormCategory                                   |
-| - FormCategoryList                               |
-| - FormDailyRoutine                               |
-| - FormDailyRoutineList                           |
-| - FormDeletedData                                |
-| - FormGraphs                                     |
-| - FormMonthlyReports                             |
-| - FormMonthlyRoutineReportsList                  |
-| - FormSummaryList                                |
-| - FormTaskList                                   |
-| - FormTaskWithSummary                            |
-| - FormTotalReportsList                           |
-+-------------------------▲------------------------+
-                          |
-                          |
-+-------------------------|------------------------+
-|               Business Logic Layer (BLL)         |
-|--------------------------------------------------|
-| - CategoryBLL                                    |
-| - DailyTaskBLL                                   |
-| - DashboardBLL                                   |
-| - GraphBLL                                       |
-| - IBLL                                           |
-| - MonthBLL                                       |
-| - ReportsBLL                                     |
-| - TaskBLL                                        |
-| - YearBLL                                        |
-|                                                  |
-| Handles:                                         |
-| - Validation                                     |
-| - Aggregation Logic                              |
-| - Statistical Calculations                       |
-+-------------------------▲------------------------+
-                          |
-                          |
-+-------------------------|------------------------+
-|               Data Access Layer (DAL)            |
-|--------------------------------------------------|
-| DAO                                              |
-| - APPContext                                     |
-| - CategoryDAO                                    |
-| - DailyTaskDAO                                   |
-| - GraphDAO                                       |
-| - IDAO                                           |
-| - MonthDAO                                       |
-| - ReportsDAO                                     |
-| - TaskDAO                                        |
-| - YearDAO                                        |
-|                                                  |
-| DTO                                              |
-| - AllYearsDetailDTO                              |
-| - YearDTO                                        |
-| - CategoryDetailDTO                              |
-| - CategoryDTO                                    |
-| - MonthDetailDTO                                 |
-| - MonthDTO                                       |
-| - DailyTaskDetailDTO                             |
-| - DailyTaskDTO                                   |
-| - TaskDetailDTO                                  |
-| - TaskDTO                                        |
-| - MonthlyRoutinesDetailDTO                       |
-| - MonthlyRoutineDTO                              |
-| - ReportsDetailDTO                               |
-| - ReportDTO                                      |
-| - GraphDetailDTO                                 |
-| - GraphDTO                                       |
-|                                                  |
-| Entity Framework (EDMX - Database First)         |
-+-------------------------▲------------------------+
-                          |
-                          |
-+-------------------------|------------------------+
-|                    Microsoft SQL Server          |
-|--------------------------------------------------|
-| Tables:                                          |
-| - DAILY_ROUTINE                                  |
-| - MONTHs                                         |
-| - TASK                                           |
-| - CATEGORY                                       |
-+--------------------------------------------------+
-````
 
 ## Data Flow
 ````
-
-1. User interacts with Windows Forms UI.
-2. UI sends request to BLL.
-3. BLL performs validation and statistical calculations.
-4. BLL calls DAO layer.
-5. DAO interacts with Entity Framework.
-6. Entity Framework executes queries against MSSQL.
-7. Results are mapped into DTOs and returned upward.
+UI (Forms)
+   ↓
+Application Services
+   ↓
+Repository Interfaces
+   ↓
+Infrastructure (Repositories)
+   ↓
+Entity Framework (EDMX)
+   ↓
+SQL Server
 ````
 
 ## 🗄 Database Schema
@@ -208,22 +228,65 @@ boundaries between layers.
     MONTH ||--o{ TASK : groups
 ````
 
+## UI Features
+Dashboard
+- Monthly and yearly summaries
+- Top categories
+- Productivity overview
+
+Daily Routine
+- Add and manage daily tasks
+- Track categorized time
+
+Reports
+- Monthly and yearly breakdown
+- Total usage analytics
+
+Graphs
+- Visual insights using charts
+
+## Technical Highlights
+- Clean Architecture implementation
+- Repository + Service pattern combination
+- DTO-based data transfer
+- LINQ-powered analytics engine
+- Soft delete data strategy
+- Production-tested system (2+ years)
+
+## Technologies Used
+- C#
+- .NET Framework
+- Windows Forms
+- Entity Framework (EDMX / Database-First)
+- Microsoft SQL Server
+- LINQ
+- WinForms Charting
+
+## Production Experience
+
+This system has been used continuously in real-world scenarios for over two years, proving:
+
+- Stability under long-term usage
+- Reliable analytics output
+- Clean and maintainable architecture
+- Practical usability for productivity tracking
+
+## Installation
+Prerequisites
+- Windows OS
+- Visual Studio 2022+
+- .NET Framework 4.7.2+
+- SQL Server Express
+- SSMS
+
 ````
- Database Design Overview
+git clone https://github.com/isoboye24/RoutineAPP.git
 
-The database follows a normalized relational structure:
-
-- DAILY_ROUTINE represents a specific calendar day entry.
-- TASK represents categorized time entries associated with a routine.
-- CATEGORY provides classification for activity tracking.
-- MONTH acts as a lookup reference table.
-
-Soft delete strategy is implemented across core tables using:
-- isDeleted
-- deletedDate
-
-This ensures historical consistency and safe record management.
 ````
+1. Open RoutineAPP.sln
+2. Ensure SQL Server Express is running
+3. Build (Ctrl + Shift + B)
+3. Run (F5)
 
 
 ## 🏠 Dashboard Overview
@@ -237,9 +300,9 @@ Displays total hours per category, yearly summaries, and average monthly statist
 Interface for adding each task with optional summary and daily tasks view.
 
 <p align="center">
-  <img src="images/daily_tasks.png" width="32%" height="150"/>
+  <img src="images/daily.png" width="32%" height="150"/>
   <img src="images/add_task.png" width="32%" height="150"/>
-  <img src="images/task_view.png" width="32%" height="150" />
+  <img src="images/task.png" width="32%" height="150" />
 </p>
 
 
@@ -249,91 +312,13 @@ Bar chart visualization of annual category performance
 
 
 <p align="center">
-  <img src="images/month_report.png" width="32%" height="150"/>
+  <img src="images/monthly.png" width="32%" height="150"/>
   <img src="images/yearly_barchart.png" width="32%" height="150"/>
-  <img src="images/annual.png" width="32%" height="150" />
+  <img src="images/total.png" width="32%" height="150" />
 </p>
 
 
-## Technical Highlights
 
-- Clean 3-tier layered architecture
-- Separation of UI, business logic, and data access concerns
-- Soft delete implementation across core entities
-- LINQ-based aggregation and statistical computation
-- DTO-based data transport for decoupled communication
-- Production-validated stability over extended use
-
-## Technologies Used
-- C#
-- .NET Framework
-- Windows Forms
-- Microsoft SQL Server
-- Entity Framework (Database-First / EDMX)
-- LINQ
-- System.Windows.Forms.DataVisualization (Charts)
-- Layered Architecture (3-Tier)
-- DAO & DTO Patterns
-
-## Production Stability
-
-The system has been actively used in real-world daily operations for two years, demonstrating:
-
-- Architectural robustness
-- Data consistency
-- Reporting accuracy
-- Long-term maintainability
-
-
-## 🚀 Installation
-
-### Prerequisites
-
-- Windows OS
-- Visual Studio (2022 or later recommended)
-- .NET Framework 4.7.2 or later
-- Microsoft SQL Server SQLEXPRESS
-- SQL Server Management Studio 
-
----
-
-### 1️. Clone the Repository
-
-```bash
-git clone https://github.com/isoboye24/RoutineAPP.git
-
-````
-
-### 2. Open the Solution
-
-Open RoutineAPP.sln in Visual Studio.
-
-
-### 3. Database Configuration
-
-RoutineAPP is configured to use a local SQL Server Express instance with 
-Windows Integrated Security.
-
-The connection string is preconfigured in `App.config` and does not require 
-manual adjustment for standard local environments.
-
-Requirements:
-
-- Microsoft SQL Server Express installed
-- SQL Server (SQLEXPRESS) service running
-- Windows Authentication enabled
-
-On first execution, the application automatically verifies the existence of 
-the target database and creates it if it does not already exist.
-
-
-### 4. Build and Run
-
-- Build the solution (Ctrl + Shift + B)
-- Run the application (F5)
-
-
-
-### License
-This project is provided for portfolio and demonstration purposes only.
+## License
+This project is intended for portfolio and demonstration purposes only.
 Unauthorized commercial use is not permitted.

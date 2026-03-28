@@ -16,16 +16,31 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public IQueryable<TASK> GetAll(int dailyId)
+        public IQueryable<TASK> GetAll()
         {
-            return _db.TASKs.Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId);
+            return _db.TASKs.Where(x => !x.isDeleted);
         }
-        
+
         public IQueryable<TASK> GetAllDeletedTasks()
         {
             return _db.TASKs.Where(x => x.isDeleted);
         }
-        
+
+        public IQueryable<TASK> GetTasksByDay(int dailyId)
+        {
+            return _db.TASKs.Where(x => !x.isDeleted && x.dailiyRoutineID == dailyId);
+        }
+
+        public IQueryable<TASK> GetTasksByMonth(int month, int year)
+        {
+            return _db.TASKs.Where(x => x.monthID == month && x.year == year && !x.isDeleted);
+        }
+
+        public IQueryable<TASK> GetTasksByYear(int year)
+        {
+            return _db.TASKs.Where(x => x.year == year && !x.isDeleted);
+        }
+
         public IQueryable<TASK> GetById(int id)
         {
             return _db.TASKs.Where(x => x.taskID == id && !x.isDeleted);
@@ -99,20 +114,6 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.TASKs.Count(x => !x.isDeleted);
         }
 
-        public IQueryable<TASK> GetTasksByMonth(int month, int year)
-        {
-            return _db.TASKs.Where(x => x.monthID == month && x.year == year && !x.isDeleted);
-        }
-
-        public IQueryable<TASK> GetTasksByYear(int year)
-        {
-            return _db.TASKs.Where(x => x.year == year && !x.isDeleted);
-        }
-
-        public IQueryable<TASK> GetTotalTasks()
-        {
-            return _db.TASKs.Where(x => !x.isDeleted);
-        }
 
         public int GetCategoryTimeMonthly(int month, int year, string category)
         {

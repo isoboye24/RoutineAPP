@@ -20,6 +20,6 @@ namespace RoutineAPP.Application.Interfaces
 
         List<TaskDTO> GetTasksByMonth(int month, int year);
         List<TaskDTO> GetTasksByYear(int year);
-        List<TaskDTO> GetTotalTasks();
+        List<TaskDTO> GetAll();
     }
 }

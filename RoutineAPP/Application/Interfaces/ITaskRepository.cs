@@ -6,11 +6,11 @@ namespace RoutineAPP.Application.Interfaces
 {
     public interface ITaskRepository
     {
-        IQueryable<TASK> GetAll(int dailyId);
+        IQueryable<TASK> GetAll();
         IQueryable<TASK> GetAllDeletedTasks();
+        IQueryable<TASK> GetTasksByDay(int routineId);
         IQueryable<TASK> GetById(int id);
         IQueryable<TASK> GetTasksByMonth(int month, int year);
-        IQueryable<TASK> GetTotalTasks();
         IQueryable<TASK> GetTasksByYear(int year);
 
         bool Insert(Task routine);

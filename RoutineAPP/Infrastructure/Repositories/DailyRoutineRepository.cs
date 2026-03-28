@@ -19,6 +19,11 @@ namespace RoutineAPP.Infrastructure.Repositories
         {
             return _db.DAILY_ROUTINE.Where(x => !x.isDeleted);
         }
+        
+        public IQueryable<DAILY_ROUTINE> GetAllByYear(int year)
+        {
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.routineDate.Year == year);
+        }
 
         public IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines()
         {

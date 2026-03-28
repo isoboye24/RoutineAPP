@@ -33,7 +33,7 @@ namespace RoutineAPP.Application.Services
 
         public List<TaskDTO> GetTasksByDay(int routineId)
         {
-            return (from t in _repository.GetAll(routineId)
+            return (from t in _repository.GetTasksByDay(routineId)
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     where !t.isDeleted && r.dailyRoutineID == routineId
@@ -97,9 +97,9 @@ namespace RoutineAPP.Application.Services
             .ToList();
         }
 
-        public List<TaskDTO> GetTotalTasks()
+        public List<TaskDTO> GetAll()
         {
-            return (from t in _repository.GetTotalTasks()
+            return (from t in _repository.GetAll()
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     where !t.isDeleted

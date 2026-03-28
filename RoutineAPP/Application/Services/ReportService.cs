@@ -31,30 +31,27 @@ namespace RoutineAPP.Application.Services
 
         public List<Top5ReportDTO> GetTop5AnnualReport(int year)
         {
-            var query = (
-                from t in _db.TASKs
-                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                join c in _db.CATEGORies
-                    on t.categoryID equals c.categoryID
-                where !t.isDeleted
-                      && !c.isDeleted
-                      && !d.isDeleted
-                      && d.routineDate.Year == year
-                group new { t, c } by new
-                {
-                    t.categoryID,
-                    c.categoryName
-                }
-                into g
-                orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportDTO
-                {
-                    CategoryId = g.Key.categoryID,
-                    CategoryName = g.Key.categoryName,
-                    TotalMinutes = g.Sum(x => x.t.timeSpent)
-                }
-            )
-            .Take(5);
+            var query = (from t in _taskRepository.GetAll()
+                         join r in _dailyRoutineRepository.GetAllByYear(year)
+                             on t.dailiyRoutineID equals r.dailyRoutineID
+                         join c in _categoryRepository.GetAll()
+                             on t.categoryID equals c.categoryID
+                         where !t.isDeleted
+                         group new { t, c } by new
+                         {
+                             t.categoryID,
+                             c.categoryName
+                         }
+                         into g
+                         let totalMinutes = g.Sum(x => x.t.timeSpent)
+                         orderby totalMinutes descending
+                         select new Top5ReportDTO
+                         {
+                             CategoryId = g.Key.categoryID,
+                             CategoryName = g.Key.categoryName,
+                             TotalMinutes = totalMinutes
+                         })
+                        .Take(5);
 
             return query.ToList();
         }
