@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RoutineAPP.AllForms;
 using RoutineAPP.Application.Services;
-using RoutineAPP.Core.Interfaces;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Infrastructure.Data;
 using RoutineAPP.Infrastructure.Repositories;
 using System;
@@ -32,7 +32,6 @@ namespace RoutineAPP
             services.AddScoped<IMonthRepository, MonthRepository>();
             services.AddScoped<IDailyRoutineRepository, DailyRoutineRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<IGraphRepository, GraphRepository>();
 
             // Services
             services.AddScoped<ICategoryService, CategoryService>();
@@ -40,7 +39,6 @@ namespace RoutineAPP
             services.AddScoped<IDailyRoutineService, DailyRoutineService>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<IReportService, ReportService>();
-            services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IGraphService, GraphService>();
             services.AddScoped<IDashboardService, DashboardService>();
 

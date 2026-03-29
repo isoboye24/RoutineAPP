@@ -2,9 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using RoutineAPP.AllForms;
 using RoutineAPP.Core.Entities;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.ReportHelper;
+using RoutineAPP.Application.DTO;
 
 namespace RoutineAPP
 {
@@ -26,7 +26,6 @@ namespace RoutineAPP
         private readonly IDailyRoutineService _dailyService;
         private readonly ITaskService _taskService;
         private readonly IReportService _reportService;
-        private readonly ICommentService _commentService;
         private readonly IGraphService _graphService;
         private readonly IDashboardService _dashboardService;
         private readonly IDateProvider _dateProvider;
@@ -43,7 +42,7 @@ namespace RoutineAPP
         List<Top5ReportDTO> _top5AnnualReportVM;
 
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
-            ITaskService taskService, IReportService reportService, ICommentService commentService, IGraphService graphService, IDashboardService dashboardService, 
+            ITaskService taskService, IReportService reportService, IGraphService graphService, IDashboardService dashboardService, 
             IDateProvider dateProvider, IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -61,7 +60,6 @@ namespace RoutineAPP
             _dailyService = dailyService;
             _taskService = taskService;
             _reportService = reportService;
-            _commentService = commentService;
             _graphService = graphService;
             _dashboardService = dashboardService;
             _dateProvider = dateProvider;
@@ -144,40 +142,14 @@ namespace RoutineAPP
         }
 
         private void loadTop5MonthlyReport(int month, int year)
-        {
-            var domainList = _reportService.GetFormattedTop5MonthlyReport(month, year);
-
-            _top5MonthlyReportVM  = domainList
-                .Select(x => new Top5ReportDTO
-                {
-                    CategoryId = x.CategoryId,
-                    CategoryName = x.CategoryName,
-                    TotalMinutes = x.TotalMinutes,
-                    FormattedTotalMinutes = x.FormattedTotalMinutes,
-                    Percentage = x.Percentage 
-                })
-                .ToList();
-
-            dataGridViewTop5Monthly.DataSource = _top5MonthlyReportVM;
+        {           
+            dataGridViewTop5Monthly.DataSource = _reportService.GetTop5MonthlyReport(month, year);
             ConfigureReportDetailsGrid(dataGridViewTop5Monthly, ReportGridType.Top5ReportDetails);
         }
 
         private void loadTop5AnnualReport(int year)
         {
-            var domainList = _reportService.GetFormattedTop5AnnualReport(year);
-
-            _top5AnnualReportVM  = domainList
-                .Select(x => new Top5ReportDTO
-                {
-                    CategoryId = x.CategoryId,
-                    CategoryName = x.CategoryName,
-                    TotalMinutes = x.TotalMinutes,
-                    FormattedTotalMinutes = x.FormattedTotalMinutes,
-                    Percentage = x.Percentage 
-                })
-                .ToList();
-
-            dataGridViewTop5Yearly.DataSource = _top5AnnualReportVM;
+            dataGridViewTop5Yearly.DataSource = _reportService.GetTop5AnnualReport(year);
             ConfigureReportDetailsGrid(dataGridViewTop5Yearly, ReportGridType.Top5ReportDetails);
         }
 
