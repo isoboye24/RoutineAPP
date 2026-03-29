@@ -1,14 +1,10 @@
-﻿using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.CategoryHelper;
 
@@ -40,17 +36,7 @@ namespace RoutineAPP.AllForms
 
         private void loadCategories()
         {
-            var domainList = _service.GetAll();
-
-            _categories = domainList
-                .Select(x => new CategoryDTO
-                {
-                    CategoryID = x.CategoryID,
-                    CategoryName = x.CategoryName
-                })
-                .ToList();
-
-            dataGridView1.DataSource = _categories;
+            dataGridView1.DataSource = _service.GetAll();
             ConfigureCategoryGrid(dataGridView1, CategoryGridType.Basic);
         }
 

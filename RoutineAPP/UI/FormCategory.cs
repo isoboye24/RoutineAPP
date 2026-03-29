@@ -1,25 +1,19 @@
-﻿using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
+﻿using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Core.Entities;
+using RoutineAPP.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RoutineAPP.AllForms
 {
     public partial class FormCategory : Form
     {
-        private readonly ICategoryService _service;
+        private readonly ICategoryService _categoryService;
         private int _categoryId = 0;
-        public FormCategory(ICategoryService service)
+        public FormCategory(ICategoryService categoryService)
         {
             InitializeComponent();
-            _service = service;
+            _categoryService = categoryService;
         }
 
         private void iconClose_Click(object sender, EventArgs e)
@@ -47,31 +41,22 @@ namespace RoutineAPP.AllForms
         {
             try
             {
+                var name = txtCategory.Text.Trim();
+
                 if (_categoryId == 0)
                 {
-                    if (txtCategory.Text.Trim() == "")
-                    {
-                        MessageBox.Show("Please enter category");
-                    }
-                    else
-                    {
-                        _service.Create(txtCategory.Text);
-                    }
+                    var category = new Category(name);
+                    _categoryService.Create(category);
+                    MessageBox.Show("Category created successfully!");
                 }
                 else
                 {
-                    if (txtCategory.Text.Trim() == "")
-                    {
-                        MessageBox.Show("Please enter category");
-                    }
-                    else
-                    {
-                        _service.Update(_categoryId, txtCategory.Text);
-                    }
-                }                
-
-                MessageBox.Show("Operation successful");
-                this.Close();
+                    var category = new Category(name);
+                    category.SetId(_categoryId);
+                    _categoryService.Update(category);
+                    MessageBox.Show("Category updated successfully!");
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
