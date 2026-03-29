@@ -58,30 +58,27 @@ namespace RoutineAPP.Application.Services
 
         public List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year)
         {
-            var query = (
-                from t in _db.TASKs
-                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                join c in _db.CATEGORies on t.categoryID equals c.categoryID
-                where !t.isDeleted
-                      && !c.isDeleted
-                      && !d.isDeleted
-                      && d.routineDate.Month == month
-                      && d.routineDate.Year == year
-                group new { t, c } by new
-                {
-                    t.categoryID,
-                    c.categoryName
-                }
-                into g
-                orderby g.Sum(x => x.t.timeSpent) descending
-                select new Top5ReportDTO
-                {
-                    CategoryId = g.Key.categoryID,
-                    CategoryName = g.Key.categoryName,
-                    TotalMinutes = g.Sum(x => x.t.timeSpent)
-                }
-            )
-            .Take(5);
+            var query = (from t in _taskRepository.GetAll()
+                         join r in _dailyRoutineRepository.GetAllByMonth(month, year)
+                             on t.dailiyRoutineID equals r.dailyRoutineID
+                         join c in _categoryRepository.GetAll()
+                             on t.categoryID equals c.categoryID
+                         where !t.isDeleted
+                         group new { t, c } by new
+                         {
+                             t.categoryID,
+                             c.categoryName
+                         }
+                         into g
+                         let totalMinutes = g.Sum(x => x.t.timeSpent)
+                         orderby totalMinutes descending
+                         select new Top5ReportDTO
+                         {
+                             CategoryId = g.Key.categoryID,
+                             CategoryName = g.Key.categoryName,
+                             TotalMinutes = totalMinutes
+                         })
+                        .Take(5);
 
             return query.ToList();
         }
@@ -90,7 +87,7 @@ namespace RoutineAPP.Application.Services
         {
             var tasks = _taskRepository.GetTasksByDay(routine);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
         }
@@ -100,7 +97,7 @@ namespace RoutineAPP.Application.Services
 
             var tasks = _taskRepository.GetTasksByDay(routine);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             int totalUnusedMinutes = (24 * 60) - totalUsedMinutes;
 
@@ -109,7 +106,25 @@ namespace RoutineAPP.Application.Services
 
 
         public List<GetAllMonthsDTO> GetAllMonths()
-            => _dailyRoutineRepository.GetAllMonths();
+        {
+            var result = _dailyRoutineRepository.GetAll()
+                                                .GroupBy(r => new
+                                                {
+                                                    Year = r.routineDate.Year,
+                                                    Month = r.routineDate.Month
+                                                })
+                                                .Select(g => new GetAllMonthsDTO
+                                                {
+                                                    Year = g.Key.Year,
+                                                    Month = new DateTime(1, g.Key.Month, 1).ToString("MMMM"),
+                                                    MonthID = g.Key.Month
+                                                })
+                                                .OrderByDescending(x => x.Year)
+                                                .ThenByDescending(x => x.Month)
+                                                .ToList();
+
+            return result;
+        }
 
         public List<ReportDTO> GetReportDetailsByMonth(int month, int year)
         {
@@ -118,17 +133,17 @@ namespace RoutineAPP.Application.Services
             if (!tasks.Any())
                 return new List<ReportDTO>();
 
-            int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
+            int totalMonthMinutes = tasks.Sum(t => t.timeSpent);
 
-            var grouped = tasks.GroupBy(t => t.CategoryId)
+            var grouped = tasks.GroupBy(t => t.categoryID)
                                 .Select(g => new
                                 {
                                     CategoryId = g.Key,
-                                    TotalMinutes = g.Sum(x => x.TimeSpent)
+                                    TotalMinutes = g.Sum(x => x.timeSpent)
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.categoryID, c => c.categoryName);
 
             int counter = 0;
 
@@ -165,7 +180,7 @@ namespace RoutineAPP.Application.Services
 
             var tasks = _taskRepository.GetTasksByMonth(month, year);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
 
@@ -179,7 +194,7 @@ namespace RoutineAPP.Application.Services
 
             var tasks = _taskRepository.GetTasksByMonth(month, year);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
         }
@@ -200,17 +215,17 @@ namespace RoutineAPP.Application.Services
             if (!tasks.Any())
                 return new List<ReportDTO>();
 
-            int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
+            int totalMonthMinutes = tasks.Sum(t => t.timeSpent);
 
-            var grouped = tasks.GroupBy(t => t.CategoryId)
+            var grouped = tasks.GroupBy(t => t.categoryID)
                                 .Select(g => new
                                 {
                                     CategoryId = g.Key,
-                                    TotalMinutes = g.Sum(x => x.TimeSpent)
+                                    TotalMinutes = g.Sum(x => x.timeSpent)
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.categoryID, c => c.categoryName);
 
             int counter = 0;
 
@@ -252,7 +267,7 @@ namespace RoutineAPP.Application.Services
         {
             var tasks = _taskRepository.GetTasksByYear(year);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
         }
@@ -264,7 +279,7 @@ namespace RoutineAPP.Application.Services
 
             var tasks = _taskRepository.GetTasksByYear(year);
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
 
@@ -274,22 +289,22 @@ namespace RoutineAPP.Application.Services
 
         public List<ReportDTO> GetOverallReportDetails()
         {
-            var tasks = _taskRepository.GetTotalTasks().ToList();
+            var tasks = _taskRepository.GetAll().ToList();
 
             if (!tasks.Any())
                 return new List<ReportDTO>();
 
-            int totalMonthMinutes = tasks.Sum(t => t.TimeSpent);
+            int totalMonthMinutes = tasks.Sum(t => t.timeSpent);
 
-            var grouped = tasks.GroupBy(t => t.CategoryId)
+            var grouped = tasks.GroupBy(t => t.categoryID)
                                 .Select(g => new
                                 {
                                     CategoryId = g.Key,
-                                    TotalMinutes = g.Sum(x => x.TimeSpent)
+                                    TotalMinutes = g.Sum(x => x.timeSpent)
                                 })
                                 .ToList();
 
-            var categories = _categoryRepository.GetAll().ToDictionary(c => c.CategoryID, c => c.CategoryName);
+            var categories = _categoryRepository.GetAll().ToDictionary(c => c.categoryID, c => c.categoryName);
 
             int counter = 0;
 
@@ -326,9 +341,9 @@ namespace RoutineAPP.Application.Services
 
         public string GetTotalOverallUsedTime()
         {
-            var tasks = _taskRepository.GetTotalTasks();
+            var tasks = _taskRepository.GetAll();
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
         }
@@ -338,9 +353,9 @@ namespace RoutineAPP.Application.Services
             var days = _dailyRoutineRepository.Count();
             int overallTotalMinutes = days * 24 * 60;
 
-            var tasks = _taskRepository.GetTotalTasks();
+            var tasks = _taskRepository.GetAll();
 
-            int totalUsedMinutes = tasks.Sum(x => x.TimeSpent);
+            int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
 
@@ -355,47 +370,17 @@ namespace RoutineAPP.Application.Services
 
         public string GetDateRange()
         {
-            var (firstDate, lastDate) = _dailyRoutineRepository.GetDateRange();
+            var query = _dailyRoutineRepository.GetAll();
 
-            if (!firstDate.HasValue || !lastDate.HasValue)
+            if (!query.Any())
                 return "No data available";
+
+            var firstDate = query.Min(x => x.routineDate);
+            var lastDate = query.Max(x => x.routineDate);
 
             return $"{firstDate:MMMM dd, yyyy} - {lastDate:MMMM dd, yyyy}";
         }
 
-        public List<Top5ReportDTO> GetFormattedTop5MonthlyReport(int month, int year)
-        {
-            var data = _taskRepository.GetTop5MonthlyReport(month, year);
-
-            if (!data.Any())
-                return new List<Top5ReportDTO>();
-
-            int totalMinutes = data.Sum(x => x.TotalMinutes);
-
-            return data.Select(x => new Top5ReportDTO
-            {
-                CategoryName = x.CategoryName,
-                FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),
-                Percentage = GeneralHelper.CalculatePercentage(x.TotalMinutes, totalMinutes)
-            }).ToList();
-        }
-
-        public List<Top5ReportDTO> GetFormattedTop5AnnualReport(int year)
-        {
-            var data = _taskRepository.GetTop5AnnualReport(year);
-
-            if (!data.Any())
-                return new List<Top5ReportDTO>();
-
-            int totalMinutes = data.Sum(x => x.TotalMinutes);
-
-            return data.Select(x => new Top5ReportDTO
-            {
-                CategoryName = x.CategoryName,
-                FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),
-                Percentage = GeneralHelper.CalculatePercentage(x.TotalMinutes, totalMinutes)
-            }).ToList();
-        }
     }
     
 }

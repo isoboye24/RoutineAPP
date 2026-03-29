@@ -11,6 +11,36 @@ maintainability, scalability, and clear separation of concerns.
 The application has been actively used in a real-world production environment for over 
 two years, demonstrating long-term stability, reliability, and practical usability.
 
+
+## 🏠 Dashboard Overview
+Displays total hours per category, yearly summaries, and average monthly statistics.
+
+
+![Dashboard](images/dashboard.png)
+
+
+## 📅 Task Entry & View
+Interface for adding each task with optional summary and daily tasks view.
+
+<p align="center">
+  <img src="images/daily.png" width="32%" height="150"/>
+  <img src="images/add_task.png" width="32%" height="150"/>
+  <img src="images/task.png" width="32%" height="150" />
+</p>
+
+
+## Reports
+Aggregated monthly and annual time distribution per category, and 
+Bar chart visualization of annual category performance
+
+
+<p align="center">
+  <img src="images/monthly.png" width="32%" height="150"/>
+  <img src="images/yearly_barchart.png" width="32%" height="150"/>
+  <img src="images/total.png" width="32%" height="150" />
+</p>
+
+
 ## Architecture (Clean Architecture)
 
 The system follows Clean Architecture principles, organizing the codebase into distinct layers with strict dependency direction:
@@ -287,36 +317,6 @@ git clone https://github.com/isoboye24/RoutineAPP.git
 2. Ensure SQL Server Express is running
 3. Build (Ctrl + Shift + B)
 3. Run (F5)
-
-
-## 🏠 Dashboard Overview
-Displays total hours per category, yearly summaries, and average monthly statistics.
-
-
-![Dashboard](images/dashboard.png)
-
-
-## 📅 Task Entry & View
-Interface for adding each task with optional summary and daily tasks view.
-
-<p align="center">
-  <img src="images/daily.png" width="32%" height="150"/>
-  <img src="images/add_task.png" width="32%" height="150"/>
-  <img src="images/task.png" width="32%" height="150" />
-</p>
-
-
-## Reports
-Aggregated monthly and annual time distribution per category, and 
-Bar chart visualization of annual category performance
-
-
-<p align="center">
-  <img src="images/monthly.png" width="32%" height="150"/>
-  <img src="images/yearly_barchart.png" width="32%" height="150"/>
-  <img src="images/total.png" width="32%" height="150" />
-</p>
-
 
 
 ## License

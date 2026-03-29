@@ -31,7 +31,7 @@ namespace RoutineAPP.Application.Interfaces
 
         string GetDateRange();
 
-        List<Top5ReportDTO> GetFormattedTop5MonthlyReport(int month, int year);
-        List<Top5ReportDTO> GetFormattedTop5AnnualReport(int year);
+        List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year);
+        List<Top5ReportDTO> GetTop5AnnualReport(int year);
     }
 }

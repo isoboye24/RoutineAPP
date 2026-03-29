@@ -15,26 +15,6 @@ namespace RoutineAPP.Infrastructure.Repositories
             _db = db;
         }
 
-        public IQueryable<DAILY_ROUTINE> GetAll()
-        {
-            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted);
-        }
-        
-        public IQueryable<DAILY_ROUTINE> GetAllByYear(int year)
-        {
-            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.routineDate.Year == year);
-        }
-
-        public IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines()
-        {
-            return _db.DAILY_ROUTINE.Where(x => x.isDeleted);
-        }
-
-        public IQueryable<DAILY_ROUTINE> GetById(int id)
-        {
-            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.dailyRoutineID == id);
-        }
-
         public bool Insert(DailyRoutine routine)
         {
             _db.DAILY_ROUTINE.Add(new DAILY_ROUTINE
@@ -94,19 +74,51 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.DAILY_ROUTINE.Count(x => !x.isDeleted);
         }
 
-        public int CountByMonth(int month, int year)
+
+        public IQueryable<DAILY_ROUTINE> GetAll()
         {
-            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.routineDate.Month == month && x.routineDate.Year == year);
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted);
+        }
+        
+        public IQueryable<DAILY_ROUTINE> GetAllByYear(int year)
+        {
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.routineDate.Year == year);
+        }
+
+        public IQueryable<DAILY_ROUTINE> GetAllByMonth(int month, int year)
+        {
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.routineDate.Month == month && x.routineDate.Year == year);
+        }
+
+        public IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines()
+        {
+            return _db.DAILY_ROUTINE.Where(x => x.isDeleted);
+        }
+
+        public IQueryable<DAILY_ROUTINE> GetById(int id)
+        {
+            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.dailyRoutineID == id);
         }
 
         public IQueryable<DAILY_ROUTINE> GetComments(int year)
         {
             return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.summary != null && x.year == year);
         }
-        
+
         public IQueryable<DAILY_ROUTINE> GetCommentById(int id)
         {
             return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.dailyRoutineID == id && x.summary != null);
+        }
+
+        public IQueryable<int> GetYears()
+        {
+            return _db.DAILY_ROUTINE.Select(x => x.routineDate.Year).Distinct();
+        }
+
+
+        public int CountByMonth(int month, int year)
+        {
+            return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.routineDate.Month == month && x.routineDate.Year == year);
         }
 
         public int CountByYear(int year)
@@ -124,9 +136,6 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.DAILY_ROUTINE.Count(x => !x.isDeleted && x.summary != null);
         }
 
-        public IQueryable<int> GetYears()
-        {
-            return _db.DAILY_ROUTINE.Select(x => x.routineDate.Year).Distinct();
-        }
+        
     }
 }
