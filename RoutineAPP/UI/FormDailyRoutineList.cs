@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RoutineAPP.Application.Services;
+using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
-using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,23 +68,7 @@ namespace RoutineAPP.AllForms
 
         private void loadDailyRoutine()
         {
-            var domainList = _dailyService.GetAll();
-
-            _dailyRoutineVM = domainList
-                .Select(x => new DailyRoutineDTO
-                {
-                    Id = x.Id,
-                    RoutineDate = x.Date,
-                    Summary = x.Summary,
-                    Day = x.Date.Day,
-                    MonthID = x.Date.Month,
-                    MonthName = GeneralHelper.ConventIntToMonth(x.Date.Month),
-                    Year = x.Date.Year
-
-                })
-                .ToList();
-
-            dataGridView1.DataSource = _dailyRoutineVM;
+            dataGridView1.DataSource = _dailyService.GetAll();
             ConfigureDailyRoutineGrid(dataGridView1, RoutineGridType.Basic);
         }
 

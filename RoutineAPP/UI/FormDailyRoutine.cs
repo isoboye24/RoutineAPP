@@ -1,6 +1,7 @@
-﻿using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Application.Services;
+using RoutineAPP.Core.Entities;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -104,13 +105,23 @@ namespace RoutineAPP.AllForms
         {
             try
             {
-                if (_routineId == 0)
-                    _dailyService.Create(dateTimePickerRoutine.Value, txtSummary.Text.Trim());
-                else
-                    _dailyService.Update(_routineId, dateTimePickerRoutine.Value, txtSummary.Text.Trim());
+                string summary = txtSummary.Text.Trim();
+                DateTime date = dateTimePickerRoutine.Value;
 
-                MessageBox.Show("Operation successful");
-                this.Close();
+                if (_routineId == 0)
+                {
+                    var routine = new DailyRoutine(date, summary);
+                    _dailyService.Create(routine);
+                    MessageBox.Show("Daily routine created successfully!");
+                }
+                else
+                {
+                    var routine = new DailyRoutine(date, summary);
+                    routine.SetId(_routineId);
+                    _dailyService.Update(routine);
+                    MessageBox.Show("Daily routine updated successfully!");
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
