@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static RoutineAPP.HelperService.TaskHelper;
+using static RoutineAPP.Helper.TaskHelper;
 
 namespace RoutineAPP.AllForms
 {
@@ -20,19 +16,17 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
-        private readonly IServiceProvider _serviceProvider;
 
         private int _routineId;
         private DateTime _routineDate;
         private List<TaskDTO> _taskVM;
 
-        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService, IServiceProvider serviceProvider)
+        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
         {
             InitializeComponent();
             _taskService = taskService;
             _categoryService = categoryService;
             _reportService = reportService;
-            _serviceProvider = serviceProvider;
         }
 
         public void LoadForView(int id, DateTime date)
@@ -44,29 +38,7 @@ namespace RoutineAPP.AllForms
 
         private void loadTasks()
         {
-            var domainList = _taskService.GetTaskDetails(_routineId);
-
-            _taskVM = domainList.ToList();
-
-            _taskVM = domainList
-                .Select(x => new TaskDTO
-                {
-                    Id = x.Id,
-                    DailyRoutineId = x.DailyRoutineId,
-                    DailyRoutineDate = x.DailyRoutineDate,
-                    CategoryId = x.CategoryId,
-                    Category = x.Category,
-                    TimeSpent = x.TimeSpent,
-                    Day = x.DailyRoutineDate.Day,
-                    MonthID = x.DailyRoutineDate.Month,
-                    MonthName = GeneralHelper.ConventIntToMonth(x.DailyRoutineDate.Month),
-                    Year = x.DailyRoutineDate.Year,
-                    Summary = x.Summary,
-                    TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.TimeSpent)
-                }).OrderByDescending(x => x.TimeSpent).ThenBy(x => x.Category)
-                .ToList();
-
-            dataGridView1.DataSource = _taskVM;
+            dataGridView1.DataSource = _taskService.GetTasksByDay(_routineId);
             ConfigureTaskGrid(dataGridView1, TaskGridType.Basic);
         }
 
@@ -162,8 +134,15 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            var form = _serviceProvider.GetRequiredService<FormTask>();
-            form.LoadForAddTask(_routineId, _routineDate);
+            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
+            if (selected == null)
+            {
+                MessageBox.Show("Please select a category.");
+                return;
+            }
+
+            var form = new FormTask(_taskService, _categoryService);
+            form.LoadForAddTask(selected);
             form.ShowDialog();
 
             ClearFilters();
@@ -178,7 +157,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = _serviceProvider.GetRequiredService<FormTask>();
+            var form = new FormTask(_taskService, _categoryService);
             form.LoadForEdit(selected, true);
             form.ShowDialog();
 

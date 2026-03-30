@@ -4,12 +4,8 @@ using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.RoutineHelper;
 
@@ -121,8 +117,8 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = _serviceProvider.GetRequiredService<FormDailyRoutine>();
-            form.LoadForEdit(selected.Id, selected.RoutineDate, selected.Summary);
+            var form = new FormDailyRoutine(_dailyService);
+            form.LoadForEdit(selected);
             form.ShowDialog();
 
             ClearFilters();
@@ -138,7 +134,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = _serviceProvider.GetRequiredService<FormTaskList>();
+            var form = new FormTaskList(_taskService, _categoryService, _reportService);
             form.LoadForView(selected.Id, selected.RoutineDate);
             form.ShowDialog();
         }

@@ -118,6 +118,7 @@
     <Compile Include="Application\Interfaces\IMonthRepository.cs" />
     <Compile Include="Application\Interfaces\IMonthService.cs" />
     <Compile Include="Helper\CategoryHelper.cs" />
+    <Compile Include="Helper\CommentHelper.cs" />
     <Compile Include="Helper\ReportHelper.cs" />
     <Compile Include="Helper\RoutineHelper.cs" />
     <Compile Include="Infrastructure\Repositories\CategoryRepository.cs" />

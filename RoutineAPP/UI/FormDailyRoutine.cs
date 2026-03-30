@@ -1,23 +1,17 @@
-﻿using RoutineAPP.Application.Interfaces;
-using RoutineAPP.Application.Services;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Core.Entities;
 using RoutineAPP.Helper;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace RoutineAPP.AllForms
 {
     public partial class FormDailyRoutine : Form
     {
         private readonly IDailyRoutineService _dailyService;
+        private DailyRoutineDTO _dailyRoutineDTO;
+        private DailyRoutineDTO _dailyRoutineViewDTO;
 
         private int _routineId = 0;
         private bool _isView = false;
@@ -66,18 +60,15 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
-        public void LoadForEdit(int id, DateTime date, string summary)
+        public void LoadForEdit(DailyRoutineDTO dailyRoutineDTO)
         {
-            _routineId = id;
-            txtSummary.Text = summary;
-            dateTimePickerRoutine.Value = date;
+            _dailyRoutineDTO = dailyRoutineDTO;
         }
 
-        public void LoadForCommentView(bool isView, DateTime date, string summary)
+        public void LoadForCommentView(bool isView, DailyRoutineDTO dailyRoutineViewDTO)
         {
             _isView = isView;
-            _date = date;
-            _summary = summary;
+            _dailyRoutineViewDTO = dailyRoutineViewDTO;
         }
 
 
@@ -90,7 +81,7 @@ namespace RoutineAPP.AllForms
                 label3.Hide();
                 txtSummary.ReadOnly = true;
                 txtSummary.Text = _summary;
-                labelTitle.Text = "Routine on " + _date.Day + "." + _date.Month + "." + _date.Year;
+                labelTitle.Text = "Routine on " + _dailyRoutineViewDTO.Day + "." + _dailyRoutineViewDTO.MonthName + "." + _dailyRoutineViewDTO.Year;
             }
 
             ResizeControls();            
@@ -108,7 +99,7 @@ namespace RoutineAPP.AllForms
                 string summary = txtSummary.Text.Trim();
                 DateTime date = dateTimePickerRoutine.Value;
 
-                if (_routineId == 0)
+                if (_dailyRoutineDTO.Id == 0)
                 {
                     var routine = new DailyRoutine(date, summary);
                     _dailyService.Create(routine);

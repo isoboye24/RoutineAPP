@@ -1,15 +1,12 @@
-﻿using RoutineAPP.Application.Services;
-using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.ReportHelper;
 
@@ -77,19 +74,7 @@ namespace RoutineAPP.AllForms
 
         private void loadMonthlyReports()
         {
-            var domainList = _reportService.GetReportDetailsByMonth(month, year);
-
-            _reportDetailsVM = domainList.Select(x => new ReportDTO
-            {
-                ReportID = x.ReportID,
-                CategoryID = x.CategoryID,
-                Category = x.Category,
-                TotalTimeUsed = x.TotalTimeUsed,
-                PercentageOfUsedTime = x.PercentageOfUsedTime,
-                CompletePercentage = x.CompletePercentage
-            }).ToList();
-
-            dataGridView1.DataSource = _reportDetailsVM;
+            dataGridView1.DataSource = _reportService.GetReportDetailsByMonth(month, year);
             ConfigureReportDetailsGrid(dataGridView1, ReportGridType.ReportDetails);
         }
 

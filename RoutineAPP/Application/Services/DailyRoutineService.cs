@@ -85,6 +85,7 @@ namespace RoutineAPP.Application.Services
                  {
                      Id = x.dailyRoutineID,
                      RoutineDate = x.routineDate,
+                     FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
                      Summary = x.summary,
                      Day = x.routineDate.Day,
                      MonthID = x.routineDate.Month,

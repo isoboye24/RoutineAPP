@@ -1,36 +1,27 @@
-﻿using RoutineAPP.Core.Interfaces;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static RoutineAPP.Helper.ReportHelper;
 
 namespace RoutineAPP.AllForms
 {
     public partial class FormCommentList : Form
     {
-        private readonly ICommentService _commentService;
         private readonly IDailyRoutineService _dailyRoutineService;
         private readonly IMonthService _monthlyService;
-        private readonly IDateProvider _dateProvider;
         private bool _isView = false;
 
         List<DailyRoutineDTO> _dailyRoutineVM;
-        public FormCommentList(ICommentService commentService, IDailyRoutineService dailyRoutineService, IMonthService monthService, IDateProvider dateProvider)
+        public FormCommentList(IDailyRoutineService dailyRoutineService, IMonthService monthService)
         {
             InitializeComponent();
-            _commentService = commentService;
             _dailyRoutineService = dailyRoutineService;
             _monthlyService = monthService;
-            _dateProvider = dateProvider;
         }
         
         private int year => DateTime.Now.Year;
@@ -55,18 +46,8 @@ namespace RoutineAPP.AllForms
 
         private void loadComments(int year)
         {
-            var summaries = _commentService.GetComments(year);
-
-            _dailyRoutineVM = summaries.Select(x => new DailyRoutineDTO
-            {
-                Id = x.Id,
-                RoutineDate = x.RoutineDate,
-                Summary = x.Summary,
-                Day = x.Day,
-                MonthID = x.MonthID,
-                MonthName = x.MonthName,
-                Year = x.Year
-            }).ToList();
+            dataGridView1.DataSource = _dailyRoutineService.GetComments(year);
+            CommentHelper.ConfigureCommentGrid(dataGridView1, CommentHelper.CommentGridType.Basic);
         }
 
         private void FormCommentList_Load(object sender, EventArgs e)
@@ -96,7 +77,6 @@ namespace RoutineAPP.AllForms
 
             RefreshDataCounts();
         }
-
 
         private void txtComment_TextChanged(object sender, EventArgs e)
         {
@@ -137,7 +117,7 @@ namespace RoutineAPP.AllForms
             }
 
             var form = new FormDailyRoutine(_dailyRoutineService);
-            form.LoadForCommentView(_isView = true, selected.RoutineDate, selected.Summary);
+            form.LoadForCommentView(true, selected);
             form.ShowDialog();
 
             ClearFilters();

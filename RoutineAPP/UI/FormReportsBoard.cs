@@ -1,17 +1,11 @@
-﻿using RoutineAPP.Application.Services;
-using RoutineAPP.Core.Interfaces;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
-using RoutineAPP.HelperService;
-using RoutineAPP.UI.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.ReportHelper;
 
@@ -66,58 +60,19 @@ namespace RoutineAPP.AllForms
 
         private void loadMonthlyReports()
         {
-            var domainList = _reportService.GetAllMonths();
-
-            _getAllMonthsVM = domainList
-                .Select(x => new GetAllMonthsDTO
-                {
-                    MonthID = x.MonthID,
-                    Month = GeneralHelper.ConventIntToMonth(x.MonthID),
-                    Year = x.Year,
-                })
-                .ToList();
-
-            dataGridViewMonthly.DataSource = _getAllMonthsVM;
+            dataGridViewMonthly.DataSource = _reportService.GetAllMonths();
             ConfigureReportDetailsGrid(dataGridViewMonthly, ReportGridType.GetAllMonths);
         }
 
         private void loadYearlyReports(int year)
         {
-            var domainList = _reportService.GetReportDetailsByYear(year);
-
-            _yearlyReportDetailsVM = domainList
-                .Select(x => new ReportDTO
-                {
-                    ReportID = x.ReportID,
-                    CategoryID = x.CategoryID,
-                    Category = x.Category,
-                    TotalTimeUsed = x.TotalTimeUsed,
-                    PercentageOfUsedTime = x.PercentageOfUsedTime,
-                    CompletePercentage = x.CompletePercentage,
-                })
-                .ToList();
-
-            dataGridViewAnually.DataSource = _yearlyReportDetailsVM;
+            dataGridViewAnually.DataSource = _reportService.GetReportDetailsByYear(year);
             ConfigureReportDetailsGrid(dataGridViewAnually, ReportGridType.ReportDetails);
         }
 
         private void loadOverallReports()
         {
-            var domainList = _reportService.GetOverallReportDetails();
-
-            _reportDetailsVM = domainList
-                .Select(x => new ReportDTO
-                {
-                    ReportID = x.ReportID,
-                    CategoryID = x.CategoryID,
-                    Category = x.Category,
-                    TotalTimeUsed = x.TotalTimeUsed,
-                    PercentageOfUsedTime = x.PercentageOfUsedTime,
-                    CompletePercentage = x.CompletePercentage,
-                })
-                .ToList();
-
-            dataGridViewTotal.DataSource = _reportDetailsVM;
+            dataGridViewTotal.DataSource = _reportService.GetOverallReportDetails();
             ConfigureReportDetailsGrid(dataGridViewTotal, ReportGridType.ReportDetails);
         }
 
