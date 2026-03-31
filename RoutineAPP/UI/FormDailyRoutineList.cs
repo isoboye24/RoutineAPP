@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RoutineAPP.Application.DTO;
+﻿using RoutineAPP.Application.DTO;
 using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
 using System;
@@ -18,18 +17,17 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
-        private readonly IServiceProvider _serviceProvider;
 
         private List<DailyRoutineDTO> _dailyRoutineVM;
 
-        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IServiceProvider serviceProvider)
+        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IReportService reportService)
         {
             InitializeComponent();
             _monthService = monthService;
             _dailyService = dailyService;
             _taskService = taskService;
             _categoryService = categoryService;
-            _serviceProvider = serviceProvider;
+            _reportService = reportService;
         }
 
         private void resizeControls()
@@ -108,9 +106,17 @@ namespace RoutineAPP.AllForms
             ClearFilters();
         }
 
+        private DailyRoutineDTO GetSelected()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as DailyRoutineDTO;
+        }
+
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
+            var selected = GetSelected();
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -126,7 +132,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnView_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
+            var selected = GetSelected();
 
             if (selected == null)
             {
@@ -141,7 +147,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
+            var selected = GetSelected();
             if (selected == null)
             {
                 MessageBox.Show("Please select a daily routine.");

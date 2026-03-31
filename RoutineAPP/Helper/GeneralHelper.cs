@@ -173,9 +173,9 @@ namespace RoutineAPP.Helper
             int mins = minutes % 60;
 
             if (hours == 0)
-                return $"{mins} min{(mins != 1 ? "s" : "")}";
+                return $"{mins} min{(mins > 1 ? "s" : "")}";
 
-            return $"{hours} hr{(hours != 1 ? "s" : "")} {mins} min{(mins != 1 ? "s" : "")}";
+            return $"{hours} hr{(hours > 1 ? "s" : "")} {mins} min{(mins > 1 ? "s" : "")}";
         }
 
         public static string FormatTimeShort(int minutes)

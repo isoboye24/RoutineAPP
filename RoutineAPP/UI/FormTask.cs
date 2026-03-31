@@ -145,9 +145,9 @@ namespace RoutineAPP.AllForms
                 int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
                 string summary = txtSummary.Text?.Trim();
 
-                if (_taskId == 0)
+                if (!_isUpdate)
                 {
-                    var task = new Task(_routineId, categoryId, time, _dailyRoutineDTO.RoutineDate, summary);
+                    var task = new Task(_dailyRoutineDTO.Id, categoryId, time, _dailyRoutineDTO.RoutineDate, summary);
                     _taskService.Create(task);
                     MessageBox.Show("Task created successfully!");
                     ClearFields();

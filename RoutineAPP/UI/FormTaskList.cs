@@ -15,6 +15,7 @@ namespace RoutineAPP.AllForms
     {
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
+        private readonly IReportService _reportService;
 
         private List<TaskDTO> _taskVM;
         private DailyRoutineDTO _routineViewDTO;
@@ -22,8 +23,9 @@ namespace RoutineAPP.AllForms
         public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
         {
             InitializeComponent();
-            _taskService = taskService;
-            _categoryService = categoryService;
+            _taskService = taskService ?? throw new ArgumentNullException(nameof(taskService));
+            _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
+            _reportService = reportService ?? throw new ArgumentNullException(nameof(reportService));
         }
 
         public void LoadForView(DailyRoutineDTO routineViewDTO)
@@ -56,6 +58,13 @@ namespace RoutineAPP.AllForms
             GeneralHelper.ComboBoxProps(cmbCategory, "CategoryName", "CategoryID");
         }
 
+        private void RefreshDataCounts()
+        {
+            labelTotalTimeUsed.Text = ("Used Time : " + _reportService.GetTotalUsedTimeInDay(_routineViewDTO.Id)).ToString();
+            labelTotalUnusedTime.Text = ("Unused Time : " + _reportService.GetTotalUnusedTimeInDay(_routineViewDTO.Id)).ToString();
+            labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "").ToString();
+        }
+
         private void FormTaskList_Load(object sender, EventArgs e)
         {
             ApplyFontStyles();
@@ -66,13 +75,6 @@ namespace RoutineAPP.AllForms
             labelTitle.Text = _routineViewDTO.RoutineDate.ToString("dd.MM.yyyy");
 
             RefreshDataCounts();
-        }
-
-        private void RefreshDataCounts()
-        {
-            //labelTotalTimeUsed.Text = "Used Time : " + _reportService.GetTotalUsedTimeInDay(_routineViewDTO.Id);
-            //labelTotalUnusedTime.Text = "Unused Time : " + _reportService.GetTotalUnusedTimeInDay(_routineViewDTO.Id);
-            labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "").ToString();
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)
@@ -162,7 +164,7 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnDelete_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<TaskDTO>(dataGridView1);
+            var selected = GetSelectedTask();
             if (selected == null)
             {
                 MessageBox.Show("Please select a task.");

@@ -1,12 +1,9 @@
-﻿using RoutineAPP.Core.Entities;
-using RoutineAPP.Application.Interfaces;
+﻿using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Application.DTO;
 using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoutineAPP.Application.Services
 {

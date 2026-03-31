@@ -4,6 +4,7 @@ using RoutineAPP.Application.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RoutineAPP.Helper;
 namespace RoutineAPP.Application.Services
 {
     public class TaskService : ITaskService
@@ -35,7 +36,7 @@ namespace RoutineAPP.Application.Services
 
         public List<TaskDTO> GetTasksByDay(int routineId)
         {
-            return (from t in _repository.GetTasksByDay(routineId)
+            return (from t in _repository.GetTasksByDay(routineId).ToList()
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     select new TaskDTO
@@ -50,13 +51,14 @@ namespace RoutineAPP.Application.Services
                         Day = r.routineDate.Day,
                         MonthID = r.routineDate.Month,
                         Year = r.routineDate.Year,
+                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
                     })
             .ToList();
         }
         
         public List<TaskDTO> GetTasksByMonth(int month, int year)
         {
-            return (from t in _repository.GetTasksByMonth(month, year)
+            return (from t in _repository.GetTasksByMonth(month, year).ToList()
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     where !t.isDeleted
@@ -72,13 +74,14 @@ namespace RoutineAPP.Application.Services
                         Day = r.routineDate.Day,
                         MonthID = r.routineDate.Month,
                         Year = r.routineDate.Year,
+                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
                     })
             .ToList();
         }
         
         public List<TaskDTO> GetTasksByYear(int year)
         {
-            return (from t in _repository.GetTasksByYear(year)
+            return (from t in _repository.GetTasksByYear(year).ToList()
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     where !t.isDeleted
@@ -94,13 +97,14 @@ namespace RoutineAPP.Application.Services
                         Day = r.routineDate.Day,
                         MonthID = r.routineDate.Month,
                         Year = r.routineDate.Year,
+                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
                     })
             .ToList();
         }
 
         public List<TaskDTO> GetAll()
         {
-            return (from t in _repository.GetAll()
+            return (from t in _repository.GetAll().ToList()
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
                     where !t.isDeleted
@@ -116,6 +120,7 @@ namespace RoutineAPP.Application.Services
                         Day = r.routineDate.Day,
                         MonthID = r.routineDate.Month,
                         Year = r.routineDate.Year,
+                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
                     })
             .ToList();
         }
