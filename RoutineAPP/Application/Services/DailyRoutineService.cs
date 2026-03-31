@@ -33,7 +33,7 @@ namespace RoutineAPP.Application.Services
 
         public List<DailyRoutineDTO> GetAll()
         {
-            return _repository.GetAll()
+            return _repository.GetAll().ToList()
                 .Select(x => new DailyRoutineDTO
                 {
                     Id = x.dailyRoutineID,
@@ -41,7 +41,8 @@ namespace RoutineAPP.Application.Services
                     Summary = x.summary,
                     Day = x.routineDate.Day,
                     MonthID = x.routineDate.Month,
-                    MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                    FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
+                    MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
                     Year = x.routineDate.Year,
                 })
                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
@@ -50,7 +51,7 @@ namespace RoutineAPP.Application.Services
         
         public List<DailyRoutineDTO> GetAllDeletedRoutines()
         {
-            return _repository.GetAllDeletedRoutines()
+            return _repository.GetAllDeletedRoutines().ToList()
                 .Select(x => new DailyRoutineDTO
                 {
                     Id = x.dailyRoutineID,
@@ -58,7 +59,8 @@ namespace RoutineAPP.Application.Services
                     Summary = x.summary,
                     Day = x.routineDate.Day,
                     MonthID = x.routineDate.Month,
-                    MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                    FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
+                    MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
                     Year = x.routineDate.Year,
                 })
                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
@@ -80,16 +82,16 @@ namespace RoutineAPP.Application.Services
 
         public List<DailyRoutineDTO> GetComments(int year)
         {
-            return _repository.GetComments(year)
+            return _repository.GetComments(year).ToList()
                  .Select(x => new DailyRoutineDTO
                  {
                      Id = x.dailyRoutineID,
                      RoutineDate = x.routineDate,
-                     FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
                      Summary = x.summary,
                      Day = x.routineDate.Day,
                      MonthID = x.routineDate.Month,
-                     MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                     FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
+                     MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
                      Year = x.routineDate.Year,
                  })
                  .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
@@ -98,7 +100,7 @@ namespace RoutineAPP.Application.Services
         
         public List<DailyRoutineDTO> GetCommentById(int id)
         {
-            return _repository.GetCommentById(id)
+            return _repository.GetCommentById(id).ToList()
                  .Select(x => new DailyRoutineDTO
                  {
                      Id = x.dailyRoutineID,
@@ -106,7 +108,8 @@ namespace RoutineAPP.Application.Services
                      Summary = x.summary,
                      Day = x.routineDate.Day,
                      MonthID = x.routineDate.Month,
-                     MonthName = GeneralHelper.ConventIntToMonth(x.routineDate.Day),
+                     FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
+                     MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
                      Year = x.routineDate.Year,
                  })
                  .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)

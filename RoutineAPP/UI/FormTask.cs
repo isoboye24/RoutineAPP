@@ -13,9 +13,7 @@ namespace RoutineAPP.AllForms
         private readonly ICategoryService _categoryService;
         private int _routineId;
         private DateTime _routineDate;
-        private int _taskId;
-        private int _prevTimeSpent;
-        private int _prevCategoryId;
+        private int _taskId = 0;
         private bool _isUpdate = false;
 
         private DailyRoutineDTO _dailyRoutineDTO;
@@ -68,10 +66,10 @@ namespace RoutineAPP.AllForms
             _dailyRoutineDTO = dailyRoutineDTO;
         }
 
-        public void LoadForEdit(TaskDTO taskDTO, bool isUpdate)
+        public void LoadForEdit(TaskDTO taskDTO)
         {
             _taskDTO = taskDTO;
-            _isUpdate = isUpdate;           
+            _isUpdate = true;
         }
 
         private void loadCombos()
@@ -83,27 +81,24 @@ namespace RoutineAPP.AllForms
         private void FormTaskWithSummary_Load(object sender, EventArgs e)
         {
             resizeControls();
+            loadCombos();
 
-            if (!_isUpdate)
+            if (_isUpdate)
+            {
+                labelTitle.Text = "Edit Task";
+
+                _taskId = _taskDTO.Id;
+                _routineId = _taskDTO.DailyRoutineId;
+                cmbCategory.SelectedValue = _taskDTO.CategoryId;
+                txtSummary.Text = _taskDTO.Summary;
+                txtTimeSpent.Text = _taskDTO.TimeSpent.ToString();
+            }
+            else
             {
                 labelTitle.Text = "Add Task";
                 txtAdditionalTime.Hide();
                 label1.Hide();
                 label5.Hide();
-
-                loadCombos();
-
-                _taskId = _taskDTO.Id;
-                _routineId = _taskDTO.DailyRoutineId;
-                cmbCategory.SelectedValue = _taskDTO.CategoryId;
-                _prevCategoryId = _taskDTO.CategoryId;
-                txtSummary.Text = _taskDTO.Summary;
-                txtTimeSpent.Text = _taskDTO.TimeSpent.ToString();
-                _prevTimeSpent = _taskDTO.TimeSpent;
-            }
-            else
-            {
-                labelTitle.Text = "Edit Task";                
             }
 
         }
@@ -123,25 +118,56 @@ namespace RoutineAPP.AllForms
             this.Close();
         }
 
+        private void ClearFields()
+        {
+            txtTimeSpent.Clear();
+            txtAdditionalTime.Clear();
+            txtSummary.Clear();
+            cmbCategory.SelectedIndex = -1;
+        }
+
         private void iconBtnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                int time = Convert.ToInt32(txtTimeSpent.Text.Trim());
-                int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
-                string summary = txtSummary.Text.Trim();
-
-                if (_taskDTO.Id == 0)
+                int time;
+                if (!int.TryParse(txtTimeSpent.Text.Trim(), out time))
                 {
-                    var task = new Task(_dailyRoutineDTO.Id, categoryId,time, _dailyRoutineDTO.Day, _dailyRoutineDTO.MonthID, _dailyRoutineDTO.Year, summary);
+                    MessageBox.Show("Please enter a valid number for time.");
+                    return;
+                }
+                if (cmbCategory.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a category.");
+                    return;
+                }
+
+                int categoryId = Convert.ToInt32(cmbCategory.SelectedValue);
+                string summary = txtSummary.Text?.Trim();
+
+                if (_taskId == 0)
+                {
+                    var task = new Task(_routineId, categoryId, time, _dailyRoutineDTO.RoutineDate, summary);
                     _taskService.Create(task);
                     MessageBox.Show("Task created successfully!");
+                    ClearFields();
                 }
                 else
                 {
-                    time += Convert.ToInt32(txtAdditionalTime.Text.Trim());
-                    var task = new Task(_dailyRoutineDTO.Id, categoryId, time, _dailyRoutineDTO.Day, _dailyRoutineDTO.MonthID, _dailyRoutineDTO.Year, summary);
-                    task.SetId(_taskDTO.Id);
+                    int additionalTime = 0;
+
+                    if (!string.IsNullOrWhiteSpace(txtAdditionalTime.Text))
+                    {
+                        if (!int.TryParse(txtAdditionalTime.Text.Trim(), out additionalTime))
+                        {
+                            MessageBox.Show("Additional time must be a number.");
+                            return;
+                        }
+
+                        time += additionalTime;
+                    }
+
+                    var task = Task.Rehydrate(_taskId, _taskDTO.DailyRoutineId, categoryId, time, _taskDTO.DailyRoutineDate, summary);
                     _taskService.Update(task);
                     MessageBox.Show("Task updated successfully!");
                     this.Close();

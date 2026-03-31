@@ -135,7 +135,7 @@ namespace RoutineAPP.AllForms
             }
 
             var form = new FormTaskList(_taskService, _categoryService, _reportService);
-            form.LoadForView(selected.Id, selected.RoutineDate);
+            form.LoadForView(selected);
             form.ShowDialog();
         }
 

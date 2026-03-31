@@ -15,30 +15,25 @@ namespace RoutineAPP.AllForms
     {
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
-        private readonly IReportService _reportService;
 
-        private int _routineId;
-        private DateTime _routineDate;
         private List<TaskDTO> _taskVM;
+        private DailyRoutineDTO _routineViewDTO;
 
         public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
         {
             InitializeComponent();
             _taskService = taskService;
             _categoryService = categoryService;
-            _reportService = reportService;
         }
 
-        public void LoadForView(int id, DateTime date)
+        public void LoadForView(DailyRoutineDTO routineViewDTO)
         {
-            _routineId = id;
-            _routineDate = date;
+            _routineViewDTO = routineViewDTO;
         }
-
 
         private void loadTasks()
         {
-            dataGridView1.DataSource = _taskService.GetTasksByDay(_routineId);
+            dataGridView1.DataSource = _taskService.GetTasksByDay(_routineViewDTO.Id);
             ConfigureTaskGrid(dataGridView1, TaskGridType.Basic);
         }
 
@@ -68,16 +63,16 @@ namespace RoutineAPP.AllForms
 
             loadTasks();
 
-            labelTitle.Text = _routineDate.ToString("dd.MM.yyyy");
+            labelTitle.Text = _routineViewDTO.RoutineDate.ToString("dd.MM.yyyy");
 
             RefreshDataCounts();
         }
 
         private void RefreshDataCounts()
         {
-            labelTotalTimeUsed.Text = "Used Time : " + _reportService.GetTotalUsedTimeInDay(_routineId);
-            labelTotalUnusedTime.Text = "Unused Time : " + _reportService.GetTotalUnusedTimeInDay(_routineId);
-            labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "");
+            //labelTotalTimeUsed.Text = "Used Time : " + _reportService.GetTotalUsedTimeInDay(_routineViewDTO.Id);
+            //labelTotalUnusedTime.Text = "Unused Time : " + _reportService.GetTotalUnusedTimeInDay(_routineViewDTO.Id);
+            labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "").ToString();
         }
 
         private void iconMaximize_Click(object sender, EventArgs e)
@@ -134,23 +129,24 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnAdd_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<DailyRoutineDTO>(dataGridView1);
-            if (selected == null)
-            {
-                MessageBox.Show("Please select a category.");
-                return;
-            }
-
             var form = new FormTask(_taskService, _categoryService);
-            form.LoadForAddTask(selected);
+            form.LoadForAddTask(_routineViewDTO);
             form.ShowDialog();
 
             ClearFilters();
         }
 
+        private TaskDTO GetSelectedTask()
+        {
+            if (dataGridView1.CurrentRow == null)
+                return null;
+
+            return dataGridView1.CurrentRow.DataBoundItem as TaskDTO;
+        }
+
         private void iconBtnEdit_Click(object sender, EventArgs e)
         {
-            var selected = GeneralHelper.GetSelected<TaskDTO>(dataGridView1);
+            var selected = GetSelectedTask();
             if (selected == null)
             {
                 MessageBox.Show("Please select a category.");
@@ -158,7 +154,7 @@ namespace RoutineAPP.AllForms
             }
 
             var form = new FormTask(_taskService, _categoryService);
-            form.LoadForEdit(selected, true);
+            form.LoadForEdit(selected);
             form.ShowDialog();
 
             ClearFilters();

@@ -1,18 +1,12 @@
 ﻿using FontAwesome.Sharp;
 using Microsoft.Extensions.DependencyInjection;
 using RoutineAPP.AllForms;
-using RoutineAPP.Core.Entities;
 using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.ReportHelper;
 using RoutineAPP.Application.DTO;
@@ -37,9 +31,6 @@ namespace RoutineAPP
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-
-        List<Top5ReportDTO> _top5MonthlyReportVM;
-        List<Top5ReportDTO> _top5AnnualReportVM;
 
         public FormDashboard(ICategoryService categoryService, IMonthService monthService, IDailyRoutineService dailyService, 
             ITaskService taskService, IReportService reportService, IGraphService graphService, IDashboardService dashboardService, 

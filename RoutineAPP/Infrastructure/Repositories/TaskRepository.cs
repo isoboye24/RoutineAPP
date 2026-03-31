@@ -2,7 +2,6 @@
 using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Infrastructure.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RoutineAPP.Infrastructure.Repositories
@@ -53,9 +52,9 @@ namespace RoutineAPP.Infrastructure.Repositories
                 dailiyRoutineID = task.DailyRoutineId,
                 categoryID = task.CategoryId,
                 timeSpent = task.TimeSpent,
-                day = task.Day,
-                monthID = task.Month,
-                year = task.Year,
+                day = task.TaskDate.Day,
+                monthID = task.TaskDate.Month,
+                year = task.TaskDate.Year,
                 summary = task.Summary,
             });
 
@@ -69,9 +68,9 @@ namespace RoutineAPP.Infrastructure.Repositories
             entity.dailiyRoutineID = task.DailyRoutineId;
             entity.categoryID = task.CategoryId;
             entity.timeSpent = task.TimeSpent;
-            entity.day = task.Day;
-            entity.monthID = task.Month;
-            entity.year = task.Year;
+            entity.day = task.TaskDate.Day;
+            entity.monthID = task.TaskDate.Month;
+            entity.year = task.TaskDate.Year;
             entity.summary = task.Summary;
 
             _db.SaveChanges();

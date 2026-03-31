@@ -12,9 +12,11 @@ namespace RoutineAPP.Application.Services
         private readonly IDailyRoutineRepository _routineRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public TaskService(ITaskRepository repository)
+        public TaskService(ITaskRepository repository, IDailyRoutineRepository routineRepository, ICategoryRepository categoryRepository)
         {
             _repository = repository;
+            _routineRepository = routineRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public int Count()
@@ -36,7 +38,6 @@ namespace RoutineAPP.Application.Services
             return (from t in _repository.GetTasksByDay(routineId)
                     join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
                     join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    where !t.isDeleted && r.dailyRoutineID == routineId
                     select new TaskDTO
                     {
                         Id = t.taskID,
@@ -146,19 +147,14 @@ namespace RoutineAPP.Application.Services
 
         public bool Update(Task task)
         {
-            var existing = _repository.GetById(task.Id);
-
-            if (existing == null)
+            var check = _repository.GetById(task.Id);
+            if (check == null)
                 throw new Exception("Task not found");
 
-            task.Update(
-                task.DailyRoutineId,
-                task.CategoryId,
-                task.TimeSpent,
-                task.Day,
-                task.Month,
-                task.Year,
-                task.Summary);
+            task.UpdateCategory(task.CategoryId);
+            task.UpdateTimeSpent(task.TimeSpent);
+            task.UpdateTaskDate(task.TaskDate);
+            task.UpdateSummary(task.Summary);
 
             return _repository.Update(task);
         }

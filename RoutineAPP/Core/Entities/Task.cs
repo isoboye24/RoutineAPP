@@ -1,9 +1,5 @@
-﻿using RoutineAPP.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+
 
 namespace RoutineAPP.Core.Entities
 {
@@ -13,23 +9,16 @@ namespace RoutineAPP.Core.Entities
         public int DailyRoutineId { get; private set; }
         public int CategoryId { get; private set; }
         public int TimeSpent { get; private set; }
-        public int Day { get; private set; }
-        public int Month { get; private set; }
-        public int Year { get; private set; }
         public string Summary { get; private set; }
+        public DateTime TaskDate { get; private set; }
 
-        public Task(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary = null)
+        public Task(int dailyRoutineId, int categoryId, int timeSpent, DateTime date, string summary = null)
         {
-            DailyRoutineId = dailyRoutineId;
-            CategoryId = categoryId;
-            TimeSpent = timeSpent;
-            Day = day;
-            Month = month;
-            Year = year;
-
-            Summary = string.IsNullOrWhiteSpace(summary)
-                ? null
-                : summary.Trim();
+            SetDailyRoutineId(dailyRoutineId);
+            SetCategoryId(categoryId);
+            SetTimeSpent(timeSpent);
+            SetTaskDate(date);
+            SetSummary(summary);
         }
 
         public static Task Rehydrate(
@@ -37,35 +26,69 @@ namespace RoutineAPP.Core.Entities
             int dailyRoutineId, 
             int categoryId,
             int timeSpent,
-            int day, 
-            int month, 
-            int year,
+            DateTime date,
             string summary)
         {
-            return new Task(dailyRoutineId, categoryId, timeSpent, day, month, year, summary)
-            {
-                Id = id
-            };
+            var task = new Task(dailyRoutineId, categoryId, timeSpent, date, summary);
+            task.Id = id;
+            return task;
         }
 
-        public void Update(int dailyRoutineId, int categoryId, int timeSpent, int day, int month, int year, string summary)
+        private void SetDailyRoutineId(int id)
         {
-            DailyRoutineId = dailyRoutineId;
-            CategoryId = categoryId;
+            if (id < 0)
+                throw new ArgumentException("Invalid Daily routine");
+
+            DailyRoutineId = id;
+        }
+
+        public void UpdateCategory(int newId)
+        {
+            SetCategoryId(newId);
+        }
+
+        private void SetCategoryId(int id)
+        {
+            if (id < 0)
+                throw new ArgumentException("Invalid Category");
+
+            CategoryId = id;
+        }
+
+        public void UpdateTimeSpent(int newTimeSpent)
+        {
+            SetTimeSpent(newTimeSpent);
+        }
+
+        private void SetTimeSpent(int timeSpent)
+        {
+            if (timeSpent < 0)
+                throw new ArgumentException("Time must be an integer and more than 0");
+
             TimeSpent = timeSpent;
-            Day = day;
-            Month = month;
-            Year = year;
-
-            Summary = string.IsNullOrWhiteSpace(summary)
-                ? null
-                : summary.Trim();
         }
 
-        public void SetId(int id)
+        public void UpdateTaskDate(DateTime newDate)
         {
-            Id = id;
+            SetTaskDate(newDate);
         }
 
+        private void SetTaskDate(DateTime date)
+        {
+            if (date.Year < 2024 || date.Year > DateTime.Now.Year + 1)
+                throw new ArgumentException("Invalid year");
+
+            TaskDate = date;
+        }
+
+        public void UpdateSummary(string newSummary)
+        {
+            SetSummary(newSummary);
+        }
+        
+        private void SetSummary(string summary)
+        {
+            Summary = string.IsNullOrWhiteSpace(summary) ? null : summary.Trim();
+        }
     }
 }

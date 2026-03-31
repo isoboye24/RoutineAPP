@@ -9,8 +9,6 @@ using System.Configuration;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
 using System.IO;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace RoutineAPP
 {
