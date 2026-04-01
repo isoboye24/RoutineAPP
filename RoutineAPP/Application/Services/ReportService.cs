@@ -28,61 +28,87 @@ namespace RoutineAPP.Application.Services
 
         public List<Top5ReportDTO> GetTop5AnnualReport(int year)
         {
-            var query = (from t in _taskRepository.GetAll()
-                         join r in _dailyRoutineRepository.GetAllByYear(year)
-                             on t.dailiyRoutineID equals r.dailyRoutineID
-                         join c in _categoryRepository.GetAll()
-                             on t.categoryID equals c.categoryID
-                         where !t.isDeleted
-                         group new { t, c } by new
-                         {
-                             t.categoryID,
-                             c.categoryName
-                         }
-                         into g
-                         let totalMinutes = g.Sum(x => x.t.timeSpent)
-                         orderby totalMinutes descending
-                         select new Top5ReportDTO
-                         {
-                             CategoryId = g.Key.categoryID,
-                             CategoryName = g.Key.categoryName,
-                             TotalMinutes = totalMinutes
-                         })
-                        .Take(5);
+            var baseQuery =
+                from t in _taskRepository.GetTasksByYear(year)
+                join r in _dailyRoutineRepository.GetAll()
+                    on t.dailiyRoutineID equals r.dailyRoutineID
+                where !t.isDeleted && r.year == year
+                select t;
 
-            return query.ToList();
+            int totalAnnualMinutes = baseQuery.Sum(x => (int?)x.timeSpent) ?? 0;
+
+            var data = (from t in baseQuery
+                        join c in _categoryRepository.GetAll()
+                            on t.categoryID equals c.categoryID
+                        group new { t, c } by new
+                        {
+                            t.categoryID,
+                            c.categoryName
+                        }
+                        into g
+                        let categoryMinutes = g.Sum(x => (int?)x.t.timeSpent) ?? 0
+                        orderby categoryMinutes descending
+                        select new
+                        {
+                            CategoryId = g.Key.categoryID,
+                            CategoryName = g.Key.categoryName,
+                            TotalMinutes = categoryMinutes
+                        })
+                        .Take(5)
+                        .ToList();
+
+            return data.Select(x => new Top5ReportDTO
+            {
+                CategoryId = x.CategoryId,
+                CategoryName = x.CategoryName,
+                TotalMinutes = x.TotalMinutes,
+                FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),
+                Percentage = GeneralHelper.CalculatePercentage(x.TotalMinutes, totalAnnualMinutes)
+            }).ToList();
         }
 
         public List<Top5ReportDTO> GetTop5MonthlyReport(int month, int year)
         {
-            var query = (from t in _taskRepository.GetAll()
-                         join r in _dailyRoutineRepository.GetAllByMonth(month, year)
-                             on t.dailiyRoutineID equals r.dailyRoutineID
-                         join c in _categoryRepository.GetAll()
-                             on t.categoryID equals c.categoryID
-                         where !t.isDeleted
-                         group new { t, c } by new
-                         {
-                             t.categoryID,
-                             c.categoryName
-                         }
-                         into g
-                         let totalMinutes = g.Sum(x => x.t.timeSpent)
-                         orderby totalMinutes descending
-                         select new Top5ReportDTO
-                         {
-                             CategoryId = g.Key.categoryID,
-                             CategoryName = g.Key.categoryName,
-                             TotalMinutes = totalMinutes
-                         })
-                        .Take(5);
+            var baseQuery = _taskRepository.GetTasksByMonth(month, year);
 
-            return query.ToList();
+            int totalMonthlyMinutes = baseQuery.Sum(x => (int?)x.timeSpent) ?? 0;
+
+            var data = (from t in baseQuery
+                        join c in _categoryRepository.GetAll()
+                            on t.categoryID equals c.categoryID
+                        group new { t, c } by new
+                        {
+                            t.categoryID,
+                            c.categoryName
+                        }
+                        into g
+                        let categoryMinutes = g.Sum(x => (int?)x.t.timeSpent) ?? 0
+                        orderby categoryMinutes descending
+                        select new
+                        {
+                            CategoryId = g.Key.categoryID,
+                            CategoryName = g.Key.categoryName,
+                            TotalMinutes = categoryMinutes
+                        })
+                        .Take(5)
+                        .ToList();
+
+            return data.Select(x => new Top5ReportDTO
+            {
+                CategoryId = x.CategoryId,
+                CategoryName = x.CategoryName,
+                TotalMinutes = x.TotalMinutes,
+                FormattedTotalMinutes = GeneralHelper.FormatTime(x.TotalMinutes),
+                Percentage = GeneralHelper.CalculatePercentage(x.TotalMinutes, totalMonthlyMinutes)
+            }).ToList();
         }
 
         public string GetTotalUsedTimeInDay(int routine)
         {
             var tasks = _taskRepository.GetTasksByDay(routine);
+
+            if (!tasks.Any())
+                return "0 min";
 
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
@@ -93,6 +119,9 @@ namespace RoutineAPP.Application.Services
         {
 
             var tasks = _taskRepository.GetTasksByDay(routine);
+
+            if (!tasks.Any())
+                return "24 hrs";
 
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
@@ -177,6 +206,9 @@ namespace RoutineAPP.Application.Services
 
             var tasks = _taskRepository.GetTasksByMonth(month, year);
 
+            if (!tasks.Any())
+                return GeneralHelper.FormatTime(overallTotalMinutes);
+
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             int totalUnusedMinutes = overallTotalMinutes - totalUsedMinutes;
@@ -186,10 +218,10 @@ namespace RoutineAPP.Application.Services
 
         public string GetTotalUsedTimeInMonth(int month, int year)
         {
-            var days = _dailyRoutineRepository.CountByMonth(month, year);
-            int overallTotalMinutes = days * 24 * 60;
-
             var tasks = _taskRepository.GetTasksByMonth(month, year);
+
+            if (!tasks.Any())
+                return "0 min";
 
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
@@ -264,6 +296,9 @@ namespace RoutineAPP.Application.Services
         {
             var tasks = _taskRepository.GetTasksByYear(year);
 
+            if (!tasks.Any())
+                return "0 min";
+
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
@@ -275,6 +310,9 @@ namespace RoutineAPP.Application.Services
             int overallTotalMinutes = days * 24 * 60;
 
             var tasks = _taskRepository.GetTasksByYear(year);
+
+            if (!tasks.Any())
+                return GeneralHelper.FormatTime(overallTotalMinutes);
 
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
@@ -340,6 +378,9 @@ namespace RoutineAPP.Application.Services
         {
             var tasks = _taskRepository.GetAll();
 
+            if (!tasks.Any())
+                return "0 min";
+
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 
             return GeneralHelper.FormatTime(totalUsedMinutes);
@@ -351,6 +392,9 @@ namespace RoutineAPP.Application.Services
             int overallTotalMinutes = days * 24 * 60;
 
             var tasks = _taskRepository.GetAll();
+
+            if (!tasks.Any())
+                return GeneralHelper.FormatTime(overallTotalMinutes);
 
             int totalUsedMinutes = tasks.Sum(x => x.timeSpent);
 

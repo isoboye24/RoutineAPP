@@ -19,8 +19,5 @@ namespace RoutineAPP.Application.Interfaces
         bool PermanentDelete(int id);
         bool Exists(int categoryId, int routineId);
         int Count();
-
-        int GetCategoryTimeMonthly(int month, int year, string category);
-        int GetCategoryTimeAnually(int year, string category);
     }
 }

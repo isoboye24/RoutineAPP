@@ -113,36 +113,5 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.TASKs.Count(x => !x.isDeleted);
         }
 
-
-        public int GetCategoryTimeMonthly(int month, int year, string category)
-        {
-            return (from t in _db.TASKs
-                                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                                join c in _db.CATEGORies
-                                    on t.categoryID equals c.categoryID
-                                where !t.isDeleted
-                                      && !c.isDeleted
-                                      && !d.isDeleted
-                                      && d.routineDate.Month == month
-                                      && d.routineDate.Year == year
-                                      && c.categoryName == category
-                                select (int?)t.timeSpent).Sum() ?? 0;
-
-        }
-
-        public int GetCategoryTimeAnually(int year, string category)
-        {
-            return (from t in _db.TASKs
-                                join d in _db.DAILY_ROUTINE on t.dailiyRoutineID equals d.dailyRoutineID
-                                join c in _db.CATEGORies
-                                    on t.categoryID equals c.categoryID
-                                where !t.isDeleted
-                                      && !c.isDeleted
-                                      && !d.isDeleted
-                                      && d.routineDate.Year == year
-                                      && c.categoryName == category
-                                select (int?)t.timeSpent).Sum() ?? 0;
-
-        }
     }
 }

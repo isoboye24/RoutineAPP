@@ -17,6 +17,7 @@ namespace RoutineAPP.AllForms
         private bool _isView = false;
         private DateTime _date;
         private string _summary;
+        private bool _isUpdate = false;
 
         public FormDailyRoutine(IDailyRoutineService dailyService)
         {
@@ -63,6 +64,7 @@ namespace RoutineAPP.AllForms
         public void LoadForEdit(DailyRoutineDTO dailyRoutineDTO)
         {
             _dailyRoutineDTO = dailyRoutineDTO;
+            _isUpdate = true;
         }
 
         public void LoadForCommentView(bool isView, DailyRoutineDTO dailyRoutineViewDTO)
@@ -83,6 +85,12 @@ namespace RoutineAPP.AllForms
                 txtSummary.Text = _summary;
                 labelTitle.Text = "Routine on " + _dailyRoutineViewDTO.Day + "." + _dailyRoutineViewDTO.MonthName + "." + _dailyRoutineViewDTO.Year;
             }
+            else if (_isUpdate)
+            {
+                dateTimePickerRoutine.Value = _dailyRoutineDTO.RoutineDate;
+                txtSummary.Text = _dailyRoutineDTO.Summary;
+                labelTitle.Text = "Edit Routine on " + _dailyRoutineDTO.Day + "." + _dailyRoutineDTO.MonthName + "." + _dailyRoutineDTO.Year;
+            }
 
             ResizeControls();            
         }
@@ -99,7 +107,7 @@ namespace RoutineAPP.AllForms
                 string summary = txtSummary.Text.Trim();
                 DateTime date = dateTimePickerRoutine.Value;
 
-                if (_dailyRoutineDTO.Id == 0)
+                if (!_isUpdate)
                 {
                     var routine = new DailyRoutine(date, summary);
                     _dailyService.Create(routine);
@@ -107,7 +115,7 @@ namespace RoutineAPP.AllForms
                 }
                 else
                 {
-                    var routine = new DailyRoutine(date, summary);
+                    var routine = DailyRoutine.Rehydrate(_dailyRoutineDTO.Id, date, summary);
                     routine.SetId(_routineId);
                     _dailyService.Update(routine);
                     MessageBox.Show("Daily routine updated successfully!");

@@ -144,12 +144,8 @@ namespace RoutineAPP
             ConfigureReportDetailsGrid(dataGridViewTop5Yearly, ReportGridType.Top5ReportDetails);
         }
 
-
         private void FormDashboard_Load(object sender, EventArgs e)
         {
-            loadTop5MonthlyReport(currentMonth, currentYear);
-            loadTop5AnnualReport(currentYear);
-
             RefreshCards();
         }
 
@@ -171,6 +167,9 @@ namespace RoutineAPP
 
             labeltop5InYear.Text = "Top 5 in " + currentYear;
             labeltop5InMonth.Text = "Top 5 in " + GeneralHelper.ConventIntToMonth(currentMonth) + " " + currentYear;
+
+            loadTop5MonthlyReport(currentMonth, currentYear);
+            loadTop5AnnualReport(currentYear);
         }
 
         private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)

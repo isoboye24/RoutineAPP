@@ -1,10 +1,10 @@
-﻿using RoutineAPP.Core.Entities;
+﻿using RoutineAPP.Application.DTO;
 using RoutineAPP.Application.Interfaces;
-using RoutineAPP.Application.DTO;
+using RoutineAPP.Core.Entities;
+using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RoutineAPP.Helper;
 namespace RoutineAPP.Application.Services
 {
     public class TaskService : ITaskService
@@ -36,114 +36,180 @@ namespace RoutineAPP.Application.Services
 
         public List<TaskDTO> GetTasksByDay(int routineId)
         {
-            return (from t in _repository.GetTasksByDay(routineId).ToList()
-                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
-                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = r.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = r.routineDate.Day,
-                        MonthID = r.routineDate.Month,
-                        Year = r.routineDate.Year,
-                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
-                    })
+            var data = (from t in _repository.GetTasksByDay(routineId)
+                        join r in _routineRepository.GetAll()
+                            on t.dailiyRoutineID equals r.dailyRoutineID
+                        join c in _categoryRepository.GetAll()
+                            on t.categoryID equals c.categoryID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
             .ToList();
         }
-        
+
         public List<TaskDTO> GetTasksByMonth(int month, int year)
         {
-            return (from t in _repository.GetTasksByMonth(month, year).ToList()
-                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
-                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    where !t.isDeleted
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = r.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = r.routineDate.Day,
-                        MonthID = r.routineDate.Month,
-                        Year = r.routineDate.Year,
-                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
-                    })
+            var data = (from t in _repository.GetTasksByMonth(month, year)
+                        join r in _routineRepository.GetAll()
+                            on t.dailiyRoutineID equals r.dailyRoutineID
+                        join c in _categoryRepository.GetAll()
+                            on t.categoryID equals c.categoryID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
             .ToList();
         }
         
         public List<TaskDTO> GetTasksByYear(int year)
         {
-            return (from t in _repository.GetTasksByYear(year).ToList()
-                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
-                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    where !t.isDeleted
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = r.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = r.routineDate.Day,
-                        MonthID = r.routineDate.Month,
-                        Year = r.routineDate.Year,
-                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
-                    })
+            var data = (from t in _repository.GetTasksByYear(year)
+                        join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                        join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
             .ToList();
         }
 
         public List<TaskDTO> GetAll()
         {
-            return (from t in _repository.GetAll().ToList()
-                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
-                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    where !t.isDeleted
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = r.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = r.routineDate.Day,
-                        MonthID = r.routineDate.Month,
-                        Year = r.routineDate.Year,
-                        TimeInHoursAndMinutes = GeneralHelper.FormatTime(t.timeSpent)
-                    })
+            var data = (from t in _repository.GetAll()
+                        join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                        join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
             .ToList();
         }
-        
+
         public List<TaskDTO> GetAllDeletedTasks()
         {
-            return (from t in _repository.GetAllDeletedTasks()
-                    join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
-                    join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
-                    where !t.isDeleted
-                    select new TaskDTO
-                    {
-                        Id = t.taskID,
-                        Category = c.categoryName,
-                        CategoryId = t.categoryID,
-                        DailyRoutineDate = r.routineDate,
-                        DailyRoutineId = t.dailiyRoutineID,
-                        TimeSpent = t.timeSpent,
-                        Summary = t.summary,
-                        Day = r.routineDate.Day,
-                        MonthID = r.routineDate.Month,
-                        Year = r.routineDate.Year,
-                    })
+            var data = (from t in _repository.GetAllDeletedTasks()
+                        join r in _routineRepository.GetAll() on t.dailiyRoutineID equals r.dailyRoutineID
+                        join c in _categoryRepository.GetAll() on t.categoryID equals c.categoryID
+                        where !t.isDeleted
+                        select new
+                        {
+                            t.taskID,
+                            t.categoryID,
+                            c.categoryName,
+                            r.routineDate,
+                            t.dailiyRoutineID,
+                            t.timeSpent,
+                            t.summary
+                        })
+                        .ToList();
+
+            return data.Select(x => new TaskDTO
+            {
+                Id = x.taskID,
+                Category = x.categoryName,
+                CategoryId = x.categoryID,
+                DailyRoutineDate = x.routineDate,
+                DailyRoutineId = x.dailiyRoutineID,
+                TimeSpent = x.timeSpent,
+                Summary = x.summary,
+                Day = x.routineDate.Day,
+                MonthID = x.routineDate.Month,
+                Year = x.routineDate.Year,
+                TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
+            })
             .ToList();
         }
 

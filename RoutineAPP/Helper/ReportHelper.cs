@@ -26,13 +26,12 @@ namespace RoutineAPP.Helper
                     break;
 
                 case ReportGridType.ReportDetails:
-                    GeneralHelper.SetVisibleColumns(grid, "Category", "TotalTimeUsed", "PercentageOfUsedTime", "TotalTimeForFormatting");
+                    GeneralHelper.SetVisibleColumns(grid, "Category", "TotalTimeUsed", "PercentageOfUsedTime");
                     GeneralHelper.RenameColumns(grid, new Dictionary<string, string>
                                 {
                                     { "CategoryName", "Category" },
                                     { "TotalTimeUsed", "In Minute" },
-                                    { "PercentageOfUsedTime", "% in 2 dp" },
-                                    { "TotalTimeForFormatting", "Complete %" },
+                                    { "PercentageOfUsedTime", "%" },
                                 });
                     break;
 
