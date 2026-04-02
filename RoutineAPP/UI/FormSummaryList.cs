@@ -4,6 +4,7 @@ using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows.Forms;
 using static RoutineAPP.Helper.ReportHelper;
@@ -14,9 +15,9 @@ namespace RoutineAPP.AllForms
     {
         private readonly IDailyRoutineService _dailyRoutineService;
         private readonly IMonthService _monthlyService;
-        private bool _isView = false;
 
-        List<DailyRoutineDTO> _dailyRoutineVM;
+        List<DailyRoutineDTO> _dailyRoutineDTODefault;
+        List<DailyRoutineDTO> _dailyRoutineDTOAllLists;
         public FormCommentList(IDailyRoutineService dailyRoutineService, IMonthService monthService)
         {
             InitializeComponent();
@@ -46,7 +47,9 @@ namespace RoutineAPP.AllForms
 
         private void loadComments(int year)
         {
-            dataGridView1.DataSource = _dailyRoutineService.GetComments(year);
+            _dailyRoutineDTODefault = _dailyRoutineService.GetComments(year);
+            _dailyRoutineDTOAllLists = _dailyRoutineService.GetAllComments();
+            dataGridView1.DataSource = _dailyRoutineDTODefault;
             CommentHelper.ConfigureCommentGrid(dataGridView1, CommentHelper.CommentGridType.Basic);
         }
 
@@ -84,11 +87,11 @@ namespace RoutineAPP.AllForms
 
             if (string.IsNullOrWhiteSpace(search))
             {
-                dataGridView1.DataSource = _dailyRoutineVM;
+                dataGridView1.DataSource = _dailyRoutineDTODefault;
             }
             else
             {
-                var filtered = _dailyRoutineVM
+                var filtered = _dailyRoutineDTOAllLists
                     .Where(x => !string.IsNullOrEmpty(x.Summary) &&
                                 x.Summary.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0)
                     .ToList();
@@ -101,10 +104,13 @@ namespace RoutineAPP.AllForms
 
         private void txtDay_TextChanged(object sender, EventArgs e)
         {
-            int searchDate = Convert.ToInt32(txtDay.Text.Trim());
-            var filtered = _dailyRoutineVM.Where(x => x.Day == searchDate).ToList();
-            dataGridView1.DataSource = filtered;
-            RefreshDataCounts();
+            if (txtDay.Text.Trim() != "")
+            {
+                int searchDate = Convert.ToInt32(txtDay.Text.Trim());
+                var filtered = _dailyRoutineDTOAllLists.Where(x => x.Day == searchDate).ToList();
+                dataGridView1.DataSource = filtered;
+                RefreshDataCounts();
+            }            
         }
 
         private void iconBtnView_Click(object sender, EventArgs e)
@@ -130,34 +136,35 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearch_Click(object sender, EventArgs e)
         {
-            int searchedMonth;
-            int searchedYear;
-            List<DailyRoutineDTO> filtered = new List<DailyRoutineDTO>();
-
-            if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
+            if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex == -1)
             {
-                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
-                filtered = _dailyRoutineVM.Where(x => x.MonthID == searchedMonth).ToList();
-            }
-            else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
-            {
-                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
-                loadComments(searchedYear);
-                filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear).ToList();
-            }
-            else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
-            {
-                searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
-                searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
-                loadComments(searchedYear);
-                filtered = _dailyRoutineVM.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
+                MessageBox.Show("Please select at least a month or year");
+                return;
             }
             else
             {
-                MessageBox.Show("Please at least a month or year");
-            }
-            dataGridView1.DataSource = filtered;
-            RefreshDataCounts();
+                var query = _dailyRoutineDTOAllLists.AsEnumerable();
+                int selectedMonth = cmbMonth.SelectedIndex != -1 ? Convert.ToInt32(cmbMonth.SelectedValue) : -1;
+                int selectedYear = cmbYear.SelectedIndex != -1 ? Convert.ToInt32(cmbYear.SelectedValue) : -1;
+
+                if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
+                {
+                    query = query.Where(x => x.Year == selectedYear && x.MonthID == selectedMonth);                    
+                }
+                else if (cmbYear.SelectedIndex != -1)
+                {
+                    query = query.Where(x => x.Year == selectedYear);
+                }
+                else
+                {
+                    query = query.Where(x => x.MonthID == selectedMonth);
+                }
+
+                var filtered = query.ToList();
+
+                dataGridView1.DataSource = filtered;
+                RefreshDataCounts();
+            }            
         }
 
         private void txtDay_KeyPress(object sender, KeyPressEventArgs e)

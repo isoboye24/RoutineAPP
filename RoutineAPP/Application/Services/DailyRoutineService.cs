@@ -48,6 +48,24 @@ namespace RoutineAPP.Application.Services
                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
                 .ToList();
         }
+
+        public List<DailyRoutineDTO> GetAllByYear(int year)
+        {
+            return _repository.GetAllByYear(year).ToList()
+                .Select(x => new DailyRoutineDTO
+                {
+                    Id = x.dailyRoutineID,
+                    RoutineDate = x.routineDate,
+                    Summary = x.summary,
+                    Day = x.routineDate.Day,
+                    MonthID = x.routineDate.Month,
+                    FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
+                    MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
+                    Year = x.routineDate.Year,
+                })
+                .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
+                .ToList();
+        }
         
         public List<DailyRoutineDTO> GetAllDeletedRoutines()
         {
@@ -82,22 +100,48 @@ namespace RoutineAPP.Application.Services
 
         public List<DailyRoutineDTO> GetComments(int year)
         {
-            return _repository.GetComments(year).ToList()
-                 .Select(x => new DailyRoutineDTO
-                 {
-                     Id = x.dailyRoutineID,
-                     RoutineDate = x.routineDate,
-                     Summary = x.summary,
-                     Day = x.routineDate.Day,
-                     MonthID = x.routineDate.Month,
-                     FormattedRoutineDate = x.routineDate.ToString("dd.MMM.YYYY"),
-                     MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
-                     Year = x.routineDate.Year,
-                 })
-                 .OrderByDescending(x => x.Year).ThenByDescending(x => x.MonthID).ThenByDescending(x => x.Day)
-                 .ToList();
+            return _repository.GetComments(year)
+                .ToList()
+                .Where(x => !string.IsNullOrWhiteSpace(x.summary))
+                .Select(x => new DailyRoutineDTO
+                {
+                    Id = x.dailyRoutineID,
+                    RoutineDate = x.routineDate,
+                    Summary = x.summary,
+                    Day = x.routineDate.Day,
+                    MonthID = x.routineDate.Month,
+                    FormattedRoutineDate = x.routineDate.ToString("dd.MMM.yyyy"),
+                    MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
+                    Year = x.routineDate.Year,
+                })
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.MonthID)
+                .ThenByDescending(x => x.Day)
+                .ToList();
         }
         
+        public List<DailyRoutineDTO> GetAllComments()
+        {
+            return _repository.GetAllComments()
+                .ToList()
+                .Where(x => !string.IsNullOrWhiteSpace(x.summary))
+                .Select(x => new DailyRoutineDTO
+                {
+                    Id = x.dailyRoutineID,
+                    RoutineDate = x.routineDate,
+                    Summary = x.summary,
+                    Day = x.routineDate.Day,
+                    MonthID = x.routineDate.Month,
+                    FormattedRoutineDate = x.routineDate.ToString("dd.MMM.yyyy"),
+                    MonthName = new DateTime(x.routineDate.Year, x.routineDate.Month, 1).ToString("MMMM"),
+                    Year = x.routineDate.Year,
+                })
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.MonthID)
+                .ThenByDescending(x => x.Day)
+                .ToList();
+        }
+
         public List<DailyRoutineDTO> GetCommentById(int id)
         {
             return _repository.GetCommentById(id).ToList()

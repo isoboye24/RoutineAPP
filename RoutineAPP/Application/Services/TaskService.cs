@@ -68,6 +68,7 @@ namespace RoutineAPP.Application.Services
                 Year = x.routineDate.Year,
                 TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
             })
+            .OrderByDescending(x => x.TimeSpent)
             .ToList();
         }
 
@@ -105,6 +106,7 @@ namespace RoutineAPP.Application.Services
                 Year = x.routineDate.Year,
                 TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
             })
+            .OrderByDescending(x => x.TimeSpent)
             .ToList();
         }
         
@@ -140,7 +142,7 @@ namespace RoutineAPP.Application.Services
                 Year = x.routineDate.Year,
                 TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
             })
-            .ToList();
+            .OrderByDescending(x => x.TimeSpent).ToList();
         }
 
         public List<TaskDTO> GetAll()
@@ -175,7 +177,7 @@ namespace RoutineAPP.Application.Services
                 Year = x.routineDate.Year,
                 TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
             })
-            .ToList();
+            .OrderByDescending(x => x.TimeSpent).ToList();
         }
 
         public List<TaskDTO> GetAllDeletedTasks()
@@ -210,7 +212,7 @@ namespace RoutineAPP.Application.Services
                 Year = x.routineDate.Year,
                 TimeInHoursAndMinutes = GeneralHelper.FormatTime(x.timeSpent)
             })
-            .ToList();
+            .OrderByDescending(x => x.TimeSpent).ToList();
         }
 
         public bool PermanentDelete(int id)

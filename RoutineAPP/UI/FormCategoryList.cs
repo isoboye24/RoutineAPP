@@ -36,7 +36,8 @@ namespace RoutineAPP.AllForms
 
         private void loadCategories()
         {
-            dataGridView1.DataSource = _service.GetAll();
+            _categories = _service.GetAll().ToList();
+            dataGridView1.DataSource = _categories;
             ConfigureCategoryGrid(dataGridView1, CategoryGridType.Basic);
         }
 

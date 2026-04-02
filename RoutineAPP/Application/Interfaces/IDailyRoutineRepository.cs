@@ -23,6 +23,7 @@ namespace RoutineAPP.Application.Interfaces
         int CountByYear(int year);
 
         IQueryable<DAILY_ROUTINE> GetComments(int year);
+        IQueryable<DAILY_ROUTINE> GetAllComments();
         IQueryable<DAILY_ROUTINE> GetCommentById(int id);
 
         IQueryable<int> GetYears();
