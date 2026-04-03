@@ -82,7 +82,7 @@ namespace RoutineAPP.AllForms
                 dateTimePickerRoutine.Hide();
                 label3.Hide();
                 txtSummary.ReadOnly = true;
-                txtSummary.Text = _summary;
+                txtSummary.Text = _dailyRoutineViewDTO.Summary;
                 labelTitle.Text = "Routine on " + _dailyRoutineViewDTO.Day + "." + _dailyRoutineViewDTO.MonthName + "." + _dailyRoutineViewDTO.Year;
             }
             else if (_isUpdate)

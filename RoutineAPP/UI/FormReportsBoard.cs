@@ -18,9 +18,10 @@ namespace RoutineAPP.AllForms
         private readonly ICategoryService _categoryService;
         private readonly IDailyRoutineService _dailyRoutineService;
 
-        private List<GetAllMonthsDTO> _getAllMonthsVM;
-        private List<ReportDTO> _reportDetailsVM;
-        private List<ReportDTO> _yearlyReportDetailsVM;
+        private List<GetAllMonthsDTO> _getAllMonthsDTO;
+        private List<ReportDTO> _reportTotalDTO;
+        private List<ReportDTO> _yearlyReportDTO;
+        private List<ReportDTO> _allReportsDTO;
 
         public FormReportsBoard(IReportService reportService, IMonthService monthService, ICategoryService categoryService, IDailyRoutineService dailyRoutineService)
         {
@@ -60,19 +61,23 @@ namespace RoutineAPP.AllForms
 
         private void loadMonthlyReports()
         {
-            dataGridViewMonthly.DataSource = _reportService.GetAllMonths();
+            _getAllMonthsDTO = _reportService.GetAllMonths();
+            dataGridViewMonthly.DataSource = _getAllMonthsDTO;
             ConfigureReportDetailsGrid(dataGridViewMonthly, ReportGridType.GetAllMonths);
         }
 
         private void loadYearlyReports(int year)
         {
-            dataGridViewAnually.DataSource = _reportService.GetReportDetailsByYear(year);
+            _yearlyReportDTO = _reportService.GetReportDetailsByYear(year);
+            _allReportsDTO = _reportService.GetOverallReportDetails();
+            dataGridViewAnually.DataSource = _yearlyReportDTO;
             ConfigureReportDetailsGrid(dataGridViewAnually, ReportGridType.ReportDetails);
         }
 
         private void loadOverallReports()
         {
-            dataGridViewTotal.DataSource = _reportService.GetOverallReportDetails();
+            _reportTotalDTO = _reportService.GetOverallReportDetails();
+            dataGridViewTotal.DataSource = _reportTotalDTO;
             ConfigureReportDetailsGrid(dataGridViewTotal, ReportGridType.ReportDetails);
         }
 
@@ -138,18 +143,18 @@ namespace RoutineAPP.AllForms
             if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex == -1)
             {
                 searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
-                filtered = _getAllMonthsVM.Where(x => x.MonthID == searchedMonth).ToList();
+                filtered = _getAllMonthsDTO.Where(x => x.MonthID == searchedMonth).ToList();
             }
             else if (cmbMonth.SelectedIndex == -1 && cmbYear.SelectedIndex != -1)
             {
                 searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
-                filtered = _getAllMonthsVM.Where(x => x.Year == searchedYear).ToList();
+                filtered = _getAllMonthsDTO.Where(x => x.Year == searchedYear).ToList();
             }
             else if (cmbMonth.SelectedIndex != -1 && cmbYear.SelectedIndex != -1)
             {
                 searchedMonth = Convert.ToInt32(cmbMonth.SelectedValue);
                 searchedYear = Convert.ToInt32(cmbYear.SelectedValue);
-                filtered = _getAllMonthsVM.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
+                filtered = _getAllMonthsDTO.Where(x => x.Year == searchedYear && x.MonthID == searchedMonth).ToList();
             }
             else
             {
@@ -188,42 +193,37 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearchAnually_Click(object sender, EventArgs e)
         {
-            int? searchedCategory = null;
-            int? searchedYear = null;
-
-            if (cmbYearAnually.SelectedIndex != -1)
+            if (cmbCategoryAnually.SelectedIndex == -1 && cmbYearAnually.SelectedIndex == -1)
             {
-                searchedYear = Convert.ToInt32(cmbYearAnually.SelectedValue);
-            }
-
-            if (cmbCategoryAnually.SelectedIndex != -1)
-            {
-                searchedCategory = Convert.ToInt32(cmbCategoryAnually.SelectedValue);
-            }
-
-            if (searchedYear == null && searchedCategory == null)
-            {
-                MessageBox.Show("Please select at least a year or category");
+                MessageBox.Show("Please select at least a category or year");
                 return;
             }
-
-            if (searchedYear != null)
+            else
             {
-                loadYearlyReports(searchedYear.Value);
-                
+                var query = _allReportsDTO.AsEnumerable();
+                int selectedCategory = Convert.ToInt32(cmbCategoryAnually.SelectedValue);
+                int selectedYear = Convert.ToInt32(cmbYearAnually.SelectedValue);
+                bool hasYear = cmbYearAnually.SelectedIndex > -1;
+
+                if (cmbCategoryAnually.SelectedIndex != -1 && cmbYearAnually.SelectedIndex != -1)
+                {
+                    query = query.Where(x => x.Year == selectedYear && x.CategoryID == selectedCategory);
+                }
+                else if (cmbYearAnually.SelectedIndex != -1 && cmbCategoryAnually.SelectedIndex == -1)
+                {
+                    query = query.Where(x => x.Year == selectedYear);
+                }
+                else
+                {
+                    query = query.Where(x => x.CategoryID == selectedCategory);
+                }
+
+                var filtered = query.ToList();
+
+                dataGridViewAnually.DataSource = filtered;
+
+                RefreshAnually(hasYear ? selectedYear : DateTime.Today.Year);
             }
-
-            var result = _yearlyReportDetailsVM;
-
-            if (searchedCategory != null)
-            {
-                result = result
-                    .Where(x => x.CategoryID == searchedCategory.Value)
-                    .ToList();
-            }
-
-            dataGridViewAnually.DataSource = result;
-            RefreshAnually(searchedYear.Value);
         }
 
         private void iconBtnClearAnually_Click(object sender, EventArgs e)
@@ -277,20 +277,19 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearchTotal_Click(object sender, EventArgs e)
         {
-            int searchedCategory;
-            List<ReportDTO> filtered = new List<ReportDTO>();
-
             if (cmbCategoryTotal.SelectedIndex != -1)
-            {               
-                searchedCategory = Convert.ToInt32(cmbCategoryTotal.SelectedValue);
-                filtered = _reportDetailsVM.Where(x => x.CategoryID == searchedCategory).ToList();
+            {
+                int searchedCategory = Convert.ToInt32(cmbCategoryTotal.SelectedValue);
+
+                var filtered = _reportTotalDTO.Where(x => x.CategoryID == searchedCategory).ToList();
+
+                dataGridViewTotal.DataSource = filtered;
+                RefreshCounts();
             }            
             else
             {
-                MessageBox.Show("Please choose a category");
-            }
-            dataGridViewTotal.DataSource = filtered;
-            RefreshCounts();
+                MessageBox.Show("Please choose a category from the dropdown");
+            }            
         }
 
         private void dataGridViewMonthly_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

@@ -1,6 +1,9 @@
-﻿using RoutineAPP.Application.Interfaces;
+﻿using RoutineAPP.Application.DTO;
+using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -72,13 +75,13 @@ namespace RoutineAPP.AllForms
             chartAllCategoryMonthly.Series.Add("Hours");
             chartAllCategoryMonthly.Series["Hours"].ChartType = SeriesChartType.Column;
             chartAllCategoryMonthly.Series["Hours"].XValueMember = "CategoryName";
-            chartAllCategoryMonthly.Series["Hours"].YValueMembers = "TotalHours";
+            chartAllCategoryMonthly.Series["Hours"].YValueMembers = "TotalMinutes";
             chartAllCategoryMonthly.Series["Hours"].IsValueShownAsLabel = true;
 
             chartAllCategoryMonthly.DataBind();
 
             chartAllCategoryMonthly.Titles.Clear();
-            chartAllCategoryMonthly.Titles.Add($"{monthName} {year} Report");
+            allCatMonthlyReport.Text = $"{monthName} {year} Report";
         }
 
         private void loadSingleCategoryGraph(int year, int categoryId, string categoryName)
@@ -92,13 +95,13 @@ namespace RoutineAPP.AllForms
             chartSingleCategory.Series.Add("Hours");
             chartSingleCategory.Series["Hours"].ChartType = SeriesChartType.Column;
             chartSingleCategory.Series["Hours"].XValueMember = "Month";
-            chartSingleCategory.Series["Hours"].YValueMembers = "TotalHours";
+            chartSingleCategory.Series["Hours"].YValueMembers = "TotalMinutes";
             chartSingleCategory.Series["Hours"].IsValueShownAsLabel = true;
 
             chartSingleCategory.DataBind();
 
             chartSingleCategory.Titles.Clear();
-            chartSingleCategory.Titles.Add($"{year} {categoryName} Report");
+            labelTitleSingleCategory.Text = $"{categoryName} {year} Report";
 
         }
 
@@ -113,13 +116,13 @@ namespace RoutineAPP.AllForms
             chartAnnualReport.Series.Add("Hours");
             chartAnnualReport.Series["Hours"].ChartType = SeriesChartType.Column;
             chartAnnualReport.Series["Hours"].XValueMember = "CategoryName";
-            chartAnnualReport.Series["Hours"].YValueMembers = "TotalHours";
+            chartAnnualReport.Series["Hours"].YValueMembers = "TotalMinutes";
             chartAnnualReport.Series["Hours"].IsValueShownAsLabel = true;
 
             chartAnnualReport.DataBind();
 
             chartAnnualReport.Titles.Clear();
-            chartAnnualReport.Titles.Add($"{year} Annual Report");
+            labelGraphTitleAnnualReport.Text = $"{year} Report";
         }
 
         private void loadCombos()
@@ -209,19 +212,9 @@ namespace RoutineAPP.AllForms
             {
                 int year = Convert.ToInt32(cmbYearSingleCategory.SelectedValue);
                 int category = Convert.ToInt32(cmbCategorySingleCat.SelectedValue);
+                string categoryName = cmbCategorySingleCat.Text;
 
-                var data = _graphService.GetSingleCategoryReport(year, category);
-
-                chartSingleCategory.Series[0].Points.Clear();
-
-                foreach (var item in data)
-                {
-                    chartSingleCategory.Series[0].Points.AddXY(
-                        item.Month,
-                        item.TotalHours);
-                }
-
-                labelGraphTitleAnnualReport.Text = year + " Report";
+                loadSingleCategoryGraph(year, category, categoryName);
             }
         }
 

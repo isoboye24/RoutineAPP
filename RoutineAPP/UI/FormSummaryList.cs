@@ -4,10 +4,8 @@ using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows.Forms;
-using static RoutineAPP.Helper.ReportHelper;
 
 namespace RoutineAPP.AllForms
 {

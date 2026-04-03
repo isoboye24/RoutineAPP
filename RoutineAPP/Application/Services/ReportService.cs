@@ -133,21 +133,21 @@ namespace RoutineAPP.Application.Services
 
         public List<GetAllMonthsDTO> GetAllMonths()
         {
-            var result = _dailyRoutineRepository.GetAll()
-                                                .GroupBy(r => new
-                                                {
-                                                    Year = r.routineDate.Year,
-                                                    Month = r.routineDate.Month
-                                                })
-                                                .Select(g => new GetAllMonthsDTO
-                                                {
-                                                    Year = g.Key.Year,
-                                                    Month = new DateTime(1, g.Key.Month, 1).ToString("MMMM"),
-                                                    MonthID = g.Key.Month
-                                                })
-                                                .OrderByDescending(x => x.Year)
-                                                .ThenByDescending(x => x.Month)
-                                                .ToList();
+            var result = _dailyRoutineRepository.GetAll().ToList()
+                .GroupBy(r => new
+                {
+                    Year = r.routineDate.Year,
+                    Month = r.routineDate.Month
+                })
+                .Select(g => new GetAllMonthsDTO
+                {
+                    Year = g.Key.Year,
+                    MonthID = g.Key.Month,
+                    Month = new DateTime(1, g.Key.Month, 1).ToString("MMMM")
+                })
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.MonthID)
+                .ToList();
 
             return result;
         }
@@ -177,8 +177,6 @@ namespace RoutineAPP.Application.Services
                 .Select(g =>
                 {
                     double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
-
-                    
 
                     string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
 
