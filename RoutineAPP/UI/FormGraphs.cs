@@ -1,5 +1,6 @@
 ﻿using RoutineAPP.Application.DTO;
 using RoutineAPP.Application.Interfaces;
+using RoutineAPP.Core.Entities;
 using RoutineAPP.Helper;
 using System;
 using System.Collections.Generic;
@@ -167,18 +168,7 @@ namespace RoutineAPP.AllForms
 
             int year = Convert.ToInt32(cmbAnnualYear.SelectedValue);
 
-            var data = _graphService.GetAllCategoriesAnnualReport(year);
-
-            chartAnnualReport.Series[0].Points.Clear();
-
-            foreach (var item in data)
-            {
-                chartAnnualReport.Series[0].Points.AddXY(
-                    item.CategoryName,
-                    item.TotalHours);
-            }
-
-            labelGraphTitleAnnualReport.Text = year + " Report";
+            loadAllCategoriesAnnualGraph(year);
         }
 
         private void iconBtnClearMonthly_Click(object sender, EventArgs e)
@@ -220,7 +210,22 @@ namespace RoutineAPP.AllForms
 
         private void iconBtnSearchMonthly_Click(object sender, EventArgs e)
         {
-            
+            if (cmbMonthMonthly.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a month.");
+                return;
+            }
+            else if (cmbYearMonthly.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a year.");
+                return;
+            }
+            else
+            {
+                int month = Convert.ToInt32(cmbMonthMonthly.SelectedValue);
+                int year = Convert.ToInt32(cmbYearMonthly.SelectedValue);
+                loadMonthlyCategoriesGraph(month, year);
+            }
         }
     }
 }
