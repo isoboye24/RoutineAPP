@@ -433,8 +433,9 @@
             this.dailyPieChart.Legends.Add(legend1);
             this.dailyPieChart.Location = new System.Drawing.Point(3, 3);
             this.dailyPieChart.Name = "dailyPieChart";
-            this.dailyPieChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            this.dailyPieChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.dailyPieChart.Series.Add(series1);

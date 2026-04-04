@@ -1,10 +1,6 @@
-﻿using RoutineAPP.Application.DTO;
-using RoutineAPP.Application.Interfaces;
-using RoutineAPP.Core.Entities;
+﻿using RoutineAPP.Application.Interfaces;
 using RoutineAPP.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 

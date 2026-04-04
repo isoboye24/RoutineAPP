@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static RoutineAPP.Helper.TaskHelper;
 
 namespace RoutineAPP.AllForms
@@ -16,16 +17,18 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
+        private readonly IGraphService _graphService;
 
         private List<TaskDTO> _taskVM;
         private DailyRoutineDTO _routineViewDTO;
 
-        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService)
+        public FormTaskList(ITaskService taskService, ICategoryService categoryService, IReportService reportService, IGraphService graphService)
         {
             InitializeComponent();
             _taskService = taskService ?? throw new ArgumentNullException(nameof(taskService));
             _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
             _reportService = reportService ?? throw new ArgumentNullException(nameof(reportService));
+            _graphService = graphService ?? throw new ArgumentNullException(nameof(graphService));
         }
 
         public void LoadForView(DailyRoutineDTO routineViewDTO)
@@ -44,6 +47,7 @@ namespace RoutineAPP.AllForms
             cmbCategory.SelectedIndex = -1;
             
             loadTasks();
+            loadPieChart(_routineViewDTO.Id);
             RefreshDataCounts();
         }
 
@@ -65,12 +69,41 @@ namespace RoutineAPP.AllForms
             labelTotalTasks.Text = dataGridView1.RowCount + " Task" + (dataGridView1.RowCount > 1 ? "s" : "").ToString();
         }
 
+        private void loadPieChart(int routineId)
+        {
+            var data = _graphService.GetDailyReport(routineId);
+
+            dailyPieChart.Series.Clear();
+
+            var series = new Series("Minutes");
+            series.ChartType = SeriesChartType.Pie;
+
+            foreach (var item in data)
+            {
+                series.Points.AddXY(item.CategoryName, item.TotalMinutes);
+            }
+
+            series.IsValueShownAsLabel = true;
+            series.Label = "#VALX: #PERCENT{P0}";
+
+            series["PieCollectedThreshold"] = "0";
+            series["PieCollectedStyle"] = "None";
+
+            dailyPieChart.Series.Add(series);
+
+            dailyPieChart.Titles.Clear();
+            dailyPieChart.Titles.Add("Daily Category Distribution");
+        }
+
+
         private void FormTaskList_Load(object sender, EventArgs e)
         {
             ApplyFontStyles();
             LoadCombo();
 
             loadTasks();
+
+            loadPieChart(_routineViewDTO.Id);
 
             labelTitle.Text = _routineViewDTO.RoutineDate.ToString("dd.MM.yyyy");
 
@@ -211,5 +244,6 @@ namespace RoutineAPP.AllForms
         {
             GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
         }
+
     }
 }

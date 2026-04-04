@@ -95,9 +95,9 @@ namespace RoutineAPP.Infrastructure.Repositories
             return _db.DAILY_ROUTINE.Where(x => x.isDeleted);
         }
 
-        public IQueryable<DAILY_ROUTINE> GetById(int id)
+        public DAILY_ROUTINE GetById(int id)
         {
-            return _db.DAILY_ROUTINE.Where(x => !x.isDeleted && x.dailyRoutineID == id);
+            return _db.DAILY_ROUTINE.FirstOrDefault(x => !x.isDeleted && x.dailyRoutineID == id);
         }
 
         public IQueryable<DAILY_ROUTINE> GetComments(int year)

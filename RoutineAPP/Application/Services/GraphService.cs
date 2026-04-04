@@ -18,6 +18,22 @@ namespace RoutineAPP.Application.Services
             _routineRepository = routineRepository;
         }
 
+        public List<GetAllCategoriesDTO> GetDailyReport(int routineId)
+        {
+            return (from t in _taskRepository.GetTasksByDay(routineId)
+                        join c in _categoryRepository.GetAll()
+                            on t.categoryID equals c.categoryID
+                        where !t.isDeleted && !c.isDeleted
+                        group t by new { c.categoryID, c.categoryName } into g
+                        select new GetAllCategoriesDTO
+                        {
+                            CategoryId = g.Key.categoryID,
+                            CategoryName = g.Key.categoryName,
+                            TotalMinutes = g.Sum(x => x.timeSpent)
+                        })
+                .ToList();
+        }
+
         public List<GetAllCategoriesDTO> GetMonthlyCategoriesReport(int month, int year)
         {
             var data = (from t in _taskRepository.GetAll()

@@ -17,6 +17,7 @@ namespace RoutineAPP.AllForms
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IReportService _reportService;
+        private readonly IGraphService _graphService;
 
         private List<DailyRoutineDTO> _dailyRoutineDTODefault;
         private List<DailyRoutineDTO> _dailyRoutineDTOAllLists;
@@ -24,7 +25,7 @@ namespace RoutineAPP.AllForms
         private int year = DateTime.Today.Year;
         private string allYearRange = ("2024 - " + DateTime.Today.Year).ToString();
 
-        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IReportService reportService)
+        public FormDailyRoutineList(IMonthService monthService, IDailyRoutineService dailyService, ITaskService taskService, ICategoryService categoryService, IReportService reportService, IGraphService graphService)
         {
             InitializeComponent();
             _monthService = monthService;
@@ -32,6 +33,7 @@ namespace RoutineAPP.AllForms
             _taskService = taskService;
             _categoryService = categoryService;
             _reportService = reportService;
+            _graphService = graphService;
         }
 
         private void resizeControls()
@@ -148,7 +150,7 @@ namespace RoutineAPP.AllForms
                 return;
             }
 
-            var form = new FormTaskList(_taskService, _categoryService, _reportService);
+            var form = new FormTaskList(_taskService, _categoryService, _reportService, _graphService);
             form.LoadForView(selected);
             form.ShowDialog();
         }

@@ -176,21 +176,19 @@ namespace RoutineAPP.Application.Services
             return grouped
                 .Select(g =>
                 {
-                    double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
-
                     string formattedTime = GeneralHelper.FormatTime(g.TotalMinutes);
+
+                    double percentage = (double)g.TotalMinutes / totalMonthMinutes * 100;
 
                     return new ReportDTO
                     {
                         ReportID = ++counter,
                         CategoryID = g.CategoryId,
-                        Category = categories.TryGetValue(g.CategoryId, out var name)
-                                    ? name
-                                    : "Unknown",
+                        Category = categories.TryGetValue(g.CategoryId, out var name) ? name : "Unknown",
                         CompletePercentage = percentage,
                         TotalTimeUsed = formattedTime,
                         Year = year,
-                        PercentageOfUsedTime = percentage.ToString("0.00") + " %"
+                        PercentageOfUsedTime = GeneralHelper.CalculatePercentage(g.TotalMinutes, totalMonthMinutes)
                     };
                 })
                 .OrderByDescending(x => x.CompletePercentage)

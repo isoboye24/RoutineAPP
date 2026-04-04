@@ -11,7 +11,7 @@ namespace RoutineAPP.Application.Interfaces
         IQueryable<DAILY_ROUTINE> GetAllByYear(int year);
         IQueryable<DAILY_ROUTINE> GetAllByMonth(int month, int year);
         IQueryable<DAILY_ROUTINE> GetAllDeletedRoutines();
-        IQueryable<DAILY_ROUTINE> GetById(int id);
+        DAILY_ROUTINE GetById(int id);
         bool Insert(DailyRoutine routine);
         bool Update(DailyRoutine routine);
         bool Delete(int id);

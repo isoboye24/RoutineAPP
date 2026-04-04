@@ -10,6 +10,7 @@ namespace RoutineAPP.Application.DTO
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public int Day { get; set; }
         public int MonthID { get; set; }
         public string Month { get; set; }
         public int Year { get; set; }

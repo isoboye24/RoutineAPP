@@ -9,6 +9,7 @@ namespace RoutineAPP.Application.Interfaces
 {
     public interface IGraphService
     {
+        List<GetAllCategoriesDTO> GetDailyReport(int routineId);
         List<GetSingleCategoryDTO> GetSingleCategoryReport(int year, int categoryId);
         int GetAnnualSingleCategoryTime(int year, int categoryId);
         List<GetAllCategoriesDTO> GetMonthlyCategoriesReport(int month, int year);
