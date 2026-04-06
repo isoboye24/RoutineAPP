@@ -134,13 +134,13 @@ namespace RoutineAPP
 
         private void loadTop5MonthlyReport(int month, int year)
         {           
-            dataGridViewTop5Monthly.DataSource = _reportService.GetTop5MonthlyReport(month, year);
+            dataGridViewTop5Monthly.DataSource = _dashboardService.GetTop5MonthlyReport(month, year);
             ConfigureReportDetailsGrid(dataGridViewTop5Monthly, ReportGridType.Top5ReportDetails);
         }
 
         private void loadTop5AnnualReport(int year)
         {
-            dataGridViewTop5Yearly.DataSource = _reportService.GetTop5AnnualReport(year);
+            dataGridViewTop5Yearly.DataSource = _dashboardService.GetTop5AnnualReport(year);
             ConfigureReportDetailsGrid(dataGridViewTop5Yearly, ReportGridType.Top5ReportDetails);
         }
 

@@ -245,5 +245,11 @@ namespace RoutineAPP.AllForms
             GeneralHelper.ApplyRankingColors((DataGridView)sender, e);
         }
 
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedTask = GetSelectedTask();
+
+            txtSummary.Text = selectedTask != null ? selectedTask.Summary : "";
+        }
     }
 }
